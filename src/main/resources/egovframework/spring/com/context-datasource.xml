@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 환경설정 기본정보를 globals.properties 에서 참조하도록 propertyConfigurer 설정  -->
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/egovframework/egovProps/globals.properties</value>
+                <!-- value>file:/product/jeus/egovProps/globals.properties</value-->
+            </list>
+        </property>
+    </bean>
+    
+    <!-- datasource 설정(propertyConfigurer 활용) -->
+    <alias name="dataSource-${Globals.DbType}" alias="dataSource" />
+<!--     <alias name="dataSource-${Globals.DbType}" alias="egov.dataSource" /> -->
+    
+    <!-- mysql -->
+    <bean id="dataSource-mysql" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${Globals.DriverClassName}"/>
+        <property name="url" value="${Globals.Url}" />
+        <property name="username" value="${Globals.UserName}"/>
+        <property name="password" value="${Globals.Password}"/>
+        <!-- DBCP2 속성 설정 -->
+	    <property name="defaultAutoCommit" value="true" />
+	    <property name="maxTotal" value="25" /> <!-- maxActive는 DBCP에서 사용 2에서는 사용안함, maxTotal로 대체 -->
+	    <property name="maxIdle" value="20" />
+	    <property name="minIdle" value="10" />
+	    <property name="initialSize" value="5" /> <!-- 연결 풀 초기화 크기 -->
+	    <property name="testOnBorrow" value="true" /> <!-- 연결 대여 시 검증 -->
+	    <property name="validationQuery" value="SELECT 1" /> <!-- 유효성 검사 쿼리 -->
+	    <property name="testWhileIdle" value="true" /> <!-- 풀에서 대기하는 동안 연결 검증 -->
+	    <property name="timeBetweenEvictionRunsMillis" value="30000" /> <!-- 유휴 연결 검사 주기 -->
+	    <property name="minEvictableIdleTimeMillis" value="60000" /> <!-- 유휴 연결 최소 유지 시간 -->
+    </bean>
+    
+    <!-- Oracle -->
+    <bean id="dataSource-oracle" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${Globals.DriverClassName}"/>
+        <property name="url" value="${Globals.Url}" />
+        <property name="username" value="${Globals.UserName}"/>
+        <property name="password" value="${Globals.Password}"/>
+        <!-- 추가된 속성들 -->
+        <!-- DBCP2 속성 설정 -->
+	    <property name="defaultAutoCommit" value="true" />
+	    <property name="maxTotal" value="25" /> <!-- maxActive는 DBCP에서 사용 2에서는 사용안함, maxTotal로 대체 -->
+	    <property name="maxIdle" value="20" />
+	    <property name="minIdle" value="10" />
+	    <property name="initialSize" value="5" /> <!-- 연결 풀 초기화 크기 -->
+	    <property name="testOnBorrow" value="true" /> <!-- 연결 대여 시 검증 -->
+	    <property name="validationQuery" value="SELECT 1 FROM DUAL" /> <!-- 유효성 검사 쿼리 -->
+	    <property name="testWhileIdle" value="true" /> <!-- 풀에서 대기하는 동안 연결 검증 -->
+	    <property name="timeBetweenEvictionRunsMillis" value="30000" /> <!-- 유휴 연결 검사 주기 -->
+	    <property name="minEvictableIdleTimeMillis" value="60000" /> <!-- 유휴 연결 최소 유지 시간 -->
+    </bean>
+    
+</beans>
