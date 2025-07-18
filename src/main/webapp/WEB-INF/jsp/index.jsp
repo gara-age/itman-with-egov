@@ -4,7 +4,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="test.css" type="text/css" />
     <title>Index Page</title>
 </head>
 <body>
