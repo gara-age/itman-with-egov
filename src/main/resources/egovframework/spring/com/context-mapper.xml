@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+    <!-- 실행환경에서 빈이름 참조(EgovAbstractDAO) -->
+	<bean id="egov.lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>
+	    <property name="configLocation" value="classpath:/egovframework/mapper/config/mapper-config.xml"/>
+	    <property name="mapperLocations">
+	        <list>
+	            <value>classpath:/egovframework/mapper/egov/**/**/*_${Globals.DbType}.xml</value>
+	        </list>
+	    </property>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	    <constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+
+<!--	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">-->
+<!--		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--		<property name="url" value="jdbc:mysql://localhost:3306/pst"/>-->
+<!--		<property name="username" value="root"/>-->
+<!--		<property name="password" value="Rkskekfkakqk4$"/>-->
+<!--	</bean>-->
+
+<!--	문제해결 절차 -->
+<!--	불필요한 Alias 제거-->
+<!--	dataSource Bean으로 인한 오류 가능성 제거위해 Bean 등록-->
+<!--	기존 설정된 Bean들에서 'egov.' 부분 제거 -->
+<!--	이후 문제가 되었던 CmmUseDAO 에서 EgovComAbstractDAO 를 찾아가 'egov.' 부분 동일하게 제거-->
+
+	<alias name="sqlSessionFactory" alias="sqlSession"/> <!--Alias 수동 등록 -->
+
+<!--	Bean 자동 등록 해주는 요소들(잘 모른다면 수동등록보다는 자동등록이 나음) / 총 5개 정도됨 / @Resource @Autowired는 아님 -->
+<!--	@Repository-->
+<!--	@Controller-->
+<!--	@Service-->
+
+	
+</beans>
