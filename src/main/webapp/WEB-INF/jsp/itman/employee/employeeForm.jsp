@@ -158,7 +158,6 @@
             <tr>
                 <th>부서</th>
                 <td>
-
                     <select name="divIdx">
                          <option value="" >부서를 선택해주세요</option>
                         <c:forEach var="d" items="${divisionList}">
@@ -248,6 +247,10 @@
 
         const empNum = form.empNum.value.trim();
         const empName = form.empName.value.trim();
+        const empDivIdx = form.divIdx.value.trim();
+        const empPosIdx = form.posIdx.value.trim();
+        const empStIdx = form.empStIdx.value.trim();
+
 
         if (empNum === "") {
             alert("사번을 입력하세요.");
@@ -258,6 +261,24 @@
         if (empName === "") {
             alert("이름을 입력하세요.");
             form.empName.focus();
+            return false;
+        }
+
+        if (empDivIdx === "") {
+            alert("부서를 선택하세요.");
+            form.divIdx.focus();
+            return false;
+        }
+
+        if (empPosIdx === "") {
+            alert("직위를 선택하세요.");
+            form.posIdx.focus();
+            return false;
+        }
+
+        if (empStIdx === "") {
+            alert("상태를 선택하세요.");
+            form.empStIdx.focus();
             return false;
         }
 
