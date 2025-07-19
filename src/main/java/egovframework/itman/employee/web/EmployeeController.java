@@ -74,7 +74,7 @@ public class EmployeeController {
     public String  updateEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
         employeeService.updateEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employee/employeeView.do?empIdx=" + vo.getEmpIdx();
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
     }
 
 
