@@ -1,4 +1,4 @@
-package egovframework.itman.service;
+package egovframework.itman.employee.service;
 
 public class EmployeeVO {
 
@@ -15,7 +15,7 @@ public class EmployeeVO {
     private String redIdx; // 생성자IDX
     private String modDate; // 수정일시
     private String modIdx; // 수정자IDX
-    private String isDeleted; // 삭제여부
+    private String delYn; // 삭제여부
     private String delIdx; // 삭제자IDX
     private String delDate; // 삭제일시
     private String empDiv;
@@ -147,11 +147,11 @@ public class EmployeeVO {
     }
 
     public String getIsDeleted() {
-        return isDeleted;
+        return delYn;
     }
 
     public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
+        this.delYn = isDeleted;
     }
 
     public String getDelIdx() {

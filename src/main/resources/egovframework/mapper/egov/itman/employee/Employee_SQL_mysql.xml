@@ -10,6 +10,7 @@
         EMP_IDX as empIdx,
         EMP_NUM as empNum,
         EMP_NAME as empName,
+        GRO_IDX as groIdx,
         (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
         (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
         EMP_MAIL as empMail,
@@ -24,6 +25,10 @@
             EMP_IDX AS empIdx,
             EMP_NUM AS empNum,
             EMP_NAME AS empName,
+            GRO_IDX as groIdx,
+            DIV_IDX,
+            POS_IDX,
+            EMP_ST_IDX,
             (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
             (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
             EMP_MAIL AS empMail,
@@ -40,31 +45,51 @@
             GRO_IDX,
             EMP_NUM,
             EMP_NAME,
-            <if test="empMail  != null">EMP_MAIL,</if>
-            <if test="empTel   != null">EMP_TEL,</if>
-            <if test="divIdx   != null">DIV_IDX,</if>
-            <if test="posIdx   != null">POS_IDX,</if>
-            <if test="empStIdx != null">EMP_ST_IDX,</if>
+            <if test="empMail  != null and empMail.trim().length() > 0">EMP_MAIL,</if>
+            <if test="empTel   != null and empTel.trim().length() > 0">EMP_TEL,</if>
+            DIV_IDX,
+            POS_IDX,
+            EMP_ST_IDX,
+            REG_DATE,
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             1,
             #{empNum},
             #{empName},
-            <if test="empMail  != null">#{empMail},</if>
-            <if test="empTel   != null">#{empTel},</if>
-            <if test="divIdx   != null">#{divIdx},</if>
-            <if test="posIdx   != null">#{posIdx},</if>
-            <if test="empStIdx != null">#{empStIdx},</if>
+            <if test="empMail  != null and empMail.trim().length() > 0">#{empMail},</if>
+            <if test="empTel   != null and empTel.trim().length() > 0">#{empTel},</if>
+            #{divIdx},
+            #{posIdx},
+            #{empStIdx},
+            NOW(),
+
         </trim>
     </insert>
+
+    <update id="updateEmployee" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            EMP_IDX = #{empIdx},
+            EMP_NUM = #{empNum},
+            EMP_NAME = #{empName},
+            DIV_IDX = #{divIdx},
+            POS_IDX = #{posIdx},
+            EMP_MAIL = #{empMail},
+            EMP_TEL = #{empTel},
+            EMP_ST_IDX = #{empStIdx},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
 
     <update id="deleteEmployee" parameterType="employeeVO">
         UPDATE
             ITM_EMPLOYE
         SET
-            DEL_YN = 'Y'
-
+            DEL_YN = 'Y' ,
+            DEL_DATE = NOW()
         WHERE
             EMP_IDX = #{empIdx}
     </update>

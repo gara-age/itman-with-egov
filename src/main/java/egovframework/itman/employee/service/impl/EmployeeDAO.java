@@ -1,8 +1,7 @@
-package egovframework.itman.service.impl;
+package egovframework.itman.employee.service.impl;
 
-import egovframework.itman.service.EmployeeVO;
+import egovframework.itman.employee.service.EmployeeVO;
 import org.apache.ibatis.session.SqlSession;
-import org.egovframe.rte.psl.dataaccess.EgovAbstractMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

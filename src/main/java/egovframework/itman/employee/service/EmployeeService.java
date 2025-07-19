@@ -1,4 +1,4 @@
-package egovframework.itman.service;
+package egovframework.itman.employee.service;
 
 
 import java.util.List;
@@ -9,5 +9,6 @@ public interface EmployeeService {
     void insertEmployee(EmployeeVO vo);
     void deleteEmployee(EmployeeVO vo);
     void updateEmployee(EmployeeVO vo);
+
 
 }
