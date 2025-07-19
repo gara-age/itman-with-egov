@@ -1,8 +1,7 @@
-package egovframework.itman.service.impl;
+package egovframework.itman.employee.service.impl;
 
-import egovframework.itman.service.EmployeeService;
-import egovframework.itman.service.EmployeeVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import egovframework.itman.employee.service.EmployeeService;
+import egovframework.itman.employee.service.EmployeeVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

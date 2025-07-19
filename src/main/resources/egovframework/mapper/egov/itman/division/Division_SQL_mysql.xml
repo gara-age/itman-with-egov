@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="divisionDAO">
+    <select id="selectDivisionsByGroup" resultType="DivisionVO" parameterType="string">
+        SELECT DIV_IDX AS divIdx,
+        DIV_NAME  AS divName
+        FROM ITM_DIVISION
+        WHERE GRO_IDX = #{groIdx}
+        AND DEL_YN = 'N'
+        AND DIV_YN IN ('사', 'Y')
+        ORDER BY DIV_NAME
+    </select>
+</mapper>
+
