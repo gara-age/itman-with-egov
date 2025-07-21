@@ -78,6 +78,12 @@
             -moz-appearance:none;
             -webkit-appearance:none;
             appearance:none;
+            background-color: transparent;
+
+        }
+        option {
+            background-color: transparent;
+
         }
     </style>
 </head>
@@ -91,7 +97,6 @@
 <c:if test="${!empty resultVo.empIdx}">
     <c:set var="actionUrl" value="/itman/update.do" />
 </c:if>
-
 <form id="employeeForm" name="employeeForm" method="post" action="${actionUrl}" onsubmit="return validateForm();">
     <c:if test="${!empty resultVo.empIdx}">
         <input type="hidden" name="empIdx" value="${resultVo.empIdx}" />

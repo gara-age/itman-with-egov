@@ -4,20 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="employeeDAO">
-    <select id="selectEmployeeList" resultType="employeeVO">
-        <!--사번, 이름, 부서, 직위, 이메일, 휴대폰, 상태 -->
+    <select id="selectEmployeeList"  resultType="employeeVO">
         SELECT
-        EMP_IDX as empIdx,
-        EMP_NUM as empNum,
-        EMP_NAME as empName,
-        GRO_IDX as groIdx,
-        (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
-        (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
-        EMP_MAIL as empMail,
-        EMP_TEL as empTel,
-        (SELECT EMP_ST_NAME FROM ITM_EMP_STATE AS S WHERE S.EMP_ST_IDX = E.EMP_ST_IDX) as empState
-        FROM ITM_EMPLOYE AS E
+        EMP_IDX   AS empIdx,
+        EMP_NUM   AS empNum,
+        EMP_NAME  AS empName,
+        GRO_IDX   AS groIdx,
+        (SELECT DIV_NAME FROM ITM_DIVISION D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
+        (SELECT POS_NAME FROM ITM_POSITION P WHERE P.POS_IDX = E.POS_IDX) AS posName,
+        EMP_MAIL  AS empMail,
+        EMP_TEL   AS empTel,
+        (SELECT EMP_ST_NAME FROM ITM_EMP_STATE S WHERE S.EMP_ST_IDX = E.EMP_ST_IDX) AS empState
+        FROM ITM_EMPLOYE E
         WHERE DEL_YN = 'N'
+        <!-- 페이징: pagination 속성명(startList, listSize)에 맞춰서 -->
+        LIMIT #{startList}, #{listSize}
+    </select>
+
+    <select id="selectEmployeeListCnt" resultType="int">
+        SELECT
+            count(*) as listCnt
+        FROM
+            ITM_EMPLOYE
     </select>
 
     <select id="selectEmployeeView" resultType="employeeVO" parameterType="employeeVO">

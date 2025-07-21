@@ -1,6 +1,8 @@
 package egovframework.itman.employee.web;
 
 
+import egovframework.itman.common.Pagination;
+import egovframework.itman.common.Searching;
 import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
@@ -11,7 +13,9 @@ import egovframework.itman.empState.service.EmpStateVO;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -28,33 +32,48 @@ public class EmployeeController {
     @Resource(name = "positionService")
     private PositionServiceImpl positionService;
 
-    @RequestMapping("/itman/employeeList.do")
-    public String selectEmployeeList(EmployeeVO vo, Model model) {
-        List<EmployeeVO> list = employeeService.selectEmployeeList(vo);
-        model.addAttribute("resultList",list);
-        return "itman/employee/employeeList";
+    @RequestMapping("/itman/index.do")
+    public String index(Model model) {
+        return "itman/public/html/index";
     }
+
+    @RequestMapping("/itman/employeeList.do")
+    public String selectEmployeeList(Model model , @RequestParam(required = false, defaultValue = "1") int page
+    , @RequestParam(required = false, defaultValue = "1") int range ) throws Exception {
+        //전체 게시글 갯수
+        int listCnt = employeeService.selectEmployeeListTotCnt();
+
+        //Pagination 객체 생성
+        Pagination pagination = new Pagination();
+        pagination.pageInfo(page, range, listCnt);
+
+        model.addAttribute("listCnt", listCnt);
+
+        model.addAttribute("pagination", pagination);
+//        List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
+
+        List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
+        model.addAttribute("resultList",list);
+        //        return "itman/employee/employeeList";
+        return "itman/public/html/ingroup/emploList";
+    }
+
 
     @RequestMapping("/itman/employeeView.do")
     public String selectEmployeeView(EmployeeVO vo, Model model) {
         vo.getEmpIdx();
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
-        model.addAttribute("result", resultVO);
-        return "itman/employee/employeeView";
+        model.addAttribute("employee", resultVO);
+        return "itman/public/html/ingroup/emploView";
     }
 
-    @RequestMapping("/itman/employeeForm.do")
+    @RequestMapping("/itman/employeeEdit.do")
     public String  employeeForm(EmployeeVO vo, Model model) {
         String groIdx = vo.getGroIdx();
         if (vo.getEmpIdx() != null) {
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
-            model.addAttribute("resultVo", resultVO);
+            model.addAttribute("employee", resultVO);
             groIdx = resultVO.getGroIdx();
-            System.err.println(resultVO.getGroIdx());
-            System.err.println("resultVO.getDivIdx" + resultVO.getDivIdx());
-            System.err.println("resultVO.getPosIdx" + resultVO.getPosIdx());
-            System.err.println("resultVO.getEmpStIdx" + resultVO.getEmpStIdx());
-
         }
         if(vo.getEmpIdx() == null){
             groIdx = "1";
@@ -67,7 +86,7 @@ public class EmployeeController {
         model.addAttribute("positionList", positions);
 
 
-        return "itman/employee/employeeForm";
+        return "itman/public/html/ingroup/emploWrite";
     }
 
     @RequestMapping("/itman/update.do")

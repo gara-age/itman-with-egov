@@ -1,5 +1,7 @@
 package egovframework.itman.employee.service.impl;
 
+import egovframework.itman.common.Pagination;
+import egovframework.itman.common.Searching;
 import egovframework.itman.employee.service.EmployeeService;
 import egovframework.itman.employee.service.EmployeeVO;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<EmployeeVO> selectEmployeeList(EmployeeVO vo) {
+    public List<EmployeeVO> selectEmployeeList(Pagination pagination) throws Exception {
 
-        return employeeDAO.selectEmployeeList(vo);
+        return employeeDAO.selectEmployeeList(pagination);
+    }
+
+    @Override
+    public int selectEmployeeListTotCnt() throws Exception{
+        return employeeDAO.selectEmployeeListCnt();
     }
 
     @Override
