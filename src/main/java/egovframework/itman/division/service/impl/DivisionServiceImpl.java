@@ -13,6 +13,7 @@ public class DivisionServiceImpl implements DivisionService {
     private DivisionDAO divisionDAO;
 
     public List<DivisionVO> selectDivisionsByGroup(String groIdx) {
+
         return divisionDAO.selectDivisionsByGroup(groIdx);
     }
 }

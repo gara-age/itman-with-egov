@@ -1,0 +1,281 @@
+@charset "utf-8";
+
+body	{background:#f0f5f5}
+
+/*************** 헤더/푸터 ***************/
+header									{width:100%; position:relative; z-index:10; padding:0 20px; height:60px; background:#fff; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.5); display:flex; justify-content: space-between; align-items: center;}
+header .h_left .ham						{display:inline-block; margin-right:15px; line-height:22px;}
+header .h_left .ham a					{display:block;position:relative; width:18px; height:14px;}
+header .h_left .ham span					{position:absolute; top:0; left:0; width:18px; height:2px; background:#222; display:block; transition:0.3s}
+header .h_left .ham span:nth-child(2)		{top:6px;}
+header .h_left .ham span:nth-child(3)		{top:12px;}
+header .h_left .ham a.on span:nth-child(1)	{top:6px; transform:rotate(45deg);}
+header .h_left .ham a.on span:nth-child(2)	{width:0; background:#1178ff}
+header .h_left .ham a.on span:nth-child(3)	{top:6px; transform:rotate(135deg);}
+
+
+header .h_left h1						{display:inline-block; vertical-align:baseline;}
+header .h_left h1 a						{display:block; line-height:20px;}
+header .h_left h1 a img					{max-width:150px; max-height:28px;}
+header .h_left div.tmn							{display:inline-block; margin-left:20px;}
+header .h_left div.tmn .m_tit					{display:none;}
+header .h_left div.tmn ul.list					{}
+header .h_left div.tmn ul.list li				{display:inline-block; height:60px; padding-top:18px;margin-right:22px; position:relative; transition:0.3s}
+header .h_left div.tmn ul.list li:last-child	{margin-right:0;}
+header .h_left div.tmn ul.list li.dash			{display:none}
+header .h_left div.tmn ul.list li a				{font:600 16px/22px "Open Sans", "Noto Sans KR", sans-serif; color:#222; transition:0.2s; vertical-align:top;}
+header .h_left div.tmn ul.list li span			{position:absolute; bottom:-11px; left:50%; transform:translateX(-50%); padding:5px; border-radius:3px; background:#222; font:500 12px/12px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+header .h_left div.tmn ul.list li a.on			{color:#1178ff}
+header .h_left div.tmn ul.list li a.on span		{background:#1178ff}
+header .h_left div.tmn ul.list li .depth				{display:none; position:absolute; top:42px; left:0; width:max-content; padding:20px 15px; border-radius:3px; min-width:100px; background:#fff; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.5);}
+header .h_left div.tmn ul.list li .depth a				{display:block; margin-bottom:10px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#222}
+header .h_left div.tmn ul.list li .depth a:last-child	{margin-bottom:0px}
+header .h_left div.tmn ul.list li .depth a.on			{color:#8400ff}
+header .h_left div.tmn ul.list li .depth a:hover		{color:#8400ff}
+
+header .h_left div.tmn ul.list li:hover > a		{color:#1178ff}
+header .h_left div.tmn ul.list li:hover span	{background:#1178ff}
+header .h_left div.tmn ul.list li:hover .depth	{display:block;}
+
+
+
+/* 로그인X */
+header .h_right_index				{margin-top:-5px;}
+header .h_right_index a				{font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#555; position:relative; vertical-align:middle; transition:0.3s;}
+header .h_right_index a:hover		{color:#4344ff}
+header .h_right_index a + a			{margin-left:20px;}
+header .h_right_index a + a:after	{content:""; position:absolute; top:5px; left:-13px; width:1px; height:12px; background:#999;}
+
+/* 로그인O */
+header .h_right						{}
+header .h_right .hr_btn				{display:none;}
+header .h_right .hr_box				{}
+header .h_right .hr_box span		{font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#333; vertical-align:middle; margin-right:10px;}
+header .h_right .hr_box a			{display:inline-block; vertical-align:middle; margin:0 0 0 2px; width:35px; height:35px; border-radius:3px; font-size:0px; transition:0.3s;}
+header .h_right .hr_box a.mypage	{background:#e9f2f2 url('../../images/_img/mypage.png')no-repeat center center / 14px;}
+header .h_right .hr_box a.logout	{background:#e9f2f2 url('../../images/_img/logout.png')no-repeat center center / 16px;}
+header .h_right .hr_box a.group		{background:#e9f2f2 url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat center center / 15px;}
+
+header .h_right .hr_box a.mypage:hover	{background:#4344ff url('../../images/_img/mypage_w.png')no-repeat center center / 14px;}
+header .h_right .hr_box a.logout:hover	{background:#4344ff url('../../images/_img/logout_w.png')no-repeat center center / 16px;}
+header .h_right .hr_box a.group:hover	{background:#4344ff url('../../images/_img/group_w.png')no-repeat center center / 15px;}
+
+
+#group header	{background:transparent; box-shadow:inherit}
+#group h1		{display:none}
+#group .tmn		{display:none}
+
+#group header .h_right .hr_box a.mypage		{background:#fff url('../../images/_img/mypage.png')no-repeat center center / 14px;}
+#group header .h_right .hr_box a.logout		{background:#fff url('../../images/_img/logout.png')no-repeat center center / 16px;}
+#group header .h_right .hr_box a.group		{display:none;}
+
+#group header .h_right .hr_box a.mypage:hover	{background:#4344ff url('../../images/_img/mypage_w.png')no-repeat center center / 14px;}
+#group header .h_right .hr_box a.logout:hover	{background:#4344ff url('../../images/_img/logout_w.png')no-repeat center center / 16px;}
+
+
+#mypage header	{background:transparent; box-shadow:inherit}
+#mypage h1		{display:none}
+#mypage .tmn	{display:none}
+
+#mypage header .h_right .hr_box a.mypage		{background:#fff url('../../images/_img/mypage.png')no-repeat center center / 14px;}
+#mypage header .h_right .hr_box a.logout		{background:#fff url('../../images/_img/logout.png')no-repeat center center / 16px;}
+#mypage header .h_right .hr_box a.group		{background:#fff url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat center center / 15px;}
+
+#mypage header .h_right .hr_box a.mypage:hover	{background:#4344ff url('../../images/_img/mypage_w.png')no-repeat center center / 14px;}
+#mypage header .h_right .hr_box a.logout:hover	{background:#4344ff url('../../images/_img/logout_w.png')no-repeat center center / 16px;}
+#mypage header .h_right .hr_box a.group:hover	{background:#4344ff url('../../images/_img/group_w.png')no-repeat center center / 15px;}
+
+
+footer	{width:100%; padding:60px 0 40px 0; text-align:center; font:400 16px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#b2bfbf}
+
+
+#contents			{min-height:calc(100vh - 178px); width:100%; max-width:1240px; padding:40px 20px 0 20px; margin:0 auto;}
+#group #contents	{padding:40px 10px 0 10px;}
+#mypage #contents	{padding:40px 10px 0 10px;}
+
+
+
+/*************** 사이드메뉴 ***************/
+.smn									{position:fixed; top:0; left:-300px; z-index:9; width:300px; background:#fff; height:100vh; padding:75px 30px 30px; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.5); transition:0.8s}
+.smn.open								{left:0;}
+.smn ul.smn_list						{width:100%; height:calc(100% - 70px); overflow-y:auto;}
+.smn ul.smn_list > li					{width:100%; margin-top:25px;}
+.smn ul.smn_list > li p a				{display:block; position:relative; font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; padding-left:20px; transition:0.3s; word-break:keep-all;}
+.smn ul.smn_list > li p a:before		{content:""; display:block; width:12px; height:2px; background:#222; position:absolute; top:12px; left:0;}
+.smn ul.smn_list > li p a:after			{content:""; display:block; width:2px; height:12px; background:#222; position:absolute; top:7px; left:5px; transition:0.3s}
+.smn ul.smn_list > li p a.on			{color:#1178ff}
+.smn ul.smn_list > li p a.on:after		{transform:rotate(90deg); background:#1178ff}
+.smn ul.smn_list > li p a:hover			{color:#1178ff}
+.smn ul.smn_list > li > ul				{display:none; padding-left:20px;}
+.smn ul.smn_list > li > ul li 			{margin-top:8px;}
+.smn ul.smn_list > li > ul li a			{font:400 16px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#666; transition:0.3s;}
+.smn ul.smn_list > li > ul li a.on		{color:#8400ff; font-weight:500}
+.smn ul.smn_list > li > ul li a:hover	{color:#8400ff; font-weight:500}
+
+
+.smn ul.smn_list::-webkit-scrollbar				{width: 5px;}
+.smn ul.smn_list::-webkit-scrollbar-track		{background-color:#fff;}
+.smn ul.smn_list::-webkit-scrollbar-thumb		{background-color:#eee;border-radius: 10px;}
+.smn ul.smn_list::-webkit-scrollbar-thumb:hover {background: #e5e5e5;}
+
+.smn .go_itman			{padding:20px 0 15px 0;}
+.smn .go_itman a		{display:block; padding:12px; border-radius:5px; font:400 15px/25px "Open Sans", "Noto Sans KR", sans-serif; color:#6d9f9f; width:100%; background:#e7f3f3 url('../../images/_img/arr.png')no-repeat center right 15px / 6px;}
+.smn .go_itman span		{display:inline-block; width:25px; height:25px; border-radius:3px; background:#fff; margin-right:5px; text-align:center;}
+.smn .go_itman span img	{height:15px; margin:-3px 0 0 -2px;}
+
+.smn .go_itman a:hover	{text-decoration:underline}
+
+@media only screen and (max-width: 1300px) {
+
+/*************** 헤더/푸터 ***************/
+header							{padding:0 15px;}
+
+header .h_left h1 a img					{max-width:120px; max-height:23px;}
+header .h_left div.tmn ul.list li a		{font:600 15px/22px "Open Sans", "Noto Sans KR", sans-serif;}
+header .h_left div.tmn ul.list li .depth{top:40px;}
+
+/* 로그인X */
+header .h_right_index a				{font:400 14px/16px "Open Sans", "Noto Sans KR", sans-serif;}
+
+/* 로그인O */
+header .h_right .hr_box span		{font:400 14px/16px "Open Sans", "Noto Sans KR", sans-serif; margin-right:5px}
+header .h_right .hr_box a			{width:30px; height:30px;}
+
+
+}
+
+
+
+
+
+@media only screen and (max-width: 1200px) {
+
+/*************** 헤더/푸터 ***************/
+header .h_left div.tmn				{position:relative;}
+header .h_left div.tmn .m_tit		{display:block; cursor:pointer; padding-right:30px; font:600 17px/22px "Open Sans", "Noto Sans KR", sans-serif; color:#222; background:url('../../images/_img/sel_bg.png')no-repeat center right / 12px ;}
+header .h_left div.tmn .m_tit span	{display:inline-block; vertical-align:middle; margin-left:5px; padding:4px 5px 3px 5px; border-radius:3px; background:#222; font:500 12px/12px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+
+header .h_left div.tmn ul.list					{display:none; position:absolute; top:35px; left:0; z-index:30; width:180px; padding:15px; border-radius:5px; background:#fff; box-shadow: 3px 5px 20px rgba(205, 232, 232, 0.8);}
+header .h_left div.tmn ul.list li				{display:block; margin:0 0 13px 0; height:auto; padding-top:0;}
+
+header .h_left div.tmn ul.list li a				{display:block; width:100%; font:600 16px/18px "Open Sans", "Noto Sans KR", sans-serif;}
+header .h_left div.tmn ul.list li span			{bottom:auto; left:auto; right:0; transform:translateX(0); padding:4px 5px 3px 5px; border-radius:3px; background:#222; font:500 12px/12px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+header .h_left div.tmn ul.list li.dash			{display:block;}
+header .h_left div.tmn ul.list li:last-child	{margin:0;}
+
+header .h_left div.tmn ul.list.open	{display:block !important;}
+
+header .h_left div.tmn ul.list li .depth			{display:block; position:relative; top:auto; left:auto; width:100%; padding:10px 0 0 5px; border-radius:0; box-shadow:none;}
+header .h_left div.tmn ul.list li .depth a			{display:block; margin-bottom:10px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#555}
+header .h_left div.tmn ul.list li .depth a:before	{content:"- "}
+
+#contents	{ padding:30px 20px 0 20px;}
+
+}
+
+
+
+
+@media only screen and (max-width: 640px) {
+
+body._ov	{overflow-y:hidden;}
+
+/*************** 헤더/푸터 ***************/
+header			{height:95px; padding-bottom:45px}
+header.h_index	{height:50px; padding-bottom:0px;}
+
+header .h_left .ham			{margin-right:8px;}
+header .h_left h1 a img		{max-width:150px; max-height:19px;}
+
+header .h_left div.tmn				{position:absolute; top:47px; left:0; margin:0; width:100%; background:#fff; padding:10px 15px 15px 15px;}
+header .h_left div.tmn .m_tit		{width:100%; background:url('../../images/_img/sel_bg.png')no-repeat right center / 14px; font:600 19px/22px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+header .h_left div.tmn .m_tit span	{vertical-align:top; padding:4px 7px 5px 7px; background:#222; font:500 13px/14px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+
+header .h_left div.tmn ul.list			{top:45px; width:100%; padding:10px 15px 20px 15px; border-radius:0px 0px 5px 5px; box-shadow:none;}
+header .h_left div.tmn ul.list li		{display:block; width:100%; margin:0 0 20px 0;}
+header .h_left div.tmn ul.list li a		{display:block; width:100%; font:600 18px/20px "Open Sans", "Noto Sans KR", sans-serif;}
+
+
+
+header .h_left div.tmn ul.list li .depth			{display:block; position:relative; top:auto; left:auto; width:100%; padding:15px 0 0 0px; border-radius:0; box-shadow:none;}
+header .h_left div.tmn ul.list li .depth a			{display:block; margin-bottom:12px; font:400 17px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#555}
+header .h_left div.tmn ul.list li .depth a:before	{content:"- "}
+
+
+/* 로그인X */
+header .h_right_index a				{font:400 13px/15px "Open Sans", "Noto Sans KR", sans-serif;}
+header .h_right_index a + a			{margin-left:13px;}
+header .h_right_index a + a:after	{content:""; position:absolute; top:4px; left:-8px; width:1px; height:10px; background:#999;}
+
+/* 로그인O */
+header .h_right .hr_btn					{display:block; padding-left:10px;}
+header .h_right .hr_btn span			{display:block; width:3px; height:3px; border-radius:8px; background:#333; margin-bottom:3px;}
+header .h_right .hr_btn span:last-child	{margin-bottom:0px;}
+
+header .h_right .hr_box			{z-index:30; position:absolute; top:45px; right:15px; height:0; overflow:hidden; border-radius:5px; background:#e9f2f2; box-shadow: 3px 5px 10px rgba(193, 219, 219, 0.8); transition:0.3s}
+header .h_right .hr_box.open	{height:auto; padding:20px 15px;}
+header .h_right .hr_box span	{display:block; font:500 15px/16px "Open Sans", "Noto Sans KR", sans-serif; margin-bottom:15px;}
+header .h_right .hr_box a		{display:block; font:400 14px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#333; width:auto; height:auto; padding-left:20px; margin-top:12px;}
+
+header .h_right .hr_box a.mypage	{background:#e9f2f2 url('../../images/_img/mypage.png')no-repeat left center / 13px;}
+header .h_right .hr_box a.logout	{background:#e9f2f2 url('../../images/_img/logout.png')no-repeat left center / 15px;}
+header .h_right .hr_box a.group		{background:#e9f2f2 url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat left center / 14px;}
+
+header .h_right .hr_box a.mypage:hover	{background:#e9f2f2 url('../../images/_img/mypage.png')no-repeat left center / 13px; font-weight:500; color:#333}
+header .h_right .hr_box a.logout:hover	{background:#e9f2f2 url('../../images/_img/logout.png')no-repeat left center / 15px; font-weight:500; color:#333}
+header .h_right .hr_box a.group:hover	{background:#e9f2f2 url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat left center / 14px; font-weight:500; color:#333}
+
+#group header .h_right .hr_box			{background:#fff;}
+#group header .h_right .hr_box a.mypage	{background:#fff url('../../images/_img/mypage.png')no-repeat left center / 13px;}
+#group header .h_right .hr_box a.logout	{background:#fff url('../../images/_img/logout.png')no-repeat left center / 15px;}
+
+#group header .h_right .hr_box a.mypage:hover	{background:#fff url('../../images/_img/mypage.png')no-repeat left center / 13px; font-weight:500; color:#333}
+#group header .h_right .hr_box a.logout:hover	{background:#fff url('../../images/_img/logout.png')no-repeat left center / 15px; font-weight:500; color:#333}
+
+#mypage header .h_right .hr_box			{background:#fff;}
+#mypage header .h_right .hr_box a.mypage	{background:#fff url('../../images/_img/mypage.png')no-repeat left center / 13px;}
+#mypage header .h_right .hr_box a.logout	{background:#fff url('../../images/_img/logout.png')no-repeat left center / 15px;}
+#mypage header .h_right .hr_box a.group	{background:#fff url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat left center / 15px;}
+
+#mypage header .h_right .hr_box a.mypage:hover	{background:#fff url('../../images/_img/mypage.png')no-repeat left center / 13px; font-weight:500; color:#333}
+#mypage header .h_right .hr_box a.logout:hover	{background:#fff url('../../images/_img/logout.png')no-repeat left center / 15px; font-weight:500; color:#333}
+#mypage header .h_right .hr_box a.group:hover	{background:#fff url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat left center / 15px; font-weight:500; color:#333}
+
+footer	{width:100%; padding:50px 0 25px 0; text-align:center; font:400 14px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#b2bfbf}
+
+
+#contents	{min-height:calc(100vh - 168px); padding:20px 15px 0 15px;}
+
+/*************** 사이드메뉴 ***************/
+.smn									{top:47px; left:-100%; z-index:35; width:100%; height:calc(100vh - 47px); padding:30px 30px;}
+.smn.open								{left:0;}
+.smn ul.smn_list						{width:100%; overflow-y:auto;}
+.smn ul.smn_list > li					{width:100%; margin-top:25px;}
+.smn ul.smn_list > li:first-child		{margin-top:0;}
+.smn ul.smn_list > li p a				{display:block; position:relative; font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; padding-left:20px; transition:0.3s; word-break:keep-all;}
+.smn ul.smn_list > li p a:before		{content:""; display:block; width:12px; height:2px; background:#222; position:absolute; top:12px; left:0;}
+.smn ul.smn_list > li p a:after			{content:""; display:block; width:2px; height:12px; background:#222; position:absolute; top:7px; left:5px; transition:0.3s}
+.smn ul.smn_list > li p a.on			{color:#1178ff}
+.smn ul.smn_list > li p a.on:after		{transform:rotate(90deg); background:#1178ff}
+.smn ul.smn_list > li p a:hover			{color:#1178ff}
+.smn ul.smn_list > li > ul				{display:none; padding-left:20px;}
+.smn ul.smn_list > li > ul li 			{margin-top:8px;}
+.smn ul.smn_list > li > ul li a			{font:400 16px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#666; transition:0.3s;}
+.smn ul.smn_list > li > ul li a.on		{color:#8400ff; font-weight:500}
+.smn ul.smn_list > li > ul li a:hover	{color:#8400ff; font-weight:500}
+
+
+.smn ul.smn_list::-webkit-scrollbar				{width: 5px;}
+.smn ul.smn_list::-webkit-scrollbar-track		{background-color:#fff;}
+.smn ul.smn_list::-webkit-scrollbar-thumb		{background-color:#eee;border-radius: 10px;}
+.smn ul.smn_list::-webkit-scrollbar-thumb:hover {background: #e5e5e5;}
+
+
+#group header		{padding-bottom:0; height:50px;}
+#group .smn			{top:0; height:100vh;  z-index:9;  padding:90px 30px 30px;}
+#group #contents	{padding:0px 10px 0 10px;}
+#mypage #contents	{padding:0px 10px 0 10px;}
+
+
+}
+

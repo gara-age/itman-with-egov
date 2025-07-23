@@ -20,6 +20,7 @@
 		<typeAlias alias="divisionVO"		type="egovframework.itman.division.service.DivisionVO" />
 		<typeAlias alias="empStateVO"  		type="egovframework.itman.empState.service.EmpStateVO" />
 		<typeAlias alias="positionVO"		type="egovframework.itman.position.service.PositionVO" />
+		<typeAlias alias="pagination" 		type="egovframework.itman.common.Pagination" />
 	</typeAliases>
     
 </configuration>
