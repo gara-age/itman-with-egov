@@ -1,5 +1,7 @@
 package egovframework.itman.employee.service;
 
+import egovframework.itman.common.Pagination;
+
 public class EmployeeVO {
 
     private String empIdx; // 직원IDX
@@ -21,6 +23,23 @@ public class EmployeeVO {
     private String empDiv;
     private String posName;
     public String empState;
+    private int listCnt;
+
+    public int getListCnt() {
+        return listCnt;
+    }
+
+    public void setListCnt(int listCnt) {
+        this.listCnt = listCnt;
+    }
+
+    public String getDelYn() {
+        return delYn;
+    }
+
+    public void setDelYn(String delYn) {
+        this.delYn = delYn;
+    }
 
     public String getEmpState() {return empState; }
 

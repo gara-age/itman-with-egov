@@ -1,0 +1,525 @@
+@charset "utf-8";
+
+.Basic						{width:100%; padding:30px; background:#fff; border-radius:10px;}
+.Basic .base_tit			{width:100%; display:table; margin-bottom:20px;}
+.Basic .base_tit > p		{display:table-cell; vertical-align:middle;}
+.Basic .base_tit .tit		{width:auto; font:500 20px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222}
+.Basic .base_tit .more		{width:20px; padding-left:14px; font-size:0;}
+.Basic .base_tit .more img	{width:14px}
+
+.dashboard .overflow .f_l	{width:calc(100% - 380px)}
+.dashboard .overflow .f_r	{width:360px;}
+.dashboard .overflow.mt		{margin-top:20px;}
+
+.dashboard .graph	{font:400 15px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#666}
+
+
+.tit_search					{width:100%; overflow:hidden; margin:10px 0 20px 0; padding-left:5px;}
+.tit_search h2				{float:left; margin-top:3px; font:700 30px/34px "Open Sans", "Noto Sans KR", sans-serif; color:#000;}
+.tit_search .list_search	{float:right}
+.tit_search .list_search *					{margin-left:3px; vertical-align:middle; display:inline-block; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+.tit_search .list_search select				{background:#dbe4e4 url('../../images/_img/sel_bg.png')no-repeat center right 15px / 13px; height:42px; border-radius:3px; padding: 0 40px 0 15px; border:none; outline:none; -moz-appearance:none; -webkit-appearance:none; appearance:none;}
+.tit_search .list_search select::-ms-expand	{display:none;}
+.tit_search .list_search input[type="text"]	{width:230px; height:42px; background:#dbe4e4; border-radius:3px; border:none; padding:0 15px; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.tit_search .list_search a					{height:42px; padding:12px 15px; border-radius:3px; background:#222; color:#fff}
+
+.tit_search .delete		{float:right;}
+.tit_search .delete a	{display:inline-block; padding:10px 12px 10px 30px; border-radius:3px; background:#9eb1b1 url('../../images/_img/del_view.png')no-repeat top 10px left 12px / auto 15px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.3s}
+.tit_search .delete a:hover	{background:#8400ff url('../../images/_img/del_view.png')no-repeat top 10px left 12px / auto 15px;}
+
+.num_list							{width:100%; overflow:hidden; margin:0 0 10px 0; padding:0 5px;}
+.num_list .total					{float:left; margin-top:3px; font:400 16px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#6b8181;}
+.num_list .total span				{font-weight:600; font-size:20px; color:#1178ff}
+.num_list .view						{float:right;}
+.num_list .view select				{background:transparent url('../../images/_img/sel_bg.png')no-repeat center right / 12px; padding: 0 20px 0 0px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222; border:none; outline:none; -moz-appearance:none; -webkit-appearance:none; appearance:none;}
+.num_list .view select::-ms-expand	{display:none;}
+
+
+.paging			{margin-top:25px; text-align:center;}
+.paging a		{display:inline-block; vertical-align:middle; margin:0 2px; font:400 17px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#222; width:35px; height:35px; border-radius:3px; padding-top:7px; transition:0.3s}
+.paging a.on	{background:#1178ff; color:#fff}
+.paging a:hover	{background:#dbe4e4;}
+.paging a:hover.on	{background:#1178ff;}
+
+.paging a.first, .paging a.prev,
+.paging a.last, .paging a.next	{background:transparent; margin:0; padding-top:6px}
+.paging a img	{height:14px;}
+
+.nocont			{width:100%; padding:50px 0; text-align:center;  font:300 16px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+.nocont:hover	{background:transparent !important}
+
+.addContent						{position:fixed; bottom:30px; right:30px; z-index:5; transition:0.3s;}
+.addContent	a					{display:block; width:80px; height:80px; background:#8400ff; border-radius:50px; font-size:0; position:relative; overflow:hidden; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.8);}
+.addContent	a:before			{content:""; opacity:0.2; position:absolute; top:0; left:0px; z-index:2; display:block; width:calc(100% + 110px); height:80px; background:linear-gradient(90deg, #8400ff, #1178ff); transition:0.5s}
+.addContent	a span				{display:block; background:#fff; position:absolute; z-index:2; transition:0.5s}
+.addContent	a span:nth-child(1)	{width:36px; height:3px; top:50%; left:50%; margin:-1px 0 0 -18px;}
+.addContent	a span:nth-child(2) {width:0; height:3px;}
+.addContent	a span:nth-child(3)	{height:36px; width:3px; top:50%; left:50%; margin:-18px 0 0 -1px;}
+
+.addContent:hover						{bottom:40px;}
+.addContent:hover a:before				{left:-100px; opacity:1;}
+.addContent:hover a span:nth-child(1)	{transform:rotate(45deg); width:25px; height:3px; top:31px; left:68%;}
+.addContent:hover a span:nth-child(2)	{width:36px; top:38px; left:51%; margin-left:-20px;}
+.addContent:hover a span:nth-child(3)	{transform:rotate(45deg); width:3px; height:25px; top:53px; left:60%;}
+
+.editContent						{position:fixed; bottom:130px; right:30px; z-index:5; transition:0.3s;}
+.editContent	a					{display:block; width:80px; height:80px; background: #40b807; border-radius:50px; font-size:0; position:relative; overflow:hidden; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.8); display: flex; justify-content: center; align-items: center;}
+.editContent	a:before			{content:""; opacity:0.2; position:absolute; top:0; left:0px; z-index:2; display:block; width:calc(100% + 110px); height:80px; background:linear-gradient(90deg, #0545d5, #00ff66); transition:0.5s}
+.editContent	a img				{position:relative; z-index:9; width:30px;}
+
+.editContent:hover						{bottom:140px;}
+.editContent:hover a:before				{left:-50px; opacity:1;}
+
+.delContent						{position:fixed; bottom:30px; right:30px; z-index:5; transition:0.3s;}
+.delContent	a					{display:block; width:80px; height:80px; background:#d02444; border-radius:50px; font-size:0; position:relative; overflow:hidden; box-shadow: 3px 5px 10px rgba(205, 232, 232, 0.8); display: flex; justify-content: center; align-items: center;}
+.delContent	a:before			{content:""; opacity:0.2; position:absolute; top:0; left:0px; z-index:2; display:block; width:calc(100% + 110px); height:80px; background:linear-gradient(90deg, #d02444, #8400ff); transition:0.5s}
+.delContent	a img				{position:relative; z-index:9; width:30px;}
+
+.delContent:hover						{bottom:40px;}
+.delContent:hover a:before				{left:-50px; opacity:1;}
+
+
+
+
+.viewTop				{overflow:hidden;}
+.viewTop .adminView		{float:left; width:calc(100% - 300px)}
+
+.viewTop .img			{float:right; width:280px;}
+.viewTop .img span		{display:flex; justify-content: center; align-items: center; width:280px; height:280px; padding:20px; border-radius:10px; background:#fff; }
+.viewTop .img span img	{max-width:240px; max-height:240px;}
+
+.viewTop .filebox						{margin-top:10px;}
+.viewTop .filebox input[type="file"]	{position:absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;}
+.viewTop .filebox label					{display:inline-block; vertical-align:middle; position:relative; overflow:hidden; height:60px; width:100%; text-align:center; padding:22px 10px; border-radius:5px; font:400 16px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; cursor:pointer; transition:0.3s}
+.viewTop .filebox label:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 400px); height:60px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+.viewTop .filebox label:hover:before	{left:-400px}
+
+
+
+h3		{margin:40px 0 8px 0; font:700 21px/32px "Open Sans", "Noto Sans KR", sans-serif; color:#000;}
+h3.top	{margin-top:0px;}
+
+ul.adminView					{width:100%;}
+ul.adminView li					{display:table; background:#fff; width:100%; padding:18px 20px; font:400 16px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#555; margin-bottom:3px; table-layout:fixed;}
+ul.adminView li	> p				{display:table-cell; word-break:break-all;}
+ul.adminView li:first-child		{border-radius:10px 10px 0 0}
+ul.adminView li:last-child		{border-radius:0 0 10px 10px; margin-bottom:0px;}
+ul.adminView li	.tit			{font-weight:500; color:#222; width:150px; padding-right:40px; position:relative;}
+ul.adminView li	.tit:after		{content:""; position:absolute; top:5px; right:20px; width:2px; height:14px; background:#dbe4e4;}
+ul.adminView li	.tit.v02		{width:100px;}
+ul.adminView li	.cont			{width:auto}
+ul.adminView li	.edit			{width:44px;}
+ul.adminView li	.edit a			{display:block; background:url('../../images/_img/edit.png')no-repeat center left / auto 15px; padding-left:17px; font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+ul.adminView li	.edit a:hover	{background:url('../../images/_img/edit_on.png')no-repeat center left / auto 15px; color:#8400ff}
+
+ul.adminView.v02				{width:100%; display:table; table-layout:fixed;}
+ul.adminView.v02 li				{display:table-cell; width:*; border-right:3px solid #f0f5f5; position:relative}
+ul.adminView.v02 li	> p			{display:block;}
+ul.adminView.v02 li:first-child	{border-radius:10px 0 0 10px}
+ul.adminView.v02 li:last-child	{border-radius:0 10px 10px 0; border-right:none;}
+ul.adminView.v02 li	.tit		{width:100%; padding-right:60px; margin-bottom:8px;}
+ul.adminView.v02 li	.tit:after	{display:none;}
+ul.adminView.v02 li	.edit		{position:absolute; top:10px; right:10px;}
+
+ul.adminView.Write li *						{vertical-align:middle;}
+ul.adminView.Write li .tit:after			{content:""; position:absolute; top:50%; right:20px; margin-top:-7px; width:2px; height:14px; background:#dbe4e4;}
+ul.adminView.Write li .tit span				{color:#8400ff; font-weight:600;}
+ul.adminView.Write li input[type="text"]	{width:100%; padding:0 0 0 5px; font:400 16px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; border:none; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+ul.adminView.Write li select				{max-width:100% ; background:#fff url('../../images/_img/sel_bg.png')no-repeat center right 15px / 13px; padding: 0 50px 0 5px; font:400 16px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#222; border:none; outline:none; -moz-appearance:none; -webkit-appearance:none; appearance:none;}
+ul.adminView.Write li select::-ms-expand	{display:none;}
+ul.adminView.Write li .edit					{width:100px;}
+
+ul.adminView.Write li a.popbtn					{display:inline-block; position:relative; z-index:1; overflow:hidden; padding:10px; text-align:center; border-radius:3px; font:400 14px/15px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.3s}
+ul.adminView.Write li a.popbtn:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 100px); height:50px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+ul.adminView.Write li a.popbtn:hover:before		{left:-50px}
+ul.adminView.Write li span.name			{margin-left:10px;}
+ul.adminView.Write li .edit				{text-align:right;}
+ul.adminView.Write li .edit a			{display:inline-block; background:url('../../images/_img/more.png')no-repeat center right / auto 10px; padding:0 17px 0 0; color:#666}
+ul.adminView.Write li .edit a:hover		{background:url('../../images/_img/more_on.png')no-repeat center right / auto 10px;; color:#8400ff}
+
+
+.table_box									{width:100%; border-radius:10px; overflow:hidden;}
+.table_box table							{width:100%; table-layout:fixed;}
+.table_box table th, .table_box table td	{vertical-align:middle; word-break:break-word}
+.table_box table thead tr th				{background:#1178ff; padding:12px 15px; border-right:1px solid #1764c9; font:500 16px/28px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.table_box table thead tr th:last-child		{border-right:none;}
+.table_box table tbody tr th				{background:#4344ff; padding:10px 15px; border-bottom:1px solid #2e2fbf; font:500 16px/28px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+.table_box table tbody tr td				{background:#fff; border-right:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px 15px; font:400 16px/28px "Open Sans", "Noto Sans KR", sans-serif; text-align:center;}
+.table_box table tbody tr td:last-child		{border-right:none;}
+.table_box table tbody tr:last-child td		{border-bottom:none;}
+
+
+.pagebtn		{width:100%; margin-top:30px; text-align:center}
+.pagebtn a		{display:inline-block; padding:12px 15px; margin:0 2px; background:#222; border-radius:3px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.pagebtn a.comp	{background:#222;}
+.pagebtn a.del	{background:#d02444;}
+
+
+@media only screen and (min-width: 1201px) {
+
+
+/*리스트*/
+.adminList					{width:100%;}
+.adminList.click li			{cursor:pointer;}
+.adminList li				{width:100%; border-bottom:1px solid #ddd; display:table; table-layout:fixed;}
+.adminList li:hover			{background:#fafafa}
+.adminList.click li.tit		{cursor:default;}
+.adminList li.tit:hover		{background:#fff}
+.adminList li:last-child	{border-bottom:none;}
+.adminList li > div,
+.adminList li > p			{display:table-cell; text-align:center; vertical-align:middle; height:48px;}
+.adminList li > div > div	{display:table-cell; vertical-align:middle;}
+.adminList li p			{padding:10px 8px; font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#555; display:table-cell; vertical-align:middle; word-break:break-all; letter-spacing:0px}
+.adminList li p span.hidden	{display:none;}
+.adminList li p span.etc	{display:none;}
+.adminList li.tit		{border-bottom:1px solid #555}
+.adminList li.tit p		{padding:0 0 15px 0; height:auto; font-weight:500; color:#222; letter-spacing:-1px}
+
+.adminList li .tit				{width:auto}
+.adminList li .img				{width:80px;}
+.adminList li .img span			{display:flex; align-items: center; justify-content: center; width:65px; height:65px; border-radius:3px; position:relative; overflow:hidden;}
+.adminList li .img span:after	{content:""; display:block; width:100%; height:100%; position:absolute; top:0; left:0; background:rgba(0, 0, 0, 0.05)}
+.adminList li .img img			{max-width:65px; max-height:65px;}
+
+.adminList li .cate		{width:110px}
+.adminList li .stat		{width:90px;}
+.adminList li .view		{width:50px; background:url('../../images/_img/arr.png')no-repeat center center / 10px;}
+.adminList li.tit .view		{background:transparent}
+.adminList li .stat02	{width:60px;}
+.adminList li .date02	{width:160px;}
+
+.adminList li .depart	{width:180px;}
+.adminList li .spot		{width:140px;}
+.adminList li .depSpot	{width:320px;}
+
+.adminList li .num		{width:105px;}
+.adminList li .date		{width:160px;}
+.adminList li .numDate	{width:265px;}
+
+.adminList li .name		{width:100px;}
+.adminList li .loc		{width:130px;}
+.adminList li .nameLoc	{width:230px}
+
+.adminList li .mail		{width:260px;}
+.adminList li .tel		{width:140px;}
+.adminList li .mailTel	{width:400px}
+
+.adminList li .p_info	{width:150px;}
+.adminList li .p_date	{width:100px;}
+.adminList li .p_pay	{width:100px;}
+.adminList li .purInfo	{width:350px}
+
+.adminList li .type			{width:90px}
+.adminList li .change		{width:240px;}
+.adminList li .typeChange	{width:330px;}
+
+.adminList li .pos		{width:160px}
+.adminList li .total	{width:160px;}
+.adminList li .posTotal	{width:320px;}
+
+.adminList li .admin	{width:100px;}
+.adminList li .etc		{width:230px; text-align:left; font-size:14px; color:#888}
+.adminList li.tit .etc	{text-align:center; font-size:15px; font-weight:500; color:#222; letter-spacing:-1px}	
+.adminList li .etc a	{display:none; font-size:14px; color:#888}
+
+
+.adminList li .editDel	{width:120px;}
+.adminList li .editDel a			{font-size:14px; color:#666; margin:0 5px; transition:0.3s}
+.adminList li .editDel a.edit			{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px; padding-left:17px;}
+.adminList li .editDel a.del			{background:url('../../images/_img/del.png')no-repeat center left / auto 15px; padding-left:17px;}
+.adminList li .editDel a.viewer			{background:url('../../images/_img/view.png')no-repeat top 5px left / 18px; padding-left:22px;}
+.adminList li .editDel a.edit:hover		{background:url('../../images/_img/edit_on.png')no-repeat center left / auto 15px; color:#8400ff}
+.adminList li .editDel a.del:hover		{background:url('../../images/_img/del_on.png')no-repeat center left / auto 15px; color:#8400ff}
+.adminList li .editDel a.viewer:hover	{background:url('../../images/_img/view_on.png')no-repeat top 5px left / 18px; color:#8400ff}
+
+.adminList.history li .change.v02		{width:300px;}
+.adminList.history li .etc.v02			{width:300px;}
+
+
+}
+
+
+
+
+
+@media only screen and (max-width: 1200px) {
+
+
+.Basic						{width:100%; padding:0; background:transparent; border-radius:0;}
+.Basic .base_tit			{margin-bottom:8px;}
+
+.dashboard .overflow .f_l	{width:calc(100% - 390px)}
+.dashboard .overflow.mt		{margin-top:30px;}
+
+.dashboard .graph	{background:#fff; padding:20px; background:#fff; border-radius:10px; font:400 15px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#666}
+
+
+
+.addContent						{bottom:20px;}
+.addContent	a					{width:70px; height:70px;}
+.addContent	a span:nth-child(1)	{width:34px; height:3px; top:50%; left:50%; margin:-1px 0 0 -17px;}
+.addContent	a span:nth-child(3)	{height:34px; width:3px; top:50%; left:50%; margin:-17px 0 0 -1px;}
+
+.addContent:hover						{bottom:20px;}
+.addContent:hover a span:nth-child(1)	{transform:rotate(45deg); width:22px; height:3px; top:28px; left:70%;}
+.addContent:hover a span:nth-child(2)	{width:30px; top:35px; left:50%; margin-left:-15px;}
+.addContent:hover a span:nth-child(3)	{transform:rotate(45deg); width:3px; height:22px; top:49px; left:61%;}
+
+    .editContent						{bottom:200px;}
+    .editContent	a					{width:70px; height:70px;}
+    .editContent:hover				{bottom:100px;}
+
+.delContent						{bottom:20px;}
+.delContent	a					{width:70px; height:70px;}
+.delContent:hover				{bottom:20px;}
+
+
+
+.adminList						{overflow:hidden}
+.adminList.click li				{cursor:pointer;}
+.adminList li					{float:left; width:calc(50% - 5px); margin-bottom:10px; background:#fff; border-radius:10px; padding:40px 15px 20px 15px; position:relative;}
+.adminList.img li				{padding:40px 15px 20px 95px;}
+.adminList li:nth-child(even)	{margin-right:5px}
+.adminList li:nth-child(odd)	{margin-left:5px}
+
+.adminList.history li			{width:100% !important; margin:0 0 10px 0 !important;}
+
+.adminList li.tit				{display:none;}
+.adminList li p					{letter-spacing:0; vertical-align:middle;}
+.adminList li p span.hidden			{display:initial;}
+
+.adminList li .tit				{display:inline-block; font:500 17px/23px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+.adminList li .img				{position:absolute; top:45px; left:15px; width:80px;}
+.adminList li .img span			{display:flex; align-items: center; justify-content: center; justify-content: center; width:65px; height:65px; border-radius:3px; position:relative; overflow:hidden;}
+.adminList li .img span:after	{content:""; display:block; width:100%; height:100%; position:absolute; top:0; left:0; background:rgba(0, 0, 0, 0.05);}
+.adminList li .img img			{max-width:65px; max-height:65px;}
+
+.adminList li .cate				{display:block; margin-top:5px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; color:#6d8c8c;}
+.adminList li .editDel			{position:absolute; top:8px; right:12px;}
+.adminList li .editDel a		{display:inline-block; width:15px; height:15px; vertical-align:middle; font-size:0;}
+.adminList li .editDel a.edit	{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px;}
+.adminList li .editDel a.del	{background:url('../../images/_img/del.png')no-repeat center left / auto 15px; margin-left:9px;}
+
+
+.adminList li .stat		{position:absolute; display:inline-block; border-radius:3px; padding:4px 7px; background:#1178ff; top:12px; right:15px; font:400 13px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.adminList li .stat02	{display:inline-block; font:500 18px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+
+.adminList li .depart			{display:block; margin-top:5px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; color:#6d8c8c;}
+.adminList li .spot				{display:inline-block; margin-left:5px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; color:#666;}
+.adminList li .depSpot			{overflow:hidden; width:fit-content; margin-top:5px;}
+.adminList li .depSpot p		{float:left; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; color:#6d8c8c; margin-left:3px; margin-top:0px;}
+.adminList li .depSpot p:before	{content:"/ "}
+.adminList li .depSpot p:first-child		{margin-left:0;}
+.adminList li .depSpot p:first-child:before	{display:none}
+
+.adminList li .num				{position:absolute; top:12px; left:15px; font:700 14px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#555;}
+.adminList li .date				{position:absolute; top:12px; left:15px; font:400 14px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+.adminList li .numDate			{position:absolute; top:12px; left:15px; overflow:hidden; width:fit-content;}
+.adminList li .numDate p		{position:relative; top:auto; left:auto;}
+.adminList li .numDate .num		{float:left;}
+.adminList li .numDate .date	{float:right; margin-left:8px}
+
+.adminList li .loc					{font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#6d8c8c; margin-top:5px;}
+.adminList li .nameLoc				{overflow:hidden; width:fit-content; margin-top:10px;}
+.adminList li .nameLoc .name		{float:right; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; margin-left:15px; position:relative;}
+.adminList li .nameLoc .name:before	{content:""; position:absolute; top:3px; left:-8px; width:1px; height:13px; background:#aaa}
+.adminList li .nameLoc .loc			{float:left; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; margin-top:0;}
+
+.adminList li .tel		 		{font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999; margin-top:10px;}
+.adminList li .meil		 		{font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999; margin-top:10px;}
+.adminList li .mailTel			{overflow:hidden; margin-top:10px;}
+.adminList li .mailTel p		{float:left; font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999; margin-left:3px; margin-top:0px;}
+.adminList li .mailTel p:before	{content:"/ "}
+.adminList li .mailTel p:first-child		{margin-left:0;}
+.adminList li .mailTel p:first-child:before	{display:none}
+
+.adminList li .purInfo			{overflow:hidden; margin-top:8px;}
+.adminList li .purInfo p		{float:left; font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999; margin-left:3px;}
+.adminList li .purInfo p:before	{content:"/ "}
+.adminList li .purInfo p:first-child		{margin-left:0;}
+.adminList li .purInfo p:first-child:before	{display:none}
+
+.adminList li .date02 			{margin-top:8px; font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+
+.adminList li .change			{font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#555; position:relative; margin-top:10px;}
+.adminList li .type				{float:left; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555;}
+.adminList li .typeChange		{overflow:hidden; width:fit-content; margin-top:10px;}
+.adminList li .typeChange .change			{float:right; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; margin-top:0px; margin-left:15px; position:relative;}
+.adminList li .typeChange .change:before	{content:""; position:absolute; top:3px; left:-8px; width:1px; height:13px; background:#aaa}
+
+.adminList li .posTotal					{overflow:hidden; width:fit-content; margin-top:10px;}
+.adminList li .posTotal p				{float:left; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555; position:relative;}
+.adminList li .posTotal .yes			{color:#1178ff}
+.adminList li .posTotal .no				{color:#d02444}
+.adminList li .posTotal .total			{margin-left:15px;}
+.adminList li .posTotal .total:before	{content:""; position:absolute; top:3px; left:-8px; width:1px; height:13px; background:#aaa}
+
+.adminList li .admin	{display:inline-block; border-radius:3px; padding:4px 7px; background:#d4ebeb; top:12px; right:15px; font:400 13px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#6d8c8c;}
+.adminList li .etc		{width:100%; height:20px;font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#999; margin-top:8px; position:relative; display:inline-block; vertical-align:middle; max-width:100%; width:fit-content; height:20px; padding-right:50px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+.adminList li .etc a	{position:absolute; top:0; right:0px; display:inline-block; vertical-align:middle; font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#555;}
+
+.adminList li .view		{position:absolute; top:15px; right:12px; width:10px; height:14px; background:url('../../images/_img/arr.png')no-repeat center center / 10px;}
+
+.nocont			{width:100% !important; margin:0 0 10px 0 !important; padding:80px 0 !important; font:300 16px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+.nocont:hover	{background:#fff !important}
+
+}
+
+
+
+
+
+@media only screen and (max-width: 840px) {
+
+
+.Basic						{width:100%; padding:0; background:transparent; border-radius:0;}
+.Basic .base_tit			{margin:10px 0;}
+.Basic .base_tit.mt			{margin-top:25px;}
+
+.dashboard .overflow		{}
+.dashboard .overflow .f_l	{width:calc(100%)}
+.dashboard .overflow .f_r	{width:100%; }
+.dashboard .overflow.mt		{margin-top:15px;}
+
+.dashboard .graph	{background:#fff; padding:25px; background:#fff; border-radius:10px; font:400 15px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#666}
+
+
+.addContent						{bottom:15px; right:15px;}
+.addContent	a					{width:60px; height:60px; background:#8400ff; box-shadow:3px 5px 10px rgba(0, 0, 0, 0.2);}
+.addContent	a span:nth-child(1)	{width:26px; height:2px; top:50%; left:50%; margin:-1px 0 0 -13px;}
+.addContent	a span:nth-child(3)	{height:26px; width:2px; top:50%; left:50%; margin:-13px 0 0 -1px;}
+.addContent	a:before			{display:none;}
+
+.addContent:hover						{bottom:25px;}
+.addContent:hover a						{background:linear-gradient(90deg, #8400ff, #1178ff);}
+.addContent:hover a span:nth-child(1)	{transform:rotate(45deg); width:20px; height:2px; top:24px; left:64%;}
+.addContent:hover a span:nth-child(2)	{width:26px; height:2px; top:30px; left:50%; margin-left:-15px;}
+.addContent:hover a span:nth-child(3)	{transform:rotate(45deg); width:2px; height:20px; top:41px; left:58%;}
+
+    .editContent				{bottom:90px; right:15px;}
+    .editContent	a			{width:60px; height:60px; box-shadow:3px 5px 10px rgba(0, 0, 0, 0.2);}
+    .editContent	a img		{width:25px}
+    .editContent a:hover		{bottom:100px;}
+    .editContent	a:before	{display:none;}
+
+.delContent				{bottom:15px; right:15px;}
+.delContent	a			{width:60px; height:60px; box-shadow:3px 5px 10px rgba(0, 0, 0, 0.2);}
+.delContent	a img		{width:25px}
+.delContent a:hover		{bottom:25px;}
+.delContent	a:before	{display:none;}
+
+.tit_search									{padding:0; margin:0 0 0 0}
+.tit_search	h2								{float:inherit; margin-bottom:15px; font: 700 28px/32px "Open Sans", "Noto Sans KR", sans-serif}
+.tit_search .list_search					{float:inherit; width:100%; margin:0 0 20px 0}
+.tit_search .list_search *					{margin-left:3px;}
+.tit_search .list_search select				{width:110px; margin-left:0px;}
+.tit_search .list_search input[type="text"]	{width:calc(100% - 158px);}
+.tit_search .list_search a					{width:42px; height:42px; background:#222 url('../../images/_img/search.png')no-repeat center center / 21px; font-size:0;}
+
+.num_list							{padding:0 3px;}
+.num_list .total					{font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif;}
+.num_list .total span				{font-size:18px;}
+.num_list .view select				{font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+
+
+.paging			{margin-top:15px;}
+.paging a		{margin:0; font:400 16px/18px "Open Sans", "Noto Sans KR", sans-serif; width:30px; height:30px; padding-top:6px;}
+
+.paging a.first, .paging a.prev,
+.paging a.last, .paging a.next	{background:transparent; margin:0; padding-top:5px}
+.paging a img	{height:13px;}
+
+.nocont			{padding:50px 0  !important;  font:300 16px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#999;}
+.nocont:hover	{background:#fff !important}
+
+
+.adminList						{overflow:hidden}
+.adminList li					{float:left; width:100%; margin-bottom:8px;}
+.adminList li:nth-child(even)	{margin-right:0px}
+.adminList li:nth-child(odd)	{margin-left:0px}
+
+.adminList.history li			{margin:0 0 8px 0 !important;}
+.adminList.history li .etc		{height:auto; padding-right:0; overflow: inherit; text-overflow: ellipsis; display: block; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+
+
+.viewTop				{overflow:hidden; position:relative;}
+.viewTop .adminView		{float:inherit; width:100%}
+
+.viewTop .img			{float:inherit; width:100%; border-radius:10px; overflow:hidden;background:#fff; position:relative;}
+.viewTop .img:after		{content:""; display:block; width:100%; height:100%; position:absolute; top:0; left:0; background:rgba(199, 215, 215, 0.25)}
+.viewTop .img span		{display:flex; justify-content: center; align-items: center; width:100%; height:200px; padding:0 20px; border-radius:0; background:transparent; }
+.viewTop .img span img	{max-height:200px;}
+
+.viewTop .filebox						{margin-top:0px; position:absolute; top:0; right:10px; z-index:2;}
+.viewTop .filebox label					{height:40px; width:80px; padding:14px 10px; border-radius:3px; font:400 13px/13px "Open Sans", "Noto Sans KR", sans-serif;}
+.viewTop .filebox label:before			{width:calc(100% + 100px); height:40px;}
+.viewTop .filebox label:hover:before	{left:-100px}
+
+
+h3		{margin:40px 0 8px 0; font:700 21px/32px "Open Sans", "Noto Sans KR", sans-serif; color:#000;}
+h3.top	{margin-top:0px;}
+
+ul.adminView					{width:100%;}
+.viewTop ul.adminView			{position:relative; z-index:9; margin-top:-40px;}
+ul.adminView li					{padding:15px; font:400 15px/23px "Open Sans", "Noto Sans KR", sans-serif;}
+ul.adminView li:first-child		{border-radius:8px 8px 0 0}
+ul.adminView li:last-child		{border-radius:0 0 8px 8px;}
+ul.adminView li	.tit			{width:120px; padding-right:20px; position:relative;}
+ul.adminView li	.tit:after		{right:10px; top:4px}
+ul.adminView li	.tit.v02		{width:80px;}
+ul.adminView li	.cont			{width:auto; padding-left:2px;}
+ul.adminView li	.edit			{width:25px; padding-left:10px; vertical-align:middle;}
+ul.adminView li	.edit a			{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px; width:15px; height:15px; padding-left:0; font-size:0px;}
+ul.adminView li	.edit a:hover	{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px;}
+ul.adminView li	.edit a:focus	{background:url('../../images/_img/edit_on.png')no-repeat center left / auto 15px;}
+
+ul.adminView.v02				{width:100%; display:block;}
+ul.adminView.v02 li				{display:block; width:100%; border-right:none; position:relative}
+ul.adminView.v02 li	> p			{display:block;}
+ul.adminView.v02 li:first-child	{border-radius:8px 8px 0 0}
+ul.adminView.v02 li:last-child	{border-radius:0 0 8px 8px;}
+ul.adminView.v02 li	.tit		{width:100%; padding-right:60px; margin-bottom:5px;}
+ul.adminView.v02 li	.tit:after	{display:none;}
+ul.adminView.v02 li	.edit		{position:absolute; top:10px; right:10px;}
+
+
+ul.adminView.Write li				{display:block; position:relative}
+ul.adminView.Write li .tit			{display:block; width:100%}
+ul.adminView.Write li .tit:after	{display:none;}
+ul.adminView.Write li .tit span		{color:#8400ff; font-weight:600;}
+
+ul.adminView.Write li .cont			{display:block; margin-top:8px; width:100%; padding:0;}
+
+
+ul.adminView.Write li input[type="text"]	{padding:0; font:400 15px/23px "Open Sans", "Noto Sans KR", sans-serif;}
+ul.adminView.Write li select				{width:100%; background:#fff url('../../images/_img/sel_bg.png')no-repeat center right 0 / 13px; padding: 0 30px 0 0; font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif;}
+ul.adminView.Write li .edit					{width:100px;}
+
+ul.adminView.Write li a.popbtn					{display:inline-block; position:relative; z-index:2; overflow:hidden; padding:10px; text-align:center; border-radius:3px; font:400 14px/15px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.3s}
+ul.adminView.Write li a.popbtn:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 100px); height:50px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+ul.adminView.Write li a.popbtn:hover:before		{left:-50px}
+
+ul.adminView.Write li span.name			{margin-left:10px;}
+ul.adminView.Write li .edit				{position:absolute; top:15px; right:10px; z-index:2;}
+ul.adminView.Write li .edit a			{display:block; width:85px; height:18px; background:url('../../images/_img/more.png')no-repeat top 6px right / auto 10px; padding:0 17px 0 0; color:#666; font-size:14px;}
+ul.adminView.Write li .edit a:hover		{background:url('../../images/_img/more.png')no-repeat top 6px right / auto 10px; color:#666}
+
+.table_box									{border-radius:8px;;}
+.table_box table thead tr th				{padding:10px 12px; font:500 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.table_box table tbody tr th				{padding:8px 12px; font:500 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#fff}
+.table_box table tbody tr td				{background:#fff; border-right:1px solid #ddd; border-bottom:1px solid #ddd; padding:8px 12px; font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif; text-align:center;}
+
+
+
+}
+
+
+
+@media only screen and (max-width: 640px) {
+
+.tit_search					{padding:0; margin:10px 0  0}
+.tit_search h2				{display:none;}
+
+.pagebtn		{margin-top:20px;}
+
+}

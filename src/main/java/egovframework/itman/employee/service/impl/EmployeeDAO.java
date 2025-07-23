@@ -15,15 +15,21 @@ import java.util.Map;
 public class EmployeeDAO  {
     @Autowired
     private SqlSession sqlSession;
-    
-//    public List<EmployeeVO> selectEmployeeList(Pagination pagination) throws Exception {
-//        return sqlSession.selectList("employeeDAO.selectEmployeeList", pagination);
-//    }
+
+    public List<EmployeeVO> selectEmployeeList(EmployeeVO vo) throws Exception {
+
+        return sqlSession.selectList("employeeDAO.selectEmployeeList", vo);
+    }
 
     public List<EmployeeVO> selectEmployeeList(Pagination pagination) throws Exception {
+
         return sqlSession.selectList("employeeDAO.selectEmployeeList", pagination);
     }
 
+    public List<EmployeeVO> selectEmployeeList(int listCnt) throws Exception {
+
+        return sqlSession.selectList("employeeDAO.selectEmployeeList", listCnt);
+    }
 
     public int selectEmployeeListCnt() throws Exception{
         return sqlSession.selectOne("employeeDAO.selectEmployeeListCnt");

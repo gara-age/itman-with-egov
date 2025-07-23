@@ -1,0 +1,286 @@
+@charset "utf-8";
+
+/*************** 최초메인 ***************/
+.index				{text-align:center; padding-bottom:30px !important}
+.index .logo		{margin-top:80px;}
+.index .logo img	{height:47px;}
+
+.index .index_tt		{margin-top:40px; font:500 36px/42px "GmarketSans", sans-serif; color:#000}
+.index .index_tt span	{margin-top:10px; display:block; font-weight:300; font-size:26px;}
+.index .index_tt br		{display:none}
+
+.index ul.index_service						{margin-top:60px; width:100%; border-radius:10px; background:#fff; overflow:hidden;}
+.index ul.index_service li					{float:left; width:33%; border-top:2px solid #f0f5f5; padding:30px 25px 37px 25px; text-align:left; font:500 21px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222; transition:0.5s}
+.index ul.index_service li:nth-child(3n+2)	{width:34%; border-left:2px solid #f0f5f5; border-right:2px solid #f0f5f5}
+.index ul.index_service li:nth-child(-n+3)	{border-top:none; padding:30px 25px;}
+.index ul.index_service li span	{display:block; margin-bottom:10px; font-size:14px; font-weight:700; color:#bbb; text-transform:uppercase}
+
+.index ul.index_service li:nth-child(1)	{background:url('../../images/_img/index01.png')no-repeat top 50% right 25px / 57px;}
+.index ul.index_service li:nth-child(2)	{background:url('../../images/_img/index02.png')no-repeat top 50% right 25px / 54px;}
+.index ul.index_service li:nth-child(3)	{background:url('../../images/_img/index03.png')no-repeat top 50% right 25px / 53px;}
+.index ul.index_service li:nth-child(4)	{background:url('../../images/_img/index04.png')no-repeat top 50% right 25px / 55px;}
+.index ul.index_service li:nth-child(5)	{background:url('../../images/_img/index05.png')no-repeat top 50% right 25px / 54px;}
+.index ul.index_service li:nth-child(6)	{background:url('../../images/_img/index06.png')no-repeat top 50% right 25px / 60px;}
+
+.index ul.index_service li:hover:nth-child(1)	{background:url('../../images/_img/index01.png')no-repeat top 38% right 25px / 57px;}
+.index ul.index_service li:hover:nth-child(2)	{background:url('../../images/_img/index02.png')no-repeat top 38% right 25px / 54px;}
+.index ul.index_service li:hover:nth-child(3)	{background:url('../../images/_img/index03.png')no-repeat top 38% right 25px / 53px;}
+.index ul.index_service li:hover:nth-child(4)	{background:url('../../images/_img/index04.png')no-repeat top 38% right 25px / 55px;}
+.index ul.index_service li:hover:nth-child(5)	{background:url('../../images/_img/index05.png')no-repeat top 38% right 25px / 54px;}
+.index ul.index_service li:hover:nth-child(6)	{background:url('../../images/_img/index06.png')no-repeat top 38% right 25px / 60px;}
+
+
+
+.index .index_st	{margin-top:90px; font:500 21px/24px "GmarketSans", sans-serif; color:#000}
+
+.index .index_btn					{width:100%; max-width:500px; margin:20px auto 0 auto; text-align:left;}
+.index .index_btn a					{display:block; position:relative; overflow:hidden; width:100%; border-radius:5px; background:#1178ff url('../../images/_img/index_dot.png')no-repeat center right 40px / 22px; padding:30px 40px; font:400 20px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.2s}
+.index .index_btn a:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 400px); height:100px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+
+.index .index_btn a + a				{margin-top:10px; background-color:#8400ff}
+.index .index_btn a + a:before		{background:linear-gradient(90deg, #8400ff, #1178ff);}
+
+.index .index_btn a:hover			{background-color:transparent}
+.index .index_btn a:hover:before	{left:-200px;}
+
+
+/*************** 로그인/아이디비번찾기/회원가입 ***************/
+
+/*** 스텝 ***/
+ul.step						{overflow:hidden; width:100%; margin-bottom:50px;}
+ul.step li					{float:left; position:relative; width:33%; text-align:center; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#a4bdbd}
+ul.step li:nth-child(2)		{width:34%;}
+ul.step li:after			{content:""; position:absolute; top:18px; left:-50%; z-index:-2; width:100%; height:2px; background:#a4bdbd;}
+ul.step li:first-child:after{display:none;}
+ul.step li span				{position:relative; display:block; margin:0 auto 7px auto; width:42px; height:42px; background:#f0f5f5; border:3px solid #a4bdbd; border-radius:50px; padding-top:8px; text-align:center; font:600 20px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#a4bdbd}
+ul.step li.on				{color:#8400ff}
+ul.step li.on span			{border:3px solid #8400ff; color:#fff; background:#8400ff}
+ul.step li.on:after			{background:#8400ff;}
+
+ul.step li.comp span		{border:3px solid #8400ff; color:#fff; font-size:0; background:#8400ff url('../../images/_img/step.png')no-repeat center center / 17px;}
+
+
+/*** 입력 ***/
+.user_box		{width:500px; margin:0 auto; padding-top:100px;}
+.user_box.join	{padding-top:20px;}
+
+.user_box p.tit					{text-align:center; margin-bottom:50px;}
+.user_box.join p.tit img		{height:50px;}
+
+.find_tit		{margin-bottom:50px; font:700 36px/46px "Open Sans", "Noto Sans KR", sans-serif; color:#222}
+.find_tit span	{display:block; margin-top:30px; font:400 17px/23px "Open Sans", "Noto Sans KR", sans-serif; color:#6a8282}
+
+.find_comp		{width:100%; margin-bottom:30px; padding:18px 20px; background:#fff; text-align:center; font:400 17px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222; word-break:break-word}
+
+
+.user_box ul.mem				{}
+.user_box ul.mem li				{margin-top:20px;}
+.user_box ul.mem li > p			{margin-bottom:8px; font:500 17px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222}
+.user_box ul.mem li > p span	{font-weight:600; color:#8400ff}
+.user_box ul.mem li > div		{width:100%;}
+.user_box ul.mem li > div input	{vertical-align:middle}
+.user_box ul.mem li > div input[type="text"]			{width:100%; height:70px; border-radius:5px; border:none; padding:0 15px; font:400 18px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.user_box ul.mem li > div input[type="tel"]				{width:100%; height:70px; border-radius:5px; border:none; padding:0 15px; font:400 18px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.user_box ul.mem li > div input[type="password"]		{width:100%; height:70px; border-radius:5px; border:none; padding:0 15px; font:400 18px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.user_box ul.mem li > div input::placeholder			{color:#aaa}
+.user_box ul.mem li > div input:-ms-input-placeholde	{color:#aaa}
+
+.user_box ul.mem li > div select				{width:100%; background:#fff url('../../images/_img/sel_bg.png')no-repeat center right 15px / 13px; border-radius:5px;; padding: 0 35px 0 15px; font:400 18px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; height:70px; border:none; outline:none; -moz-appearance:none; -webkit-appearance:none; appearance:none;}
+.user_box ul.mem li > div select::-ms-expand	{display:none;}
+
+.user_box ul.mem li > div .mem_agree	{margin-bottom:10px; width:100%; height:200px; overflow-y:auto; background:#fff; border-radius:5px; padding:15px; border:none; font:400 17px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+
+.user_box ul.mem li > div a			{display:inline-block; padding:25px 0; vertical-align:middle; width:100px; border-radius:5px; background:#333; font:400 17px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; text-align:center; transition:0.3s;}
+.user_box ul.mem li > div a:hover	{background:#4344ff;}
+.user_box ul.mem li > div a br		{display:none;}
+
+.user_box ul.mem li > div.in_btn input	{width:calc(100% - 105px); margin-right:5px;}
+.user_box ul.mem li > div.tel >	p		{display:inline-block; width:calc(100% - 105px); margin-right:5px;}
+.user_box ul.mem li > div.tel > p.full	{width:100%; margin:0;}
+.user_box ul.mem li > div.tel select	{width:30%;}
+.user_box ul.mem li > div.tel input		{width:30%}
+.user_box ul.mem li > div.tel span		{display:inline-block; width:5%; text-align:center}
+
+.user_box .all_check	{margin:15px 0 30px 0; padding:10px; background:#dde9e9; text-align:center;}
+
+.user_box p.user_btn				{margin-top:30px;}
+.user_box p.user_btn a				{display:block; position:relative; overflow:hidden; text-align:center; width:100%; border-radius:5px; padding:25px 20px; font:500 20px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.user_box p.user_btn a:before		{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 200px); height:70px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+.user_box p.user_btn a:hover:before	{left:-200px;}
+
+.user_box p.mam_btn				{margin-top:30px; text-align:center;}
+.user_box p.mam_btn a			{font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#888; transition:0.3s}
+.user_box p.mam_btn a + a		{margin-left:20px; position:relative;}
+.user_box p.mam_btn a + a:after	{content:""; position:absolute; top:4px; left:-10px; width:1px; height:12px; background:#aaa;}
+.user_box p.mam_btn a:hover		{color:#8400ff}
+
+
+.comp_page		{width:100%; border-radius:5px; background:#dde9e9 url('../../images/_img/comp.png')no-repeat top 50px center / 100px ; padding:170px 50px 50px; text-align:center; font:500 20px/30px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+.comp_page span	{font-size:22px; font-weight:600; color:#1178ff}
+
+
+
+
+/*************** 콘텐츠 ***************/
+
+h2		{font:700 30px/34px "Open Sans", "Noto Sans KR", sans-serif; color:#000;}
+h2 a	{font:700 30px/34px "Open Sans", "Noto Sans KR", sans-serif; color:#000; padding-left:30px;  background:url('../../images/_img/prev.png')no-repeat left center / 15px;}
+
+input[type="checkbox"]							{position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0}
+input[type="checkbox"] + label					{display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none;  -ms-user-select: none; font:400 17px/17px "Open Sans", "Noto Sans KR", sans-serif; color:#888;}
+input[type="checkbox"] + label:before			{content: ' '; background:#fff; border: 2px solid #ccc; display: inline-block; width: 16px; height: 16px; line-height: 18px; margin: -3px 5px 0 0; text-align: center; vertical-align: middle;}
+input[type="checkbox"]:checked + label			{color:#1178ff}
+input[type="checkbox"]:checked + label:before	{content: ' '; background:#1178ff url('../../images/_img/step.png')no-repeat 50% 50% / 12px; border:2px solid #1178ff;}
+
+input[type="radio"]							{position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0}
+input[type="radio"] + label					{display:inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none;  -ms-user-select: none; font:400 17px/17px "Open Sans", "Noto Sans KR", sans-serif; color:#888;}
+input[type="radio"] + label:before			{content: ' '; background:#fff; border:2px solid #ccc; display: inline-block; width: 16px; height: 16px; line-height: 18px; border-radius:30px; margin: -3px 5px 0 0; text-align: center; vertical-align: middle;}
+input[type="radio"]:checked + label			{color:#8400ff}
+input[type="radio"]:checked + label:before	{content: ' ';background:#8400ff url('../../images/_img/step.png')no-repeat 50% 57% / 12px; border:2px solid #8400ff;}
+
+.filebox input[type="file"] {position:absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;}
+.filebox label				{display:inline-block; vertical-align:middle; position:relative; z-index:2; overflow:hidden; padding:10px; border-radius:3px; font:400 14px/15px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; cursor:pointer; transition:0.3s}
+.filebox label:before		{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 100px); height:40px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+.filebox label:hover:before	{left:-50px}
+.filebox .upload-name {display: inline-block; vertical-align:middle; width:calc(100% - 75px); padding-left:5px; border:none; background:transparent;  font:400 15px/15px "Open Sans", "Noto Sans KR", sans-serif; color:#666}
+
+.true		{display:block; margin-top:8px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#4344ff; background:url('../../images/_img/true.png')no-repeat left top 3px / 13px; padding-left:17px;}
+.false		{display:block; margin-top:8px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#d02444; background:url('../../images/_img/false.png')no-repeat left top 3px / 12px; padding-left:16px;}
+.red_txt	{display:block; margin-top:8px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#d02444;}
+.blue_txt	{display:block; margin-top:8px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#4344ff;}
+
+
+/********** 팝업 **********/
+
+div.layer				{display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:100000;}
+div.layer .bg			{position:absolute; top:0; left:0; width:100%; height:100%; background:#000; opacity:.5; filter:alpha(opacity=50);}
+div.layer .pop-layer	{position:absolute; top: 50%; left: 50%; background-color:#fff; z-index: 10; border-radius:5px; min-width:400px;}
+
+div.more_layer				{display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:100000;}
+div.more_layer .bg			{position:absolute; top:0; left:0; width:100%; height:100%; background:#000; opacity:.5; filter:alpha(opacity=50);}
+div.more_layer .pop-layer	{position:absolute; top: 50%; left: 50%; transform:translate(-50%, -50%); background-color:#fff; z-index: 10; border-radius:5px; width:400px;}
+div.more_layer .pop_cont	{font:400 15px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+
+.pop_tit			{width:100%; padding:20px; overflow:hidden;}
+.pop_tit .title		{float:left; width:calc(100% - 30px); font:500 18px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+.pop_tit .close		{float:right; width:30px; text-align:right;}
+.pop_tit .close img	{width:17px; vertical-align:baseline}
+.pop_cont			{padding:0 20px 35px 20px;}
+
+.pop_btn		{width:100%; margin-top:20px; text-align:center;}
+.pop_btn a		{display:inline-block; padding:12px 15px; margin:0 2px; border-radius:3px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.pop_btn a.comp	{margin-left:5px; background:#222;}
+.pop_btn a.del	{margin-left:5px; background:#d02444;}
+
+/*** 그룹메인 ***/
+.groupBox		{width:100%; max-width:1220px;}
+.groupBox:after {content: ''; display: block; clear: both;}
+
+.groupItem						{width:25%; float:left; padding:10px;}
+.groupItem .Box					{width:100%; padding:30px 20px; border-radius:8px;}
+.groupItem .Box .name			{display:flex; align-items: center; min-height:60px; word-break:keep-all}
+.groupItem .Box .name a			{font:400 21px/30px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+.groupItem .Box .going			{margin-top:15px;}
+.groupItem .Box .going a		{display:block; margin-top:5px; width:100%; padding:10px 15px; border-radius:3px; background:#555; font:300 17px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.3s}
+.groupItem .Box .going a span	{float:right; background:url('../../images/_img/group_arr.png')no-repeat center right 3px / 6px; padding-right:20px; font-weight:500}
+
+.groupItem .Box.c01				{background:#8359c1}
+.groupItem .Box.c02				{background:#4445bb}
+.groupItem .Box.c03				{background:#5090e4}
+.groupItem .Box.c01 .going a	{background:#683ca8}
+.groupItem .Box.c02 .going a	{background:#343497}
+.groupItem .Box.c03 .going a	{background:#2e77d6}
+
+.groupItem .Box .going a:hover		{background:#fff; color:#222;}
+.groupItem .Box .going a:hover span	{background:url('../../images/_img/group_arr_on.png')no-repeat center right 3px / 6px;}
+
+.groupItem .addBox			{display:block; height:216px; border:2px dashed #b6cdcd; border-radius:8px; padding:60px 20px; text-align:center; font:400 20px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#88a9a9; background:url('../../images/_img/addgroup.png')no-repeat center top 100px / 60px; transition:0.3s}
+.groupItem .addBox:hover	{border:2px dashed #1178ff; color:#1178ff; background:url('../../images/_img/addgroup_on.png')no-repeat center top 100px / 60px;}
+
+
+ul.groupEdit						{width:100%;}
+ul.groupEdit li						{width:100%; padding:18px 15px; margin-top:10px; border-radius:8px; background:#fff; display:flex; align-items: center; justify-content: space-between; position:relative;}
+ul.groupEdit li .name				{font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; }		
+ul.groupEdit li .btn				{width:120px; text-align:right;}
+ul.groupEdit li .btn a				{font:300 14px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#888; transition:0.3s}
+ul.groupEdit li .btn a.edit			{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px; padding-left:17px;}
+ul.groupEdit li .btn a.del			{background:url('../../images/_img/del.png')no-repeat center left / auto 15px; padding-left:17px; margin:0 0 0 12px;}
+ul.groupEdit li .btn a.edit:hover	{background:url('../../images/_img/edit_on.png')no-repeat center left / auto 15px; color:#8400ff}
+ul.groupEdit li .btn a.del:hover	{background:url('../../images/_img/del_on.png')no-repeat center left / auto 15px; color:#8400ff}
+
+ul.groupEdit li:first-child			{padding:0; background:transparent; margin-top:20px;}
+ul.groupEdit li:first-child	a		{display:block; width:100%; padding:20px; border-radius:8px; border:2px dashed #b6cdcd; font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#88a9a9; background:url('../../images/_img/addgroup.png')no-repeat center right 20px / 37px; transition:0.3s}
+ul.groupEdit li:first-child	a:hover	{border:2px dashed #1178ff; color:#1178ff; background:url('../../images/_img/addgroup_on.png')no-repeat center right 20px / 37px;}
+
+
+/** 팝업 추가 및 수정 **/
+ul.contEdit										{width:100%; border-top:2px solid #88a9a9}
+ul.contEdit li									{width:100%; display:table; margin-top:12px;}
+ul.contEdit li *								{vertical-align:middle;}
+ul.contEdit li .tit								{display:table-cell; width:90px; font:500 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+ul.contEdit li .tit span						{font-weight:600; color:#8400ff}
+ul.contEdit li .cont							{display:table-cell; width:calc(100% - 90px)}
+ul.contEdit li .cont input[type="text"]				{width:100%; height:50px; border-radius:3px; background:#fff; border:none; padding:0 15px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+ul.contEdit li .cont input::placeholder				{color:#aaa}
+ul.contEdit li .cont input:-ms-input-placeholde		{color:#aaa}
+
+ul.contEdit li .cont input[type="text"]:disabled	{background:#d6dddd; color:##718585;}
+ul.contEdit li .cont input[type="text"].search		{width:calc(100% - 90px); margin-right:5px;}
+ul.contEdit li .cont input + a						{display:inline-block; width:85px; position:relative; overflow:hidden; padding:19px 10px; text-align:center; height:50px; border-radius:3px; font:400 14px/14px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.3s}
+ul.contEdit li .cont input + a:before				{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 100px); height:50px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+ul.contEdit li .cont input + a:hover:before			{left:-50px}
+
+
+ul.contEdit li .cont textarea						{width:100%; height:90px; border-radius:3px; border:none; padding:15px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+ul.contEdit li .cont textarea::placeholder			{color:#aaa}
+ul.contEdit li .cont textarea:-ms-input-placeholde	{color:#aaa}
+
+ul.contEdit li .cont select	{width:100%; height:50px; border-radius:3px; border:none; background:#fff url('../../images/_img/sel_bg.png')no-repeat center right 15px / 13px; padding:0 15px; font:400 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+ul.contEdit li .cont select::-ms-expand	{display:none;}
+
+
+ul.popList				{width:100%; margin-top:10px;}
+ul.popList > li			{width:100%; border-radius:3px; margin-top:5px;}
+ul.popList > li a		{display:block; width:100%; border-radius:3px; background:#dbe4e4 url('../../images/_img/click.png')no-repeat center right 15px / 15px; padding:12px; transition:0.3s}
+ul.popList > li a:hover	{background:#fff url('../../images/_img/click_on.png')no-repeat center right 15px / 15px;}
+ul.popList > li .tit	{display:block; font:500 15px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#222;}
+ul.popList > li .sub	{display:block; margin-top:5px; font:400 14px/18px "Open Sans", "Noto Sans KR", sans-serif; color:#587878;}
+
+ul.popList > .nocont:hover	{background:#dbe4e4 !important}
+
+/* 약관 */
+.userPriv						{}
+.userPriv p.prv_tit:first-child	{margin-top:0;}
+.userPriv p.prv_tit				{font:500 18px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222; margin:30px 0 10px 0}
+.userPriv p.prv_sub				{font:400 17px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#555;}
+.userPriv p.prv_sub.top			{margin-top:15px;}
+.userPriv p.prv_sub.tt			{font-weight:500; color:#555}
+.userPriv ul.prv_list			{width:100%; padding-left:5px; margin-top:10px;}
+.userPriv ul.prv_list li		{width:100%; margin-top:4px; font:400 16px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#666;}
+.userPriv ul.prv_list li span	{display:block; margin-top:5px; font:400 15px/21px "Open Sans", "Noto Sans KR", sans-serif; color:#888;}
+.userPriv ul.prv_list li.pp span{padding-left:7px;}
+
+
+
+/* 마이페이지 */
+.mypage_box	{width: 500px; margin: 0 auto;}
+
+ul.myinfo						{margin-top:40px;}
+ul.myinfo li					{margin-top:20px;}
+ul.myinfo li > p				{margin-bottom:8px; font:500 17px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222}
+ul.myinfo li > div				{width:100%; border-radius:5px; background:#dbe4e4; padding:8px 8px 8px 15px; min-height:50px; font:400 16px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; display: flex; align-items: center; justify-content: space-between;}
+ul.myinfo li > div a				{display:inline-block; overflow:hidden; position:relative; z-index:2; padding:12px 15px; border-radius:3px; font:400 15px/16px "Open Sans", "Noto Sans KR", sans-serif; color:#fff;}
+ul.myinfo li > div a:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 100px); height:60px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
+ul.myinfo li > div a:hover:before	{left:-100px}
+ul.myinfo li > div.full				{padding:8px;}
+ul.myinfo li > div.full a			{width:100%; text-align:center; padding: 15px}
+ul.myinfo.pass li > div				{padding:0;}
+ul.myinfo.pass li > div	input		{width:100%; height:54px; border-radius:5px; border:none; padding:0 15px; font:400 18px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#222; outline:none; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+ul.myinfo li:first-child			{margin-top:0;}
+
+ul.boxlist						{width:100%;}
+ul.boxlist li					{margin-bottom:3px;}
+ul.boxlist li a					{display:block; width:100%; padding:18px 20px; font:500 17px/24px "Open Sans", "Noto Sans KR", sans-serif; color:#222; background:#fff url('../../images/_img/group_arr_on.png')no-repeat center right 20px / 8px}
+ul.boxlist li:first-child a		{border-radius:10px 10px 0 0}
+ul.boxlist li:last-child a		{border-radius:0 0 10px 10px; margin-bottom:0px;}
+ul.boxlist li a:hover			{color:#8400ff; background:#fff url('../../images/_img/group_arr_onp.png')no-repeat center right 20px / 8px}

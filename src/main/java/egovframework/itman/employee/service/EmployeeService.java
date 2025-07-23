@@ -2,11 +2,11 @@ package egovframework.itman.employee.service;
 
 
 import egovframework.itman.common.Pagination;
-import egovframework.itman.common.Searching;
 
 import java.util.List;
 
 public interface EmployeeService {
+    List<EmployeeVO> selectEmployeeList(EmployeeVO vo) throws Exception;
     List<EmployeeVO> selectEmployeeList(Pagination pagination) throws Exception;
     int selectEmployeeListTotCnt() throws Exception;
     EmployeeVO selectEmployeeView(EmployeeVO vo);

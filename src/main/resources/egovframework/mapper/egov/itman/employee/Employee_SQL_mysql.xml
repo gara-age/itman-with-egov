@@ -4,28 +4,64 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="employeeDAO">
-    <select id="selectEmployeeList"  resultType="employeeVO">
+    <select id="selectEmployeeList" parameterType="pagination" resultType="employeeVO">
         SELECT
-        EMP_IDX   AS empIdx,
-        EMP_NUM   AS empNum,
-        EMP_NAME  AS empName,
-        GRO_IDX   AS groIdx,
-        (SELECT DIV_NAME FROM ITM_DIVISION D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
-        (SELECT POS_NAME FROM ITM_POSITION P WHERE P.POS_IDX = E.POS_IDX) AS posName,
-        EMP_MAIL  AS empMail,
-        EMP_TEL   AS empTel,
-        (SELECT EMP_ST_NAME FROM ITM_EMP_STATE S WHERE S.EMP_ST_IDX = E.EMP_ST_IDX) AS empState
+        E.EMP_IDX      AS empIdx,
+        E.EMP_NUM      AS empNum,
+        E.EMP_NAME     AS empName,
+        E.GRO_IDX      AS groIdx,
+        E.DIV_IDX      AS divIdx,
+        D.DIV_NAME     AS empDiv,
+        P.POS_NAME     AS posName,
+        E.EMP_MAIL     AS empMail,
+        E.EMP_TEL      AS empTel,
+        S.EMP_ST_NAME  AS empState,
+        COUNT(*) OVER() AS listCnt
         FROM ITM_EMPLOYE E
-        WHERE DEL_YN = 'N'
+        LEFT JOIN ITM_DIVISION  D ON D.DIV_IDX      = E.DIV_IDX
+        LEFT JOIN ITM_POSITION  P ON P.POS_IDX      = E.POS_IDX
+        LEFT JOIN ITM_EMP_STATE S ON S.EMP_ST_IDX   = E.EMP_ST_IDX
+        WHERE E.DEL_YN    = 'N'
+        <if test="searching.divIdx != null and searching.divIdx !=''">
+            AND E.DIV_IDX = #{searching.divIdx}
+        </if>
+        <if test="searching.posIdx != null and searching.posIdx !=''">
+            AND E.POS_IDX = #{searching.posIdx}
+        </if>
+        <if test="searching.stIdx != null and searching.stIdx !=''">
+            AND E.EMP_ST_IDX = #{searching.stIdx}
+        </if>
+        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+            AND (
+            E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            )
+        </if>
+        <choose>
+            <when test="searching.orderBy == 'empNum'">
+                ORDER BY empNum
+            </when>
+            <when test="searching.orderBy == 'empName'">
+                ORDER BY empName
+            </when>
+            <when test="searching.orderBy == 'empDiv'">
+                ORDER BY empDiv
+            </when>
+            <otherwise>
+                ORDER BY E.EMP_IDX
+            </otherwise>
+        </choose>
         <!-- 페이징: pagination 속성명(startList, listSize)에 맞춰서 -->
         LIMIT #{startList}, #{listSize}
     </select>
 
-    <select id="selectEmployeeListCnt" resultType="int">
+    <select id="selectEmployeeListCnt" parameterType="pagination" resultType="int">
         SELECT
             count(*) as listCnt
         FROM
             ITM_EMPLOYE
+        WHERE
+            DEL_YN = 'N'
     </select>
 
     <select id="selectEmployeeView" resultType="employeeVO" parameterType="employeeVO">

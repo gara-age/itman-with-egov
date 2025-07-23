@@ -1,0 +1,1177 @@
+{
+   "hardware" : {
+      "baseBoard" : "Fail to Load the BaseBoardProduct",
+      "cpu" : "AMD Ryzen 5 5600X 6-Core Processor             ",
+      "gpu" : [ "NVIDIA GeForce GTX 1650 " ],
+      "hdd" : [ "SamsungSSD9801TB 1000GB" ],
+      "memory" : [
+         "Samsung DDR4   34GB M378A4G43AB2-CWE",
+         "Samsung DDR4   34GB M378A4G43AB2-CWE"
+      ],
+      "os" : "Windows 10 Enterprise 19044",
+      "uuid" : "E059A1A8-D9B4-0000-0000-000000000000  "
+   },
+   "software" : [
+      {
+         "name" : "Python 3.11.1 Utility Scripts (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Standard Library (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Core Interpreter (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Test Suite (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Development Libraries (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Executables (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Documentation (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 pip Bootstrap (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Python 3.11.1 Tcl/Tk Support (64-bit) ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.1150.0 "
+      },
+      {
+         "name" : "Microsoft PowerPoint Viewer ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.0.4763.1000 "
+      },
+      {
+         "name" : "Microsoft .NET Host FX Resolver - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "AMD Ryzen Balanced Driver ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 6.0.0.9 "
+      },
+      {
+         "name" : "Windows SDK Desktop Headers x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "vs_tipsmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "vs_devenvsharedmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.7.2 \u0178\u0462\u0183 \u0191(\u01d1\u0479\u07ae) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.7.03062 "
+      },
+      {
+         "name" : "Windows App Certification Kit Native Components ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps Metadata ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "WinRT Intellisense Desktop - Other Languages ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps Contracts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Desktop Headers arm ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "\u01d1\u0104\u07c0\u01c7\u077a 2022 ",
+         "vendor" : " Hancom ",
+         "version" : " 12.0.0.1189 "
+      },
+      {
+         "name" : "Node.js ",
+         "vendor" : " Node.js Foundation ",
+         "version" : " 18.13.0 "
+      },
+      {
+         "name" : "Windows SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Facade Windows WinMD Versioned ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.8 Targeting Pack ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.03761 "
+      },
+      {
+         "name" : "Microsoft .NET CoreRuntime For CoreCon ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 1.0.0.0 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X86 Debug Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X64 Additional Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "vs_communitysharedmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 7.0.2 Targeting Pack (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.0.2.22606 "
+      },
+      {
+         "name" : "WinRT Intellisense Desktop - en-us ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Visual C++ Library CRT ARM64 Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "Microsoft Update Health Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 3.70.0.0 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.MacCatalyst.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 16.1.17 "
+      },
+      {
+         "name" : "Windows IoT Extension SDK Contracts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Visual Studio\u07eb Microsoft .NET Framework Cumulative Intellisense \u0191(\u01d1\u0479\u07ae) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.09037 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 12.0.21005 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 12.0.21005 "
+      },
+      {
+         "name" : "Windows SDK Desktop Tools x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET 6.0 Templates 7.0.102 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 24.7.49407 "
+      },
+      {
+         "name" : "Windows App Certification Kit SupportedApiList x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 7.0.2 (x64_arm) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "icecap_collection_x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 6.0.13 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Windows SDK Desktop Libs x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "MySQL Documents 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "MySQL Router 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "IntelliTraceProfilerProxy ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 15.0.21225.01 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 6.0.13 Shared Framework (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 6.0.13.22580 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 7.0.2 (x64_x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "WinRT Intellisense PPI - en-us ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "MySQL Connector/ODBC 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "Windows SDK Desktop Headers x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Targeting Pack - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53361 "
+      },
+      {
+         "name" : "Universal CRT Tools x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "MySQL Workbench 8.0 CE ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 6.0.13 (x64_arm) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "vs_FileTracker_Singleton ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Targeting Pack - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "vs_devenx64vmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "vs_communityx64msi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Entity Framework 6.2.0 Tools  for Visual Studio 2022 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 6.2.0.0 "
+      },
+      {
+         "name" : "Windows SDK DirectX x64 Remote ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "MySQL Connector C++ 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "ENE_DRAM_RGB_AIO ",
+         "vendor" : " Ene Tech. ",
+         "version" : " 1.0.2.1 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 7.0.2 Shared Framework (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.0.2.22606 "
+      },
+      {
+         "name" : "icecap_collection_neutral ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Windows SDK Desktop Tools arm64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET CoreRuntime SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 1.1.27004.0 "
+      },
+      {
+         "name" : "ENE_EHD_SSS_HAL ",
+         "vendor" : " ENE TECHNOLOGY INC. ",
+         "version" : " 1.00.00 "
+      },
+      {
+         "name" : "Microsoft .NET Targeting Pack - 6.0.13 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Windows SDK ARM Desktop Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Targeting Pack - 6.0.13 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.53270 "
+      },
+      {
+         "name" : "Java 8 Update 351 (64-bit) ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.3510.10 "
+      },
+      {
+         "name" : "Java SE Development Kit 8 Update 351 (64-bit) ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.3510.10 "
+      },
+      {
+         "name" : "vs_minshellmsires ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "vs_filehandler_amd64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Windows Team Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.8 SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.03928 "
+      },
+      {
+         "name" : "Microsoft .NET Host - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "Universal CRT Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft TestPlatform SDK Local Feed ",
+         "vendor" : " Microsoft ",
+         "version" : " 17.0.0.5175695 "
+      },
+      {
+         "name" : "Windows Mobile Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "WinAppDeploy ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "vs_minshellinteropsharedmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.Android.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 33.0.4 "
+      },
+      {
+         "name" : "Windows SDK Modern Non-Versioned Developer Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Desktop Libs arm ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "WinRT Intellisense UAP - Other Languages ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "DiagnosticsHub_CollectionService ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.3.32601 "
+      },
+      {
+         "name" : "Windows Team Extension SDK Contracts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 6.0.13 Targeting Pack (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 6.0.13.22580 "
+      },
+      {
+         "name" : "Microsoft .NET Runtime - 6.0.13 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 6.0.13 Targeting Pack (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 6.0.13.22580 "
+      },
+      {
+         "name" : "VS Immersive Activate Helper ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.0.118.0 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X64 Debug Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "WinRT Intellisense Mobile - en-us ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft.NET.Workload.Emscripten.net6.Manifest (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.31.52114 "
+      },
+      {
+         "name" : "Microsoft.NET.Workload.Mono.Toolchain.net7.Manifest (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.3.53349 "
+      },
+      {
+         "name" : "Windows SDK DirectX x86 Remote ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "WinRT Intellisense IoT - en-us ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Desktop Tools x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "vs_filehandler_x86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "icecap_collectionresourcesx64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Windows SDK Desktop Libs x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 6.0.13 Shared Framework (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 6.0.13.22580 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 6.0.13 (x64_x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Microsoft NetStandard SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 15.0.51105 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.8 SDK(\u01d1\u0479\u07ae) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.03761 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.Maui.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.0.52 "
+      },
+      {
+         "name" : "Microsoft .NET Runtime - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "Windows Desktop Extension SDK Contracts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "ClickOnce Bootstrapper Package for Microsoft .NET Framework ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.09037 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Runtime - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53361 "
+      },
+      {
+         "name" : "AMD_Chipset_Drivers ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 2.11.26.106 "
+      },
+      {
+         "name" : "vs_minshellsharedmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Windows PC \u06f3\u0142 \u040b\u06e7 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 3.6.2204.08001 "
+      },
+      {
+         "name" : "MySQL Server 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Runtime - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53361 "
+      },
+      {
+         "name" : "Universal CRT Redistributable ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Universal General MIDI DLS Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET 7.0 Templates 7.0.102 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 28.5.33023 "
+      },
+      {
+         "name" : "Microsoft .NET Targeting Pack - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "MariaDB 10.3 (x64) ",
+         "vendor" : " MariaDB Corporation Ab ",
+         "version" : " 10.3.11.0 "
+      },
+      {
+         "name" : "Windows Desktop Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "AMD PSP Driver ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 4.13.0.0 "
+      },
+      {
+         "name" : "vs_vswebprotocolselectormsires ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "IntelliTraceProfilerProxy ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 15.0.21225.01 "
+      },
+      {
+         "name" : "windows_toolscorepkg ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft Build of OpenJDK with Hotspot 11.0.12+7 (x64) ",
+         "vendor" : " Microsoft ",
+         "version" : " 11.0.12.7 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps DirectX x86 Remote ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "SDK ARM Additions ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "vs_clickoncebootstrappermsires ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "vs_SQLClickOnceBootstrappermsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.8 \u0178\u0462\u0183 \u0191(\u01d1\u0479\u07ae) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.8.03761 "
+      },
+      {
+         "name" : "Universal CRT Tools x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Runtime - 6.0.13 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.53270 "
+      },
+      {
+         "name" : "Java(TM) SE Development Kit 11.0.17 (64-bit) ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 11.0.17.0 "
+      },
+      {
+         "name" : "MSI Development Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "vs_vswebprotocolselectormsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Runtime - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Desktop Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "Microsoft.NET.Workload.Mono.Toolchain.net6.Manifest (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.3.53349 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Runtime - 6.0.13 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.53270 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "Microsoft .NET Toolset 7.0.102 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 28.5.33023 "
+      },
+      {
+         "name" : "Windows App Certification Kit x64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "VS Script Debugging Common ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.0.118.0 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps Headers ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "ENE_MousePad_HAL ",
+         "vendor" : " ENE TECHNOLOGY INC. ",
+         "version" : " 1.0.2.0 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Desktop Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "vs_CoreEditorFonts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33213 "
+      },
+      {
+         "name" : "Universal CRT Headers Libraries and Sources ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "VS JIT Debugger ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.0.118.0 "
+      },
+      {
+         "name" : "Windows SDK Modern Versioned Developer Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET Targeting Pack - 6.0.13 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Java(TM) SE Development Kit 11.0.16.1 (64-bit) ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 11.0.16.1 "
+      },
+      {
+         "name" : "Windows SDK EULA ",
+         "vendor" : " Microsoft Corporations ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft UniversalWindowsPlatform SDK ",
+         "vendor" : " Microsoft ",
+         "version" : " 15.9.16 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Desktop Appx Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "vs_clickoncesigntoolmsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft.NET.Workload.Emscripten.net7.Manifest (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.31.52114 "
+      },
+      {
+         "name" : "Windows IoT Extension SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Targeting Pack - 6.0.13 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.53270 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.macOS.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 13.0.17 "
+      },
+      {
+         "name" : "Windows Mobile Extension SDK Contracts ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 6.0.13 (x64_arm64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 7.0.2 (x64_arm64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "\u01d1\u0104\u07c0\u01c7\u077a \u06a4\u07ae ",
+         "vendor" : " Hancom ",
+         "version" : " 9.6.1 "
+      },
+      {
+         "name" : "vs_minshellinteropx64msi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Standard Targeting Pack - 2.1.0 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 24.0.28113 "
+      },
+      {
+         "name" : "MySQL Examples and Samples 8.0 ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "vcpp_crt.redist.clickonce ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "vs_Graphics_Singletonx64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Yarn ",
+         "vendor" : " Yarn Contributors ",
+         "version" : " 1.22.19 "
+      },
+      {
+         "name" : "Microsoft .NET Host - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "SDK ARM Redistributables ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "WinRT Intellisense IoT - Other Languages ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Promontory_GPIO Driver ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 2.0.1.0 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.iOS.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 16.1.17 "
+      },
+      {
+         "name" : "Microsoft .NET Native SDK ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 15.0.24211.07 "
+      },
+      {
+         "name" : "Python Launcher ",
+         "vendor" : " Python Software Foundation ",
+         "version" : " 3.11.8009.0 "
+      },
+      {
+         "name" : "Patriot Viper M2 SSD RGB ",
+         "vendor" : " Patriot Memory ",
+         "version" : " 1.0.6.2 "
+      },
+      {
+         "name" : "Microsoft .NET SDK 7.0.102 (x64) from Visual Studio ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.1.222.60703 "
+      },
+      {
+         "name" : "Microsoft .NET Runtime - 6.0.13 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 48.55.52137 "
+      },
+      {
+         "name" : "WinRT Intellisense UAP - en-us ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Microsoft Windows Desktop Targeting Pack - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53361 "
+      },
+      {
+         "name" : "Microsoft.NET.Sdk.tvOS.Manifest-7.0.100 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 16.1.17 "
+      },
+      {
+         "name" : "MySQL Installer for Windows - Community ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 1.6.5.0 "
+      },
+      {
+         "name" : "Kits Configuration Installer ",
+         "vendor" : " Microsoft ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "AMD SBxxx SMBus Driver Alpha ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 5.12.0.38 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "Windows SDK Redistributables ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Apps Libs ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Signing Tools ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK Desktop Libs arm64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "vs_Graphics_Singletonx86 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET Framework 4.7.2 Targeting Pack ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 4.7.03062 "
+      },
+      {
+         "name" : "MySQL Connector NET 8.0.31 ",
+         "vendor" : " Oracle ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "Microsoft Visual Studio Setup WMI Provider ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 3.4.1128.26111 "
+      },
+      {
+         "name" : "ENE IO Driver ",
+         "vendor" : " ENE TECHNOLOGY INC. ",
+         "version" : " 3.3.0 "
+      },
+      {
+         "name" : "Windows SDK Desktop Headers arm64 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Visual C++ Library CRT Appx Resource Package ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31933 "
+      },
+      {
+         "name" : "Microsoft .NET Host FX Resolver - 7.0.2 (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "MySQL Connector J ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "Microsoft Visual Studio Setup Configuration ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 3.4.1128.26111 "
+      },
+      {
+         "name" : "vs_communitymsires ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "vs_clickoncebootstrappermsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft .NET AppHost Pack - 7.0.2 (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 56.11.53349 "
+      },
+      {
+         "name" : "AMD PCI Driver ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 1.0.0.81 "
+      },
+      {
+         "name" : "WinRT Intellisense PPI - Other Languages ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Windows SDK for Windows Store Managed Apps Libs ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "ENE_X-JMI_HAL ",
+         "vendor" : " ENE Tech ",
+         "version" : " 1.0.5.1 "
+      },
+      {
+         "name" : "vs_minshellx64msi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Application Verifier x64 External Package ",
+         "vendor" : " Microsoft ",
+         "version" : " 10.1.22000.832 "
+      },
+      {
+         "name" : "Java Auto Updater ",
+         "vendor" : " Oracle Corporation ",
+         "version" : " 2.8.351.10 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 7.0.2 Shared Framework (x64) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.0.2.22606 "
+      },
+      {
+         "name" : "ENE_EHD_M2_HAL ",
+         "vendor" : " ENE TECHNOLOGY INC. ",
+         "version" : " 1.0.7.11 "
+      },
+      {
+         "name" : "Windows SDK AddOn ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 10.1.0.0 "
+      },
+      {
+         "name" : "AMD GPIO2 Driver ",
+         "vendor" : " Advanced Micro Devices, Inc. ",
+         "version" : " 2.2.0.130 "
+      },
+      {
+         "name" : "Microsoft ASP.NET Core 7.0.2 Targeting Pack (x86) ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 7.0.2.22606 "
+      },
+      {
+         "name" : "MySQL Shell 8.0.31 ",
+         "vendor" : " Oracle and/or its affiliates ",
+         "version" : " 8.0.31 "
+      },
+      {
+         "name" : "vs_BlendMsi ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "SQL Server 2019\u07eb Microsoft System CLR Types ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 15.0.2000.5 "
+      },
+      {
+         "name" : "icecap_collectionresources ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 17.4.33006 "
+      },
+      {
+         "name" : "Microsoft Visual C++ 2022 X86 Additional Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      },
+      {
+         "name" : "\u0000rosoft Visual C++ 2022 X86 Additional Runtime - 14.34.31931 ",
+         "vendor" : " Microsoft Corporation ",
+         "version" : " 14.34.31931 "
+      }
+   ],
+   "ulid" : "337"
+}
