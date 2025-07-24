@@ -23,15 +23,6 @@ public class EmployeeVO {
     private String empDiv;
     private String posName;
     public String empState;
-    private int listCnt;
-
-    public int getListCnt() {
-        return listCnt;
-    }
-
-    public void setListCnt(int listCnt) {
-        this.listCnt = listCnt;
-    }
 
     public String getDelYn() {
         return delYn;

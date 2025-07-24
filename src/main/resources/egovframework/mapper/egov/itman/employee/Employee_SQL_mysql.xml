@@ -4,6 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="employeeDAO">
+    <sql id="employeeCondition">
+           WHERE E.DEL_YN    = 'N'
+           <if test="searching.divIdx != null and searching.divIdx !=''">
+               AND E.DIV_IDX = #{searching.divIdx}
+           </if>
+           <if test="searching.posIdx != null and searching.posIdx !=''">
+               AND E.POS_IDX = #{searching.posIdx}
+           </if>
+           <if test="searching.stIdx != null and searching.stIdx !=''">
+               AND E.EMP_ST_IDX = #{searching.stIdx}
+           </if>
+           <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+               AND (
+               E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+               OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+               )
+           </if>
+    </sql>
     <select id="selectEmployeeList" parameterType="pagination" resultType="employeeVO">
         SELECT
         E.EMP_IDX      AS empIdx,
@@ -36,8 +54,7 @@
             E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
             OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
             )
-        </if>
-        <choose>
+        </if>        <choose>
             <when test="searching.orderBy == 'empNum'">
                 ORDER BY empNum
             </when>
@@ -57,11 +74,10 @@
 
     <select id="selectEmployeeListCnt" parameterType="pagination" resultType="int">
         SELECT
-            count(*) as listCnt
+            count(*)
         FROM
-            ITM_EMPLOYE
-        WHERE
-            DEL_YN = 'N'
+            ITM_EMPLOYE AS E
+        <include refid="employeeCondition"/>
     </select>
 
     <select id="selectEmployeeView" resultType="employeeVO" parameterType="employeeVO">

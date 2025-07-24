@@ -26,12 +26,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public int selectEmployeeListTotCnt() throws Exception{
+    public int selectEmployeeListCnt() throws Exception{
         return employeeDAO.selectEmployeeListCnt();
     }
 
-    public int selectEmployeeListTotCnt(Pagination pagination) throws Exception{
-        return employeeDAO.selectEmployeeListCnt();
+    public int selectEmployeeListCnt(Pagination pagination) throws Exception{
+        return employeeDAO.selectEmployeeListCnt(pagination);
     }
 
     @Override
