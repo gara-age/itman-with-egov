@@ -131,23 +131,6 @@
 					<p class="date02">최초구매일</p>
 					<p class="view"></p>
 				</li>
-<%--				<?php if($asset_num == 0){?>--%>
-<%--					<li class="nocont">--%>
-<%--					 검색 결과가 없습니다.--%>
-<%--					</li>--%>
-<%--					<?php } ?>--%>
-<%--					<?php--%>
-<%--            while($row = (mysqli_fetch_array($asset_query))){--%>
-<%--				?>--%>
-<%--					<li onclick="location.href='assetsView.php?ASS_IDX=<?=$row['ASS_IDX']?>'">--%>
-<%--						<p class="img"><span><img src="../upload/assetImg/<?= $row['IMAGE']?>" onerror = "this.src='../_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>--%>
-<%--						<p class="num"><?=$row['ASS_ULID']?></p>--%>
-<%--						<p class="tit"><?=$row['ASS_NAME']?></p>--%>
-<%--						<p class="cate"><?=$row['ASS_CAT_NAME']?></p>--%>
-<%--						<p class="date02"><?=$row['BUY_DATE']?></p>--%>
-<%--						<p class="view"></p>--%>
-<%--					</li>				--%>
-<%--				<?php } ?>--%>
 			</ul>
 		</div>
 	</div>

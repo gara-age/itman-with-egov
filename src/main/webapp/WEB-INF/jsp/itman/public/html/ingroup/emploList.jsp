@@ -5,12 +5,10 @@
 <!-- 1. 타이틀과 헤더 포함 -->
 <!doctype html>
 <html lang="ko">
-
-
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
-    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
 
 </head>
 <body>
@@ -19,8 +17,10 @@
     <!-- 2. 검색 폼: action과 hidden 필드로 페이지 정보 유지 -->
     <div class="tit_search">
         <h2>직원 관리</h2>
-        <form id="search" name="searchForm" method="get" action="">
-            <input type="hidden" name="page" id="page" value="${pagination.page}"/>
+        <form id="searchForm" name="searchForm" method="get" action="${pageContext.request.contextPath}/itman/employeeList.do">
+            <input type="hidden" id="page"      name="page"      value="${pagination.page}" />
+            <input type="hidden" id="range"     name="range"     value="${pagination.range}" />
+            <input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
             <p class="list_search">
                 <select id="DIV_IDX" name="searching.divIdx">
@@ -116,7 +116,7 @@
 
         <!-- 번호 링크 -->
         <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="i">
-            <a class="${i == pagination.page ? 'on' : ''}" href="#" onClick="fn_pagination(${i}, ${pagination.range}, ${pagination.rangeSize})">${i}</a>
+            <a class="${i == pagination.page ? 'on' : ''}" href="#" onClick="changePage(${i}, ${pagination.range}, ${pagination.rangeSize});">${i}</a>
         </c:forEach>
 
         <!-- 다음 페이지 -->
@@ -127,15 +127,16 @@
     </p>
 </div>
 
-<jsp:include page="../../../_inc/footer.jsp" />
-
-</body>
-
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 <!-- 7. 페이지 이동 스크립트: form 사용 시 필요 -->
 <script>
-    function changePage(p) {
-        document.getElementById('page').value = p;
-        document.getElementById('search').submit();
+
+    function changePage(page, range, rangeSize) {
+        const form = document.getElementById('searchForm');
+        form.page.value = page;
+        form.range.value = range;
+        form.rangeSize.value = rangeSize;
+        form.submit();
     }
     //처음 버튼 이벤트
     function fn_maxPrev() {
@@ -144,7 +145,7 @@
         url = url + "&range=" + 1;
         location.href = url;	}
     //이전 버튼 이벤트
-    function fn_prev(page, range, rangeSize) {
+    function fn_prev(page, range, rangeSize,searchDiv, searchPos, searchSt, searchSort, searchKyeword) {
         var page = (((range - 2) * rangeSize) + 1) <= 1 ? 1 : ((range - 2) * rangeSize) + 1 ;
         var range = (range - 1) <= 1 ? 1 : range - 1;
         var url = "${pageContext.request.contextPath}/itman/employeeList.do";
@@ -154,6 +155,8 @@
     //페이지 번호 클릭
     function fn_pagination(page, range, rangeSize, searchType, keyword) {
         var url = "${pageContext.request.contextPath}/itman/employeeList.do";
+        //page=1&range=1&rangeSize=10&searching.divIdx=&searching.posIdx=1&searching.stIdx=&searching.orderBy=empName&searching.searchKeyword=#
+        //페이지 , 레인지, 레인지 사이즈, 검색부서, 직위, 상태, 정렬, 검색어
         url = url + "?page=" + page;
         url = url + "&range=" + range;
         location.href = url;		}
@@ -175,3 +178,4 @@
         location.href = url;
     }
 </script>
+</body>

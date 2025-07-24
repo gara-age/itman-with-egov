@@ -34,6 +34,9 @@ public class EmployeeDAO  {
     public int selectEmployeeListCnt() throws Exception{
         return sqlSession.selectOne("employeeDAO.selectEmployeeListCnt");
     }
+    public int selectEmployeeListCnt(Pagination pagination) throws Exception{
+        return sqlSession.selectOne("employeeDAO.selectEmployeeListCnt", pagination);
+    }
 
     public EmployeeVO selectEmployeeView(EmployeeVO vo) {
         return sqlSession.selectOne("employeeDAO.selectEmployeeView", vo);

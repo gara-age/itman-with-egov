@@ -11,7 +11,10 @@
 <!doctype html>
 <html lang="ko">
  <head>
-     <jsp:include page="../../../_inc/header.jsp"/>
+     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
+     <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
   <script>
 	window.onload = function(){
 		var width_size = window.innerWidth;
@@ -36,7 +39,6 @@
  </head>
 <body id="group">
 <%--	<? include "_inc/header.php"; ?>--%>
-    <jsp:include page="../../../_inc/header.jsp"/>
 	<div id="contents">
 		
 
@@ -44,7 +46,7 @@
 
 <div class="groupBox">
 	<div class="groupItem">
-		<a onclick="window.open('popup/addGroup.php', '그룹생성팝업', 'width=500, height=400')" href="#" class="addBox">그룹 생성하기</a>
+		<a onclick="window.open('${pageContext.request.contextPath}/itman/addGroup.do', '그룹생성팝업', 'width=500, height=400')" href="#" class="addBox">그룹 생성하기</a>
 	</div>
     <?php while($row = (mysqli_fetch_array($result))) { 
         $ASSET = "SELECT * FROM ITM_ASSET WHERE GRO_IDX={$row['GRO_IDX']} AND DEL_YN = 'N'";
@@ -73,6 +75,7 @@
 
 
 	</div>
-<jsp:include page="../../../_inc/footer.jsp"/></body>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
+
 </html>
 

@@ -3,12 +3,9 @@
 <!doctype html>
 <html lang="ko">
  <head>
-  <? 
-     include "../_inc/title.php"; 
-	 include "../_inc/loginTest.php";
-	 login_check();
-	 $group = $_SESSION['group'];
-  ?>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
 

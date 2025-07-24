@@ -32,11 +32,6 @@ public class EmployeeController {
     @Resource(name = "positionService")
     private PositionServiceImpl positionService;
 
-    @RequestMapping("/itman/index.do")
-    public String index(Model model) {
-        return "itman/public/html/index";
-    }
-
     @RequestMapping("/itman/employeeList.do")
     public String selectEmployeeList(EmployeeVO vo, Pagination pagination ,Model model
             , @RequestParam(required = false, defaultValue = "1") int page
@@ -51,6 +46,11 @@ public class EmployeeController {
         } else{
             groIdx = "1";
         }
+        pagination.setSearching(pagination.getSearching());
+
+        int listCnt = employeeService.selectEmployeeListCnt(pagination);
+        System.err.println("listCnt = " + listCnt);
+        pagination.pageInfo(page,range, listCnt);
         //그룹별 부서, 상태, 직위 조회
         List<DivisionVO> divisions = divisionService.selectDivisionsByGroup(groIdx);
         List<EmpStateVO> empStates = empStateService.selectEmpStatesByGroup(groIdx);
@@ -58,20 +58,13 @@ public class EmployeeController {
         model.addAttribute("divisionList", divisions);
         model.addAttribute("empStateList", empStates);
         model.addAttribute("positionList", positions);
-        //전체 게시글 갯수
-//        int listCnt = employeeService.selectEmployeeListTotCnt();
-        //전체 조회건수 , 페이징 초기화
-//        int listCnt = employeeService.selectEmployeeListTotCnt(pagination);
 
+        //검색 결과에 따른 총 목록의 길이를 반환
         List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
-        int listCnt = list.get(0).getListCnt();
-        System.err.println("toCnt = " + listCnt);
+        //페이징 구현
         pagination.pageInfo(page, range, listCnt);
         model.addAttribute("pagination", pagination);
         model.addAttribute("listCnt", listCnt); // 전체 건수 조회
-
-//        model.addAttribute("pagination", pagination);
-
 
         model.addAttribute("resultList",list);
         return "itman/public/html/ingroup/emploList";
