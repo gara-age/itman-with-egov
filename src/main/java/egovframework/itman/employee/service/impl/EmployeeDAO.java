@@ -34,6 +34,7 @@ public class EmployeeDAO  {
     public int selectEmployeeListCnt() throws Exception{
         return sqlSession.selectOne("employeeDAO.selectEmployeeListCnt");
     }
+
     public int selectEmployeeListCnt(Pagination pagination) throws Exception{
         return sqlSession.selectOne("employeeDAO.selectEmployeeListCnt", pagination);
     }
@@ -47,7 +48,7 @@ public class EmployeeDAO  {
     }
 
     public void deleteEmployee(EmployeeVO vo) {
-        sqlSession.delete("employeeDAO.deleteEmployee", vo);
+        sqlSession.update("employeeDAO.deleteEmployee", vo);
     }
 
     public void updateEmployee(EmployeeVO vo) {

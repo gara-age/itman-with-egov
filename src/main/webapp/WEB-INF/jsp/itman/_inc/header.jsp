@@ -4,11 +4,11 @@
 
 <jsp:include page="dbconn.jsp" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/bbs.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/comn.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/pc.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/respon.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/pc.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/respon.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/bbs.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/comn.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;700&display=swap" />
 
 
@@ -93,10 +93,10 @@
 					<a href="assetsList.jsp" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>3<%--${timAssetCount}--%></span></a>
 				</li>
 				<li>
-					<a href="emploList.jsp" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>2<%--${itmEmployeeCount}--%></span></a>
+					<a href="employeeList.do" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>2<%--${itmEmployeeCount}--%></span></a>
 				</li>
 				<li>
-					<a href="departList.jsp" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>4<%--${itmDivisionCount}--%></span></a>
+					<a href="departList.do" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>4<%--${itmDivisionCount}--%></span></a>
 				</li>
 				<li>
 					<a href="spotList.jsp" class="${pageNumDepth01 == 4 ? 'on' : ''}">직위 관리<span>5<%--${itmPositionCount}--%></span></a>

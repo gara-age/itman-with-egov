@@ -41,7 +41,6 @@
 	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
-<%--	<? include "../_inc/header.php"; ?>--%>
 
 	<div id="contents">
 		<div class="tit_search">
@@ -50,65 +49,44 @@
 		
 		<!-- 글삭제 -->
 		<p class="delContent">
-<%--			<a onclick="window.open('<?='../popup/employee/emploDel.php?emp_idx='.$_GET['idx'];?>', '삭제팝업', 'width=500, height=300')" href="#none"><img src="../../../../../../images/_img/del_view.png">--%>
-<%--			</a>--%>
-			<a href="" onclick="confirmDelete(${employee.empIdx})"><img alt="삭제버튼" src="../../../../../../images/_img/del_view.png"/></a>
+			<a href="#" onclick="confirmDelete(${employee.empIdx})"><img alt="삭제버튼" src="../../../../../../images/_img/del_view.png"/></a>
 		</p>
 		<p class="editContent">
-			<%--			<a onclick="window.open('<?='../popup/employee/emploDel.php?emp_idx='.$_GET['idx'];?>', '삭제팝업', 'width=500, height=300')" href="#none"><img src="../../../../../../images/_img/del_view.png">--%>
-			<%--			</a>--%>
 			<a href="#" onclick="location.href='/itman/employeeEdit.do?empIdx=${employee.empIdx}'"><img alt="수정버튼" src="../../../../../../images/_img/edit_view.png"/></a>
 		</p>
 
 
 
 		<ul class="adminView">
-<%--		<?php --%>
-<%--            while($row = (mysqli_fetch_array($query))){--%>
-<%--                ?>--%>
+
 			<li>
 				<p class="tit v02">사번</p>
 				<p class="cont">${employee.empNum}</p>
-<%--					<?=$row['EMP_NUM']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploNumInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">이름</p>
 				<p class="cont">${employee.empName}</p>
-<%--					<?=$row['EMP_NAME']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploNameInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">이메일</p>
 				<p class="cont">${employee.empMail}</p>
-<%--					<?=$row['EMP_MAIL']==""?"-":$row['EMP_MAIL'];?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploMailInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">휴대폰</p>
 				<p class="cont">${employee.empTel}</p>
-<%--					<?=$row['EMP_TEL']==""?"-":$row['EMP_TEL']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploTelInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">부서</p>
 				<p class="cont">${employee.empDiv}</p>
-<%--					<?=$row['DIV_NAME']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploDivisionInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">직위</p>
 				<p class="cont">${employee.posName}</p>
-<%--					<?=$row['POS_NAME']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploPosInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
 			<li>
 				<p class="tit v02">상태</p>
 				<p class="cont">${employee.empState}</p>
-<%--					<?=$row['EMP_ST_NAME']?></p>--%>
-<%--				<p class="edit"><a onclick="window.open('<?='../popup/employee/emploStateInfoEdit.php?emp_idx='.$_GET['idx'];?>', '수정팝업', 'width=500, height=335')" href="#none" class="edit">수정</a></p>--%>
 			</li>
-<%--			<?php } ?>--%>
 		</ul>
 
 
@@ -134,20 +112,15 @@
 			</ul>
 		</div>
 	</div>
-<%--	<? include "../_inc/footer.php"; ?>--%>
 	<jsp:include page="/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>
  <script type="text/javascript">
 	 function confirmDelete(empIdx) {
 		 if (confirm("정말 삭제하시겠습니까?")) {
 			 // 삭제 진행
-			 location.href = "/itman/delete.do?empIdx=" + empIdx + "&deleted=Y";
+			 location.href = "/itman/delete.do?empIdx=" + empIdx + "&delYn=Y";
 		 }
 	 }
  </script>
- <c:if test="${not empty msg}">
-	 <script>
-		 alert("${msg}");
-	 </script>
- </c:if>
+
 </html>

@@ -7,53 +7,53 @@
 <html lang="ko">
 <head>
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
+<%--    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />--%>
     <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
 </head>
 <body>
 <!-- 세션 정보 설정 -->
-<%--<c:set var="useremail" value="${sessionScope.useremail}" />--%>
-<%--<c:set var="username"  value="${sessionScope.username}" />--%>
-<%--<c:set var="userIDX"   value="${sessionScope.userIDX}" />--%>
+<c:set var="useremail" value="${sessionScope.useremail}" />
+<c:set var="username"  value="${sessionScope.username}" />
+<c:set var="userIDX"   value="${sessionScope.userIDX}" />
 
-<%--<header class="h_index">--%>
-<%--    <div class="h_left">--%>
-<%--        <h1 class="logo"><a href="#"><img src="/images/_img/main_logo.png" alt="아이티맨" /></a></h1>--%>
-<%--    </div>--%>
-<%--    <c:choose>--%>
-<%--        <c:when test="${empty useremail || empty username}">--%>
-<%--            <!-- 로그인 전 -->--%>
-<%--            <p class="h_right_index">--%>
-<%--                <a href="user/login.jsp">로그인</a>--%>
-<%--                <a href="user/join01.jsp" class="join">회원가입</a>--%>
-<%--            </p>--%>
-<%--        </c:when>--%>
-<%--        <c:otherwise>--%>
-<%--            <!-- 로그인 후: 그룹 개수 조회 -->--%>
-<%--            <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"--%>
-<%--                               url="jdbc:mysql://localhost:3306/yourdb?useUnicode=true&amp;characterEncoding=UTF-8"--%>
-<%--                               user="dbuser"  password="dbpass" />--%>
-<%--            <sql:query var="grpCount" dataSource="${db}">--%>
-<%--                SELECT COUNT(*) AS cnt--%>
-<%--                FROM ITM_GROUP--%>
-<%--                WHERE GRO_OWNER_IDX = ?--%>
-<%--                AND DEL_YN = 'N'--%>
-<%--            </sql:query>--%>
-<%--            <c:set var="haveGroup" value="${grpCount.rows[0].cnt}" />--%>
+<header class="h_index">
+    <div class="h_left">
+        <h1 class="logo"><a href="#"><img src="/images/_img/main_logo.png" alt="아이티맨" /></a></h1>
+    </div>
+    <c:choose>
+        <c:when test="${empty useremail || empty username}">
+            <!-- 로그인 전 -->
+            <p class="h_right_index">
+                <a href="user/login.do">로그인</a>
+                <a href="user/join.do" class="join">회원가입</a>
+            </p>
+        </c:when>
+        <c:otherwise>
+            <!-- 로그인 후: 그룹 개수 조회 -->
+            <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
+                               url="jdbc:mysql://localhost:3306/yourdb?useUnicode=true&amp;characterEncoding=UTF-8"
+                               user="dbuser"  password="dbpass" />
+            <sql:query var="grpCount" dataSource="${db}">
+                SELECT COUNT(*) AS cnt
+                FROM ITM_GROUP
+                WHERE GRO_OWNER_IDX = ?
+                AND DEL_YN = 'N'
+            </sql:query>
+            <c:set var="haveGroup" value="${grpCount.rows[0].cnt}" />
 
-<%--            <div class="h_right">--%>
-<%--                <a href="#" class="hr_btn"><span></span><span></span><span></span></a>--%>
-<%--                <p class="hr_box">--%>
-<%--                    <span>${username}님</span>--%>
-<%--                    <a href="user/mypage.jsp" class="btn mypage">마이페이지</a>--%>
-<%--                    <a href="user/logout_proc.jsp" class="btn logout">로그아웃</a>--%>
-<%--                    <a href="group.jsp" class="btn group">전체그룹메인</a>--%>
-<%--                </p>--%>
-<%--            </div>--%>
-<%--        </c:otherwise>--%>
-<%--    </c:choose>--%>
-<%--</header>--%>
+            <div class="h_right">
+                <a href="#" class="hr_btn"><span></span><span></span><span></span></a>
+                <p class="hr_box">
+                    <span>${username}님</span>
+                    <a href="user/mypage.jsp" class="btn mypage">마이페이지</a>
+                    <a href="user/logout_proc.jsp" class="btn logout">로그아웃</a>
+                    <a href="group.jsp" class="btn group">전체그룹메인</a>
+                </p>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</header>
 
 <div id="contents" class="index">
     <p class="logo"><img src="/images/_img/itman_logo.png" alt="아이티맨" /></p>

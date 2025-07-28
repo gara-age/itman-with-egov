@@ -2,18 +2,13 @@ package egovframework.itman.employee.web;
 
 
 import egovframework.itman.common.Pagination;
-import egovframework.itman.common.Searching;
-import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
-import egovframework.itman.position.service.PositionVO;
 import egovframework.itman.position.service.impl.PositionServiceImpl;
-import egovframework.itman.empState.service.EmpStateVO;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,37 +27,39 @@ public class EmployeeController {
     @Resource(name = "positionService")
     private PositionServiceImpl positionService;
 
+    private void addCommonLists(String groIdx, Model model) {
+        model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
+        model.addAttribute("empStateList",  empStateService.selectEmpStatesByGroup(groIdx));
+        model.addAttribute("positionList", positionService.selectPositionsByGroup(groIdx));
+    }
+
     @RequestMapping("/itman/employeeList.do")
     public String selectEmployeeList(EmployeeVO vo, Pagination pagination ,Model model
             , @RequestParam(required = false, defaultValue = "1") int page
             , @RequestParam(required = false, defaultValue = "1") int range
     ) throws Exception {
         //사용자가 진입한 그룹의 idx를 주입
-        String groIdx = vo.getGroIdx();
+        String groIdx;
         if (vo.getEmpIdx() != null) {
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
             model.addAttribute("employee", resultVO);
             groIdx = resultVO.getGroIdx();
+//            groIdx = "126";
+
         } else{
             groIdx = "1";
+//            groIdx = "126";
         }
-        pagination.setSearching(pagination.getSearching());
+        pagination.setSearchingGroIdx(pagination.getSearching(),groIdx);
 
         int listCnt = employeeService.selectEmployeeListCnt(pagination);
-        System.err.println("listCnt = " + listCnt);
         pagination.pageInfo(page,range, listCnt);
         //그룹별 부서, 상태, 직위 조회
-        List<DivisionVO> divisions = divisionService.selectDivisionsByGroup(groIdx);
-        List<EmpStateVO> empStates = empStateService.selectEmpStatesByGroup(groIdx);
-        List<PositionVO> positions = positionService.selectPositionsByGroup(groIdx);
-        model.addAttribute("divisionList", divisions);
-        model.addAttribute("empStateList", empStates);
-        model.addAttribute("positionList", positions);
-
+        addCommonLists(groIdx, model);
+        pagination.setSearching(pagination.getSearching());
         //검색 결과에 따른 총 목록의 길이를 반환
         List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
         //페이징 구현
-        pagination.pageInfo(page, range, listCnt);
         model.addAttribute("pagination", pagination);
         model.addAttribute("listCnt", listCnt); // 전체 건수 조회
 
@@ -73,7 +70,7 @@ public class EmployeeController {
 
     @RequestMapping("/itman/employeeView.do")
     public String selectEmployeeView(EmployeeVO vo, Model model) {
-        vo.getEmpIdx();
+
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
         model.addAttribute("employee", resultVO);
         return "itman/public/html/ingroup/emploView";
@@ -86,16 +83,10 @@ public class EmployeeController {
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
             model.addAttribute("employee", resultVO);
             groIdx = resultVO.getGroIdx();
-        }
-        if(vo.getEmpIdx() == null){
+        } else{
             groIdx = "1";
         }
-        List<DivisionVO> divisions = divisionService.selectDivisionsByGroup(groIdx);
-        List<EmpStateVO> empStates = empStateService.selectEmpStatesByGroup(groIdx);
-        List<PositionVO> positions = positionService.selectPositionsByGroup(groIdx);
-        model.addAttribute("divisionList", divisions);
-        model.addAttribute("empStateList", empStates);
-        model.addAttribute("positionList", positions);
+        addCommonLists(groIdx, model);
 
 
         return "itman/public/html/ingroup/emploWrite";
@@ -123,6 +114,5 @@ public class EmployeeController {
         redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");
         return "redirect:/itman/employeeList.do";
     }
-
 
 }

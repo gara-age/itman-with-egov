@@ -1,9 +1,13 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+
  </head>
 <body>
 	<div id="contents">
@@ -214,12 +218,12 @@
 				</li>
 			</ul>
 			<p class="all_check"><input type="checkbox" name="selectall" id="ag_all" onclick='selectAll(this)'/><label for="ag_all">모두 동의합니다</label></p>
-			<p class="user_btn"><a href="javascript:fn_submit();">다음</a></p>
+			<p class="user_btn" style="background-color: #2e2fbf"><a href="javascript:fn_submit();">다음</a></p>
 		</div>
 	</div>
-	<? include "../_inc/footer.php"; ?>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>
-<script language="javascript">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 
 function checkSelectAll(checkbox)  {
   const selectall 
@@ -244,11 +248,11 @@ function selectAll(selectAll)  {
 }
 
 function fn_submit(){
-    if($('input[name=ag01]:checkbox:checked').length < 1){
+    if($('input[name="ag01"]:checkbox:checked').length < 1){
 		alert("개인정보 수집 및 이용 동의가 필요합니다.");
 		return false;
 	}
-	if($('input[name=ag02]:checkbox:checked').length < 1){
+	if($('input[name="ag02"]:checkbox:checked').length < 1){
 		alert("금지 행위 및 이용 규칙에 대한 동의가 필요합니다.");
 		return false;
 	}

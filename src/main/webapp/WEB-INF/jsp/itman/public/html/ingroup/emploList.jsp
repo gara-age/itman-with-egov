@@ -8,7 +8,7 @@
 <head>
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
 
 </head>
 <body>
@@ -17,19 +17,19 @@
     <!-- 2. 검색 폼: action과 hidden 필드로 페이지 정보 유지 -->
     <div class="tit_search">
         <h2>직원 관리</h2>
-        <form id="searchForm" name="searchForm" method="get" action="${pageContext.request.contextPath}/itman/employeeList.do">
+        <form id="searchForm" name="searchForm" method="get" action="${pageContext.request.contextPath}/itman/employeeList.do" onsubmit="this.page.value=1; this.range.value=1;">
             <input type="hidden" id="page"      name="page"      value="${pagination.page}" />
             <input type="hidden" id="range"     name="range"     value="${pagination.range}" />
             <input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
             <p class="list_search">
-                <select id="DIV_IDX" name="searching.divIdx">
+                <select id="DIV_IDX" name="searching.divIdx" onchange="document.getElementById('searchForm').submit()">
                     <option value="" selected>부서 선택</option>
                     <c:forEach var="d" items="${divisionList}">
                                 <option value="${d.divIdx}" ${d.divIdx == pagination.searching.divIdx ? "selected" : ""}>${d.divName}</option>
                     </c:forEach>
                 </select>
-    <select id="POS_IDX" name="searching.posIdx">
+    <select id="POS_IDX" name="searching.posIdx" onchange="document.getElementById('searchForm').submit()">
         <option value=""  selected>직위 선택</option>
         <c:forEach var="p" items="${positionList}">
                     <option value="${p.posIdx}" ${p.posIdx == pagination.searching.posIdx ? "selected" : ""}>${p.posName}</option>
@@ -37,7 +37,7 @@
         </c:forEach>
     </select>
 
-                <select id="EMP_ST_IDX" name="searching.stIdx">
+                <select id="EMP_ST_IDX" name="searching.stIdx" onchange="document.getElementById('searchForm').submit()">
                     <option value="" selected>상태 선택</option>
                     <c:forEach var="s" items="${empStateList}">
                         <option value="${s.empStIdx}" ${s.empStIdx == pagination.searching.stIdx ? "selected" : ""}>${s.empStName}</option>
@@ -50,7 +50,7 @@
                     <option value="empDiv" ${pagination.searching.orderBy=='empDiv' ? 'selected' : ''}>부서명순</option>
                 </select>
                 <input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
-                <a href="#" onclick="this.closest('form').submit();">검색</a>
+                <a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>
 
             </p>
         </form>
@@ -126,7 +126,11 @@
         <a href="#" class="next end" onclick="fn_maxNext(${pagination.pageCnt}, ${pagination.range}, ${pagination.rangeSize})"><img src="${pageContext.request.contextPath}/images/_img/last.png" alt="맨마지막"/></a>
     </p>
 </div>
-
+<c:if test="${not empty msg}">
+    <script>
+        alert("${msg}");
+    </script>
+</c:if>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 <!-- 7. 페이지 이동 스크립트: form 사용 시 필요 -->
 <script>
@@ -145,7 +149,7 @@
         url = url + "&range=" + 1;
         location.href = url;	}
     //이전 버튼 이벤트
-    function fn_prev(page, range, rangeSize,searchDiv, searchPos, searchSt, searchSort, searchKyeword) {
+    function fn_prev(page, range, rangeSize) {
         var page = (((range - 2) * rangeSize) + 1) <= 1 ? 1 : ((range - 2) * rangeSize) + 1 ;
         var range = (range - 1) <= 1 ? 1 : range - 1;
         var url = "${pageContext.request.contextPath}/itman/employeeList.do";
@@ -179,3 +183,4 @@
     }
 </script>
 </body>
+
