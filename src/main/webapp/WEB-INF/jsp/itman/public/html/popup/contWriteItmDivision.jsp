@@ -1,21 +1,25 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<?php
-    include("../_inc/dbconn.php");
-    // group 불러오기
-    include "../_inc/loginTest.php";
-    login_check();
-    $group = $_SESSION['group'];
-	$REG_IDX = $_SESSION['userIDX'];
+<%--<?php--%>
+<%--    include("../_inc/dbconn.php");--%>
+<%--    // group 불러오기--%>
+<%--    include "../_inc/loginTest.php";--%>
+<%--    login_check();--%>
+<%--    $group = $_SESSION['group'];--%>
+<%--	$REG_IDX = $_SESSION['userIDX'];--%>
 
-	$group_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = $REG_IDX";
-	$group_query = mysqli_query($dbconn, $group_sql);
+<%--	$group_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = $REG_IDX";--%>
+<%--	$group_query = mysqli_query($dbconn, $group_sql);--%>
 
-?>
+<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+<%--  <? include "../_inc/title.php"; ?>--%>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
 

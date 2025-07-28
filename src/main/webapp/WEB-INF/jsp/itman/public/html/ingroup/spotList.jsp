@@ -1,54 +1,57 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<? $page_num_depth_01 = 4; ?>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<?php
-    include("../_inc/dbconn.php");
-	session_start();
-    $group = $_SESSION['group'];
-	$search = $_GET['search'];
-	$orderby = $_GET['orderby'];
+<%--<? $page_num_depth_01 = 4; ?>--%>
 
-   /** 페이지네이션  */
-	$page_per_result = 10;
-	$page = 1;
-	if($_GET['page'] !== null){
-		$page = $_GET['page'];
-	}
+<%--<?php--%>
+<%--    include("../_inc/dbconn.php");--%>
+<%--	session_start();--%>
+<%--    $group = $_SESSION['group'];--%>
+<%--	$search = $_GET['search'];--%>
+<%--	$orderby = $_GET['orderby'];--%>
 
-	/** 검색 */
-	$sql = "SELECT * FROM ITM_POSITION WHERE GRO_IDX = $group AND DEL_YN = 'N'";
+<%--   /** 페이지네이션  */--%>
+<%--	$page_per_result = 10;--%>
+<%--	$page = 1;--%>
+<%--	if($_GET['page'] !== null){--%>
+<%--		$page = $_GET['page'];--%>
+<%--	}--%>
 
-	if (empty($search)) {
+<%--	/** 검색 */--%>
+<%--	$sql = "SELECT * FROM ITM_POSITION WHERE GRO_IDX = $group AND DEL_YN = 'N'";--%>
 
-	}
-	else if ($search == 'all') {
-		$sql .= " AND (POS_NAME LIKE '%$_GET[like]%' OR POS_CODE LIKE '%$_GET[like]%')";
-	}
-	else if ($search == 'name') {
-		$sql .= " AND POS_NAME LIKE '%$_GET[like]%'";
-	}
-	else if ($search == 'code') {
-		$sql .= " AND POS_CODE LIKE '%$_GET[like]%'";
-	}
-	$count = queryCount($sql);
-	
-	$total_page = ceil($count/$page_per_result);
+<%--	if (empty($search)) {--%>
 
-	if($total_page == 0){
-		$total_page = 1;
-	}
+<%--	}--%>
+<%--	else if ($search == 'all') {--%>
+<%--		$sql .= " AND (POS_NAME LIKE '%$_GET[like]%' OR POS_CODE LIKE '%$_GET[like]%')";--%>
+<%--	}--%>
+<%--	else if ($search == 'name') {--%>
+<%--		$sql .= " AND POS_NAME LIKE '%$_GET[like]%'";--%>
+<%--	}--%>
+<%--	else if ($search == 'code') {--%>
+<%--		$sql .= " AND POS_CODE LIKE '%$_GET[like]%'";--%>
+<%--	}--%>
+<%--	$count = queryCount($sql);--%>
+<%--	--%>
+<%--	$total_page = ceil($count/$page_per_result);--%>
 
-    $page_start= ($page-1)*$page_per_result;
-	if (empty($orderby)) {
-		$sql .= " ORDER BY POS_CODE ASC";
-	}else if ($orderby == 'pos_code desc') {
-		$sql .= " ORDER BY POS_CODE DESC";
-	}
+<%--	if($total_page == 0){--%>
+<%--		$total_page = 1;--%>
+<%--	}--%>
 
-	$sql .= " LIMIT $page_start, $page_per_result ";
-	$query = mysqli_query($dbconn, $sql);
+<%--    $page_start= ($page-1)*$page_per_result;--%>
+<%--	if (empty($orderby)) {--%>
+<%--		$sql .= " ORDER BY POS_CODE ASC";--%>
+<%--	}else if ($orderby == 'pos_code desc') {--%>
+<%--		$sql .= " ORDER BY POS_CODE DESC";--%>
+<%--	}--%>
 
-?>
+<%--	$sql .= " LIMIT $page_start, $page_per_result ";--%>
+<%--	$query = mysqli_query($dbconn, $sql);--%>
+
+<%--?>--%>
 
 <!doctype html>
 <html lang="ko">

@@ -15,6 +15,15 @@ public class DivisionVO {
     private String delIdx;
     private String delDate;
     private String divYn;
+    private String rowNum;
+
+    public String getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(String rowNum) {
+        this.rowNum = rowNum;
+    }
 
     public String getDivIdx() {
         return divIdx;

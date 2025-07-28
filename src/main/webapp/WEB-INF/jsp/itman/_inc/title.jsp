@@ -4,6 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/pc.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/respon.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/bbs.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/comn.css" />
 
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/images/_img/favicon.ico"> <!--추가-->

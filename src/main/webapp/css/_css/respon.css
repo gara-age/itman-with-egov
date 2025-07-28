@@ -45,10 +45,11 @@
 .index .index_st	{margin-top:60px; font:500 18px/20px "GmarketSans", sans-serif;}
 
 .index .index_btn			{max-width:100%; margin:15px auto 0 auto;}
-.index .index_btn a			{display:inline-block; width:48%; border-radius:5px; background:#1178ff url('../../images/_img/index_dot.png')no-repeat center right 25px / 18px; padding:25px 25px; font:400 17px/17px "Open Sans", "Noto Sans KR", sans-serif;}
+.index .index_btn a			{display:inline-block; width:48%; border-radius:5px; background:#1178ff url('../_img/index_dot.png')no-repeat center right 25px / 18px; padding:25px 25px; font:400 17px/17px "Open Sans", "Noto Sans KR", sans-serif;}
 .index .index_btn a:before	{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 400px); height:100px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
 
 .index .index_btn a + a		{margin-top:0px;}
+
 
 
 

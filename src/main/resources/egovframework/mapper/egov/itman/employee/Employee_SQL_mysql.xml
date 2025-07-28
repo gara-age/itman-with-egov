@@ -6,6 +6,7 @@
 <mapper namespace="employeeDAO">
     <sql id="employeeCondition">
            WHERE E.DEL_YN    = 'N'
+            AND E.GRO_IDX = #{searching.groIdx}
            <if test="searching.divIdx != null and searching.divIdx !=''">
                AND E.DIV_IDX = #{searching.divIdx}
            </if>
@@ -33,28 +34,13 @@
         P.POS_NAME     AS posName,
         E.EMP_MAIL     AS empMail,
         E.EMP_TEL      AS empTel,
-        S.EMP_ST_NAME  AS empState,
-        COUNT(*) OVER() AS listCnt
+        S.EMP_ST_NAME  AS empState
         FROM ITM_EMPLOYE E
         LEFT JOIN ITM_DIVISION  D ON D.DIV_IDX      = E.DIV_IDX
         LEFT JOIN ITM_POSITION  P ON P.POS_IDX      = E.POS_IDX
         LEFT JOIN ITM_EMP_STATE S ON S.EMP_ST_IDX   = E.EMP_ST_IDX
-        WHERE E.DEL_YN    = 'N'
-        <if test="searching.divIdx != null and searching.divIdx !=''">
-            AND E.DIV_IDX = #{searching.divIdx}
-        </if>
-        <if test="searching.posIdx != null and searching.posIdx !=''">
-            AND E.POS_IDX = #{searching.posIdx}
-        </if>
-        <if test="searching.stIdx != null and searching.stIdx !=''">
-            AND E.EMP_ST_IDX = #{searching.stIdx}
-        </if>
-        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
-            AND (
-            E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-            OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-            )
-        </if>        <choose>
+        <include refid="employeeCondition"/>
+        <choose>
             <when test="searching.orderBy == 'empNum'">
                 ORDER BY empNum
             </when>
@@ -65,7 +51,7 @@
                 ORDER BY empDiv
             </when>
             <otherwise>
-                ORDER BY E.EMP_IDX
+                ORDER BY E.EMP_IDX DESC
             </otherwise>
         </choose>
         <!-- 페이징: pagination 속성명(startList, listSize)에 맞춰서 -->

@@ -4,6 +4,62 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="divisionDAO">
+    <sql id="divisionCondition">
+        WHERE
+        DEL_YN = 'N'
+        AND GRO_IDX = #{searching.groIdx}
+        <if test="searching.divYn != null and searching.divYn !=''">
+            AND DIV_YN = #{searching.divYn}
+        </if>
+        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+            AND (DIV_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR DIV_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
+        </if>
+    </sql>
+    <select id="selectDivisionList" parameterType="pagination" resultType="DivisionVO">
+        SELECT DIV_IDX      AS divIdx,
+               DIV_NAME     AS divName,
+               DIV_CODE     AS divCode,
+               GRO_IDX      AS groIdx,
+               DIV_YN       AS divYn,
+               ROW_NUMBER() OVER(ORDER BY DIV_IDX ASC) AS rowNum
+        FROM ITM_DIVISION
+        <include refid="divisionCondition"/>
+        <choose>
+            <when test="searching.orderBy == 'divCode'">
+                ORDER BY DIV_CODE ASC
+            </when>
+            <when test="searching.orderBy == 'divName'">
+            ORDER BY DIV_NAME ASC
+            </when>
+            <otherwise>
+                ORDER BY rowNum DESC
+            </otherwise>
+        </choose>
+        LIMIT #{startList}, #{listSize}
+    </select>
+
+    <select id="selectDivisionListCnt" parameterType="pagination" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            ITM_DIVISION
+        <include refid="divisionCondition"/>
+    </select>
+
+    <select id="selectDivisionView" resultType="divisionVO" parameterType="divisionVO">
+        SELECT
+            DIV_IDX AS divIdx,
+            GRO_IDX AS groIdx,
+            DIV_CODE AS divCode,
+            DIV_NAME AS divName,
+            DIV_LOC AS divLoc,
+            DIV_TEL AS divTel,
+            DIV_YN AS divYn
+        FROM ITM_DIVISION
+        WHERE DIV_IDX = #{divIdx}
+        AND DEL_YN = 'N'
+    </select>
     <select id="selectDivisionsByGroup" resultType="DivisionVO" parameterType="string">
         SELECT DIV_IDX AS divIdx,
         DIV_NAME  AS divName
@@ -13,5 +69,58 @@
         AND DIV_YN IN ('사', 'Y')
         ORDER BY DIV_NAME
     </select>
+
+    <insert id="insertDivision" parameterType="divisionVO">
+        INSERT INTO ITM_DIVISION
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_IDX,
+            DIV_CODE,
+            DIV_NAME,
+            <if test="divLoc != null and divLoc.trim().length > 0">DIV_LOC,</if>
+            <if test="divTel != null and divTel.trim().length > 0">DIV_Tel,</if>
+            REG_DATE,
+            REG_IDX,
+            DIV_YN,
+            </trim>
+            VALUES
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            1,
+            #{divCode},
+            #{divName},
+            <if test="divLoc != null and divLoc.trim().length > 0">#{divLoc},</if>
+            <if test="divTel != null and divTel.trim().length > 0">#{divTel},</if>
+            NOW(),
+            77,
+            #{divYn},
+            </trim>
+    </insert>
+
+    <update id="updateDivision" parameterType="divisionVO">
+        UPDATE
+            ITM_DIVISION
+        SET
+            DIV_CODE = #{divCode},
+            DIV_NAME = #{divName},
+            DIV_LOC = #{divLoc},
+            DIV_TEL = #{divTel},
+            DIV_YN = #{divYn},
+            MOD_DATE = NOW()
+        WHERE DIV_IDX = #{divIdx}
+    </update>
+
+    <update id="deleteDivision" parameterType="divisionVO">
+        UPDATE
+            ITM_DIVISION
+        SET
+            DEL_YN = 'Y',
+            DEL_DATE = NOW()
+        WHERE
+            DIV_IDX = #{divIdx}
+    </update>
+
+
+
+
+
 </mapper>
 

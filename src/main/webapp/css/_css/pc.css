@@ -200,7 +200,7 @@ div.more_layer .pop_cont	{font:400 15px/26px "Open Sans", "Noto Sans KR", sans-s
 
 ul.groupEdit						{width:100%;}
 ul.groupEdit li						{width:100%; padding:18px 15px; margin-top:10px; border-radius:8px; background:#fff; display:flex; align-items: center; justify-content: space-between; position:relative;}
-ul.groupEdit li .name				{font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; }		
+ul.groupEdit li .name				{font:500 18px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#222; }
 ul.groupEdit li .btn				{width:120px; text-align:right;}
 ul.groupEdit li .btn a				{font:300 14px/26px "Open Sans", "Noto Sans KR", sans-serif; color:#888; transition:0.3s}
 ul.groupEdit li .btn a.edit			{background:url('../../images/_img/edit.png')no-repeat center left / auto 15px; padding-left:17px;}

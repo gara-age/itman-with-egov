@@ -6,14 +6,60 @@ public class Searching {
     private String posIdx; //검색할 직위
     private String stIdx; //검색할 상태
     private String divIdx; //검색할 부서
+    private String searchCondition;
     private String searchKeyword; //검색어
+    private String divYn;
+    private String groIdx;
+    private String memIdx;
+
+    public String getGroIdx() {
+        return groIdx;
+    }
+
+    public void setGroIdx(String groIdx) {
+        this.groIdx = groIdx;
+    }
+
+    public String getMemIdx() {
+        return memIdx;
+    }
+
+    public void setMemIdx(String memIdx) {
+        this.memIdx = memIdx;
+    }
 
     public Searching() {}
-    public Searching(String orderBy, String posIdx, String stIdx, String divIdx) {
+    public Searching(String groIdx, String memIdx) {
+        this.groIdx = groIdx;
+        this.memIdx = memIdx;
+    }
+    public Searching(String groIdx) {
+        this.groIdx = groIdx;
+    }
+    public Searching(String orderBy, String posIdx, String stIdx, String divIdx, String searchCondition, String divYn) {
         this.orderBy = orderBy;
         this.posIdx = posIdx;
         this.stIdx = stIdx;
         this.divIdx = divIdx;
+        this.searchCondition = searchCondition;
+        this.divYn = divYn;
+
+    }
+
+    public String getDivYn() {
+        return divYn;
+    }
+
+    public void setDivYn(String divYn) {
+        this.divYn = divYn;
+    }
+
+    public String getSearchCondition() {
+        return searchCondition;
+    }
+
+    public void setSearchCondition(String searchCondition) {
+        this.searchCondition = searchCondition;
     }
 
     public String getOrderBy() {

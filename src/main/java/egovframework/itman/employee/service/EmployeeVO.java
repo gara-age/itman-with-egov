@@ -1,7 +1,5 @@
 package egovframework.itman.employee.service;
 
-import egovframework.itman.common.Pagination;
-
 public class EmployeeVO {
 
     private String empIdx; // 직원IDX

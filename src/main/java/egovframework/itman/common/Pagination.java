@@ -13,6 +13,7 @@ public class Pagination {
     private boolean prev; //이전 페이지 여부
     private boolean next; //다음 페이지 여부
     private Searching searching;
+    private String rowNum;
 
     public void setOrderBy(String orderBy) {
         this.searching.setOrderBy(orderBy);
@@ -30,6 +31,13 @@ public class Pagination {
         this.searching.setSearchKeyword(searchKeyword);
     }
 
+    public String getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(String rowNum) {
+        this.rowNum = rowNum;
+    }
 
     public Pagination() {
         this.searching = new Searching();
@@ -41,6 +49,10 @@ public class Pagination {
 
     public void setSearching(Searching searching) {
         this.searching = searching;
+    }
+    public void setSearchingGroIdx(Searching searching, String groIdx) {
+        this.searching = searching;
+        this.searching.setGroIdx(groIdx);
     }
 
     public Pagination(Searching searching) {
