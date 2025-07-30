@@ -23,17 +23,8 @@ public class DivisionController {
     public String selectDivisionList(DivisionVO vo, Pagination pagination, Model model
     , @RequestParam(required = false, defaultValue = "1") int page
     , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
-        String groIdx;
-        if(vo.getDivIdx() != null){
-            DivisionVO resultVO = divisionService.selectDivisionView(vo);
-            model.addAttribute("division", resultVO);
-            groIdx = resultVO.getGroIdx();
-//            groIdx = "126";
-        } else {
-            groIdx = "1";
-//            groIdx = "126";
-        }
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
         int listCnt = divisionService.selectDivisionListCnt(pagination);
@@ -43,9 +34,6 @@ public class DivisionController {
         model.addAttribute("pagination", pagination);
         model.addAttribute("listCnt", listCnt);
         model.addAttribute("resultList", list);
-        for(int i = 0; i < listCnt; i++){
-            System.err.println("resultList : " + list.get(i).getDivName());
-        }
 
         return "itman/public/html/ingroup/departList";
     }
@@ -59,7 +47,7 @@ public class DivisionController {
 
     @RequestMapping("/itman/departEdit.do")
     public String divisionForm(DivisionVO vo, Model model){
-        String groIdx = vo.getGroIdx();
+        String groIdx;
         if(vo.getDivIdx() != null){
             DivisionVO resultVO = divisionService.selectDivisionView(vo);
             model.addAttribute("division", resultVO);

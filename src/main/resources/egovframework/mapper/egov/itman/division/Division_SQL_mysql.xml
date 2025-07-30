@@ -5,16 +5,17 @@
 
 <mapper namespace="divisionDAO">
     <sql id="divisionCondition">
-        WHERE
-        DEL_YN = 'N'
-        AND GRO_IDX = #{searching.groIdx}
-        <if test="searching.divYn != null and searching.divYn !=''">
-            AND DIV_YN = #{searching.divYn}
-        </if>
-        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
-            AND (DIV_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-            OR DIV_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
-        </if>
+        <where>
+            DEL_YN = 'N'
+            AND GRO_IDX = #{searching.groIdx}
+            <if test="searching.divYn != null and searching.divYn !=''">
+                AND DIV_YN = #{searching.divYn}
+            </if>
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+                AND (DIV_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                OR DIV_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
+            </if>
+        </where>
     </sql>
     <select id="selectDivisionList" parameterType="pagination" resultType="DivisionVO">
         SELECT DIV_IDX      AS divIdx,

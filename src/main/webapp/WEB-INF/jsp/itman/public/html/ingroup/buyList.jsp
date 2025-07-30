@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
+<%--
 <? $page_num_depth_01 = 5; ?>
 
 <?php
@@ -50,15 +51,17 @@
 	
  
  ?>
-
+--%>
 
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+	 <jsp:include page="/WEB-INF/jsp/itman/_inc/title.jsp" />
+	 <jsp:include page="/WEB-INF/jsp/itman/_inc/header.jsp" />
+	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
-	<? include "../_inc/header.php"; ?>
 	<div id="contents">
 		<div class="tit_search">
 			<h2>구매처 관리</h2>
@@ -123,18 +126,18 @@
                 <a href="<?php echo $_SERVER["PHP_SELF"].'?page='.$total_page ;?>" class="next end"><img src='../../../../../../images/_img/last.png' alt='맨마지막'></a>
             </p>
 	</div>
-		
-	<? include "../_inc/footer.php"; ?>
+
+	<jsp:include page="/WEB-INF/jsp/itman/_inc/footer.jsp" />
 
 </body>
 </html>
 
-<?php
-	function queryCount($sql){
-		include "../_inc/dbconn.php";
-		$query_count = mysqli_query($dbconn, $sql);
-        $count =mysqli_num_rows($query_count); 
-		return $count;
-	}
+<%--<?php--%>
+<%--	function queryCount($sql){--%>
+<%--		include "../_inc/dbconn.php";--%>
+<%--		$query_count = mysqli_query($dbconn, $sql);--%>
+<%--        $count =mysqli_num_rows($query_count); --%>
+<%--		return $count;--%>
+<%--	}--%>
 
-?>
+<%--?>--%>

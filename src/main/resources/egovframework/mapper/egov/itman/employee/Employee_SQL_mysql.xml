@@ -4,19 +4,67 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="employeeDAO">
-    <select id="selectEmployeeList" resultType="employeeVO">
-        <!--사번, 이름, 부서, 직위, 이메일, 휴대폰, 상태 -->
+    <sql id="employeeCondition">
+        <where>
+            E.DEL_YN    = 'N'
+            AND E.GRO_IDX = #{searching.groIdx}
+            <if test="searching.divIdx != null and searching.divIdx !=''">
+                AND E.DIV_IDX = #{searching.divIdx}
+            </if>
+            <if test="searching.posIdx != null and searching.posIdx !=''">
+                AND E.POS_IDX = #{searching.posIdx}
+            </if>
+            <if test="searching.stIdx != null and searching.stIdx !=''">
+                AND E.EMP_ST_IDX = #{searching.stIdx}
+            </if>
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+                AND (
+                E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                )
+            </if>
+        </where>
+    </sql>
+    <select id="selectEmployeeList" parameterType="pagination" resultType="employeeVO">
         SELECT
-        EMP_IDX as empIdx,
-        EMP_NUM as empNum,
-        EMP_NAME as empName,
-        (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
-        (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
-        EMP_MAIL as empMail,
-        EMP_TEL as empTel,
-        (SELECT EMP_ST_NAME FROM ITM_EMP_STATE AS S WHERE S.EMP_ST_IDX = E.EMP_ST_IDX) as empState
-        FROM ITM_EMPLOYE AS E
-        WHERE DEL_YN = 'N'
+        E.EMP_IDX      AS empIdx,
+        E.EMP_NUM      AS empNum,
+        E.EMP_NAME     AS empName,
+        E.GRO_IDX      AS groIdx,
+        E.DIV_IDX      AS divIdx,
+        D.DIV_NAME     AS empDiv,
+        P.POS_NAME     AS posName,
+        E.EMP_MAIL     AS empMail,
+        E.EMP_TEL      AS empTel,
+        S.EMP_ST_NAME  AS empState
+        FROM ITM_EMPLOYE E
+        LEFT JOIN ITM_DIVISION  D ON D.DIV_IDX      = E.DIV_IDX
+        LEFT JOIN ITM_POSITION  P ON P.POS_IDX      = E.POS_IDX
+        LEFT JOIN ITM_EMP_STATE S ON S.EMP_ST_IDX   = E.EMP_ST_IDX
+        <include refid="employeeCondition"/>
+        <choose>
+            <when test="searching.orderBy == 'empNum'">
+                ORDER BY empNum
+            </when>
+            <when test="searching.orderBy == 'empName'">
+                ORDER BY empName
+            </when>
+            <when test="searching.orderBy == 'empDiv'">
+                ORDER BY empDiv
+            </when>
+            <otherwise>
+                ORDER BY E.EMP_IDX DESC
+            </otherwise>
+        </choose>
+        LIMIT #{startList}, #{listSize}
+    </select>
+
+    <select id="selectEmployeeListCnt" parameterType="pagination" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        ITM_EMPLOYE AS E
+        <include refid="employeeCondition"/>
     </select>
 
     <select id="selectEmployeeView" resultType="employeeVO" parameterType="employeeVO">
@@ -24,6 +72,10 @@
             EMP_IDX AS empIdx,
             EMP_NUM AS empNum,
             EMP_NAME AS empName,
+            GRO_IDX as groIdx,
+            DIV_IDX,
+            POS_IDX,
+            EMP_ST_IDX,
             (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
             (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
             EMP_MAIL AS empMail,
@@ -40,31 +92,51 @@
             GRO_IDX,
             EMP_NUM,
             EMP_NAME,
-            <if test="empMail  != null">EMP_MAIL,</if>
-            <if test="empTel   != null">EMP_TEL,</if>
-            <if test="divIdx   != null">DIV_IDX,</if>
-            <if test="posIdx   != null">POS_IDX,</if>
-            <if test="empStIdx != null">EMP_ST_IDX,</if>
+            <if test="empMail  != null and empMail.trim().length() > 0">EMP_MAIL,</if>
+            <if test="empTel   != null and empTel.trim().length() > 0">EMP_TEL,</if>
+            DIV_IDX,
+            POS_IDX,
+            EMP_ST_IDX,
+            REG_DATE,
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             1,
             #{empNum},
             #{empName},
-            <if test="empMail  != null">#{empMail},</if>
-            <if test="empTel   != null">#{empTel},</if>
-            <if test="divIdx   != null">#{divIdx},</if>
-            <if test="posIdx   != null">#{posIdx},</if>
-            <if test="empStIdx != null">#{empStIdx},</if>
+            <if test="empMail  != null and empMail.trim().length() > 0">#{empMail},</if>
+            <if test="empTel   != null and empTel.trim().length() > 0">#{empTel},</if>
+            #{divIdx},
+            #{posIdx},
+            #{empStIdx},
+            NOW(),
+
         </trim>
     </insert>
+
+    <update id="updateEmployee" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            EMP_IDX = #{empIdx},
+            EMP_NUM = #{empNum},
+            EMP_NAME = #{empName},
+            DIV_IDX = #{divIdx},
+            POS_IDX = #{posIdx},
+            EMP_MAIL = #{empMail},
+            EMP_TEL = #{empTel},
+            EMP_ST_IDX = #{empStIdx},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
 
     <update id="deleteEmployee" parameterType="employeeVO">
         UPDATE
             ITM_EMPLOYE
         SET
-            DEL_YN = 'Y'
-
+            DEL_YN = 'Y' ,
+            DEL_DATE = NOW()
         WHERE
             EMP_IDX = #{empIdx}
     </update>

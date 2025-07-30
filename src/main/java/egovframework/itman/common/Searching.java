@@ -11,6 +11,33 @@ public class Searching {
     private String divYn;
     private String groIdx;
     private String memIdx;
+    private String assCatIdx;
+    private String staIdx;
+    private String supIdx;
+
+    public String getAssCatIdx() {
+        return assCatIdx;
+    }
+
+    public void setAssCatIdx(String assCatIdx) {
+        this.assCatIdx = assCatIdx;
+    }
+
+    public String getStaIdx() {
+        return staIdx;
+    }
+
+    public void setStaIdx(String staIdx) {
+        this.staIdx = staIdx;
+    }
+
+    public String getSupIdx() {
+        return supIdx;
+    }
+
+    public void setSupIdx(String supIdx) {
+        this.supIdx = supIdx;
+    }
 
     public String getGroIdx() {
         return groIdx;

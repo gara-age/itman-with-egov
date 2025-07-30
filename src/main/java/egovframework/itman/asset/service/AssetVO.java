@@ -18,6 +18,60 @@ public class AssetVO {
     private String modIdx; //수정자 IDX
     private String image; //자산 이미지
     private String delYn;
+    private String assCatName;
+    private String assStaName;
+    private String assLocName;
+    private String assEmpName;
+    private String assSupName;
+    private String rowNum;
+
+    public String getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(String rowNum) {
+        this.rowNum = rowNum;
+    }
+
+    public String getAssStaName() {
+        return assStaName;
+    }
+
+    public void setAssStaName(String assStaName) {
+        this.assStaName = assStaName;
+    }
+
+    public String getAssLocName() {
+        return assLocName;
+    }
+
+    public void setAssLocName(String assLocName) {
+        this.assLocName = assLocName;
+    }
+
+    public String getAssEmpName() {
+        return assEmpName;
+    }
+
+    public void setAssEmpName(String assEmpName) {
+        this.assEmpName = assEmpName;
+    }
+
+    public String getAssSupName() {
+        return assSupName;
+    }
+
+    public void setAssSupName(String assSupName) {
+        this.assSupName = assSupName;
+    }
+
+    public String getAssCatName() {
+        return assCatName;
+    }
+
+    public void setAssCatName(String assCatName) {
+        this.assCatName = assCatName;
+    }
 
     public String getAssIdx() {
         return assIdx;

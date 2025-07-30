@@ -4,6 +4,60 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="positionDAO">
+    <sql id="positionCondition">
+        WHERE
+        DEL_YN = 'N'
+        AND GRO_IDX = #{searching.groIdx}
+        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+            AND (POS_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR POS_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
+        </if>
+    </sql>
+    <select id="selectPositionList" parameterType="pagination" resultType="positionVO">
+        SELECT
+            ROW_NUMBER() OVER(ORDER BY POS_IDX ASC) AS rowNum,
+            POS_IDX AS posIdx,
+            GRO_IDX AS groIdx,
+            POS_CODE AS posCode,
+            POS_NAME AS posName,
+            DEL_YN AS delYn,
+            SL_NOTE AS slNote
+        FROM
+            ITM_POSITION
+        <include refid="positionCondition"/>
+        <choose>
+            <when test="searching.orderBy == 'posCode'">
+                ORDER BY POS_CODE ASC
+            </when>
+            <when test="searching.orderBy == 'posName'">
+                ORDER BY POS_NAME ASC
+            </when>
+            <otherwise>
+                ORDER BY rowNum DESC
+            </otherwise>
+        </choose>
+        LIMIT #{startList}, #{listSize}
+    </select>
+
+    <select id="selectPositionView" resultType="positionVO" parameterType="positionVO">
+        SELECT
+        POS_IDX AS posIdx,
+        POS_NAME AS posName,
+        SL_NOTE AS slNote
+        FROM
+            ITM_POSITION
+        WHERE POS_IDX = #{posIdx}
+          AND DEL_YN = 'N'
+    </select>
+
+    <select id="selectPositionListCnt" parameterType="pagination" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            ITM_POSITION
+        <include refid="positionCondition"/>
+    </select>
+
     <select id="selectPositionsByGroup" resultType="PositionVO" parameterType="string">
         SELECT POS_IDX AS posIdx,
                 POS_NAME  AS posName

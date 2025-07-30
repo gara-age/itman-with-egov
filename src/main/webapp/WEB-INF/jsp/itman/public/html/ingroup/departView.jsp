@@ -49,27 +49,27 @@
 			</li>
 		</ul>
 
-		<h3>소속 직원</h3>
-		<div class="Basic">
-			<!-- 검색결과가 없을때
-				<ul class="adminList">
-					<li class="nocont">
-					 검색 결과가 없습니다.
-					</li>
-				</ul>
-			-->
+<%--		<h3>소속 직원</h3>--%>
+<%--		<div class="Basic">--%>
+<%--			<!-- 검색결과가 없을때--%>
+<%--				<ul class="adminList">--%>
+<%--					<li class="nocont">--%>
+<%--					 검색 결과가 없습니다.--%>
+<%--					</li>--%>
+<%--				</ul>--%>
+<%--			-->--%>
 
-			<ul class="adminList click img">
-				<li class="tit">
-					<p class="img">자산 이미지</p>
-					<p class="num">일련번호</p>
-					<p class="tit">자산명</p>
-					<p class="cate">분류</p>
-					<p class="date02">최초구매일</p>
-					<p class="view"></p>
-				</li>
-			</ul>
-		</div>
+<%--			<ul class="adminList click img">--%>
+<%--				<li class="tit">--%>
+<%--					<p class="img">자산 이미지</p>--%>
+<%--					<p class="num">일련번호</p>--%>
+<%--					<p class="tit">자산명</p>--%>
+<%--					<p class="cate">분류</p>--%>
+<%--					<p class="date02">최초구매일</p>--%>
+<%--					<p class="view"></p>--%>
+<%--				</li>--%>
+<%--			</ul>--%>
+<%--		</div>--%>
 	</div>
 	<jsp:include page="/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>

@@ -53,18 +53,14 @@
 					<p class="cod">코드번호</p>
 					<p class="tit">부서명</p>
 					<p class="pos">사용유무</p>
-					<p class="editDel">관리</p>
 				</li>
 				<c:if test="${!empty resultList}">
 					<c:forEach var="row" items="${resultList}">
-				<li onClick="location.href='${pageContext.request.contextPath}/itman/departView.do?divIdx=${row.divIdx}'">
+				<li style="cursor: pointer" onClick="location.href='${pageContext.request.contextPath}/itman/departView.do?divIdx=${row.divIdx}'">
 				<p class="num">${row.rowNum}</p>
 				<p class="cod">${row.divCode}</p>
 				<p class="tit">${row.divName}</p>
 				<p class="pos">${row.divYn}</p>
-				<p class="editDel">
-					<a onclick="" class="edit">수정</a><a onclick="" class="del">삭제</a>
-				</p>
 				</li>
 				</c:forEach>
 				</c:if>
