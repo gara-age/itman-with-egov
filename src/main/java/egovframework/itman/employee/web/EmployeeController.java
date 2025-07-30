@@ -7,6 +7,7 @@ import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
 import egovframework.itman.position.service.impl.PositionServiceImpl;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,31 +30,20 @@ public class EmployeeController {
 
     private void addCommonLists(String groIdx, Model model) {
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
-        model.addAttribute("empStateList",  empStateService.selectEmpStatesByGroup(groIdx));
+        model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
         model.addAttribute("positionList", positionService.selectPositionsByGroup(groIdx));
     }
 
     @RequestMapping("/itman/employeeList.do")
-    public String selectEmployeeList(EmployeeVO vo, Pagination pagination ,Model model
+    public String selectEmployeeList(EmployeeVO vo, Pagination pagination, Model model
             , @RequestParam(required = false, defaultValue = "1") int page
             , @RequestParam(required = false, defaultValue = "1") int range
     ) throws Exception {
-        //사용자가 진입한 그룹의 idx를 주입
-        String groIdx;
-        if (vo.getEmpIdx() != null) {
-            EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
-            model.addAttribute("employee", resultVO);
-            groIdx = resultVO.getGroIdx();
-//            groIdx = "126";
-
-        } else{
-            groIdx = "1";
-//            groIdx = "126";
-        }
-        pagination.setSearchingGroIdx(pagination.getSearching(),groIdx);
+        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+        pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
         int listCnt = employeeService.selectEmployeeListCnt(pagination);
-        pagination.pageInfo(page,range, listCnt);
+        pagination.pageInfo(page, range, listCnt);
         //그룹별 부서, 상태, 직위 조회
         addCommonLists(groIdx, model);
         pagination.setSearching(pagination.getSearching());
@@ -62,8 +52,7 @@ public class EmployeeController {
         //페이징 구현
         model.addAttribute("pagination", pagination);
         model.addAttribute("listCnt", listCnt); // 전체 건수 조회
-
-        model.addAttribute("resultList",list);
+        model.addAttribute("resultList", list);
         return "itman/public/html/ingroup/emploList";
     }
 
@@ -77,13 +66,13 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/employeeEdit.do")
-    public String  employeeForm(EmployeeVO vo, Model model) {
+    public String employeeForm(EmployeeVO vo, Model model) {
         String groIdx = vo.getGroIdx();
         if (vo.getEmpIdx() != null) {
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
             model.addAttribute("employee", resultVO);
             groIdx = resultVO.getGroIdx();
-        } else{
+        } else {
             groIdx = "1";
         }
         addCommonLists(groIdx, model);
@@ -93,7 +82,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/update.do")
-    public String  updateEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String updateEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
         employeeService.updateEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -101,7 +90,7 @@ public class EmployeeController {
 
 
     @RequestMapping("/itman/insert.do")
-    public String  insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
         employeeService.insertEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
         return "redirect:/itman/employeeList.do";
@@ -109,10 +98,30 @@ public class EmployeeController {
 
 
     @RequestMapping("/itman/delete.do")
-    public String  deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
         employeeService.deleteEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");
         return "redirect:/itman/employeeList.do";
     }
 
+    @RequestMapping("/popup/searchPop.do")
+    public String searchPop(EmployeeVO vo, Pagination pagination, Model model
+            , @RequestParam(required = false, defaultValue = "1") int page
+            , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+
+        pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
+
+        int listCnt = employeeService.selectEmployeeListCnt(pagination);
+        pagination.pageInfo(page, range, listCnt);
+        pagination.setSearching(pagination.getSearching());
+        //검색 결과에 따른 총 목록의 길이를 반환
+        List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
+        //페이징 구현
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("listCnt", listCnt); // 전체 건수 조회
+
+        model.addAttribute("employeeList", list);
+        return "itman/public/html/popup/searchPop";
+    }
 }

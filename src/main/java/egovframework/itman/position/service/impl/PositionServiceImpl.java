@@ -1,5 +1,6 @@
 package egovframework.itman.position.service.impl;
 
+import egovframework.itman.common.Pagination;
 import egovframework.itman.position.service.PositionService;
 import egovframework.itman.position.service.PositionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,35 @@ public class PositionServiceImpl implements PositionService {
     public List<PositionVO> selectPositionsByGroup(String groIdx) {
 
         return positionDAO.selectPositionsByGroup(groIdx);
+    }
+
+    @Override
+    public List<PositionVO> selectPositionList(Pagination pagination) {
+        return positionDAO.selectPositionList(pagination);
+    }
+
+    @Override
+    public PositionVO selectPositionView(PositionVO positionVO) {
+        return positionDAO.selectPositionView(positionVO);
+    }
+
+    @Override
+    public void insertPosition(PositionVO positionVO) {
+        positionDAO.insertPosition(positionVO);
+    }
+
+    @Override
+    public void updatePosition(PositionVO positionVO) {
+        positionDAO.updatePosition(positionVO);
+    }
+
+    @Override
+    public void deletePosition(PositionVO positionVO) {
+        positionDAO.deletePosition(positionVO);
+    }
+
+    @Override
+    public int selectPositionListCnt(Pagination pagination) {
+        return positionDAO.selectPositionListCnt(pagination);
     }
 }

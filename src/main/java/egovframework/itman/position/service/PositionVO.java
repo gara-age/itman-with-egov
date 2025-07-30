@@ -13,6 +13,15 @@ public class PositionVO {
     private String delIdx;
     private String delDate;
     private String slNote;
+    private String rowNum;
+
+    public String getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(String rowNum) {
+        this.rowNum = rowNum;
+    }
 
     public String getPosIdx() {
         return posIdx;

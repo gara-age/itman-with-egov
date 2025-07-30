@@ -1,47 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<?php
-    include "../_inc/dbconn.php";
 
-	session_start();
-    $group = $_SESSION['group'];
-
-	$ass_cat_code = "";
-
-    $ITM_ASSET_CATEGORY = "SELECT * FROM ITM_ASSET_CATEGORY WHERE GRO_IDX=$group";
-
-    $ITM_ASSET_CATEGORY_result = mysqli_query($dbconn, $ITM_ASSET_CATEGORY);
-
-    $STA_IDX = "SELECT * FROM ITM_STATE";
-    $STA_IDX_result = mysqli_query($dbconn, $STA_IDX);
-    $STA_IDX_row = mysqli_fetch_array($STA_IDX_result);
-
-    $ITM_EMPLOYEE = "SELECT * FROM ITM_EMPLOYE WHERE GRO_IDX=$group";
-    $ITM_EMPLOYEE_result = mysqli_query($dbconn, $ITM_EMPLOYEE);
-    $ITM_EMPLOYEE_row = mysqli_fetch_array($ITM_EMPLOYEE_result);
-
-    $LOC_IDX = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX=$group";
-    $LOC_IDX_result = mysqli_query($dbconn, $LOC_IDX);
-
-    $SUP_IDX = "SELECT * FROM ITM_SUPPLIER WHERE GRO_IDX=$group";
-    $SUP_IDX_result = mysqli_query($dbconn, $SUP_IDX);
-
-	$STATE_SQL = "SELECT * FROM ITM_STATE WHERE GRO_IDX = $group";
-	$STATE_RESULT = mysqli_query($dbconn, $STATE_SQL);
-
-	
-
-
-?>
-
-<? $page_num_depth_01 = 1; ?>
 
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
- </head>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
+	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" /> </head>
 <body>
-	<? include "../_inc/header.php"; ?>
 	<div id="contents">
 		<div class="tit_search">
 			<h2>자산 관리</h2>
@@ -68,11 +36,11 @@
 			<li>
 				<p class="tit">분류 <span>*</span></p>
 				<p class="cont">
-					<select id="ass_cat" name = "ass_cat_idx">
+					<select id="ass_cat" name = "assCatIdx">
 						<option value="">분류선택</option>
-                        <?php while($cate_row = (mysqli_fetch_array($ITM_ASSET_CATEGORY_result))) { ?>
-						    <option name="<?=$cate_row['ASS_CAT_CODE']?>" value="<?=$cate_row['ASS_CAT_IDX']?>"><?= $cate_row['ASS_CAT_NAME']; ?></option>
-                        <?php }; ?>
+                        <c:forEach var="c" items="${categories}">
+							<option value="${c.assCatIdx}" >${c.assCatName}</option>
+						</c:forEach>
 					</select>
 				</p>
 				<p class="edit"><a onclick="window.open('../popup/contWriteAssetCategory.php', '자산분류등록팝업', 'width=500, height=335')" href="#none">분류 추가</a></p>
@@ -81,10 +49,10 @@
 				<p class="tit">상태 <span>*</span></p>
 				<p class="cont">
 					<select id="state" name="state">
-						<?php 
-							while($row = (mysqli_fetch_array($STATE_RESULT))) { ?>
-								<option value="<?= $row['STA_IDX']; ?>"><?= $row['STA_NAME']; ?></option>
-						<?php } ?>
+						<option value="">상태선택</option>
+						<c:forEach var="s" items="${states}">
+							<option value="${s.staIdx}" >${s.staName}</option>
+						</c:forEach>
 					</select>
 				</p>
 				<p class="edit"><a onclick="window.open('../popup/contWriteItmState.php', '자산상태등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
@@ -92,15 +60,18 @@
 			<li>
 				<p class="tit">위치 <span>*</span></p>
 				<p class="cont">
-				<input style="display:none" id = "loc_idx" name="loc_idx" value="" />
-				<a onclick="window.open('../popup/LocationPop.php', '위치등록팝업', 'width=500, height=335')" href="#none" class="popbtn">위치 선택</a><span class="name" id="loc_name"></span></p>
-
+				<select id="location" name="location">
+					<option value="">위치선택</option>
+					<c:forEach var="l" items="${locations}">
+						<option value="${l.locIdx}" >${l.locName}&nbsp;/&nbsp;${l.locCode}</option>
+					</c:forEach>
+				</select>
 				<p class="edit"><a onclick="window.open('../popup/contWriteItmLocation.php', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">사용직원 <span>*</span></p>
 				<input type="hidden" id= "emp_idx" name="emp_idx" value="" />
-				<p class="cont"><a onclick="window.open('../popup/searchPop.php', '직원등록팝업', 'width=500, height=335')" href="#none" class="popbtn">직원 선택</a><span class="name" id="emp_name" value=""></span></p>
+				<p class="cont"><a onclick="window.open('/popup/searchPop.do', '직원등록팝업', 'width=500, height=335')" href="#none" class="popbtn">직원 선택</a><span class="name" id="emp_name" value=""></span></p>
 			</li>
 		</ul>
 		
@@ -109,8 +80,8 @@
 		<li>
 				<p class="tit">구매처 </p>
 				<p class="cont">
-				<input style="display:none" id = "sup_idx" name="sup_idx" value="" />
-				<a onclick="window.open('../popup/supplierPop.php', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name"></span></p>
+				<input type="hidden" id = "sup_idx" name="sup_idx" value="" />
+				<a onclick="window.open('/popup/supplierPop.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
 			
 				<p class="edit"><a onclick="window.open('../popup/contWriteItmSupplier.php', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
 			</li>
@@ -132,7 +103,7 @@
 	</form>
 	</div>
 
-	<? include "../_inc/footer.php"; ?>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>
 	<script>
 		function formSubmit(){
@@ -239,61 +210,61 @@
 			  })
 
 
-			$('#ass_cat').on('change', function () {
-				console.log("2");
-				console.log(<?=$group?>);
-				console.log($("#ass_cat").val());
-				console.log($("#emp_idx").val());
-				if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
-					$.ajax({
-					  url: "./ig_process/assetAutoULID_proc.php",
-					  type: 'POST',
-					  data: {
-						gro_idx: <?=$group?>,
-						ass_cat_idx: $(this).val(),
-						emp_idx:  $("#emp_idx").val()
-					  },
-					  dataType: 'json',
-					  success: function(res) {
-						if (res.status === 'success') {
-						  console.log("생성된 ULID:", res.ulid);
-						  $("#ULID").val(res.ulid);
-						} else {
-						  alert('ULID 생성 실패: ' + res.message);
-						}
-					  },
-					  error: function(xhr, status, error) {
-						console.error('AJAX 오류:', status, error);
-					  }
-					});		
-				}
-        	})
-			
-			$('#emp_idx').on('change', function () {
-				if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
-					$.ajax({
-					  url: "./ig_process/assetAutoULID_proc.php",
-					  type: 'POST',
-					  data: {
-						gro_idx: <?=$group?>,
-						ass_cat_idx: $("#ass_cat").val(),
-						emp_idx:  $("#emp_idx").val()
-					  },
-					  dataType: 'json',
-					  success: function(res) {
-						if (res.status === 'success') {
-						  console.log("생성된 ULID:", res.ulid);
-						  $("#ULID").val(res.ulid);
-						} else {
-						  alert('ULID 생성 실패: ' + res.message);
-						}
-					  },
-					  error: function(xhr, status, error) {
-						console.error('AJAX 오류:', status, error);
-					  }
-					});		
-				}
-        	})
+			// $('#ass_cat').on('change', function () {
+			// 	console.log("2");
+			// 	console.log(<?=$group?>);
+			// 	console.log($("#ass_cat").val());
+			// 	console.log($("#emp_idx").val());
+			// 	if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
+			// 		$.ajax({
+			// 		  url: "./ig_process/assetAutoULID_proc.php",
+			// 		  type: 'POST',
+			// 		  data: {
+			// 			gro_idx: <?=$group?>,
+			// 			ass_cat_idx: $(this).val(),
+			// 			emp_idx:  $("#emp_idx").val()
+			// 		  },
+			// 		  dataType: 'json',
+			// 		  success: function(res) {
+			// 			if (res.status === 'success') {
+			// 			  console.log("생성된 ULID:", res.ulid);
+			// 			  $("#ULID").val(res.ulid);
+			// 			} else {
+			// 			  alert('ULID 생성 실패: ' + res.message);
+			// 			}
+			// 		  },
+			// 		  error: function(xhr, status, error) {
+			// 			console.error('AJAX 오류:', status, error);
+			// 		  }
+			// 		});
+			// 	}
+        	// })
+
+			// $('#emp_idx').on('change', function () {
+			// 	if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
+			// 		$.ajax({
+			// 			url: "./ig_process/assetAutoULID_proc.php",
+			// 			type: 'POST',
+			// 			data: {
+			// 				gro_idx: <?=$group?>,
+			// 		ass_cat_idx: $("#ass_cat").val(),
+			// 				emp_idx:  $("#emp_idx").val()
+			// 	},
+			// 		dataType: 'json',
+			// 				success: function(res) {
+			// 			if (res.status === 'success') {
+			// 				console.log("생성된 ULID:", res.ulid);
+			// 				$("#ULID").val(res.ulid);
+			// 			} else {
+			// 				alert('ULID 생성 실패: ' + res.message);
+			// 			}
+			// 		},
+			// 		error: function(xhr, status, error) {
+			// 			console.error('AJAX 오류:', status, error);
+			// 		}
+			// 	});
+			// 	}
+			// })
 
 		 	/*const changeLocation = document.querySelector("#loc_name");
 

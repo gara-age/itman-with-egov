@@ -1,70 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php $page_num_depth_01 = 1; ?>--%>
-
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-
-<%--	// group 불러오기--%>
-<%--	session_start();--%>
-<%--    $group = $_SESSION['group'];--%>
-
-<%--	$schWord = "";--%>
-<%--	if($_GET['sch_word']){--%>
-<%--		$schWord = $_GET['sch_word'];--%>
-<%--	}--%>
-
-<%--	/**--%>
-<%--     * pagination--%>
-<%--     * 한페이지당 10개씩 출력--%>
-<%--     */--%>
-<%--    $page_per_result = 10;--%>
-<%--    $page = 1;--%>
-
-<%--	if($_GET['pageCount']){--%>
-<%--		$page_per_result = $_GET['pageCount'];--%>
-<%--	}--%>
-
-<%--    if($_GET['page']){--%>
-<%--        $page = $_GET['page'];--%>
-<%--    }--%>
-<%--	$sql = "SELECT * FROM ITM_ASSET ia --%>
-<%--			LEFT JOIN ITM_ASSET_CATEGORY iac ON ia.GRO_IDX = iac.GRO_IDX AND ia.ASS_CAT_IDX = iac.ASS_CAT_IDX --%>
-<%--			LEFT JOIN ITM_STATE ist ON ia.GRO_IDX = ist.GRO_IDX AND ia.STA_IDX = ist.STA_IDX --%>
-<%--			LEFT JOIN ITM_EMPLOYE ie ON ia.GRO_IDX = ie.GRO_IDX AND ia.EMP_IDX = ie.EMP_IDX --%>
-<%--			LEFT JOIN ITM_LOCATION il ON ia.GRO_IDX = il.GRO_IDX AND ia.LOC_IDX = il.LOC_IDX --%>
-<%--			LEFT JOIN ITM_SUPPLIER isu ON ia.GRO_IDX = isu.GRO_IDX AND ia.SUP_IDX = isu.SUP_IDX --%>
-<%--			WHERE ia.GRO_IDX=$group AND ia.STA_IDX != 5 AND ia.DEL_YN = 'N'";--%>
-<%--	--%>
-<%--	switch ($_GET['rangeOption']) {--%>
-<%--		case 'all':--%>
-<%--			$sql .= "AND (ia.ASS_ULID LIKE '%{$schWord}%' OR ia.ASS_NAME LIKE '%{$schWord}%' OR iac.ASS_CAT_NAME LIKE '%{$schWord}%') ";--%>
-<%--			break;--%>
-<%--		case 'ASS_ULID':--%>
-<%--			$sql .= "AND (ia.ASS_ULID LIKE '%{$schWord}%') ";--%>
-<%--			break;--%>
-<%--		case 'ASS_NAME':--%>
-<%--			$sql .= "AND (ia.ASS_NAME LIKE '%{$schWord}%') ";--%>
-<%--			break;--%>
-<%--		case 'ASS_CAT_NAME':--%>
-<%--			$sql .= "AND (iac.ASS_CAT_NAME LIKE '%{$schWord}%') ";--%>
-<%--			break;--%>
-<%--	}--%>
-<%--	$query_count = mysqli_query($dbconn, $sql);--%>
-<%--	$count = mysqli_num_rows($query_count);--%>
-
-<%--	$total_page = ceil($count/$page_per_result);--%>
-<%--	if($total_page == 0){--%>
-<%--		$total_page = 1;--%>
-<%--	}--%>
-
-<%--    $page_start= ($page-1)*$page_per_result;--%>
-
-<%--    $sql .= " ORDER BY ASS_IDX DESC LIMIT $page_start, $page_per_result";--%>
-
-<%--    $query = mysqli_query($dbconn, $sql);--%>
-
-<%--?>--%>
-
 
 <!doctype html>
 <html lang="ko">
@@ -75,40 +10,51 @@
 	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
-<%--	<? include "../_inc/header.php"; ?>--%>
 	<div id="contents">
 		<div class="tit_search">
 			<h2>자산 관리</h2>
-			<form id="frmSubmit" method="get" action="assetsList.php" >
-				<p class="list_search">
-					<select name="rangeOption">
-						<option value="all" >전체</option>
-						<option value="ASS_ULID" >일련번호</option>
-						<option value="ASS_NAME" >자산명</option>
-						<option value="ASS_CAT_NAME" >분류</option>
+			<form id="searchForm" method="get" action="${pageContext.request.contextPath}/itman/assetsList.do" onsubmit="this.page.value=1; this.range.value=1;" >
+				<input type="hidden" id="page"      name="page"      value="${pagination.page}" />
+				<input type="hidden" id="range"     name="range"     value="${pagination.range}" />
+				<input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
+
+				<p class="list_search" >
+					<select name="searching.assCatIdx" onchange="document.getElementById('searchForm').submit()">
+						<option value="" >분류</option>
+						<c:forEach var="c" items="${categories}">
+							<option value="${c.assCatIdx}" ${c.assCatIdx == pagination.searching.assCatIdx ? 'selected' : ''}>${c.assCatName}</option>
+						</c:forEach>
 					</select>
-					<input type="hidden" name="post_num">
-					<input type="text" name="sch_word"  placeholder="검색어를 입력해주세요.">
-					<!-- <a href="javascript:frm.submit()" class="dark_btn"></a>  -->
-					<!-- 임시 생성 -->
-					<input type="submit" class="dark_btn" value="검색" style="height:42px; width:56px; background-color: black; color:white;"></input>
-				</p>
+					<select name="searching.staIdx" onchange="document.getElementById('searchForm').submit()">
+						<option value="" >상태</option>
+						<c:forEach var="s" items="${states}">
+						<option value="${s.staIdx}" ${s.staIdx == pagination.searching.staIdx ? 'selected' : ''}>${s.staName}</option>
+						</c:forEach>
+					</select>
+
+					<select name="searching.supIdx" onchange="document.getElementById('searchForm').submit()">
+						<option value="" >구입처</option>
+						<c:forEach var="sp" items="${suppliers}">
+							<option value="${sp.supIdx}" ${sp.supIdx == pagination.searching.supIdx ? 'selected' : ''}>${sp.supName}</option>
+						</c:forEach>
+					</select>
+					<select id="pageCount" name="listSize" onchange="document.getElementById('searchForm').submit()">
+						<option value="10" ${pagination.listSize== 10 ? 'selected' : ''}>10개씩보기</option>
+						<option value="20" ${pagination.listSize== 20 ? 'selected' : ''}>20개씩보기</option>
+						<option value="40" ${pagination.listSize== 40 ? 'selected' : ''}>40개씩보기</option>
+					</select>
+					<input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
+					<a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>				</p>
 
 		<div class="num_list">
-			<p class="total">총 <span><?= $count; ?></span>건의 결과가 있습니다.</p>
-			<p class="view">
-				<select id="pageCount" name="pageCount" >
-					<option value="" selected>페이지 설정</option>
-					<option value="10" >10개씩보기</option>
-					<option value="20" >20개씩보기</option>
-					<option value="40" >>40개씩보기</option>
-				</select>
-			</p>
+			<p class="total">총 <span>${listCnt}</span>건의 결과가 있습니다.</p>
+
 		</div>
 		</form>
+
 		</div>
 		<!-- 글쓰기 버튼-->
-		<p class="addContent"><a href="assetsWrite.jsp"><span></span><span></span><span></span></a></p>
+		<p class="addContent"><a href="assetsWrite.do"><span></span><span></span><span></span></a></p>
 
 		<div class="Basic">
 			<!-- 검색결과가 없을때
@@ -134,55 +80,108 @@
 					<p class="p_pay">가격(원)</p>
 				</li>
 
-                <?php 
-					$row_index = 0;
-                    while($row = (mysqli_fetch_array($query))) {
-                ?>
-				<li onclick="location.href='assetsView.jsp?ASS_IDX=<?= $row['ASS_IDX']; ?>'">
-					<p class="num"><?=($count - ($page - 1) * $page_per_result - $row_index)?></p>
-					<p class="img"><span><img src="../upload/assetImg/<?= $row['IMAGE']?>" onerror = "this.src='../_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
-					<p class="num"><?= $row['ASS_ULID']; ?></p>
-					<p class="tit"><?= $row['ASS_NAME']; ?></p>
-					<p class="cate"><?= $row['ASS_CAT_NAME']; ?></p>
-					<p class="stat"><?= $row['STA_NAME']; ?></p>
+				<c:if test="${!empty listCnt}">
+				<c:forEach var="asset" items="${resultList}">
+					<li onclick="">
+					<p class="num">${asset.rowNum}</p>
+					<p class="img"><span><img src="" onerror = "this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
+					<p class="num">${asset.assUlid}</p>
+					<p class="tit">${asset.assName}</p>
+					<p class="cate">${asset.assCatName}</p>
+					<p class="stat">${asset.assStaName}</p>
 					<div class="nameLoc">
-						<p class="name"><?= $row['EMP_NAME']; ?></p>
-						<p class="loc"><?= $row['LOC_NAME']; ?></p>
+						<p class="name">${asset.assEmpName}</p>
+						<p class="loc">${asset.assLocName}</p>
 					</div>
 					<div class="purInfo">
-						<p class="p_info"><?if($row['SUP_NAME']==''){?>
-						-<?}else{?><?=$row['SUP_NAME']?><?}?></p>
-						<p class="p_date"><?if($row['BUY_DATE']=='0000-00-00'){?>
-						-<?}else{?><?=$row['BUY_DATE']?><?}?> </p>
-						<p class="p_pay"><?if($row['PRICE']==''){?>
-						-<?}else{?><?=$row['PRICE']?><?}?></p>
+						<p class="p_info">${asset.assSupName}</p>
+						<p class="p_date">${asset.buyDate}</p>
+						<p class="p_pay">${asset.price}</p>
 					</div>
 				</li>
+				</c:forEach>
+				</c:if>
 
-                <?php $row_index++;} if($count == 0) { ?> 
-                    <div style="text-align:center; margin-top:20px;">
-                        일치하는 자료가 없습니다.
-                    </div>    
-                <?php }?>
+				<c:if test="${listCnt == 0}">
+					<div style="text-align:center; margin-top:20px;">
+						일치하는 자료가 없습니다.
+					</div>
+				</c:if>
 				
 			</ul>
 		</div>
 
 		<p class="paging">
-                <a href="" ><img src='../../../../../../images/_img/first.png' alt='맨처음'/></a>
-                <a href=""><img src='../../../../../../images/_img/prev.png' alt='이전으로'></a>
-<%--                <?php for ($i = 1; $i <= $total_page ; $i++) {   ?>--%>
-                    <a class="" href="<?php echo $_SERVER["PHP_SELF"].'?page='.$i.'&rangeOption='.$_GET['rangeOption'].'&sch_word='.$_GET['sch_word'] ;?>"><?=$i?></a>
-<%--                <?php  }?>--%>
-                <a href="<?= $total_page <= $page?$_SERVER["PHP_SELF"].'?page='.$total_page.'&rangeOption='.$_GET['rangeOption'].'&sch_word='.$_GET['sch_word']:$_SERVER["PHP_SELF"].'?page='.($page+1).'&rangeOption='.$_GET['rangeOption'].'&sch_word='.$_GET['sch_word'];?>" class="next"><img src='../../../../../../images/_img/next.png' alt='다음으로'></a>
-                <a href="<?php echo $_SERVER["PHP_SELF"].'?page='.$total_page.'&rangeOption='.$_GET['rangeOption'].'&sch_word='.$_GET['sch_word'] ;?>" class="next end"><img src='../../../../../../images/_img/last.png' alt='맨마지막'></a>
-            </p>
+			<!-- 현재 JSP 경로를 얻어 두기 -->
+			<c:url var="selfUrl" value="${pageContext.request.requestURI}" />
+
+			<!-- 첫 페이지 -->
+			<a href="#" class="prev end" onclick="fn_maxPrev()"><img src="${pageContext.request.contextPath}/images/_img/first.png" alt="맨처음" /></a>
+
+			<!-- 이전 페이지 -->
+			<a href="#" class="prev" onclick="fn_prev(${pagination.page} , ${pagination.range}, ${pagination.rangeSize})"><img src="${pageContext.request.contextPath}/images/_img/prev.png" alt="이전으로"/></a>
+
+			<!-- 번호 링크 -->
+			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="i">
+				<a class="${i == pagination.page ? 'on' : ''}" href="#" onClick="changePage(${i}, ${pagination.range}, ${pagination.rangeSize});">${i}</a>
+			</c:forEach>
+
+			<!-- 다음 페이지 -->
+			<a href="#" class="next" onClick="fn_next(${pagination.pageCnt},${pagination.page}, ${pagination.range}, ${pagination.rangeSize})"><img src="${pageContext.request.contextPath}/images/_img/next.png" alt="다음으로" /></a>
+
+			<!-- 마지막 페이지 -->
+			<a href="#" class="next end" onclick="fn_maxNext(${pagination.pageCnt}, ${pagination.range}, ${pagination.rangeSize})"><img src="${pageContext.request.contextPath}/images/_img/last.png" alt="맨마지막"/></a>
+		</p>
 	</div>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>
-<script>
-	$('#pageCount').on('change', function () {
-		$("#frmSubmit").submit();
-	})
-	</script>
+ <script>
+
+	 function changePage(page, range, rangeSize) {
+		 const form = document.getElementById('searchForm');
+		 form.page.value = page;
+		 form.range.value = range;
+		 form.rangeSize.value = rangeSize;
+		 form.submit();
+	 }
+	 //처음 버튼 이벤트
+	 function fn_maxPrev() {
+		 var url = "${pageContext.request.contextPath}/itman/departList.do";
+		 url = url + "?page=" + 1;
+		 url = url + "&range=" + 1;
+		 location.href = url;	}
+	 //이전 버튼 이벤트
+	 function fn_prev(page, range, rangeSize,searchDiv, searchPos, searchSt, searchSort, searchKyeword) {
+		 var page = (((range - 2) * rangeSize) + 1) <= 1 ? 1 : ((range - 2) * rangeSize) + 1 ;
+		 var range = (range - 1) <= 1 ? 1 : range - 1;
+		 var url = "${pageContext.request.contextPath}/itman/departList.do";
+		 url = url + "?page=" + page;
+		 url = url + "&range=" + range;
+		 location.href = url;	}
+	 //페이지 번호 클릭
+	 function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		 var url = "${pageContext.request.contextPath}/itman/departList.do";
+		 //page=1&range=1&rangeSize=10&searching.divIdx=&searching.posIdx=1&searching.stIdx=&searching.orderBy=empName&searching.searchKeyword=#
+		 //페이지 , 레인지, 레인지 사이즈, 검색부서, 직위, 상태, 정렬, 검색어
+		 url = url + "?page=" + page;
+		 url = url + "&range=" + range;
+		 location.href = url;		}
+	 //다음 버튼 이벤트
+	 function fn_next(pageCnt, page, range, rangeSize) {
+		 var page = (parseInt((range * rangeSize)) + 1) >= pageCnt ? pageCnt / rangeSize * 10 : parseInt((range * rangeSize)) + 1 ;
+		 var range = (parseInt(range) + 1) >= parseInt(pageCnt / rangeSize + 1) ? parseInt(pageCnt / rangeSize + 1) : (parseInt(range) + 1) ;
+		 var url = "${pageContext.request.contextPath}/itman/departList.do";
+		 url = url + "?page=" + page;
+		 url = url + "&range=" + range;
+		 location.href = url;	}
+	 //마지막 버튼 이벤트
+	 function fn_maxNext(pageCnt, range, rangeSize) {
+		 var page =  pageCnt / rangeSize * 10;
+		 var range =    parseInt(pageCnt / rangeSize + 1);
+		 var url = "${pageContext.request.contextPath}/itman/departList.do";
+		 url = url + "?page=" + page;
+		 url = url + "&range=" + range;
+		 location.href = url;
+	 }
+ </script>
 </html>

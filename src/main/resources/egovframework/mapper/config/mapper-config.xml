@@ -21,6 +21,11 @@
 		<typeAlias alias="empStateVO"  		type="egovframework.itman.empState.service.EmpStateVO" />
 		<typeAlias alias="positionVO"		type="egovframework.itman.position.service.PositionVO" />
 		<typeAlias alias="pagination" 		type="egovframework.itman.common.Pagination" />
+		<typeAlias alias="assetVO"			type="egovframework.itman.asset.service.AssetVO" />
+		<typeAlias alias="assetCategoryVO" 	type="egovframework.itman.assetCategory.service.AssetCategoryVO"/>
+		<typeAlias alias="stateVO" 			type="egovframework.itman.state.service.StateVO"/>
+		<typeAlias alias="supplierVO" 		type="egovframework.itman.supplier.service.SupplierVO"/>
+		<typeAlias alias="locationVO" 		type="egovframework.itman.location.service.LocationVO" />
 	</typeAliases>
     
 </configuration>
