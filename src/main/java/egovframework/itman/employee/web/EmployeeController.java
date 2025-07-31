@@ -1,6 +1,8 @@
 package egovframework.itman.employee.web;
 
 
+import egovframework.itman.asset.service.AssetVO;
+import egovframework.itman.asset.service.impl.AssetServiceImpl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
@@ -27,6 +29,8 @@ public class EmployeeController {
     private EmpStateServiceImpl empStateService;
     @Resource(name = "positionService")
     private PositionServiceImpl positionService;
+    @Resource(name = "assetService")
+    private AssetServiceImpl assetService;
 
     private void addCommonLists(String groIdx, Model model) {
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
@@ -58,10 +62,14 @@ public class EmployeeController {
 
 
     @RequestMapping("/itman/employeeView.do")
-    public String selectEmployeeView(EmployeeVO vo, Model model) {
+    public String selectEmployeeView(EmployeeVO vo, Model model, Pagination pagination) throws Exception {
+        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
+        pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        List<AssetVO> assetList = assetService.selectAssetList(pagination);
         model.addAttribute("employee", resultVO);
+        model.addAttribute("assetList", assetList);
         return "itman/public/html/ingroup/emploView";
     }
 
@@ -81,13 +89,121 @@ public class EmployeeController {
         return "itman/public/html/ingroup/emploWrite";
     }
 
-    @RequestMapping("/itman/update.do")
-    public String updateEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
-        employeeService.updateEmployee(vo);
+    @RequestMapping("/itman/emploTellInfoEdit.do")
+    public String employeeTelEdit(EmployeeVO vo, Model model) {
+        EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        model.addAttribute("employee", resultVO);
+
+        return "itman/public/html/popup/employee/emploTelInfoEdit";
+    }
+
+    @RequestMapping("/itman/updateEmploTelInfo.do")
+    public String updateEmploTelInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploTelInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
     }
 
+    @RequestMapping("/itman/emploDivisionInfoEdit.do")
+    public String employeeDivisionEdit(EmployeeVO vo, Model model) {
+        String groIdx;
+            EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+            model.addAttribute("employee", resultVO);
+            groIdx = resultVO.getGroIdx();
+        model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
+
+
+        return "itman/public/html/popup/employee/emploDivisionInfoEdit";
+    }
+    @RequestMapping("/itman/updateEmploDivisionInfo.do")
+    public String updateEmploDivisionInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploDivisionInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
+
+    @RequestMapping("/itman/emploPosInfoEdit.do")
+    public String employeePosEdit(EmployeeVO vo, Model model) {
+        String groIdx;
+        EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        model.addAttribute("employee", resultVO);
+        groIdx = resultVO.getGroIdx();
+
+        model.addAttribute("positionList", positionService.selectPositionsByGroup(groIdx));
+
+
+        return "itman/public/html/popup/employee/emploPosInfoEdit";
+    }
+    @RequestMapping("/itman/updateEmploPosInfo.do")
+    public String updateEmploPosInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploPosInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
+
+    @RequestMapping("/itman/emploMailInfoEdit.do")
+    public String employeeMailEdit(EmployeeVO vo, Model model) {
+        EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        model.addAttribute("employee", resultVO);
+
+        return "itman/public/html/popup/employee/emploMailInfoEdit";
+    }
+
+    @RequestMapping("/itman/updateEmploMailInfo.do")
+    public String updateEmploMailInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploMailInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
+
+    @RequestMapping("/itman/emploNameInfoEdit.do")
+    public String employeeNameEdit(EmployeeVO vo, Model model) {
+        EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        model.addAttribute("employee", resultVO);
+
+        return "itman/public/html/popup/employee/emploNameInfoEdit";
+    }
+
+    @RequestMapping("/itman/updateEmploNameInfo.do")
+    public String updateEmploNameInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploNameInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
+
+    @RequestMapping("/itman/emploStateInfoEdit.do")
+    public String employeeStateEdit(EmployeeVO vo, Model model) {
+        String groIdx;
+            EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+            model.addAttribute("employee", resultVO);
+            groIdx = resultVO.getGroIdx();
+
+        model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
+
+        return "itman/public/html/popup/employee/emploStateInfoEdit";
+    }
+
+    @RequestMapping("/itman/updateEmploStateInfo.do")
+    public String updateEmploStateInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploStateInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
+
+    @RequestMapping("/itman/emploNumInfoEdit.do")
+    public String employeeNumEdit(EmployeeVO vo, Model model) {
+            EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+            model.addAttribute("employee", resultVO);
+
+        return "itman/public/html/popup/employee/emploNumInfoEdit";
+    }
+
+    @RequestMapping("/itman/updateEmploNumInfo.do")
+    public String updateEmploNumInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+        employeeService.updateEmploNumInfo(vo);
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
+        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+    }
 
     @RequestMapping("/itman/insert.do")
     public String insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
@@ -96,8 +212,14 @@ public class EmployeeController {
         return "redirect:/itman/employeeList.do";
     }
 
+    @RequestMapping("/itman/emploDelConfirm.do")
+    public String deleteEmploConfirm(EmployeeVO vo, Model model) {
+        EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
+        model.addAttribute("employee", resultVO);
+        return "itman/public/html/popup/employee/emploDel";
+    }
 
-    @RequestMapping("/itman/delete.do")
+    @RequestMapping("/itman/emploDel.do")
     public String deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
         employeeService.deleteEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");

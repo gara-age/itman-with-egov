@@ -23,31 +23,31 @@
             <input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
             <p class="list_search">
-                <select id="DIV_IDX" name="searching.divIdx" onchange="document.getElementById('searchForm').submit()">
-                    <option value="" selected>부서 선택</option>
-                    <c:forEach var="d" items="${divisionList}">
-                                <option value="${d.divIdx}" ${d.divIdx == pagination.searching.divIdx ? "selected" : ""}>${d.divName}</option>
-                    </c:forEach>
-                </select>
-    <select id="POS_IDX" name="searching.posIdx" onchange="document.getElementById('searchForm').submit()">
-        <option value=""  selected>직위 선택</option>
-        <c:forEach var="p" items="${positionList}">
-                    <option value="${p.posIdx}" ${p.posIdx == pagination.searching.posIdx ? "selected" : ""}>${p.posName}</option>
+<%--                <select id="DIV_IDX" name="searching.divIdx" onchange="document.getElementById('searchForm').submit()">--%>
+<%--                    <option value="" selected>부서 선택</option>--%>
+<%--                    <c:forEach var="d" items="${divisionList}">--%>
+<%--                                <option value="${d.divIdx}" ${d.divIdx == pagination.searching.divIdx ? "selected" : ""}>${d.divName}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+<%--    <select id="POS_IDX" name="searching.posIdx" onchange="document.getElementById('searchForm').submit()">--%>
+<%--        <option value=""  selected>직위 선택</option>--%>
+<%--        <c:forEach var="p" items="${positionList}">--%>
+<%--                    <option value="${p.posIdx}" ${p.posIdx == pagination.searching.posIdx ? "selected" : ""}>${p.posName}</option>--%>
 
-        </c:forEach>
-    </select>
+<%--        </c:forEach>--%>
+<%--    </select>--%>
 
-                <select id="EMP_ST_IDX" name="searching.stIdx" onchange="document.getElementById('searchForm').submit()">
-                    <option value="" selected>상태 선택</option>
-                    <c:forEach var="s" items="${empStateList}">
-                        <option value="${s.empStIdx}" ${s.empStIdx == pagination.searching.stIdx ? "selected" : ""}>${s.empStName}</option>
-                    </c:forEach>
-                </select>
-                <select name="searching.orderBy" onchange="document.getElementById('searchForm').submit();">
-                    <option value="" >정렬 선택</option>
-                    <option value="empNum" ${pagination.searching.orderBy=='empNum' ? 'selected' : ''}>사번순</option>
-                    <option value="empName" ${pagination.searching.orderBy=='empName' ? 'selected' : ''}>이름순</option>
-                    <option value="empDiv" ${pagination.searching.orderBy=='empDiv' ? 'selected' : ''}>부서명순</option>
+<%--                <select id="EMP_ST_IDX" name="searching.stIdx" onchange="document.getElementById('searchForm').submit()">--%>
+<%--                    <option value="" selected>상태 선택</option>--%>
+<%--                    <c:forEach var="s" items="${empStateList}">--%>
+<%--                        <option value="${s.empStIdx}" ${s.empStIdx == pagination.searching.stIdx ? "selected" : ""}>${s.empStName}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+                <select name="searching.searchCondition" >
+                    <option value="" >전체</option>
+                    <option value="empNum" ${pagination.searching.searchCondition=='empNum' ? 'selected' : ''}>사번</option>
+                    <option value="empName" ${pagination.searching.searchCondition=='empName' ? 'selected' : ''}>이름</option>
+                    <option value="empDiv" ${pagination.searching.searchCondition=='empDiv' ? 'selected' : ''}>부서</option>
                 </select>
                 <input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
                 <a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>
@@ -159,8 +159,6 @@
     //페이지 번호 클릭
     function fn_pagination(page, range, rangeSize, searchType, keyword) {
         var url = "${pageContext.request.contextPath}/itman/employeeList.do";
-        //page=1&range=1&rangeSize=10&searching.divIdx=&searching.posIdx=1&searching.stIdx=&searching.orderBy=empName&searching.searchKeyword=#
-        //페이지 , 레인지, 레인지 사이즈, 검색부서, 직위, 상태, 정렬, 검색어
         url = url + "?page=" + page;
         url = url + "&range=" + range;
         location.href = url;		}

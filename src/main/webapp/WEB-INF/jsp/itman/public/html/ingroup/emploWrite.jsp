@@ -86,9 +86,7 @@
 				<p class="cont">
 					<select id="DIV_IDX" name="divIdx">
 							<option value="" >부서를 선택해주세요</option>
-
 							<c:forEach var="d" items="${divisionList}">
-
 								<c:choose>
 									<c:when test="${d.divIdx == employee.divIdx}">
 										<c:if test="${!empty d.divIdx}">
@@ -170,6 +168,7 @@
 	</div>
 	<jsp:include page="/WEB-INF/jsp/itman/_inc/footer.jsp" />
 
+	<script>
 		function validateForm() {
 			const form = document.forms["employeeForm"];
 

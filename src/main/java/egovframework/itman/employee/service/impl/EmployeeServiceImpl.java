@@ -13,7 +13,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Resource(name = "employeeDAO")
     private EmployeeDAO employeeDAO;
 
-
     @Override
     public List<EmployeeVO> selectEmployeeList(EmployeeVO vo) throws Exception {
 
@@ -34,6 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDAO.selectEmployeeListCnt(pagination);
     }
 
+    public int selectEmployeeListCnt(EmployeeVO employeeVO) throws Exception{
+        return employeeDAO.selectEmployeeListCnt(employeeVO);
+    }
+
+
     @Override
     public EmployeeVO selectEmployeeView(EmployeeVO vo) {
 
@@ -51,10 +55,45 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeDAO.deleteEmployee(vo);
     }
-
+//update functions
     @Override
     public void updateEmployee(EmployeeVO vo) {
 
         employeeDAO.updateEmployee(vo);
+    }
+
+    @Override
+    public void updateEmploTelInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploTelInfo(vo);
+    }
+
+    @Override
+    public void updateEmploNumInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploNumInfo(vo);
+    }
+
+    @Override
+    public void updateEmploDivisionInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploDivisionInfo(vo);
+    }
+
+    @Override
+    public void updateEmploPosInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploPosInfo(vo);
+    }
+
+    @Override
+    public void updateEmploMailInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploMailInfo(vo);
+    }
+
+    @Override
+    public void updateEmploNameInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploNameInfo(vo);
+    }
+
+    @Override
+    public void updateEmploStateInfo(EmployeeVO vo) {
+        employeeDAO.updateEmploStateInfo(vo);
     }
 }

@@ -1,30 +1,17 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<?php
-include "../../_inc/dbconn.php";
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-/**
- * 세션 체크
- */
-include "../../_inc/loginTest.php";
-login_check();
-
-$GROUP = $_SESSION['group'];
-$EMP_IDX = $_GET['emp_idx'];
-
-
-$sql = "SELECT * FROM ITM_EMP_STATE WHERE GRO_IDX = $GROUP";
-$query = mysqli_query($dbconn, $sql);
-?>
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../../_inc/title.php"; ?>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 <body>
 
 	<div id="popup">
-		<form method="post" action="pp_process/emploStateInfoEdit_proc.jsp" id="form">
-			<input type="hidden" name="emp_idx" value="<?=$EMP_IDX?>" />
+		<form method="post" action="/itman/updateEmploStateInfo.do" id="form">
+			<input type="hidden" name="empIdx" value="${employee.empIdx}" />
 		<div class="pop_tit">
 			<p class="title">직원 상태 변경</p>
 		</div>
@@ -33,12 +20,22 @@ $query = mysqli_query($dbconn, $sql);
 				<li>
 				<p class="tit">상태 분류</p><!-- 분류, 상태, 위치, 구매처 등 셀렉 폼-->
 					<p class="cont">
-						<select name="emp_st_idx">
-							<?php 
-								while ($row = mysqli_fetch_array($query)) {
-							?>
-							<option value="<?=$row['EMP_ST_IDX']?>"><?=$row['EMP_ST_NAME']?></option>
-							<?php }; ?>
+						<select id="EMP_ST_IDX" name="empStIdx">
+							<option value="">상태를 선택해주세요.</option>
+							<c:forEach var="s" items="${empStateList}">
+
+								<c:choose>
+									<c:when test="${s.empStIdx == employee.empStIdx}">
+										<c:if test="${!empty s.empStIdx}">
+											<option value="${s.empStIdx}" selected="selected">${s.empStName}</option>
+										</c:if>
+
+									</c:when>
+									<c:otherwise>
+										<option value="${s.empStIdx}">${s.empStName}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</select>
 					</p>
 				</li>
