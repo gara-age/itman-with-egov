@@ -19,36 +19,39 @@
 				<input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
 				<p class="list_search" >
-					<select name="searching.assCatIdx" onchange="document.getElementById('searchForm').submit()">
-						<option value="" >분류</option>
-						<c:forEach var="c" items="${categories}">
-							<option value="${c.assCatIdx}" ${c.assCatIdx == pagination.searching.assCatIdx ? 'selected' : ''}>${c.assCatName}</option>
-						</c:forEach>
-					</select>
-					<select name="searching.staIdx" onchange="document.getElementById('searchForm').submit()">
-						<option value="" >상태</option>
-						<c:forEach var="s" items="${states}">
-						<option value="${s.staIdx}" ${s.staIdx == pagination.searching.staIdx ? 'selected' : ''}>${s.staName}</option>
-						</c:forEach>
+<%--					<select name="searching.assCatIdx" onchange="document.getElementById('searchForm').submit()">--%>
+<%--						<option value="" >분류</option>--%>
+<%--						<c:forEach var="c" items="${categories}">--%>
+<%--							<option value="${c.assCatIdx}" ${c.assCatIdx == pagination.searching.assCatIdx ? 'selected' : ''}>${c.assCatName}</option>--%>
+<%--						</c:forEach>--%>
+<%--					</select>--%>
+<%--					<select name="searching.staIdx" onchange="document.getElementById('searchForm').submit()">--%>
+<%--						<option value="" >상태</option>--%>
+<%--						<c:forEach var="s" items="${states}">--%>
+<%--						<option value="${s.staIdx}" ${s.staIdx == pagination.searching.staIdx ? 'selected' : ''}>${s.staName}</option>--%>
+<%--						</c:forEach>--%>
+<%--					</select>--%>
+
+					<select name="searching.searchCondition" >
+						<option value="">전체</option>
+						<option value="assUlid" ${pagination.searching.searchCondition == "assUlid" ? 'selected' : ''}>일련번호</option>
+						<option value="assName" ${pagination.searching.searchCondition == "assName" ? 'selected' : ''}>자산명</option>
+						<option value="assCatName" ${pagination.searching.searchCondition == "assCatName" ? 'selected' : ''}>분류</option>
 					</select>
 
-					<select name="searching.supIdx" onchange="document.getElementById('searchForm').submit()">
-						<option value="" >구입처</option>
-						<c:forEach var="sp" items="${suppliers}">
-							<option value="${sp.supIdx}" ${sp.supIdx == pagination.searching.supIdx ? 'selected' : ''}>${sp.supName}</option>
-						</c:forEach>
-					</select>
-					<select id="pageCount" name="listSize" onchange="document.getElementById('searchForm').submit()">
-						<option value="10" ${pagination.listSize== 10 ? 'selected' : ''}>10개씩보기</option>
-						<option value="20" ${pagination.listSize== 20 ? 'selected' : ''}>20개씩보기</option>
-						<option value="40" ${pagination.listSize== 40 ? 'selected' : ''}>40개씩보기</option>
-					</select>
 					<input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
-					<a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>				</p>
+					<a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>
+				</p>
 
 		<div class="num_list">
 			<p class="total">총 <span>${listCnt}</span>건의 결과가 있습니다.</p>
-
+		<p class="view">
+			<select id="pageCount" name="listSize" onchange="document.getElementById('searchForm').submit()">
+				<option value="10" ${pagination.listSize== 10 ? 'selected' : ''}>10개씩보기</option>
+				<option value="20" ${pagination.listSize== 20 ? 'selected' : ''}>20개씩보기</option>
+				<option value="40" ${pagination.listSize== 40 ? 'selected' : ''}>40개씩보기</option>
+			</select>
+		</p>
 		</div>
 		</form>
 

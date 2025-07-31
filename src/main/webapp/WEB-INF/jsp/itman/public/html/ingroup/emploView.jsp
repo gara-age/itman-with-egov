@@ -130,8 +130,8 @@
 				</li>
 				<c:if test="${!empty assetList}">
 					<c:forEach var="ass" items="${assetList}">
-						<li style="color: black;">
-							<p class="img"><img src="" onerror="this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/> </p>
+						<li onclick="location.href='assetsView.do?assIdx=${ass.assIdx}'">
+							<p class="img"><span><img src="" onerror="this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
 							<p class="num">${ass.assUlid}</p>
 							<p class="tit">${ass.assName}</p>
 							<p class="cate">${ass.assCatName}</p>
