@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -32,7 +33,6 @@ public class AssetController {
     private void selectByGroup(String groIdx, Model model) throws Exception {
         model.addAttribute("categories", assetCategoryService.selectAssetCategoriesByGroup(groIdx));
         model.addAttribute("states", stateService.selectStatesByGroup(groIdx));
-//        model.addAttribute("suppliers", supplierService.selectSuppliersByGroup(groIdx));
         model.addAttribute("locations", locationService.selectLocationsByGroup(groIdx));
     }
 
@@ -64,4 +64,13 @@ public class AssetController {
         selectByGroup(groIdx, model);
         return "itman/public/html/ingroup/assetsWrite";
     }
+
+    @RequestMapping("/itman/assetInsert.do")
+    public String insertAsset(AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+        assetService.insertAsset(vo);
+        redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
+        return "redirect:/itman/assetsList.do";
+    }
+
+
 }

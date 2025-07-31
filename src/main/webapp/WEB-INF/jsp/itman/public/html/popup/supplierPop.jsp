@@ -32,7 +32,7 @@
 						<li><a href="javascript:onClick(${supplier.supIdx});"><span  class="tit" id="sup_name${supplier.supIdx}">${supplier.supName}</span>
 							<span class="sub" id="${supplier.supIdx}">${supplier.supName} / ${supplier.supBnum} / ${supplier.supTel}</span>
 						</a></li>
-						<input type="hidden" id="${supplier.supIdx}" value="${supplier.supIdx}"/>
+						<input type="hidden" id="sup_idx${supplier.supIdx}" value="${supplier.supIdx}"/>
 					</c:forEach>
 				</c:if>
 				<c:if test="${empty supplierList}">

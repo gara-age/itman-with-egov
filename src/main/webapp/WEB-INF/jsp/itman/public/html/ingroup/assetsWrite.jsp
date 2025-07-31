@@ -8,13 +8,18 @@
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
 	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
-	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" /> </head>
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
+ </head>
 <body>
 	<div id="contents">
 		<div class="tit_search">
 			<h2>자산 관리</h2>
 		</div>
-		<form action="ig_process/assetsWrite_proc.jsp" method="post" id="frm" enctype="multipart/form-data">
+		<c:set var="actionUrl" value="/itman/assetInsert.do" />
+		<c:if test="${!empty asset.assIdx}">
+			<c:set var="actionUrl" value="/itman/assetUpdate.do" />
+		</c:if>
+		<form action="${actionUrl}" method="post" id="frm" enctype="multipart/form-data" name="assetForm" onsubmit="return validateForm()">
 		<ul class="adminView Write">
 			<li>
 				<p class="tit">일련번호(ULID)</p>
@@ -31,7 +36,7 @@
 			</li>
 			<li>
 				<p class="tit">자산명 <span>*</span></p>
-				<p class="cont"><input type="text" id="ass_name" name="ass_name" placeholder="자산명을 입력해주세요" onkeyup='saveValue(this);'></p>
+				<p class="cont"><input type="text" id="ass_name" name="assName" placeholder="자산명을 입력해주세요" onkeyup='saveValue(this);'></p>
 			</li>
 			<li>
 				<p class="tit">분류 <span>*</span></p>
@@ -39,7 +44,7 @@
 					<select id="ass_cat" name = "assCatIdx">
 						<option value="">분류선택</option>
                         <c:forEach var="c" items="${categories}">
-							<option value="${c.assCatIdx}" >${c.assCatName}</option>
+							<option value="${c.assCatIdx}" name="assCatIdx">${c.assCatName}</option>
 						</c:forEach>
 					</select>
 				</p>
@@ -48,10 +53,10 @@
 			<li>
 				<p class="tit">상태 <span>*</span></p>
 				<p class="cont">
-					<select id="state" name="state">
+					<select id="state" name="staIdx">
 						<option value="">상태선택</option>
 						<c:forEach var="s" items="${states}">
-							<option value="${s.staIdx}" >${s.staName}</option>
+							<option value="${s.staIdx}" name="staIdx">${s.staName}</option>
 						</c:forEach>
 					</select>
 				</p>
@@ -60,17 +65,17 @@
 			<li>
 				<p class="tit">위치 <span>*</span></p>
 				<p class="cont">
-				<select id="location" name="location">
+				<select id="location" name="locIdx">
 					<option value="">위치선택</option>
 					<c:forEach var="l" items="${locations}">
-						<option value="${l.locIdx}" >${l.locName}&nbsp;/&nbsp;${l.locCode}</option>
+						<option value="${l.locIdx}" name="locIdx">${l.locName}&nbsp;/&nbsp;${l.locCode}</option>
 					</c:forEach>
 				</select>
 				<p class="edit"><a onclick="window.open('../popup/contWriteItmLocation.php', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
 			</li>
 			<li>
-				<p class="tit">사용직원 <span>*</span></p>
-				<input type="hidden" id= "emp_idx" name="emp_idx" value="" />
+				<p class="tit">사용직원</p>
+				<input type="hidden" id= "emp_idx" name="empIdx" value="" />
 				<p class="cont"><a onclick="window.open('/popup/searchPop.do', '직원등록팝업', 'width=500, height=335')" href="#none" class="popbtn">직원 선택</a><span class="name" id="emp_name" value=""></span></p>
 			</li>
 		</ul>
@@ -94,33 +99,56 @@
 				<p class="cont"><input id="price" name="price" type="text" placeholder="가격(원)을 입력해주세요" on></p>
 			</li>
 		</ul>
-
+		</form>
 		<p class="pagebtn">
-        <a href="assetsList.php" class="del">취소</a>
+        <a href="assetsList.do" class="del">취소</a>
          
-        <a href="javascript:formSubmit();" class="comp">등록</a></p>
+	<c:choose>
+			<c:when test="${!empty supplier.supIdx}">
+			<a href="#" type="submit" onclick="if(validateForm()) document.forms['assetForm'].submit(); return false" class="comp">수정</a>
+		</c:when>
+			<c:otherwise>
+				<a href="#" type="submit" onclick="if(validateForm()) document.forms['assetForm'].submit(); return false" class="comp">추가</a>
+			</c:otherwise>
+			</c:choose>
+		</p>
 
-	</form>
 	</div>
 
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 </body>
 	<script>
-		function formSubmit(){
-			$ass_name_empty = $("#ass_name").val().trim()
-			$loc_name_empty = $("#loc_name").html().trim();
-			if(!$ass_name_empty){
-				alert("자산명을 입력해 주세요!");
-			}else if(!$ass_name_empty){
-				alert("위치를 선택해 주세요!");
+		function validateForm() {
+			console.log(document.forms, document.getElementById("frm"));
+			const form = document.forms["assetForm"];
+
+			const assCatIdx = form.assCatIdx.value.trim();
+			const assName = form.assName.value.trim();
+			const staIdx = form.staIdx.value.trim();
+			const locIdx = form.locIdx.value.trim();
+
+			if(assCatIdx === ""){
+				alert("분류를 선택하세요.");
+				form.assCatIdx.focus();
+				return false;
 			}
-			else{
-				$ULID = $("#ULID").val().replace(/ /g, '');
-				sessionStorage.clear();
-				$("#ULID").val($ULID);
-				$("#file_name").val($("#show-ex-filename").val());
-				$("#frm").submit();
-			}	
+			if(staIdx === ""){
+				alert("분류를 선택하세요.");
+				form.staIdx.focus();
+				return false;
+			}
+			if(assName === ""){
+				alert("분류를 선택하세요.");
+				form.assName.focus();
+				return false;
+			}
+			if(locIdx === ""){
+				alert("분류를 선택하세요.");
+				form.locIdx.focus();
+				return false;
+			}
+			return true;
+
 		}
 		
         /* input에 입력된 값 로컬스토리지에 저장하기 */
@@ -208,7 +236,17 @@
 					$("#file_name").val(data);
 				})
 			  })
+			//분류코드 + groIdx+등록날짜+ 동일 groIdx내에서의 등록idx
+			//PC-001-2507311021-001
+			//PC-001-2507311021-002
 
+			function setULID() {
+				<%--const assCatCode = ${};--%>
+				<%--const groIdx = ${};--%>
+				<%--const date = ${};--%>
+				<%--const inGroupIdx = ${};--%>
+
+			}
 
 			// $('#ass_cat').on('change', function () {
 			// 	console.log("2");
@@ -239,7 +277,7 @@
 			// 		});
 			// 	}
         	// })
-
+			//
 			// $('#emp_idx').on('change', function () {
 			// 	if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
 			// 		$.ajax({

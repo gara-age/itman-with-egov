@@ -8,21 +8,27 @@
         <where>
             E.DEL_YN    = 'N'
             AND E.GRO_IDX = #{searching.groIdx}
-            <if test="searching.divIdx != null and searching.divIdx !=''">
-                AND E.DIV_IDX = #{searching.divIdx}
-            </if>
-            <if test="searching.posIdx != null and searching.posIdx !=''">
-                AND E.POS_IDX = #{searching.posIdx}
-            </if>
-            <if test="searching.stIdx != null and searching.stIdx !=''">
-                AND E.EMP_ST_IDX = #{searching.stIdx}
-            </if>
-            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
-                AND (
-                E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-                OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-                )
-            </if>
+        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+        <choose>
+                <when test="searching.searchCondition == 'empNum'">
+                    AND E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <when test="searching.searchCondition == 'empName'">
+                    AND E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <when test="searching.searchCondition == 'empDiv'">
+                    AND D.DIV_NAME  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <otherwise>
+                    AND (
+                    E.EMP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    OR E.EMP_NUM  LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    OR D.DIV_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+
         </where>
     </sql>
     <select id="selectEmployeeList" parameterType="pagination" resultType="employeeVO">
@@ -42,20 +48,7 @@
         LEFT JOIN ITM_POSITION  P ON P.POS_IDX      = E.POS_IDX
         LEFT JOIN ITM_EMP_STATE S ON S.EMP_ST_IDX   = E.EMP_ST_IDX
         <include refid="employeeCondition"/>
-        <choose>
-            <when test="searching.orderBy == 'empNum'">
-                ORDER BY empNum
-            </when>
-            <when test="searching.orderBy == 'empName'">
-                ORDER BY empName
-            </when>
-            <when test="searching.orderBy == 'empDiv'">
-                ORDER BY empDiv
-            </when>
-            <otherwise>
-                ORDER BY E.EMP_IDX DESC
-            </otherwise>
-        </choose>
+
         LIMIT #{startList}, #{listSize}
     </select>
 
@@ -64,6 +57,7 @@
         count(*)
         FROM
         ITM_EMPLOYE AS E
+        LEFT JOIN ITM_DIVISION  D ON D.DIV_IDX      = E.DIV_IDX
         <include refid="employeeCondition"/>
     </select>
 
@@ -101,7 +95,7 @@
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            1,
+            1, <!--테스트를 위한 임의의 groIdx-->
             #{empNum},
             #{empName},
             <if test="empMail  != null and empMail.trim().length() > 0">#{empMail},</if>
@@ -114,17 +108,66 @@
         </trim>
     </insert>
 
-    <update id="updateEmployee" parameterType="employeeVO">
+    <update id="updateEmploTelInfo" parameterType="employeeVO">
         UPDATE
             ITM_EMPLOYE
         SET
-            EMP_IDX = #{empIdx},
-            EMP_NUM = #{empNum},
-            EMP_NAME = #{empName},
-            DIV_IDX = #{divIdx},
-            POS_IDX = #{posIdx},
-            EMP_MAIL = #{empMail},
             EMP_TEL = #{empTel},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+
+    <update id="updateEmploNumInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            EMP_NUM = #{empNum},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+    <update id="updateEmploDivisionInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            DIV_IDX = #{divIdx},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+    <update id="updateEmploPosInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            POS_IDX = #{posIdx},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+    <update id="updateEmploMailInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            EMP_MAIL = #{empMail},
+
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+    <update id="updateEmploNameInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
+            EMP_NAME = #{empName},
+            MOD_DATE = NOW()
+        WHERE
+            EMP_IDX = #{empIdx}
+    </update>
+    <update id="updateEmploStateInfo" parameterType="employeeVO">
+        UPDATE
+            ITM_EMPLOYE
+        SET
             EMP_ST_IDX = #{empStIdx},
             MOD_DATE = NOW()
         WHERE

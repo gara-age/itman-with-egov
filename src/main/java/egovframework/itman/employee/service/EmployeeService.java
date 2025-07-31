@@ -10,10 +10,18 @@ public interface EmployeeService {
     List<EmployeeVO> selectEmployeeList(Pagination pagination) throws Exception;
     int selectEmployeeListCnt() throws Exception;
     int selectEmployeeListCnt(Pagination pagination) throws Exception;
+    int selectEmployeeListCnt(EmployeeVO employeeVO) throws Exception;
     EmployeeVO selectEmployeeView(EmployeeVO vo);
     void insertEmployee(EmployeeVO vo);
     void deleteEmployee(EmployeeVO vo);
     void updateEmployee(EmployeeVO vo);
+    void updateEmploTelInfo(EmployeeVO vo);
+    void updateEmploNumInfo(EmployeeVO vo);
+    void updateEmploDivisionInfo(EmployeeVO vo);
+    void updateEmploPosInfo(EmployeeVO vo);
+    void updateEmploMailInfo(EmployeeVO vo);
+    void updateEmploNameInfo(EmployeeVO vo);
+    void updateEmploStateInfo(EmployeeVO vo);
 
 
 }

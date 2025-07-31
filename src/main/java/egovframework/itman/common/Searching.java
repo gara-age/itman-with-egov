@@ -14,6 +14,23 @@ public class Searching {
     private String assCatIdx;
     private String staIdx;
     private String supIdx;
+//    private Pagination pagination;
+//
+//    public Pagination getPagination() {
+//        return pagination;
+//    }
+//
+//    public void setPagination(Pagination pagination) {
+//        this.pagination = pagination;
+//    }
+//
+//    public Searching(Pagination pagination) {
+//        this.pagination = pagination;
+//    }
+//    public void setPagination(Pagination pagination,String groIdx) {
+//        this.pagination = pagination;
+//        this.groIdx = groIdx;
+//    }
 
     public String getAssCatIdx() {
         return assCatIdx;
@@ -55,7 +72,9 @@ public class Searching {
         this.memIdx = memIdx;
     }
 
-    public Searching() {}
+    public Searching() {
+//        this.pagination = new Pagination();
+    }
     public Searching(String groIdx, String memIdx) {
         this.groIdx = groIdx;
         this.memIdx = memIdx;

@@ -1,6 +1,8 @@
 package egovframework.itman.employee.service;
 
-public class EmployeeVO {
+import egovframework.itman.common.Searching;
+
+public class EmployeeVO extends Searching {
 
     private String empIdx; // 직원IDX
     private String groIdx; // 소속그룹IDX
