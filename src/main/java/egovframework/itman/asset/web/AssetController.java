@@ -7,15 +7,17 @@ import egovframework.itman.common.Pagination;
 import egovframework.itman.location.service.impl.LocationServiceImpl;
 import egovframework.itman.state.service.impl.StateServiceImpl;
 import egovframework.itman.supplier.service.impl.SupplierServiceImpl;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AssetController {
@@ -33,7 +35,7 @@ public class AssetController {
     private void selectByGroup(String groIdx, Model model) throws Exception {
         model.addAttribute("categories", assetCategoryService.selectAssetCategoriesByGroup(groIdx));
         model.addAttribute("states", stateService.selectStatesByGroup(groIdx));
-        model.addAttribute("locations", locationService.selectLocationsByGroup(groIdx));
+        model.addAttribute("groIdx", groIdx);
     }
 
     @RequestMapping("/itman/assetsList.do")
@@ -58,10 +60,12 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/assetsWrite.do")
-    public String assetForm(AssetVO vo, Model model) throws Exception {
+    public String assetForm(AssetVO vo, Pagination pagination ,Model model) throws Exception {
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
-
+        pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
+        int inGroupCnt = assetService.selectInGroupAssetListCnt(pagination);
         selectByGroup(groIdx, model);
+        model.addAttribute("inGroupCnt", inGroupCnt);
         return "itman/public/html/ingroup/assetsWrite";
     }
 
@@ -71,6 +75,5 @@ public class AssetController {
         redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
         return "redirect:/itman/assetsList.do";
     }
-
 
 }

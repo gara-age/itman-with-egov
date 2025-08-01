@@ -226,7 +226,7 @@ public class EmployeeController {
         return "redirect:/itman/employeeList.do";
     }
 
-    @RequestMapping("/popup/searchPop.do")
+    @RequestMapping("/itman/popup/searchPop.do")
     public String searchPop(EmployeeVO vo, Pagination pagination, Model model
             , @RequestParam(required = false, defaultValue = "1") int page
             , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {

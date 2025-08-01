@@ -20,10 +20,12 @@
 			<c:set var="actionUrl" value="/itman/assetUpdate.do" />
 		</c:if>
 		<form action="${actionUrl}" method="post" id="frm" enctype="multipart/form-data" name="assetForm" onsubmit="return validateForm()">
+			<input type="hidden" id="gorIdx" name="groIdx" value="${groIdx}">
+			<input type="hidden" id="inGroupCnt" name="inGroupCnt" value="${inGroupCnt}">
 		<ul class="adminView Write">
 			<li>
 				<p class="tit">일련번호(ULID)</p>
-				<input type="text" id="ULID" name="ULID" value="" placeholder="분류와 직원을 선택하면 자동으로 생성" readonly>
+				<input type="text" id="assUlid" name="assUlid" value="${assUlid}" placeholder="분류와 직원을 선택하면 자동으로 생성" readonly>
 			</li>
 			<li>
 				<p class="tit">자산이미지</p>
@@ -44,7 +46,8 @@
 					<select id="ass_cat" name = "assCatIdx">
 						<option value="">분류선택</option>
                         <c:forEach var="c" items="${categories}">
-							<option value="${c.assCatIdx}" name="assCatIdx">${c.assCatName}</option>
+							<option value="${c.assCatIdx}" name="assCatIdx" data-code="${c.assCatCode}">${c.assCatName}</option>
+<%--							<input type="hidden" id="assCatCode" value="${c.assCatCode}"/>--%>
 						</c:forEach>
 					</select>
 				</p>
@@ -65,18 +68,15 @@
 			<li>
 				<p class="tit">위치 <span>*</span></p>
 				<p class="cont">
-				<select id="location" name="locIdx">
-					<option value="">위치선택</option>
-					<c:forEach var="l" items="${locations}">
-						<option value="${l.locIdx}" name="locIdx">${l.locName}&nbsp;/&nbsp;${l.locCode}</option>
-					</c:forEach>
-				</select>
+					<input style="display:none" id = "loc_idx" name="locIdx" value="" />
+					<a onclick="window.open('/itman/popup/locationPop.do', '위치등록팝업', 'width=500, height=335')" href="#none" class="popbtn">위치 선택</a><span class="name" id="loc_name"></span></p>
+
 				<p class="edit"><a onclick="window.open('../popup/contWriteItmLocation.php', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
 			</li>
 			<li>
-				<p class="tit">사용직원</p>
+				<p class="tit">사용직원 <span>*</span></p>
 				<input type="hidden" id= "emp_idx" name="empIdx" value="" />
-				<p class="cont"><a onclick="window.open('/popup/searchPop.do', '직원등록팝업', 'width=500, height=335')" href="#none" class="popbtn">직원 선택</a><span class="name" id="emp_name" value=""></span></p>
+				<p class="cont"><a onclick="window.open('/itman/popup/searchPop.do', '직원등록팝업', 'width=500, height=335')" href="#none" class="popbtn">직원 선택</a><span class="name" id="emp_name" value=""></span></p>
 			</li>
 		</ul>
 		
@@ -236,94 +236,28 @@
 					$("#file_name").val(data);
 				})
 			  })
-			//분류코드 + groIdx+등록날짜+ 동일 groIdx내에서의 등록idx
-			//PC-001-2507311021-001
-			//PC-001-2507311021-002
 
-			function setULID() {
-				<%--const assCatCode = ${};--%>
-				<%--const groIdx = ${};--%>
-				<%--const date = ${};--%>
-				<%--const inGroupIdx = ${};--%>
+			const groIdx     = "${groIdx}";
+			const inGroupCnt = "${inGroupCnt + 1}";
 
-			}
+			const select = document.getElementById('ass_cat');
+			const ulidInput = document.getElementById('assUlid');
 
-			// $('#ass_cat').on('change', function () {
-			// 	console.log("2");
-			// 	console.log(<?=$group?>);
-			// 	console.log($("#ass_cat").val());
-			// 	console.log($("#emp_idx").val());
-			// 	if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
-			// 		$.ajax({
-			// 		  url: "./ig_process/assetAutoULID_proc.php",
-			// 		  type: 'POST',
-			// 		  data: {
-			// 			gro_idx: <?=$group?>,
-			// 			ass_cat_idx: $(this).val(),
-			// 			emp_idx:  $("#emp_idx").val()
-			// 		  },
-			// 		  dataType: 'json',
-			// 		  success: function(res) {
-			// 			if (res.status === 'success') {
-			// 			  console.log("생성된 ULID:", res.ulid);
-			// 			  $("#ULID").val(res.ulid);
-			// 			} else {
-			// 			  alert('ULID 생성 실패: ' + res.message);
-			// 			}
-			// 		  },
-			// 		  error: function(xhr, status, error) {
-			// 			console.error('AJAX 오류:', status, error);
-			// 		  }
-			// 		});
-			// 	}
-        	// })
-			//
-			// $('#emp_idx').on('change', function () {
-			// 	if(<?=$group?> !="" && $("#ass_cat").val() !="" && $("#emp_idx").val() != ""){
-			// 		$.ajax({
-			// 			url: "./ig_process/assetAutoULID_proc.php",
-			// 			type: 'POST',
-			// 			data: {
-			// 				gro_idx: <?=$group?>,
-			// 		ass_cat_idx: $("#ass_cat").val(),
-			// 				emp_idx:  $("#emp_idx").val()
-			// 	},
-			// 		dataType: 'json',
-			// 				success: function(res) {
-			// 			if (res.status === 'success') {
-			// 				console.log("생성된 ULID:", res.ulid);
-			// 				$("#ULID").val(res.ulid);
-			// 			} else {
-			// 				alert('ULID 생성 실패: ' + res.message);
-			// 			}
-			// 		},
-			// 		error: function(xhr, status, error) {
-			// 			console.error('AJAX 오류:', status, error);
-			// 		}
-			// 	});
-			// 	}
-			// })
+			select.addEventListener('change', () => {
+				const opt = select.options[select.selectedIndex];
+				const assCatCode = opt.getAttribute('data-code');
 
-		 	/*const changeLocation = document.querySelector("#loc_name");
+				// 현재 날짜·시간 YYYYMMDDhhmmss 로 포맷팅
+				const now = new Date();
+				const timestamp = now.getFullYear().toString()
+						+ String(now.getMonth()+1).padStart(2,'0')
+						+ String(now.getDate()).padStart(2,'0')
+				// 조합!
+				const serial = assCatCode + '-' + timestamp + '-' + inGroupCnt;
 
-			changeLocation.addEventListener("DOMSubtreeModified", (e) =>{
-				$ulid_cat = $.trim($ulid_cat);
-				$.ajax({
-					url: "./ig_process/assetsChangeBy.jsp",
-					data : {which : 'loca' ,
-							ulid_cat : $ulid_cat,
-							loc_idx : $("#loc_idx").val()},
-					method : "GET",
-				})
-				.done(function(data){
-					var datas = data.split('*');
-					$ulid_loc = $.trim(datas[0]);
-					$num = Number(datas[1]);
-					$num += 1;
-					$num = (String($num).padStart(4, "0"));
-					$("#ULID").val($ulid_cat+"-"+$ulid_loc+"-"+$num);
-				});
-			});*/
+				// input에 딱 박기
+				ulidInput.value = serial;
+			});
 
 	})
 
