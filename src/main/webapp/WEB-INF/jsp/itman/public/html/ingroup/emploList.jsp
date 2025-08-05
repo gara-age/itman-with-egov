@@ -63,7 +63,7 @@
 
     <!-- 4. 신규 등록 버튼 -->
     <p class="addContent">
-        <a href="/itman/employeeEdit.do"><span></span><span></span><span></span></a>
+        <a href="/itman/employeeWrite.do"><span></span><span></span><span></span></a>
     </p>
 
     <!-- 5. 목록 출력: resultList는 List<Map> 혹은 List<VO> -->

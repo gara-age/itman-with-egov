@@ -73,7 +73,7 @@ public class EmployeeController {
         return "itman/public/html/ingroup/emploView";
     }
 
-    @RequestMapping("/itman/employeeEdit.do")
+    @RequestMapping("/itman/employeeWrite.do")
     public String employeeForm(EmployeeVO vo, Model model) {
         String groIdx = vo.getGroIdx();
         if (vo.getEmpIdx() != null) {
