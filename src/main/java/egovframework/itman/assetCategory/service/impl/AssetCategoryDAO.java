@@ -15,4 +15,8 @@ public class AssetCategoryDAO {
     public List<AssetCategoryVO> selectAssetCategoriesByGroup(String groIdx) throws Exception {
         return sqlSession.selectList("assetCategoryDAO.selectAssetCategoriesByGroup", groIdx);
     }
+
+    public void insertAssetCategory(AssetCategoryVO vo) throws Exception {
+        sqlSession.insert("assetCategoryDAO.insertAssetCategory", vo);
+    }
 }

@@ -5,6 +5,7 @@ import egovframework.itman.assLog.service.AssLogVO;
 import egovframework.itman.assLog.service.impl.AssLogServiceImpl;
 import egovframework.itman.asset.service.AssetVO;
 import egovframework.itman.asset.service.impl.AssetServiceImpl;
+import egovframework.itman.assetCategory.service.AssetCategoryVO;
 import egovframework.itman.assetCategory.service.impl.AssetCategoryServiceImpl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.employee.service.EmployeeVO;
@@ -130,8 +131,18 @@ public class AssetController {
         return "redirect:/itman/assetsList.do";
     }
 
-    @PostMapping("/itman/asset/contWriteAssetCategory.do")
+    @RequestMapping("/itman/asset/contWriteAssetCategory.do")
+    public String writeAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
+        model.addAttribute("vo", vo);
+        return "itman/public/html/popup/contWriteAssetCategory";
+    }
 
+    @PostMapping("/itman/asset/insertAssetCategory.do")
+    public String insetAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
+        assetCategoryService.insertAssetCategory(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
 
     //-------------------------------------수정-----------------------------------------
 
@@ -168,8 +179,6 @@ public class AssetController {
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
         selectByGroup(groIdx, model);
-
-
         return "itman/public/html/popup/asset/assetCategoryInfoEdit";
     }
 

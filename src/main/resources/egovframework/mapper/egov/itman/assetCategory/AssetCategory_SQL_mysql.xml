@@ -13,4 +13,28 @@
         AND DEL_YN = 'N'
         ORDER BY ASS_CAT_NAME
     </select>
+
+    <insert id="insertAssetCategory" parameterType="assetCategoryVO" >
+        INSERT INTO
+            ITM_ASSET_CATEGORY
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_IDX,
+            ASS_CAT_CODE,
+            ASS_CAT_NAME,
+            REG_DATE,
+            REG_IDX,
+                <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE</if>
+            </trim>
+            VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            1, <!-- #{groIdx}, 임시 groIdx-->
+            #{assCatCode},
+            #{assCatName},
+            NOW(),
+            77, <!-- #{regIdx}, 임시 regIdx-->
+            <if test="slNote != null and slNote.trim().length() > 0">#{slNote}</if>
+        </trim>
+
+
+    </insert>
 </mapper>
