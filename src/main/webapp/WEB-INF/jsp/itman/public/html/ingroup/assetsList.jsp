@@ -85,7 +85,7 @@
 
 				<c:if test="${!empty listCnt}">
 				<c:forEach var="asset" items="${resultList}">
-					<li onclick="">
+					<li onclick="location.href='assetsView.do?assIdx=${asset.assIdx}'">
 					<p class="num">${asset.rowNum}</p>
 					<p class="img"><span><img src="" onerror = "this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
 					<p class="num">${asset.assUlid}</p>

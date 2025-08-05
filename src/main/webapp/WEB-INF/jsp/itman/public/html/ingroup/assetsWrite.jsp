@@ -15,11 +15,7 @@
 		<div class="tit_search">
 			<h2>자산 관리</h2>
 		</div>
-		<c:set var="actionUrl" value="/itman/assetInsert.do" />
-		<c:if test="${!empty asset.assIdx}">
-			<c:set var="actionUrl" value="/itman/assetUpdate.do" />
-		</c:if>
-		<form action="${actionUrl}" method="post" id="frm" enctype="multipart/form-data" name="assetForm" onsubmit="return validateForm()">
+		<form action="/itman/assetInsert.do" method="post" id="frm" enctype="multipart/form-data" name="assetForm" onsubmit="return validateForm()">
 			<input type="hidden" id="gorIdx" name="groIdx" value="${groIdx}">
 			<input type="hidden" id="inGroupCnt" name="inGroupCnt" value="${inGroupCnt}">
 		<ul class="adminView Write">
@@ -47,11 +43,10 @@
 						<option value="">분류선택</option>
                         <c:forEach var="c" items="${categories}">
 							<option value="${c.assCatIdx}" name="assCatIdx" data-code="${c.assCatCode}">${c.assCatName}</option>
-<%--							<input type="hidden" id="assCatCode" value="${c.assCatCode}"/>--%>
 						</c:forEach>
 					</select>
 				</p>
-				<p class="edit"><a onclick="window.open('../popup/contWriteAssetCategory.php', '자산분류등록팝업', 'width=500, height=335')" href="#none">분류 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteAssetCategory.do', '자산분류등록팝업', 'width=500, height=335')" href="#none">분류 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">상태 <span>*</span></p>
@@ -63,7 +58,7 @@
 						</c:forEach>
 					</select>
 				</p>
-				<p class="edit"><a onclick="window.open('../popup/contWriteItmState.php', '자산상태등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmState.do', '자산상태등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">위치 <span>*</span></p>
@@ -71,7 +66,7 @@
 					<input style="display:none" id = "loc_idx" name="locIdx" value="" />
 					<a onclick="window.open('/itman/popup/locationPop.do', '위치등록팝업', 'width=500, height=335')" href="#none" class="popbtn">위치 선택</a><span class="name" id="loc_name"></span></p>
 
-				<p class="edit"><a onclick="window.open('../popup/contWriteItmLocation.php', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmLocation.do', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">사용직원 <span>*</span></p>
@@ -88,7 +83,7 @@
 				<input type="hidden" id = "sup_idx" name="sup_idx" value="" />
 				<a onclick="window.open('/popup/supplierPop.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
 			
-				<p class="edit"><a onclick="window.open('../popup/contWriteItmSupplier.php', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">최초 구매일</p>
@@ -133,17 +128,17 @@
 				return false;
 			}
 			if(staIdx === ""){
-				alert("분류를 선택하세요.");
+				alert("상태를 선택하세요.");
 				form.staIdx.focus();
 				return false;
 			}
 			if(assName === ""){
-				alert("분류를 선택하세요.");
+				alert("자산명을 입력하세요.");
 				form.assName.focus();
 				return false;
 			}
 			if(locIdx === ""){
-				alert("분류를 선택하세요.");
+				alert("위치를 선택하세요.");
 				form.locIdx.focus();
 				return false;
 			}

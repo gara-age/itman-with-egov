@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<?php
-    include("../_inc/dbconn.php");
-    
-    // group 불러오기
-    include "../_inc/loginTest.php";
-    login_check();
-    $group = $_SESSION['group'];
+<%--<?php--%>
+<%--    include("../_inc/dbconn.php");--%>
+<%--    --%>
+<%--    // group 불러오기--%>
+<%--    include "../_inc/loginTest.php";--%>
+<%--    login_check();--%>
+<%--    $group = $_SESSION['group'];--%>
 
 
-?>
+<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 <body>
 
