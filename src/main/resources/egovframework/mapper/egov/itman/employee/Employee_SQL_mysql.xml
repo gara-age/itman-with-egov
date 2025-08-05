@@ -63,21 +63,24 @@
 
     <select id="selectEmployeeView" resultType="employeeVO" parameterType="employeeVO">
         SELECT
-            EMP_IDX AS empIdx,
-            EMP_NUM AS empNum,
-            EMP_NAME AS empName,
-            GRO_IDX as groIdx,
-            DIV_IDX,
-            POS_IDX,
-            EMP_ST_IDX,
-            (SELECT DIV_NAME FROM ITM_DIVISION AS D WHERE D.DIV_IDX = E.DIV_IDX) AS empDiv,
-            (SELECT POS_NAME FROM ITM_POSITION AS P WHERE P.POS_IDX = E.POS_IDX) AS posName,
-            EMP_MAIL AS empMail,
-            EMP_TEL AS empTel,
-            (SELECT EMP_ST_NAME FROM ITM_EMP_STATE AS S WHERE S.EMP_ST_IDX = E.EMP_ST_IDX) AS empState
+            E.EMP_IDX      AS empIdx,
+            E.EMP_NUM      AS empNum,
+            E.EMP_NAME     AS empName,
+            E.GRO_IDX      AS groIdx,
+            E.DIV_IDX      AS divIdx,
+            E.POS_IDX      AS posIdx,
+            E.EMP_ST_IDX   AS empStIdx,
+            D.DIV_NAME     AS empDiv,
+            P.POS_NAME     AS posName,
+            E.EMP_MAIL     AS empMail,
+            E.EMP_TEL      AS empTel,
+            S.EMP_ST_NAME  AS empState
         FROM ITM_EMPLOYE AS E
-        WHERE EMP_IDX = #{empIdx}
-          AND DEL_YN = 'N'
+                 LEFT JOIN ITM_DIVISION  D ON D.DIV_IDX      = E.DIV_IDX
+                 LEFT JOIN ITM_POSITION  P ON P.POS_IDX      = E.POS_IDX
+                 LEFT JOIN ITM_EMP_STATE S ON S.EMP_ST_IDX   = E.EMP_ST_IDX
+        WHERE E.EMP_IDX = #{empIdx}
+          AND E.DEL_YN = 'N'
     </select>
 
     <insert id="insertEmployee" parameterType="employeeVO">
