@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="assetCategoryDAO">
+    <select id="selectAssetCategoriesByGroup" parameterType="string" resultType="assetCategoryVO">
+        SELECT ASS_CAT_IDX AS assCatIdx,
+               ASS_CAT_NAME AS assCatName,
+               ASS_CAT_CODE AS assCatCode
+        FROM ITM_ASSET_CATEGORY
+        WHERE GRO_IDX = #{groIdx}
+        AND DEL_YN = 'N'
+        ORDER BY ASS_CAT_NAME
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="softwareDAO">
+    <select id="selectSoftwareList" parameterType="string" resultType="softwareVO">
+        SELECT SW_IDX  AS swIdx,
+               ASS_IDX AS assIdx,
+               SW_NAME AS swName,
+               SW_COM  AS swCom,
+               SW_VER  AS swVer
+        FROM ITM_SOFTWARE
+        WHERE ASS_IDX = #{assIdx}
+        ORDER BY SW_IDX
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hardwareDAO">
+    <select id="selectHardwareView" parameterType="string" resultType="hardwareVO">
+        SELECT
+            HW_IDX AS hwIdx,
+            ASS_IDX AS assIdx,
+            OS AS os,
+            CPU AS cpu,
+            BASEBOARD AS baseboard,
+            MEMORY AS memory,
+            DISK AS disk,
+            GRAPHICS AS graphics,
+            UUID AS uuid
+        FROM ITM_HARDWARE
+        WHERE
+            ASS_IDX = #{assIdx}
+    </select>
+</mapper>

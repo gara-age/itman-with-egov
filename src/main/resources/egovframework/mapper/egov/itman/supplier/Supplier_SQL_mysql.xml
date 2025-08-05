@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="supplierDAO">
+    <sql id="supplierCondition">
+        WHERE   DEL_YN = 'N'
+        AND GRO_IDX = #{searching.groIdx}
+        <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+            AND (
+            SUP_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR SUP_MAIL LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR SUP_TEL LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            OR SUP_BNUM LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectSupplierList" parameterType="pagination" resultType="supplierVO">
+        SELECT
+            ROW_NUMBER() OVER(ORDER BY SUP_IDX) AS rowNum,
+            SUP_IDX AS supIdx,
+            SUP_NAME AS supName,
+            SUP_BNUM AS supBnum,
+            SUP_MAIL AS supMail,
+            SUP_TEL AS supTel
+        FROM
+            ITM_SUPPLIER
+        <include refid="supplierCondition"/>
+        ORDER BY rowNum DESC;
+    </select>
+
+    <select id="selectSupplierListCnt" parameterType="pagination" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            ITM_SUPPLIER
+        <include refid="supplierCondition"/>
+    </select>
+
+    <select id="selectSuppliersByGroup" parameterType="string" resultType="supplierVO">
+        SELECT
+        SUP_IDX AS supidx,
+        SUP_NAME AS supName
+        FROM ITM_SUPPLIER
+        WHERE
+            DEL_YN = 'N'
+          AND GRO_IDX = #{groIdx}
+
+        ORDER BY SUP_NAME
+    </select>
+
+</mapper>

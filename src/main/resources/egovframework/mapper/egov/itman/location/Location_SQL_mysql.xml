@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="locationDAO">
+    <sql id="locationCondition">
+        <where>
+            DEL_YN = 'N'
+        AND GRO_IDX = #{searching.groIdx}
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
+            AND LOC_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+        </if>
+        </where>
+    </sql>
+    <select id="selectLocationsByGroup" parameterType="string" resultType="locationVO">
+        SELECT
+            LOC_IDX AS locIdx,
+            LOC_NAME AS locName,
+            LOC_CODE AS locCode
+        FROM
+            ITM_LOCATION
+        WHERE
+            DEL_YN = 'N'
+        AND GRO_IDX = #{groIdx}
+        ORDER BY LOC_NAME
+    </select>
+
+    <select id="selectLocationList" parameterType="pagination" resultType="locationVO">
+    SELECT
+        LOC_IDX AS locIdx,
+        LOC_NAME AS locName,
+        LOC_CODE AS locCode
+    FROM ITM_LOCATION
+        <include refid="locationCondition"/>
+    ORDER BY LOC_NAME
+    LIMIT #{startList} , #{listSize}
+    </select>
+
+    <select id="selectLocationListCnt" parameterType="pagination" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM ITM_LOCATION
+        <include refid="locationCondition"/>
+    </select>
+</mapper>

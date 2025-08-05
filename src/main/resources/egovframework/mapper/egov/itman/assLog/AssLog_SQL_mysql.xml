@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="assLogDAO">
+    <insert id="insertAssLog" parameterType="assLogVO">
+    INSERT INTO ITM_ASS_LOG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="assNameLog != null and assNameLog != ''">ASS_NAME_LOG, </if>
+            ASS_IDX,
+            AL_TYPE,
+            <if test="alCat != null and alCat != ''">AL_CAT, </if>
+            <if test="alCont != null and alCont != ''">AL_CONT, </if>
+            <if test="alNote != null and alNote != ''">AL_NOTE,</if>
+            REG_DATE,
+            REG_IDX,
+            REG_IP
+        </trim>
+    VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+        <if test="assNameLog != null and assNameLog.trim().length() > 0">#{assNameLog}, </if>
+            #{assIdx},
+            #{alType},
+            <if test="alCat != null and alCat.trim().length() > 0">#{alCat}, </if>
+            <if test="alCont != null and alCont.trim().length() > 0">#{alCont}, </if>
+            <if test="alNote != null and alNote.trim().length() > 0">#{alNote}, </if>
+            NOW(),
+             77,  <!-- #{regIdx} 임시값으로 77세팅-->
+            '127.0.0.1' <!--임시 IP세팅 -->
+        </trim>
+    </insert>
+
+    <select id="selectAssLogList" parameterType="string" resultType="assLogVO">
+        SELECT
+            L.AL_TYPE AS alType,
+            L.AL_CAT AS alCat,
+            L.AL_CONT AS alCont,
+            L.AL_NOTE AS alNote,
+            L.REG_DATE AS regDate,
+            M.MEM_NAME AS memName
+        FROM ITM_ASS_LOG L
+        LEFT JOIN ITM_MEMBER M ON M.MEM_IDX = L.REG_IDX
+        WHERE
+            L.ASS_IDX = #{assIdx}
+        ORDER BY L.AL_IDX DESC
+    </select>
+</mapper>
