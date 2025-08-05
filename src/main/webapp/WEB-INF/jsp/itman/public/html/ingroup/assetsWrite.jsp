@@ -21,7 +21,7 @@
 		<ul class="adminView Write">
 			<li>
 				<p class="tit">일련번호(ULID)</p>
-				<input type="text" id="assUlid" name="assUlid" value="${assUlid}" placeholder="분류와 직원을 선택하면 자동으로 생성" readonly>
+				<input type="text" id="assUlid" name="assUlid" value="${assUlid}" placeholder="분류를 선택하면 자동으로 생성" readonly>
 			</li>
 			<li>
 				<p class="tit">자산이미지</p>
@@ -58,7 +58,7 @@
 						</c:forEach>
 					</select>
 				</p>
-				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmState.do', '자산상태등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteAssetState.do', '자산상태등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">위치 <span>*</span></p>
@@ -66,7 +66,7 @@
 					<input style="display:none" id = "loc_idx" name="locIdx" value="" />
 					<a onclick="window.open('/itman/popup/locationPop.do', '위치등록팝업', 'width=500, height=335')" href="#none" class="popbtn">위치 선택</a><span class="name" id="loc_name"></span></p>
 
-				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmLocation.do', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteAssetLocation.do', '직원등록팝업', 'width=500, height=335')" href="#none">위치 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">사용직원 <span>*</span></p>
@@ -83,7 +83,7 @@
 				<input type="hidden" id = "sup_idx" name="sup_idx" value="" />
 				<a onclick="window.open('/popup/supplierPop.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
 			
-				<p class="edit"><a onclick="window.open('/itman/asset/contWriteItmSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteAssetSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">최초 구매일</p>

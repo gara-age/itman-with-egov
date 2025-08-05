@@ -51,4 +51,33 @@
         ORDER BY SUP_NAME
     </select>
 
+    <insert id="insertAssetSupplier" parameterType="supplierVO">
+        INSERT INTO
+        ITM_SUPPLIER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_iDX,
+            SUP_CODE,
+            SUP_NAME,
+            SUP_BNUM,
+            REG_DATE,
+            REG_IDX,
+            <if test="supTel != null and supTel.trim().length() > 0">SUP_TEL,</if>
+            <if test="supMemo != null and supMemo.trim().length() > 0">SUP_MEMO,</if>
+            <if test="supMail != null and supMail.trim().length() > 0">SUP_MAIL,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            1, <!--  #{groIdx} 임시 groIdx-->
+            #{supCode},
+            #{supName},
+            #{supBnum},
+            NOW(),
+            77, <!-- #{regIdx} 임시 rgIdx-->
+            <if test="supTel != null and supTel.trim().length() > 0">#{supTel},</if>
+            <if test="supMemo != null and supMemo.trim().length() > 0">#{supMemo},</if>
+            <if test="supMail != null and supMail.trim().length() > 0">#{supMail},</if>
+        </trim>
+    </insert>
+
 </mapper>

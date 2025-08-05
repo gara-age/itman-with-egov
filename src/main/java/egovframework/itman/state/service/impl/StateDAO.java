@@ -15,4 +15,8 @@ public class StateDAO {
     public List<StateVO> selectStatesByGroup(String groIdx) throws Exception {
         return sqlSession.selectList("stateDAO.selectStatesByGroup", groIdx);
     }
+
+    public void insertAssetState(StateVO vo) throws Exception {
+        sqlSession.insert("stateDAO.insertAssetState", vo);
+    }
 }

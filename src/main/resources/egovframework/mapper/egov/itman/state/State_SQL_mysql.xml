@@ -13,4 +13,28 @@
         AND DEL_YN = 'N'
         ORDER BY STA_NAME
     </select>
+
+    <insert id="insertAssetState" parameterType="stateVO">
+        INSERT INTO
+        ITM_STATE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_IDX,
+            STA_CODE,
+            STA_NAME,
+            STA_YN,
+            <if test="staNote != null and staNote.trim().length() > 0">STA_NOTE,</if>
+            REG_DATE,
+            REG_IDX,
+        </trim>
+            VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                1, <!-- #{groIdx} 임시 groIdx-->
+                #{staCode},
+                #{staName},
+                'Y',
+            <if test="staNote != null and staNote.trim().length() > 0">#{staNote},</if>
+            NOW(),
+                77 <!-- #{regIdx} 임시 IDX -->
+            </trim>
+    </insert>
 </mapper>

@@ -43,4 +43,26 @@
         FROM ITM_LOCATION
         <include refid="locationCondition"/>
     </select>
+
+    <insert id="insertAssetLocation" parameterType="locationVO">
+        INSERT INTO
+        ITM_LOCATION
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_IDX,
+            LOC_CODE,
+            LOC_NAME,
+            REG_DATE,
+            REG_IDX,
+            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE,</if>
+        </trim>
+            VALUES
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    1, <!-- #{groIdx} 임시 IDX-->
+                #{locCode},
+                #{locName},
+                NOW(),
+                77, <!--#{regIdx} 임시 IDX-->
+        <if test="slNote != null and slNote.trim().length() > 0 ">#{slNote},</if>
+                </trim>
+    </insert>
 </mapper>

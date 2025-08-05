@@ -39,6 +39,7 @@ a            <form method="post" id="form" action="${pageContext.request.context
 				</li>
 			</ul>
 			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="javascript:formSubmit();" class="comp">작성</a></p>
+		</form>
 		</div>
 	</div>
 <script>

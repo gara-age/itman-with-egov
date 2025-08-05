@@ -26,5 +26,9 @@ public class LocationDAO {
         return sqlSession.selectOne("locationDAO.selectLocationListCnt", pagination);
     }
 
+    public void insertAssetLocation(LocationVO vo) throws Exception {
+        sqlSession.insert("locationDAO.insertAssetLocation", vo);
+    }
+
 
 }

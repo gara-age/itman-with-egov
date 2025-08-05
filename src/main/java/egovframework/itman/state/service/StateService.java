@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface StateService {
     List<StateVO> selectStatesByGroup(String groIdx) throws Exception;
+    void insertAssetState(StateVO vo) throws Exception;
 }

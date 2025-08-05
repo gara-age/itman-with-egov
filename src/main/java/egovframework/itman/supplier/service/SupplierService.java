@@ -8,5 +8,5 @@ public interface SupplierService {
     List<SupplierVO> selectSupplierList(Pagination pagination) throws Exception;
     List<SupplierVO> selectSuppliersByGroup(String groIdx) throws Exception;
     int selectSupplierListCnt(Pagination pagination) throws Exception;
-
+    void insertAssetSupplier(SupplierVO vo) throws Exception;
 }

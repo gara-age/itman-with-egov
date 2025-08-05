@@ -12,7 +12,13 @@ public class StateServiceImpl implements StateService {
     @Resource(name = "stateDAO")
     private StateDAO stateDAO;
 
+    @Override
     public List<StateVO> selectStatesByGroup(String groIdx) throws Exception {
         return stateDAO.selectStatesByGroup(groIdx);
+    }
+
+    @Override
+    public void insertAssetState(StateVO vo) throws Exception {
+        stateDAO.insertAssetState(vo);
     }
 }

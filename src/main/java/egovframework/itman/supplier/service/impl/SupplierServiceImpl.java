@@ -27,4 +27,9 @@ public class SupplierServiceImpl implements SupplierService {
     public int selectSupplierListCnt(Pagination pagination) throws Exception {
         return supplierDAO.selectSupplierListCnt(pagination);
     }
+
+    @Override
+    public void insertAssetSupplier(SupplierVO vo) throws Exception {
+        supplierDAO.insertAssetSupplier(vo);
+    }
 }

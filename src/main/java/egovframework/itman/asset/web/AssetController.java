@@ -11,9 +11,12 @@ import egovframework.itman.common.Pagination;
 import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
 import egovframework.itman.hardware.service.impl.HardwareServiceImpl;
+import egovframework.itman.location.service.LocationVO;
 import egovframework.itman.location.service.impl.LocationServiceImpl;
 import egovframework.itman.software.service.impl.SoftwareServiceImpl;
+import egovframework.itman.state.service.StateVO;
 import egovframework.itman.state.service.impl.StateServiceImpl;
+import egovframework.itman.supplier.service.SupplierVO;
 import egovframework.itman.supplier.service.impl.SupplierServiceImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.parameters.P;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.xml.stream.Location;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,6 +144,45 @@ public class AssetController {
     @PostMapping("/itman/asset/insertAssetCategory.do")
     public String insetAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
         assetCategoryService.insertAssetCategory(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/asset/contWriteAssetState.do")
+    public String writeAssetState(StateVO vo, Model model) throws Exception {
+        model.addAttribute("vo", vo);
+        return "itman/public/html/popup/contWriteItmState";
+    }
+
+    @PostMapping("/itman/asset/insertAssetState.do")
+    public String insetAssetState(StateVO vo, Model model) throws Exception {
+        stateService.insertAssetState(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/asset/contWriteAssetLocation.do")
+    public String writeAssetLocation(LocationVO vo, Model model) throws Exception {
+        model.addAttribute("vo", vo);
+        return "itman/public/html/popup/contWriteItmLocation";
+    }
+
+    @PostMapping("/itman/asset/insertAssetLocation.do")
+    public String insetAssetLocation(LocationVO vo, Model model) throws Exception {
+        locationService.insertAssetLocation(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/asset/contWriteAssetSupplier.do")
+    public String writeAssetSupplier(SupplierVO vo, Model model) throws Exception {
+        model.addAttribute("vo", vo);
+        return "itman/public/html/popup/contWriteItmSupplier";
+    }
+
+    @PostMapping("/itman/asset/insertAssetSupplier.do")
+    public String insetAssetSupplier(SupplierVO  vo, Model model) throws Exception {
+        supplierService.insertAssetSupplier(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }

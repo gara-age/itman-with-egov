@@ -23,4 +23,7 @@ public class SupplierDAO {
     public int selectSupplierListCnt(Pagination pagination) throws Exception {
         return sqlSession.selectOne("supplierDAO.selectSupplierListCnt", pagination);
     }
+    public void insertAssetSupplier(SupplierVO vo) throws Exception {
+        sqlSession.insert("supplierDAO.insertAssetSupplier", vo);
+    }
 }

@@ -28,4 +28,9 @@ public class LocationServiceImpl implements LocationService {
     public int selectLocationListCnt(Pagination pagination){
         return locationDAO.selectLocationListCnt(pagination);
     }
+
+    @Override
+    public void insertAssetLocation(LocationVO vo) throws Exception {
+         locationDAO.insertAssetLocation(vo);
+    }
 }
