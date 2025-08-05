@@ -26,6 +26,9 @@
 		<typeAlias alias="stateVO" 			type="egovframework.itman.state.service.StateVO"/>
 		<typeAlias alias="supplierVO" 		type="egovframework.itman.supplier.service.SupplierVO"/>
 		<typeAlias alias="locationVO" 		type="egovframework.itman.location.service.LocationVO" />
+		<typeAlias alias="softwareVO" 		type="egovframework.itman.software.service.SoftwareVO" />
+		<typeAlias alias="hardwareVO" 		type="egovframework.itman.hardware.service.HardwareVO" />
+		<typeAlias alias="assLogVO" 		type="egovframework.itman.assLog.service.AssLogVO" />
 	</typeAliases>
     
 </configuration>
