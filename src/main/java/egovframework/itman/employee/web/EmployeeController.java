@@ -125,6 +125,7 @@ public class EmployeeController {
         return "itman/common/scriptResponse";
     }
 
+
     @RequestMapping("/itman/emploStateWrite.do")
     public String writeEmployeeState(EmpStateVO vo, Model model) {
         model.addAttribute("empState", vo);
@@ -137,6 +138,7 @@ public class EmployeeController {
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
+
 
     // --------------------수정----------------------------
 
