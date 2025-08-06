@@ -17,7 +17,6 @@
 <!doctype html>
 <html lang="ko">
  <head>
-<%--  <? include "../../_inc/title.php"; ?>--%>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
  </head>
 <body>

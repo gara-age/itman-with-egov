@@ -69,7 +69,7 @@
         <include refid="positionCondition"/>
     </select>
 
-    <select id="selectPositionsByGroup" resultType="PositionVO" parameterType="string">
+    <select id="selectPositionsByGroup" resultType="positionVO" parameterType="string">
         SELECT POS_IDX AS posIdx,
                 POS_NAME  AS posName
         FROM ITM_POSITION
@@ -77,5 +77,26 @@
             AND DEL_YN = 'N'
         ORDER BY POS_NAME
     </select>
+    <insert id="insertPosition" parameterType="positionVO">
+        INSERT INTO
+        ITM_POSITION
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_IDX,
+            POS_CODE,
+            POS_NAME,
+            REG_DATE,
+            REG_IDX
+            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE,</if>
+        </trim>
+            VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        1 ,<!-- #{groIdx} 임시IDX -->
+        #{posCode},
+        #{posName},
+        NOW(),
+        77, <!-- #{regIdx} 임시IDX -->
+        <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
+        </trim>
+    </insert>
 </mapper>
 

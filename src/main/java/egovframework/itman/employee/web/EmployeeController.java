@@ -6,11 +6,14 @@ import egovframework.itman.asset.service.impl.AssetServiceImpl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
+import egovframework.itman.empState.service.EmpStateVO;
 import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
 import egovframework.itman.position.service.PositionVO;
 import egovframework.itman.position.service.impl.PositionServiceImpl;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
+import egovframework.itman.state.service.StateVO;
+import egovframework.itman.state.service.impl.StateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +37,7 @@ public class EmployeeController {
     private PositionServiceImpl positionService;
     @Resource(name = "assetService")
     private AssetServiceImpl assetService;
+
 
     private void addCommonLists(String groIdx, Model model) {
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
@@ -117,6 +121,19 @@ public class EmployeeController {
     @PostMapping("/itman/insertEmploPosition.do")
     public String insertEmployeePosition(PositionVO vo, Model model) {
         positionService.insertPosition(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/emploStateWrite.do")
+    public String writeEmployeeState(EmpStateVO vo, Model model) {
+        model.addAttribute("empState", vo);
+        return "itman/public/html/popup/employee/emploStateWrite";
+    }
+
+    @PostMapping("/itman/insertEmploState.do")
+    public String insertEmployeeState(EmpStateVO vo, Model model) {
+        empStateService.insertEmployeeState(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }

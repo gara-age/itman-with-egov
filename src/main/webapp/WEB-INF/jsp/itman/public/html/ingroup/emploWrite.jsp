@@ -148,7 +148,7 @@
 						</c:forEach>
 					</select>
 				</p>
-				<p class="edit"><a onclick="window.open('../popup/employee/emploStateWrite.php', '자산분류등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/emploStateWrite.do', '자산분류등록팝업', 'width=500, height=335')" href="#none">상태 추가</a></p>
 			</li>
 		</ul>
 		</form>
