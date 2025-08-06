@@ -16,4 +16,9 @@ public class EmpStateServiceImpl implements EmpStateService {
     public List<EmpStateVO> selectEmpStatesByGroup(String groIdx) {
         return empStateDAO.selectEmpStatesByGroup(groIdx);
     }
+
+    @Override
+    public void insertEmployeeState(EmpStateVO vo) {
+        empStateDAO.insertEmployeeState(vo);
+    }
 }

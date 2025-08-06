@@ -16,4 +16,8 @@ public class EmpStateDAO {
         return sqlSession.selectList(
                 "empStateDAO.selectEmpStatesByGroup", groIdx);
     }
+
+    public void insertEmployeeState(EmpStateVO vo) {
+        sqlSession.insert("empStateDAO.insertEmployeeState", vo);
+    }
 }
