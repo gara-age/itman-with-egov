@@ -9,8 +9,19 @@
         DEL_YN = 'N'
         AND GRO_IDX = #{searching.groIdx}
         <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
-            AND (POS_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
-            OR POS_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
+            <choose>
+                <when test="searching.searchCondition == 'posCode'">
+                    AND POS_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <when test="searching.searchCondition == 'posName'">
+                    AND POS_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <otherwise>
+                    AND (POS_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    OR POS_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%'))
+                </otherwise>
+            </choose>
+
         </if>
     </sql>
     <select id="selectPositionList" parameterType="pagination" resultType="positionVO">
@@ -25,17 +36,17 @@
         FROM
             ITM_POSITION
         <include refid="positionCondition"/>
-        <choose>
-            <when test="searching.orderBy == 'posCode'">
-                ORDER BY POS_CODE ASC
-            </when>
-            <when test="searching.orderBy == 'posName'">
-                ORDER BY POS_NAME ASC
-            </when>
-            <otherwise>
-                ORDER BY rowNum DESC
-            </otherwise>
-        </choose>
+<!--        <choose>-->
+<!--            <when test="searching.searchCondition == 'posCode'">-->
+<!--                ORDER BY POS_CODE ASC-->
+<!--            </when>-->
+<!--            <when test="searching.searchCondition == 'posName'">-->
+<!--                ORDER BY POS_NAME ASC-->
+<!--            </when>-->
+<!--            <otherwise>-->
+<!--                ORDER BY rowNum DESC-->
+<!--            </otherwise>-->
+<!--        </choose>-->
         LIMIT #{startList}, #{listSize}
     </select>
 

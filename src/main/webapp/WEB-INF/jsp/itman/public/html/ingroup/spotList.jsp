@@ -19,10 +19,10 @@
 			<input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
 			<p class="list_search">
-				<select name="searching.orderBy" onchange="document.getElementById('searchForm').submit();">
-					<option value="" >정렬 방식</option>
-					<option value="posCode" ${pagination.searching.orderBy=='posCode' ? 'selected' : ''}>코드번호순</option>
-					<option value="posName" ${pagination.searching.orderBy=='posName' ? 'selected' : ''}>직위명순</option>
+				<select name="searching.searchCondition">
+					<option value="" >전체</option>
+					<option value="posCode" ${pagination.searching.searchCondition=='posCode' ? 'selected' : ''}>코드번호</option>
+					<option value="posName" ${pagination.searching.searchCondition=='posName' ? 'selected' : ''}>직위명</option>
 				</select>
 				<input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
 				<a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>
