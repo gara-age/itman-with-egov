@@ -4,14 +4,17 @@ package egovframework.itman.employee.web;
 import egovframework.itman.asset.service.AssetVO;
 import egovframework.itman.asset.service.impl.AssetServiceImpl;
 import egovframework.itman.common.Pagination;
+import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
+import egovframework.itman.position.service.PositionVO;
 import egovframework.itman.position.service.impl.PositionServiceImpl;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,6 +40,7 @@ public class EmployeeController {
         model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
         model.addAttribute("positionList", positionService.selectPositionsByGroup(groIdx));
     }
+    // --------------------조회--------------------
 
     @RequestMapping("/itman/employeeList.do")
     public String selectEmployeeList(EmployeeVO vo, Pagination pagination, Model model
@@ -73,6 +77,8 @@ public class EmployeeController {
         return "itman/public/html/ingroup/emploView";
     }
 
+    // ---------------------생성--------------------------
+
     @RequestMapping("/itman/employeeWrite.do")
     public String employeeForm(EmployeeVO vo, Model model) {
         String groIdx = vo.getGroIdx();
@@ -88,6 +94,34 @@ public class EmployeeController {
 
         return "itman/public/html/ingroup/emploWrite";
     }
+
+    @RequestMapping("/itman/emploDivisionWrite.do")
+    public String writeEmployeeDivision(DivisionVO vo, Model model) {
+        model.addAttribute("division", vo);
+        return "itman/public/html/popup/employee/emploDivisionWrite";
+    }
+
+    @PostMapping("/itman/insertEmploDivision.do")
+    public String insertEmployeeDivision(DivisionVO vo, Model model) {
+        divisionService.insertDivision(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/emploPositionWrite.do")
+    public String writeEmployeePosition(PositionVO vo, Model model) {
+        model.addAttribute("position", vo);
+        return "itman/public/html/popup/employee/emploPositionWrite";
+    }
+
+    @PostMapping("/itman/insertEmploPosition.do")
+    public String insertEmployeePosition(PositionVO vo, Model model) {
+        positionService.insertPosition(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    // --------------------수정----------------------------
 
     @RequestMapping("/itman/emploTellInfoEdit.do")
     public String employeeTelEdit(EmployeeVO vo, Model model) {

@@ -101,7 +101,7 @@
 							</c:forEach>
 					</select>
 				</p>
-                <p class="edit"><a onclick="window.open('../popup/employee/emploDivisionWrite.php', '자산분류등록팝업', 'width=500, height=335')" href="#none">부서 추가</a></p>
+                <p class="edit"><a onclick="window.open('/itman/emploDivisionWrite.do', '부서등록팝업', 'width=500, height=335')" href="#none">부서 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">직위 <span>*</span></p>
@@ -125,7 +125,7 @@
 						</c:forEach>
 					</select>
 				</p>
-				<p class="edit"><a onclick="window.open('../popup/employee/emploPositionWrite.php', '자산분류등록팝업', 'width=500, height=335')" href="#none">직위 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/emploPositionWrite.do', '자산분류등록팝업', 'width=500, height=335')" href="#none">직위 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">상태 <span>*</span></p>
