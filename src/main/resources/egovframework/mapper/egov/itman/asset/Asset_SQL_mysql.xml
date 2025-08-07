@@ -213,5 +213,16 @@
             ASS_IDX = #{assIdx}
     </update>
 
+    <update id="deleteAsset" parameterType="assetVO">
+        UPDATE
+            ITM_ASSET
+        SET
+            <trim suffixOverrides=",">
+            DEL_YN = 'Y',
+            </trim>
+        WHERE
+            ASS_IDX = #{assIdx}
+    </update>
+
 </mapper>
 

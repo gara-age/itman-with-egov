@@ -82,7 +82,7 @@
 		</div>
 <%--		<input type="hidden" id="gorIdx" name="groIdx" value="${groIdx}">--%>
 		<!-- 글삭제 -->
-		<p class="delContent"><a onclick="window.open('<?='../popup/asset/contAssetDel.php?ass_idx='.$row['ASS_IDX']?>', '삭제팝업', 'width=500, height=300')" href="#none"><img src="../../../../../../images/_img/del_view.png"></a></p>
+		<p class="delContent"><a onclick="window.open('/itman/asset/confirmAssetDel.do?assIdx=${asset.assIdx}', '삭제팝업', 'width=500, height=300')" href="#none"><img src="../../../../../../images/_img/del_view.png"></a></p>
 
 		<div class="viewTop">
 			<div class="img">

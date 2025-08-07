@@ -9,9 +9,10 @@ public interface AssetService {
     AssetVO selectAssetView(AssetVO vo);
     int selectAssetListCnt(Pagination pagination) throws Exception;
     int selectInGroupAssetListCnt(Pagination pagination) throws Exception;
-    void insertAsset(AssetVO vo) throws Exception;
-    void updateAsset(AssetVO vo) throws Exception;
 
+    void insertAsset(AssetVO vo) throws Exception;
+
+    void updateAsset(AssetVO vo) throws Exception;
     void updateAssetNameInfo(AssetVO vo) throws Exception;
     void updateAssetCategoryInfo(AssetVO vo) throws Exception;
     void updateAssetStateInfo(AssetVO vo) throws Exception;
@@ -20,8 +21,6 @@ public interface AssetService {
     void updateAssetSupplyInfo(AssetVO vo) throws Exception;
     void updateAssetBuyDateInfo(AssetVO vo) throws Exception;
     void updateAssetPriceInfo(AssetVO vo) throws Exception;
-
-
 
     void deleteAsset(AssetVO vo) throws Exception;
 
