@@ -199,7 +199,6 @@ public class AssetController {
 
     @PostMapping("/itman/asset/updateAssetNameInfo.do")
     public String updateAssetNameInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
-        System.err.println(">>>> controller 진입 확인");
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldName = assetVO.getAssName();
         String newName = vo.getAssName();
@@ -427,6 +426,26 @@ public class AssetController {
         assLogVO.setAlCont(oldPrice + "->" + newPrice);
         assLogService.insertAssLog(assLogVO);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    //-------------------------------삭제------------------------------------------
+    @RequestMapping("/itman/asset/confirmAssetDel.do")
+    public String confirmAssetDel(AssetVO vo, Model model) throws Exception {
+        model.addAttribute("asset", vo);
+        return "itman/public/html/popup/asset/contAssetDel";
+    }
+
+    @PostMapping("/itman/asset/deleteAsset.do")
+    public String deleteAsset(@ModelAttribute AssLogVO assLogVO ,AssetVO  vo, Model model) throws Exception {
+        AssetVO assetVO = assetService.selectAssetView(vo);
+        assetService.deleteAsset(vo);
+        assLogVO.setAssIdx(vo.getAssIdx());
+        assLogVO.setAssNameLog(assetVO.getAssName());
+        assLogVO.setAlType("삭제");
+        assLogVO.setAlCat("자산");
+        assLogService.insertAssLog(assLogVO);
+        model.addAttribute("script", "<script>window.opener.location.href=\"/itman/assetsList.do\"; window.close();</script>");
         return "itman/common/scriptResponse";
     }
 }
