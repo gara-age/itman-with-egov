@@ -22,7 +22,7 @@
 			<p class="title">자산 분류 추가 팝업</p>
 		</div>
 		<div class="pop_cont">
-a            <form method="post" id="form" action="${pageContext.request.contextPath}/itman/asset/insertAssetCategory.do">
+            <form method="post" id="form" action="${pageContext.request.contextPath}/itman/asset/insertAssetCategory.do">
 			<ul class="contEdit">
 				<li>
 					<p class="tit">분류이름 <span>*</span></p>

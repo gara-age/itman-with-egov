@@ -7,6 +7,8 @@ import egovframework.itman.employee.service.EmployeeVO;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,8 +23,8 @@ public class DivisionController {
 
     @RequestMapping("/itman/departList.do")
     public String selectDivisionList(DivisionVO vo, Pagination pagination, Model model
-    , @RequestParam(required = false, defaultValue = "1") int page
-    , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+            , @RequestParam(required = false, defaultValue = "1") int page
+            , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
@@ -40,8 +42,8 @@ public class DivisionController {
 
     @RequestMapping("/itman/departView.do")
     public String selectDivisionView(DivisionVO vo, Model model){
-    DivisionVO resultVO = divisionService.selectDivisionView(vo);
-    model.addAttribute("division", resultVO);
+        DivisionVO resultVO = divisionService.selectDivisionView(vo);
+        model.addAttribute("division", resultVO);
         return "itman/public/html/ingroup/departView";
     }
 
@@ -58,25 +60,41 @@ public class DivisionController {
 
         return "itman/public/html/ingroup/departWrite";
     }
-    @RequestMapping("/itman/departInsert.do")
+
+    @RequestMapping("/itman/divisionWrite.do")
+    public String writeEmployeeDivision(DivisionVO vo, Model model) throws Exception {
+        if(vo.getDivIdx() != null){
+            DivisionVO resultVO = divisionService.selectDivisionView(vo);
+            model.addAttribute("division", resultVO);
+        }
+        return "itman/public/html/popup/contWriteItmDivision";
+    }
+
+    @PostMapping("/itman/insertDepart.do")
     public String insertDivision(DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
         divisionService.insertDivision(vo);
-        redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
-        return "redirect:/itman/departList.do";
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
-    @RequestMapping("/itman/departUpdate.do")
-    public String updateDivision(DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
+    @PostMapping("/itman/updateDepart.do")
+    public String updateDivision(@ModelAttribute DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
         divisionService.updateDivision(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/departList.do";
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
-    @RequestMapping("/itman/departDelete.do")
-    public String deleteDivision(DivisionVO vo, RedirectAttributes redirectAttributes) {
+    @RequestMapping("/itman/confirmDivisionDel.do")
+    public String confirmDivisionDel(DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
+        model.addAttribute("division", vo);
+        return "itman/public/html/popup/contDivisionDel";
+    }
+
+    @PostMapping("/itman/deleteDepart.do")
+    public String deleteDivision(DivisionVO vo, Model model) {
         divisionService.deleteDivision(vo);
-        redirectAttributes.addFlashAttribute("msg","삭제되었습니다.");
-        return "redirect:/itman/departList.do";
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
 

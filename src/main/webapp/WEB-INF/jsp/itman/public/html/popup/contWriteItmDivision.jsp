@@ -17,33 +17,40 @@
 <!doctype html>
 <html lang="ko">
  <head>
-<%--  <? include "../_inc/title.php"; ?>--%>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
-
+<c:set var="actionUrl" value="/itman/insertDepart.do" />
+<c:if test="${!empty division.divIdx}">
+	<c:set var="actionUrl" value="/itman/updateDepart.do?divIdx=${division.divIdx}" />
+</c:if>
 	<div id="popup">
 		<div class="pop_tit">
-			<p class="title">부서 추가 팝업</p>
+			<p class="title">
+				<c:choose>
+					<c:when test="${!empty division.divIdx}">부서 수정 팝업</c:when>
+					<c:otherwise>부서 추가 팝업</c:otherwise>
+				</c:choose>
+			</p>
 		</div>
 		<div class="pop_cont">
-			<form method="post" id="divisionCateForm" action="pp_process/writeItmDivision_proc.jsp">
+			<form method="post" id="form" action="${actionUrl}">
 			<ul class="contEdit">
 				<li>
 					<p class="tit">부서명<span>*</span></p>
-					<p class="cont"><input type="text" id="div_name" name="div_name" placeholder="부서명을 입력해주세요." value=""></p>
+					<p class="cont"><input type="text" id="div_name" name="divName" placeholder="부서명을 입력해주세요." value="${division.divName}"></p>
 				</li>
 				<li>
 					<p class="tit">부서코드번호<span>*</span></p>
-					<p class="cont"><input type="text" id="div_code" name="div_code" placeholder="부서 코드 번호를 입력해 주세요."></p>
+					<p class="cont"><input type="text" id="div_code" name="divCode" value="${division.divCode}" placeholder="부서 코드 번호를 입력해 주세요."></p>
 				</li>
 				<li>
 					<p class="tit">사용유무<span>*</span></p>
-					<p class="cont"><input type="radio" id="yes" name="gener" value="Y"><label for="yes">사용</label> <input type="radio" id="no" name="gener" value="N" checked><label for="no">사용안함</label></p>
+					<p class="cont"><input type="radio" id="yes" name="DivYn" value="Y" ${division.divYn == 'Y' ? 'checked' : ''} ${empty division.divIdx ? 'checked' : ''} ><label for="yes">사용</label> <input type="radio" id="no" name="DivYn" value="N" ${division.divYn == 'N' ? 'checked' : ''}><label for="no">사용안함</label></p>
 				</li>
 			</ul>
-			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="javascript:formSubmit();" class="comp">등록</a></p>
+			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="formSubmit();" class="comp">등록</a></p>
+			</form>
 		</div>
 	</div>
 <script>
@@ -54,7 +61,12 @@
 		if(!$div_name || !$div_code){
 			alert("필수 값을 입력해주세요!");
 		}else{
-			$("#divisionCateForm").submit();
+			document.forms['form'].submit();
+
+			setTimeout(() => {
+				window.opener.location.reload();
+				window.close();
+			}, 300);
 		}
     }
 </script>

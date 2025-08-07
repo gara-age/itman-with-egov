@@ -7,7 +7,7 @@
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
-	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
+<%--	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />--%>
  </head>
 <body>
 
@@ -20,15 +20,10 @@
 				<input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
 
 				<p class="list_search">
-					<select id="DIV_YN" name="searching.divYn" onchange="document.getElementById('searchForm').submit()">
-						<option value="" >사용여부</option>
-						<option value="Y" ${pagination.searching.divYn =='Y' ? 'selected' : ''}>사용</option>
-						<option value="N" ${pagination.searching.divYn =='N' ? 'selected' : ''}>미사용</option>
-					</select>
-					<select name="searching.orderBy" onchange="document.getElementById('searchForm').submit();">
-						<option value="" >정렬 방식</option>
-						<option value="divCode" ${pagination.searching.orderBy=='divCode' ? 'selected' : ''}>코드번호순</option>
-						<option value="divName" ${pagination.searching.orderBy=='divName' ? 'selected' : ''}>부서명순</option>
+					<select name="searching.searchCondition">
+						<option value="" >전체</option>
+						<option value="divCode" ${pagination.searching.searchCondition=='divCode' ? 'selected' : ''}>코드번호</option>
+						<option value="divName" ${pagination.searching.searchCondition=='divName' ? 'selected' : ''}>부서명</option>
 					</select>
 					<input name="searching.searchKeyword" type="text" value="${pagination.searching.searchKeyword}" placeholder="검색어를 입력해주세요."/>
 					<a href="#" onclick="const form = this.closest('form'); form.page.value=1; form.range.value=1; form.submit();">검색</a>
@@ -44,7 +39,7 @@
 		
 		<!-- 글쓰기 버튼-->
 		<p class="addContent">
-			<a href="/itman/departEdit.do" class="edit"><span></span><span></span><span></span></a></p>
+			<a href="#" onclick="window.open('/itman/divisionWrite.do')" class="edit"><span></span><span></span><span></span></a></p>
 
 		<div class="Basic">
 			<ul class="adminList">
@@ -53,14 +48,24 @@
 					<p class="cod">코드번호</p>
 					<p class="tit">부서명</p>
 					<p class="pos">사용유무</p>
+					<p class="editDel">관리</p>
 				</li>
 				<c:if test="${!empty resultList}">
 					<c:forEach var="row" items="${resultList}">
-				<li style="cursor: pointer" onClick="location.href='${pageContext.request.contextPath}/itman/departView.do?divIdx=${row.divIdx}'">
+				<li>
 				<p class="num">${row.rowNum}</p>
 				<p class="cod">${row.divCode}</p>
 				<p class="tit">${row.divName}</p>
-				<p class="pos">${row.divYn}</p>
+				<p class="pos">
+					<c:choose>
+						<c:when test="${row.divYn == 'Y'}">사용</c:when>
+						<c:otherwise>사용안함</c:otherwise>
+					</c:choose>
+				</p>
+				<p class="editDel" style="padding: 0;">
+					<a href="#" onclick="window.open('/itman/divisionWrite.do?divIdx=${row.divIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+					<a href="#" onclick="window.open('/itman/confirmDivisionDel.do?divIdx=${row.divIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+				</p>
 				</li>
 				</c:forEach>
 				</c:if>
