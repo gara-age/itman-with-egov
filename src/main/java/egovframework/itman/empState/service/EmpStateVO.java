@@ -16,6 +16,15 @@ public class EmpStateVO {
     private String delIdx;
     private String delDate;
     private String slNote;
+    private String empStCnt;
+
+    public String getEmpStCnt() {
+        return empStCnt;
+    }
+
+    public void setEmpStCnt(String empStCnt) {
+        this.empStCnt = empStCnt;
+    }
 
     public String getEmpStIdx() {
         return empStIdx;

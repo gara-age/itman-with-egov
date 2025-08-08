@@ -4,6 +4,64 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="empStateDAO">
+    <sql id="empStateCondition">
+        <where>
+            DEL_YN = 'N'
+            AND GRO_IDX = #{searching.groIdx}
+            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+                <choose>
+                    <when test="searching.searchCondition == 'empStName'">
+                        AND EMP_ST_NAME LIKE CONCAT('%', #{searching.searchKeyword} ,'%')
+                    </when>
+                    <when test="searching.searchCondition == 'slNote'">
+                        AND SL_NOTE LIKE CONCAT('%', #{searching.searchKeyword} ,'%')
+                    </when>
+                    <otherwise>
+                        AND (
+                        EMP_ST_NAME LIKE CONCAT('%', #{searching.searchKeyword} ,'%')
+                        OR SL_NOTE LIKE CONCAT('%', #{searching.searchKeyword} ,'%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </sql>
+    <select id="selectEmpStateList" parameterType="pagination" resultType="empStateVO">
+        SELECT
+            EMP_ST_IDX AS empStIdx,
+            EMP_ST_CODE AS empStCode,
+            EMP_ST_NAME AS empStName,
+            (
+                SELECT COUNT(*)
+                FROM ITM_EMPLOYE e
+                WHERE e.EMP_ST_IDX = s.EMP_ST_IDX
+                AND e.DEL_YN = 'N'
+                AND e.GRO_IDX = s.GRO_IDX
+                ) AS empStCnt,
+            SL_NOTE AS slNote
+        FROM
+            ITM_EMP_STATE s
+        <include refid="empStateCondition"/>
+        LIMIT #{startList}, #{listSize}
+    </select>
+    <select id="selectEmpStateListCnt" parameterType="pagination" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            ITM_EMP_STATE s
+        <include refid="empStateCondition"/>
+
+    </select>
+    <select id="selectEmpStateView" parameterType="empStateVO" resultType="empStateVO">
+        SELECT
+            EMP_ST_IDX AS empStIdx,
+            EMP_ST_CODE AS empStCode,
+            EMP_ST_NAME AS empStName
+        FROM
+            ITM_EMP_STATE
+        WHERE
+            EMP_ST_IDX = #{empStIdx}
+    </select>
+
     <select id="selectEmpStatesByGroup" resultType="empStateVO" parameterType="string">
         SELECT EMP_ST_IDX AS empStIdx,
                EMP_ST_NAME  AS empStName
@@ -37,4 +95,28 @@
             <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
         </trim>
     </insert>
+
+    <update id="updateEmployeeState" parameterType="empStateVO">
+        UPDATE
+        ITM_EMP_STATE
+        SET
+            EMP_ST_NAME = #{empStName},
+            EMP_ST_CODE = #{empStCode},
+            MOD_DATE = NOW(),
+            MOD_IDX = 77
+        WHERE
+            EMP_ST_IDX = #{empStIdx}
+    </update>
+    <update id="deleteEmployeeState" parameterType="empStateVO">
+        UPDATE
+            ITM_EMP_STATE
+        SET
+            DEL_YN = 'Y',
+            EMP_ST_YN = 'N',
+            DEL_DATE = NOW(),
+            DEL_IDX = 77,
+            SL_NOTE = #{slNote}
+        WHERE
+            EMP_ST_IDX = #{empStIdx}
+    </update>
 </mapper>
