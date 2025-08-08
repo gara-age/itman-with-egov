@@ -179,7 +179,7 @@ public class AssetController {
         return "itman/public/html/popup/contWriteItmSupplier";
     }
 
-    @PostMapping("/itman/asset/insertSupplier.do")
+    @PostMapping("/itman/asset/insertAssetSupplier.do")
     public String insetAssetSupplier(SupplierVO  vo, Model model) throws Exception {
         supplierService.insertAssetSupplier(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
