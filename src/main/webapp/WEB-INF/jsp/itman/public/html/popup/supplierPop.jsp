@@ -6,7 +6,7 @@
 <html lang="ko">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" /> </head>
+ </head>
 <body>
 
 	<div id="popup">
