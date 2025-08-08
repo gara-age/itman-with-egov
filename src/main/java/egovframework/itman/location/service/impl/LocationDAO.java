@@ -22,12 +22,20 @@ public class LocationDAO {
         return sqlSession.selectList("locationDAO.selectLocationList", pagination);
     }
 
+    public LocationVO selectLocation(LocationVO vo) throws Exception{
+        return sqlSession.selectOne("locationDAO.selectLocation", vo);
+    }
+
     public int selectLocationListCnt(Pagination pagination) {
         return sqlSession.selectOne("locationDAO.selectLocationListCnt", pagination);
     }
 
     public void insertAssetLocation(LocationVO vo) throws Exception {
         sqlSession.insert("locationDAO.insertAssetLocation", vo);
+    }
+
+    public void updateAssetLocation(LocationVO vo) throws Exception{
+        sqlSession.update("locationDAO.updateAssetLocation", vo);
     }
 
 

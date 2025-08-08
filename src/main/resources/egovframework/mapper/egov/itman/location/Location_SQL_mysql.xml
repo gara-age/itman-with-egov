@@ -9,7 +9,20 @@
             DEL_YN = 'N'
         AND GRO_IDX = #{searching.groIdx}
             <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
-            AND LOC_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+            <choose>
+                <when test="searching.searchCondition == 'locCode'">
+                AND LOC_CODE LIKE CONCAT('%' , #{searching.searchKeyword} , '%')
+                </when>
+                <when test="searching.searchCondition == 'locName'">
+                    AND LOC_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                </when>
+                <otherwise>
+                    AND(
+                    LOC_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    OR LOC_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    )
+                </otherwise>
+            </choose>
         </if>
         </where>
     </sql>
@@ -35,6 +48,19 @@
         <include refid="locationCondition"/>
     ORDER BY LOC_NAME
     LIMIT #{startList} , #{listSize}
+    </select>
+
+    <select id="selectLocation" parameterType="locationVO" resultType="locationVO">
+        SELECT
+            LOC_IDX AS locIdx,
+            LOC_NAME AS locName,
+            LOC_CODE AS locCode,
+            SL_NOTE AS slNote
+            FROM
+                ITM_LOCATION
+        WHERE
+            DEL_YN = 'N'
+          AND LOC_IDX = #{locIdx}
     </select>
 
     <select id="selectLocationListCnt" parameterType="pagination" resultType="int">
@@ -65,4 +91,19 @@
         <if test="slNote != null and slNote.trim().length() > 0 ">#{slNote},</if>
                 </trim>
     </insert>
+
+    <update id="updateAssetLocation" parameterType="locationVO">
+        UPDATE
+        ITM_LOCATION
+        SET
+<trim suffixOverrides=",">
+    LOC_NAME = #{locName},
+    LOC_CODE = #{locCode},
+    MOD_DATE = NOW(),
+    MOD_IDX = 77,
+    <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+</trim>
+        WHERE
+            LOC_IDX = #{locIdx}
+    </update>
 </mapper>

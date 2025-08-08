@@ -3,7 +3,7 @@ package egovframework.itman.location.service.impl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.location.service.LocationService;
 import egovframework.itman.location.service.LocationVO;
-import org.egovframe.rte.ptl.mvc.tags.ui.PaginationTag;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +25,11 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public LocationVO selectLocation(LocationVO vo) throws Exception{
+        return locationDAO.selectLocation(vo);
+    }
+
+    @Override
     public int selectLocationListCnt(Pagination pagination){
         return locationDAO.selectLocationListCnt(pagination);
     }
@@ -32,5 +37,10 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public void insertAssetLocation(LocationVO vo) throws Exception {
          locationDAO.insertAssetLocation(vo);
+    }
+
+    @Override
+    public void updateAssetLocation(LocationVO vo) throws Exception{
+        locationDAO.updateAssetLocation(vo);
     }
 }
