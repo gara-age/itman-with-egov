@@ -14,6 +14,15 @@ public class StateVO {
     private String delYn; //삭제여부
     private String delIdx; //삭제자IDX
     private String delDate; //삭제일시
+    private String staCnt;
+
+    public String getStaCnt() {
+        return staCnt;
+    }
+
+    public void setStaCnt(String staCnt) {
+        this.staCnt = staCnt;
+    }
 
     public String getStaIdx() {
         return staIdx;

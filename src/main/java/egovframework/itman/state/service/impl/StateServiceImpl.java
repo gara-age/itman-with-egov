@@ -1,5 +1,6 @@
 package egovframework.itman.state.service.impl;
 
+import egovframework.itman.common.Pagination;
 import egovframework.itman.state.service.StateService;
 import egovframework.itman.state.service.StateVO;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,19 @@ public class StateServiceImpl implements StateService {
     private StateDAO stateDAO;
 
     @Override
+    public List<StateVO> selectAssetStateList(Pagination pagination) throws Exception{
+        return stateDAO.selectAssetStateList(pagination);
+    }
+
+    @Override
+    public int selectAssetStateListCnt(Pagination pagination) throws Exception{
+        return stateDAO.selectAssetStateListCnt(pagination);
+    }
+    @Override
+    public StateVO selectAssetStateView(StateVO vo) throws Exception{
+        return stateDAO.selectAssetStateView(vo);
+    }
+    @Override
     public List<StateVO> selectStatesByGroup(String groIdx) throws Exception {
         return stateDAO.selectStatesByGroup(groIdx);
     }
@@ -20,5 +34,15 @@ public class StateServiceImpl implements StateService {
     @Override
     public void insertAssetState(StateVO vo) throws Exception {
         stateDAO.insertAssetState(vo);
+    }
+
+    @Override
+    public void updateAssetState(StateVO vo) throws Exception {
+        stateDAO.updateAssetState(vo);
+    }
+
+    @Override
+    public void deleteAssetState(StateVO vo) throws Exception {
+        stateDAO.deleteAssetState(vo);
     }
 }

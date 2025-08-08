@@ -4,6 +4,68 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="stateDAO">
+    <sql id="assetStateCondition">
+        <where>
+            s.DEL_YN = 'N'
+            AND s.GRO_IDX = #{searching.groIdx}
+            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+                <choose>
+                    <when test="searching.searchCondition == 'staCode'">
+                        AND s.STA_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    </when>
+                    <when test="searching.searchCondition == 'staName'">
+                        AND s.STA_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    </when>
+                    <when test="searching.searchCondition == 'staNote'">
+                        AND s.STA_NOTE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    </when>
+                    <otherwise>
+                        AND (
+                        s.STA_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                        OR s.STA_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                        OR s.STA_NOTE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </sql>
+    <select id="selectAssetStateList" parameterType="pagination" resultType="stateVO">
+        SELECT
+            STA_IDX AS staIdx,
+            STA_CODE AS staCode,
+            STA_NAME AS staName,
+            (
+            SELECT COUNT(*)
+            FROM ITM_ASSET a
+            WHERE a.STA_IDX = s.STA_IDX
+            AND a.DEL_YN = 'N'
+            ) AS staCnt,
+            STA_NOTE AS staNote
+        FROM ITM_STATE s
+        <include refid="assetStateCondition"/>
+        LIMIT #{startList} , #{listSize}
+    </select>
+
+    <select id="selectAssetStateListCnt" parameterType="pagination" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM ITM_STATE s
+        <include refid="assetStateCondition"/>
+    </select>
+
+    <select id="selectAssetStateView" parameterType="stateVO" resultType="stateVO">
+        SELECT
+            STA_IDX AS staIdx,
+            STA_NAME AS staName,
+            STA_CODE AS staCode,
+            STA_NOTE AS staNote
+        FROM
+            ITM_STATE
+        WHERE
+            STA_IDX = #{staIdx}
+    </select>
+
     <select id="selectStatesByGroup" parameterType="string" resultType="stateVO">
         SELECT
             STA_IDX AS staIdx,
@@ -37,4 +99,29 @@
                 77 <!-- #{regIdx} 임시 IDX -->
             </trim>
     </insert>
+
+    <update id="updateAssetState" parameterType="stateVO">
+        UPDATE
+        ITM_STATE
+        SET
+            STA_NAME = #{staName},
+            STA_CODE = #{staCode},
+            STA_NOTE = #{staNote},
+            MOD_DATE = NOW(),
+            MOD_IDX = 77
+        WHERE
+            STA_IDX = #{staIdx}
+    </update>
+
+    <update id="deleteAssetState" parameterType="stateVO">
+        UPDATE
+            ITM_STATE
+        SET
+            DEL_YN = 'Y',
+            STA_YN = 'N',
+            DEL_DATE = NOW(),
+            DEL_IDX = 77
+        WHERE
+            STA_IDX = #{staIdx}
+    </update>
 </mapper>

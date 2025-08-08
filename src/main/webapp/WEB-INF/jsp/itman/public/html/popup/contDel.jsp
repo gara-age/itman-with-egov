@@ -1,26 +1,28 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<?php
-	include "../_inc/dbconn.php";
+<%--<?php--%>
+<%--	include "../_inc/dbconn.php";--%>
 
-	 /**
-	  * 세션 체크
-	  */
-	  include "../_inc/loginTest.php";
-	  login_check();
-	  $group = $_SESSION['group'];
- 
-    $method = $_GET['id'];
-    $target = $_GET['target'];
-?>
+<%--	 /**--%>
+<%--	  * 세션 체크--%>
+<%--	  */--%>
+<%--	  include "../_inc/loginTest.php";--%>
+<%--	  login_check();--%>
+<%--	  $group = $_SESSION['group'];--%>
+<%-- --%>
+<%--    $method = $_GET['id'];--%>
+<%--    $target = $_GET['target'];--%>
+<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 <body>
 
 	<div id="popup">
+		<form name="form" method="post" action="${pageContext.request.contextPath}/itman/deleteAssetState.do">
+			<input name="staIdx" type="hidden" value="${state.staIdx}">
 		<div class="pop_tit">
 			<p class="title">삭제하시겠습니까?</p>
 		</div>
@@ -31,9 +33,19 @@
 					<p class="cont"><input type="text"/></p>
 				</li>
 			</ul>
-			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="pp_process/contDel_proc.jsp?id=<?=$method?>&target=<?=$target?>" class="comp">삭제</a></p>
+			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="#" onclick="formSubmit()" class="comp">삭제</a></p>
+		</div>
+		</form>
 	</div>
-
+<script>
+	function formSubmit(){
+		document.forms['form'].submit();
+		setTimeout(() => {
+			window.opener.location.reload();
+			window.close();
+		}, 300);
+	}
+</script>
 </body>
 </html>
 
