@@ -111,7 +111,7 @@
 					<a href="employeeStateList.do" class="${pageNumDepth01 == 8 ? 'on' : ''}">직원 상태 관리<span>${headerData.groEmployeeStateCnt}</span></a>
 				</li>
 				<li>
-					<a href="ahistory.jsp" class="${pageNumDepth01 == 9 ? 'on' : ''}">자산 히스토리</a>
+					<a href="assetHistory.do" class="${pageNumDepth01 == 9 ? 'on' : ''}">자산 히스토리</a>
 				</li>
 			</ul>
 		</div>

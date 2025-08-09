@@ -12,6 +12,24 @@ public class AssLogVO {
     private String regIdx; //생성자 IDX
     private String memName;
     private String regIp; //생성자IP
+    private String assUlid;
+    private String assName;
+
+    public String getAssUlid() {
+        return assUlid;
+    }
+
+    public void setAssUlid(String assUlid) {
+        this.assUlid = assUlid;
+    }
+
+    public String getAssName() {
+        return assName;
+    }
+
+    public void setAssName(String assName) {
+        this.assName = assName;
+    }
 
     public String getMemName() {
         return memName;
