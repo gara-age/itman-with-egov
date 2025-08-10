@@ -103,7 +103,6 @@ public class AssetController {
     }
     @RequestMapping("/itman/assetsView.do")
     public String selectAssetView(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
         selectByAssIdx(assetVO.getAssIdx(), model);
@@ -111,6 +110,16 @@ public class AssetController {
         model.addAttribute("assLogList", list);
 
         return "itman/public/html/ingroup/assetsView";
+    }
+
+    @RequestMapping("/itman/dashboard.do")
+    public String selectAssetDashboard(StateVO stateVO , Model model) throws Exception {
+    String groIdx = stateVO.getGroIdx() != null ? stateVO.getGroIdx() : "1";
+    List<AssLogVO> historyList = assLogService.selectDashBoardAssLogList(groIdx);
+    List<StateVO> stateList = stateService.selectDashBoardAssetStateList(groIdx);
+    model.addAttribute("historyList", historyList);
+    model.addAttribute("stateList", stateList);
+        return "itman/public/html/ingroup/dashboard";
     }
 
     //-------------------------------------생성-----------------------------------------

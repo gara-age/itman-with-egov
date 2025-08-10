@@ -19,6 +19,9 @@ public class StateDAO {
     public int selectAssetStateListCnt(Pagination pagination) throws Exception{
         return sqlSession.selectOne("stateDAO.selectAssetStateListCnt", pagination);
     }
+    public List<StateVO> selectDashBoardAssetStateList(String groIdx) throws Exception{
+        return sqlSession.selectList("stateDAO.selectDashBoardAssetStateList", groIdx);
+    }
 
     public StateVO selectAssetStateView(StateVO vo) throws Exception{
         return sqlSession.selectOne("stateDAO.selectAssetStateView", vo);

@@ -17,6 +17,10 @@ public class StateServiceImpl implements StateService {
     public List<StateVO> selectAssetStateList(Pagination pagination) throws Exception{
         return stateDAO.selectAssetStateList(pagination);
     }
+    @Override
+    public List<StateVO> selectDashBoardAssetStateList(String groIdx) throws Exception{
+        return stateDAO.selectDashBoardAssetStateList(groIdx);
+    }
 
     @Override
     public int selectAssetStateListCnt(Pagination pagination) throws Exception{

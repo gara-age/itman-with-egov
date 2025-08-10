@@ -71,7 +71,7 @@
 	<div class="h_left">
 		<p class="ham"><a href="#none"><span></span><span></span><span></span></a></p>
 		<h1>
-			<a href="${pageContext.request.contextPath}/html/ingroup/dashboard.jsp">
+			<a href="${pageContext.request.contextPath}/itman/dashboard.do">
 				<img src="/images/_img/groupImage/no_img.png" />
 			</a>
 		</h1>
@@ -81,7 +81,7 @@
 
 				<span>${itmAssetCount}</span>
 				<li class="dash">
-					<a href="dashboard.jsp" class="${pageNumDepth01 == 0 ? 'on' : ''}">대시보드</a>
+					<a href="dashboard.do" class="${pageNumDepth01 == 0 ? 'on' : ''}">대시보드</a>
 				</li>
 				<li>
 					<a href="assetsList.do" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>${headerData.groAssetCnt}</span></a>

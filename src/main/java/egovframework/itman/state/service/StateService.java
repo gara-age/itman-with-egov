@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface StateService {
     List<StateVO> selectAssetStateList(Pagination pagination) throws Exception;
+    List<StateVO> selectDashBoardAssetStateList(String groIdx) throws Exception;
     int selectAssetStateListCnt(Pagination pagination) throws Exception;
     StateVO selectAssetStateView(StateVO vo) throws Exception;
     List<StateVO> selectStatesByGroup(String groIdx) throws Exception;

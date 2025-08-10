@@ -66,6 +66,21 @@
             STA_IDX = #{staIdx}
     </select>
 
+    <select id="selectDashBoardAssetStateList" parameterType="string" resultType="stateVO">
+        SELECT
+            s.STA_NAME AS staName,
+            (
+            SELECT COUNT(*)
+            FROM ITM_ASSET a
+            WHERE a.STA_IDX = s.STA_IDX
+            AND a.DEL_YN = 'N'
+            ) AS staCnt
+        FROM
+            ITM_STATE s
+        WHERE s.DEL_YN = 'N'
+          AND s.GRO_IDX = #{groIdx}
+    </select>
+
     <select id="selectStatesByGroup" parameterType="string" resultType="stateVO">
         SELECT
             STA_IDX AS staIdx,

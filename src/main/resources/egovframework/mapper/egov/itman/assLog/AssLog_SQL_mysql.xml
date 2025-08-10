@@ -98,6 +98,28 @@
         </choose>
         LIMIT #{startList}, #{listSize}
     </select>
+
+    <select id="selectDashBoardAssLogList" parameterType="string" resultType="assLogVO">
+        SELECT
+        (SELECT m.MEM_NAME
+        FROM ITM_MEMBER m
+        WHERE l.REG_IDX = m.MEM_IDX ) AS memName,
+        l.REG_DATE as regDate,
+        a.ASS_ULID AS assUlid,
+        a.ASS_NAME AS assName,
+        l.AL_TYPE AS alType,
+        l.AL_CAT AS alCat,
+        l.AL_CONT AS alCont,
+        l.AL_NOTE AS alNote
+        FROM
+        ITM_ASS_LOG l
+        LEFT JOIN ITM_ASSET a ON a.ASS_IDX = l.ASS_IDX
+        WHERE
+            a.GRO_IDX = ${groIdx}
+        ORDER BY l.AL_IDX DESC
+        LIMIT 0, 10
+    </select>
+
     <select id="selectAssLogListCnt" parameterType="pagination" resultType="int">
         SELECT
             COUNT(*)
