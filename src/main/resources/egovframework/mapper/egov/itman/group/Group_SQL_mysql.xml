@@ -55,15 +55,14 @@
             VALUES
                 <trim prefix="(" suffix=")" suffixOverrides=",">
                     #{groName},
-                'img.jpg',
-<!--                <choose>-->
-<!--                    <when test="groImg != null and groImg.trim().length() > 0 ">-->
-<!--                        #{groImg},-->
-<!--                    </when>-->
-<!--                    <otherwise>-->
-<!--                        "",-->
-<!--                    </otherwise>-->
-<!--                </choose>-->
+                <choose>
+                    <when test="groImg != null and groImg.trim().length() > 0 ">
+                        #{groImg},
+                    </when>
+                    <otherwise>
+                        "",
+                    </otherwise>
+                </choose>
                 1, <!-- #{groOwnerIdx} -->
                 NOW(),
                 1 , <!-- #{regIdx} -->

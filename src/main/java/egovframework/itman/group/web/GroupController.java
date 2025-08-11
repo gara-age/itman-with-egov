@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
@@ -39,17 +40,34 @@ public class GroupController {
 
     @PostMapping("/itman/insertGroup.do")
     public String insertGroup(GroupVO vo,
-                              @RequestParam("groImgFile") MultipartFile file
+                              @RequestParam(value = "groImgFile" , required = false) MultipartFile file,
+                              HttpServletRequest request
             , Model model) throws Exception {
+        System.err.println("[insertGroup] groName=" + vo.getGroName());
+        System.err.println("[insertGroup] file isEmpty=" + file.isEmpty() + ", name=" + file.getOriginalFilename() + ", size=" + file.getSize());
+
         if(!file.isEmpty()){
-            String fileName = file.getOriginalFilename();
             String uploadDir = "/upload/groImg/";
-            File img = new File(uploadDir + fileName);
+            String realDir = request.getServletContext().getRealPath(uploadDir);
+            File dir = new File(realDir);
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            String originalFileName = file.getOriginalFilename();
+            String ext = (originalFileName != null && originalFileName.lastIndexOf('.') != -1) ? originalFileName.substring(originalFileName.lastIndexOf('.')) : "";
+            String prefix = "groupImg";
+            String datePart = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+            String randomPart = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 6).toUpperCase();
+            String savedName = prefix + "_" + datePart + "_" + randomPart + ext;
+            //[밀리초 단위 현재 시각]_[UUID].[원본 확장자]
+            File img = new File(dir, savedName);
             file.transferTo(img);
-            vo.setGroImg(fileName);
+            vo.setGroImg(savedName);
         }
         groupService.insertGroup(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
+
 }
