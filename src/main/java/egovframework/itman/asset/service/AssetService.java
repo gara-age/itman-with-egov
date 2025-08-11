@@ -1,11 +1,13 @@
 package egovframework.itman.asset.service;
 
 import egovframework.itman.common.Pagination;
+import egovframework.itman.employee.service.EmployeeVO;
 
 import java.util.List;
 
 public interface AssetService {
     List<AssetVO> selectAssetList(Pagination pagination) throws Exception;
+    List<AssetVO> selectEmpAssetList(EmployeeVO employeeVO) throws Exception;
     AssetVO selectAssetView(AssetVO vo);
     int selectAssetListCnt(Pagination pagination) throws Exception;
     int selectInGroupAssetListCnt(Pagination pagination) throws Exception;

@@ -73,7 +73,7 @@ public class EmployeeController {
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
-        List<AssetVO> assetList = assetService.selectAssetList(pagination);
+        List<AssetVO> assetList = assetService.selectEmpAssetList(resultVO);
         model.addAttribute("employee", resultVO);
         model.addAttribute("assetList", assetList);
         return "itman/public/html/ingroup/emploView";

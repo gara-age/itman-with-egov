@@ -69,7 +69,7 @@
         <ul class="contEdit">
             <li>
                 <form action="${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do" id="searchForm" method="post" onsubmit="this.page.value=1; this.range.value=1;">
-                    <input type="hidden" name="assIdx" value="${asset.assIdx}" />
+                    <input type="hidden" id="assIdx" name="assIdx" value="${asset.assIdx}" />
                     <input type="hidden" id="page"      name="page"      value="${pagination.page}" />
                     <input type="hidden" id="range"     name="range"     value="${pagination.range}" />
                     <input type="hidden" id="rangeSize" name="rangeSize" value="${pagination.rangeSize}" />
@@ -125,6 +125,7 @@
 </form>
 </body>
 <script>
+
     function updateAsset(empIdx) {
         <%--const assIdx = "${asset.assIdx}";--%>
         document.getElementById("emp_idx").value = empIdx;
@@ -166,38 +167,53 @@
     }
     //처음 버튼 이벤트
     function fn_maxPrev() {
+        const form = document.forms["searchForm"];
+        const assIdx = form.assIdx.value.trim();
         var url = "${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do";
-        url = url + "?page=" + 1;
+        url = url + "?assIdx=" + assIdx;
+        url = url + "&page=" + 1;
         url = url + "&range=" + 1;
         location.href = url;	}
     //이전 버튼 이벤트
     function fn_prev(page, range, rangeSize) {
+        const form = document.forms["searchForm"];
+        const assIdx = form.assIdx.value.trim();
         var page = (((range - 2) * rangeSize) + 1) <= 1 ? 1 : ((range - 2) * rangeSize) + 1 ;
         var range = (range - 1) <= 1 ? 1 : range - 1;
         var url = "${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do";
-        url = url + "?page=" + page;
+        url = url + "?assIdx=" + assIdx;
+        url = url + "&page=" + page;
         url = url + "&range=" + range;
         location.href = url;	}
     //페이지 번호 클릭
     function fn_pagination(page, range, rangeSize, searchType, keyword) {
+        const form = document.forms["searchForm"];
+        const assIdx = form.assIdx.value.trim();
         var url = "${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do";
-        url = url + "?page=" + page;
+        url = url + "?assIdx=" + assIdx;
+        url = url + "&page=" + page;
         url = url + "&range=" + range;
         location.href = url;		}
     //다음 버튼 이벤트
     function fn_next(pageCnt, page, range, rangeSize) {
+        const form = document.forms["searchForm"];
+        const assIdx = form.assIdx.value.trim();
         var page = (parseInt((range * rangeSize)) + 1) >= pageCnt ? pageCnt / rangeSize * 10 : parseInt((range * rangeSize)) + 1 ;
         var range = (parseInt(range) + 1) >= parseInt(pageCnt / rangeSize + 1) ? parseInt(pageCnt / rangeSize + 1) : (parseInt(range) + 1) ;
         var url = "${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do";
-        url = url + "?page=" + page;
+        url = url + "?assIdx=" + assIdx;
+        url = url + "&page=" + page;
         url = url + "&range=" + range;
         location.href = url;	}
     //마지막 버튼 이벤트
     function fn_maxNext(pageCnt, range, rangeSize) {
+        const form = document.forms["searchForm"];
+        const assIdx = form.assIdx.value.trim();
         var page =  pageCnt / rangeSize * 10;
         var range =    parseInt(pageCnt / rangeSize + 1);
         var url = "${pageContext.request.contextPath}/itman/asset/assetEmployeeInfoEdit.do";
-        url = url + "?page=" + page;
+        url = url + "?assIdx=" + assIdx;
+        url = url + "&page=" + page;
         url = url + "&range=" + range;
         location.href = url;
     }

@@ -43,9 +43,6 @@ public class GroupController {
                               @RequestParam(value = "groImgFile" , required = false) MultipartFile file,
                               HttpServletRequest request
             , Model model) throws Exception {
-        System.err.println("[insertGroup] groName=" + vo.getGroName());
-        System.err.println("[insertGroup] file isEmpty=" + file.isEmpty() + ", name=" + file.getOriginalFilename() + ", size=" + file.getSize());
-
         if(!file.isEmpty()){
             String uploadDir = "/upload/groImg/";
             String realDir = request.getServletContext().getRealPath(uploadDir);
@@ -60,7 +57,6 @@ public class GroupController {
             String datePart = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
             String randomPart = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 6).toUpperCase();
             String savedName = prefix + "_" + datePart + "_" + randomPart + ext;
-            //[밀리초 단위 현재 시각]_[UUID].[원본 확장자]
             File img = new File(dir, savedName);
             file.transferTo(img);
             vo.setGroImg(savedName);

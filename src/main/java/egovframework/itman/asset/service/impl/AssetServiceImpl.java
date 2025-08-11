@@ -3,6 +3,7 @@ package egovframework.itman.asset.service.impl;
 import egovframework.itman.asset.service.AssetService;
 import egovframework.itman.asset.service.AssetVO;
 import egovframework.itman.common.Pagination;
+import egovframework.itman.employee.service.EmployeeVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +17,11 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public List<AssetVO> selectAssetList(Pagination pagination) throws Exception {
         return assetDAO.selectAssetList(pagination);
+    }
+
+    @Override
+    public List<AssetVO> selectEmpAssetList(EmployeeVO employeeVO) throws Exception{
+        return assetDAO.selectEmpAssetList(employeeVO);
     }
 
     @Override

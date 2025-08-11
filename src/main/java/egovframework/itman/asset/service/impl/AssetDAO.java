@@ -2,6 +2,7 @@ package egovframework.itman.asset.service.impl;
 
 import egovframework.itman.asset.service.AssetVO;
 import egovframework.itman.common.Pagination;
+import egovframework.itman.employee.service.EmployeeVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,9 +17,13 @@ public class AssetDAO {
     public List<AssetVO> selectAssetList(Pagination pagination) throws Exception{
         return sqlSession.selectList("assetDAO.selectAssetList", pagination);
     }
+    public List<AssetVO> selectEmpAssetList(EmployeeVO employeeVO) throws Exception{
+        return sqlSession.selectList("assetDAO.selectEmpAssetList", employeeVO);
+    }
     public AssetVO selectAssetView(AssetVO vo){
         return sqlSession.selectOne("assetDAO.selectAssetView", vo);
     }
+
     public int selectAssetListCnt(Pagination pagination) throws Exception{
         return sqlSession.selectOne("assetDAO.selectAssetListCnt", pagination);
     }

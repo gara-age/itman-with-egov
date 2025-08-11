@@ -55,6 +55,28 @@
             LIMIT #{startList} , #{listSize}
     </select>
 
+    <select id="selectEmpAssetList" parameterType="employeeVO" resultType="assetVO">
+        SELECT
+        A.ASS_IDX AS assIdx,
+        A.GRO_IDX AS groIdx,
+        A.ASS_ULID AS assUlid,
+        A.ASS_NAME AS assName,
+        A.IMAGE AS image,
+        C.ASS_CAT_NAME AS assCatName,
+        SP.SUP_NAME AS assSupName,
+        A.BUY_DATE AS buyDate
+        FROM ITM_ASSET A
+        LEFT JOIN ITM_ASSET_CATEGORY C ON C.ASS_CAT_IDX = A.ASS_CAT_IDX
+        LEFT JOIN ITM_STATE S ON S.STA_IDX = A.STA_IDX
+        LEFT JOIN ITM_EMPLOYE E ON E.EMP_IDX = A.EMP_IDX
+        LEFT JOIN ITM_LOCATION L ON L.LOC_IDX = A.LOC_IDX
+        LEFT JOIN ITM_SUPPLIER SP ON SP.SUP_IDX = A.SUP_IDX
+        WHERE
+            A.DEL_YN = 'N'
+            AND A.GRO_IDX = #{groIdx}
+            AND A.EMP_IDX = #{empIdx}
+    </select>
+
 <select id="selectAssetListCnt" parameterType="pagination" resultType="int">
     SELECT
         COUNT(*)
