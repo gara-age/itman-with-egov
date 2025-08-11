@@ -44,9 +44,9 @@
 				</p>
 
 		<div class="num_list">
-			<p class="total">총 <span>${listCnt}</span>건의 결과가 있습니다.</p>
+			<p class="total">총 <span>${pagination.listCnt}</span>건의 결과가 있습니다.</p>
 		<p class="view">
-			<select id="pageCount" name="listSize" onchange="document.getElementById('searchForm').submit()">
+			<select id="pageCount" name="listSize" onchange="document.getElementById('searchForm').submit(); this.page.value=1; this.range.value=1;">
 				<option value="10" ${pagination.listSize== 10 ? 'selected' : ''}>10개씩보기</option>
 				<option value="20" ${pagination.listSize== 20 ? 'selected' : ''}>20개씩보기</option>
 				<option value="40" ${pagination.listSize== 40 ? 'selected' : ''}>40개씩보기</option>
@@ -83,7 +83,7 @@
 					<p class="p_pay">가격(원)</p>
 				</li>
 
-				<c:if test="${!empty listCnt}">
+				<c:if test="${!empty resultList}">
 				<c:forEach var="asset" items="${resultList}">
 					<li onclick="location.href='assetsView.do?assIdx=${asset.assIdx}'">
 					<p class="num">${asset.rowNum}</p>

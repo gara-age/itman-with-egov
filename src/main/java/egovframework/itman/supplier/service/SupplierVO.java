@@ -16,6 +16,15 @@ public class SupplierVO {
     private String supMemo; //구매처 메모
     private String supBnum; //사업자번호
     private String supMail; //구매처 이메일
+    private String rowNum;
+
+    public String getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(String rowNum) {
+        this.rowNum = rowNum;
+    }
 
     public String getSupIdx() {
         return supIdx;

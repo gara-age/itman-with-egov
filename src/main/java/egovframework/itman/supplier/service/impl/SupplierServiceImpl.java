@@ -19,6 +19,22 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public SupplierVO selectSupplyView(SupplierVO vo) throws Exception {
+        return supplierDAO.selectSupplyView(vo);
+    }
+
+    @Override
+    public void updateSupply(SupplierVO vo) throws Exception {
+                supplierDAO.updateSupply(vo);
+    }
+
+    @Override
+    public void deleteSupply(SupplierVO vo) throws Exception {
+                supplierDAO.deleteSupply(vo);
+    }
+
+
+    @Override
     public List<SupplierVO> selectSuppliersByGroup(String groIdx) throws Exception {
         return supplierDAO.selectSuppliersByGroup(groIdx);
     }

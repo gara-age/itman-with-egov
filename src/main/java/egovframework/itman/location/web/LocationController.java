@@ -18,8 +18,8 @@ public class LocationController {
 
     @RequestMapping("/itman/popup/locationPop.do")
     public String locationPop(LocationVO vo, Pagination pagination, Model model
-            , @RequestParam(required = false, defaultValue = "1") int page
-            , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "1") int range) throws Exception {
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);

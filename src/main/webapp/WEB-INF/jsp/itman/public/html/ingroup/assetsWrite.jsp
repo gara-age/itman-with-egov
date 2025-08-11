@@ -83,7 +83,7 @@
 				<input type="hidden" id = "sup_idx" name="sup_idx" value="" />
 				<a onclick="window.open('/popup/supplierPop.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
 			
-				<p class="edit"><a onclick="window.open('/itman/asset/contWriteAssetSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
+				<p class="edit"><a onclick="window.open('/itman/asset/contWriteSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
 			</li>
 			<li>
 				<p class="tit">최초 구매일</p>

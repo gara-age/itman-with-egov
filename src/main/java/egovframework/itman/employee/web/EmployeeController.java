@@ -38,6 +38,7 @@ public class EmployeeController {
     @Resource(name = "assetService")
     private AssetServiceImpl assetService;
 
+
     private void addCommonLists(String groIdx, Model model) {
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
         model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
@@ -47,8 +48,8 @@ public class EmployeeController {
 
     @RequestMapping("/itman/employeeList.do")
     public String selectEmployeeList(EmployeeVO vo, Pagination pagination, Model model
-            , @RequestParam(required = false, defaultValue = "1") int page
-            , @RequestParam(required = false, defaultValue = "1") int range
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "1") int range
     ) throws Exception {
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
@@ -62,7 +63,6 @@ public class EmployeeController {
         List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
         //페이징 구현
         model.addAttribute("pagination", pagination);
-        model.addAttribute("listCnt", listCnt); // 전체 건수 조회
         model.addAttribute("resultList", list);
         return "itman/public/html/ingroup/emploList";
     }
@@ -278,8 +278,8 @@ public class EmployeeController {
 
     @RequestMapping("/itman/popup/searchPop.do")
     public String searchPop(EmployeeVO vo, Pagination pagination, Model model
-            , @RequestParam(required = false, defaultValue = "1") int page
-            , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "1") int range) throws Exception {
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
@@ -291,8 +291,6 @@ public class EmployeeController {
         List<EmployeeVO> list = employeeService.selectEmployeeList(pagination);
         //페이징 구현
         model.addAttribute("pagination", pagination);
-        model.addAttribute("listCnt", listCnt); // 전체 건수 조회
-
         model.addAttribute("employeeList", list);
         return "itman/public/html/popup/searchPop";
     }

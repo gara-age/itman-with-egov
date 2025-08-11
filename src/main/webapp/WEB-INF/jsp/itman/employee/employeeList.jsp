@@ -218,7 +218,7 @@
 <body>
 <h2>직원 목록</h2>
 <p class="totcnt">
-    조회된 총 직원 수 : <strong>${listCnt}</strong> 명
+    조회된 총 직원 수 : <strong>${pagination.listCnt}</strong> 명
 </p>
 <form method="get" action="/bbs/bbsList.do" class="search-form" id="searchForm">
     <!-- 왼쪽: 검색 -->

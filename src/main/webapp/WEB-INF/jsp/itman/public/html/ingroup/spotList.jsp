@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="num_list">
-			<p class="total">총 <span>${listCnt}</span>건의 결과가 있습니다.</p>
+			<p class="total">총 <span>${pagination.listCnt}</span>건의 결과가 있습니다.</p>
 		</div>
 		<!-- 글쓰기 버튼--> 
 		<p class="addContent"><a onclick="" class="edit">><span></span><span></span><span></span></a></p>

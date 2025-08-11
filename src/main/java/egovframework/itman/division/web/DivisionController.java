@@ -23,8 +23,9 @@ public class DivisionController {
 
     @RequestMapping("/itman/departList.do")
     public String selectDivisionList(DivisionVO vo, Pagination pagination, Model model
-            , @RequestParam(required = false, defaultValue = "1") int page
-            , @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "1") int range) throws Exception {
+
         String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
@@ -34,7 +35,6 @@ public class DivisionController {
 
         List<DivisionVO> list = divisionService.selectDivisionList(pagination);
         model.addAttribute("pagination", pagination);
-        model.addAttribute("listCnt", listCnt);
         model.addAttribute("resultList", list);
 
         return "itman/public/html/ingroup/departList";

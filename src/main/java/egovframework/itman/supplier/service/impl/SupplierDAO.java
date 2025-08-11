@@ -17,6 +17,18 @@ public class SupplierDAO {
         return sqlSession.selectList("supplierDAO.selectSupplierList", pagination);
     }
 
+    public SupplierVO selectSupplyView(SupplierVO vo) throws Exception {
+        return sqlSession.selectOne("supplierDAO.selectSupplyView", vo);
+    }
+
+    public void updateSupply(SupplierVO vo) throws Exception {
+        sqlSession.update("supplierDAO.updateSupply", vo);
+    }
+
+    public void deleteSupply(SupplierVO vo) throws Exception {
+        sqlSession.update("supplierDAO.deleteSupply", vo);
+    }
+
     public List<SupplierVO> selectSuppliersByGroup(String groIdx) throws Exception {
         return sqlSession.selectList("supplierDAO.selectSuppliersByGroup", groIdx);
     }

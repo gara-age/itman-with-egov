@@ -58,7 +58,7 @@
 
     <!-- 3. 결과 개수 출력 -->
     <div class="num_list">
-        <p class="total">총 <span>${listCnt}</span>건의 결과가 있습니다.</p>
+        <p class="total">총 <span>${pagination.listCnt}</span>건의 결과가 있습니다.</p>
     </div>
 
     <!-- 4. 신규 등록 버튼 -->
