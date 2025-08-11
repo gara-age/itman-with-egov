@@ -106,4 +106,20 @@
         WHERE
             LOC_IDX = #{locIdx}
     </update>
+
+
+    <update id="deleteAssetLocation" parameterType="locationVO">
+        UPDATE
+        ITM_LOCATION
+        SET
+            <trim suffixOverrides=",">
+                DEL_YN = 'Y',
+                DEL_DATE = NOW(),
+                DEL_IDX = 77,
+                <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+            </trim>
+        WHERE
+            LOC_IDX = #{locIdx}
+    </update>
+
 </mapper>

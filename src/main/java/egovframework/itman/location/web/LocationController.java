@@ -63,7 +63,6 @@ public class LocationController {
 
     @PostMapping("/itman/updateLocation.do")
     public String updateLocation(LocationVO vo, Model model) throws Exception {
-        System.err.println("vo.locIdx = " + vo.getLocIdx());
         locationService.updateAssetLocation(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -73,6 +72,14 @@ public class LocationController {
     public String confirmLocationDel(LocationVO vo, Model model) throws Exception {
         model.addAttribute("location", vo);
         return "itman/public/html/popup/listDelete";
+    }
+
+
+    @PostMapping("/itman/deleteLocation.do")
+    public String deleteLocation(LocationVO vo, Model model) throws Exception {
+        locationService.deleteAssetLocation(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
 }

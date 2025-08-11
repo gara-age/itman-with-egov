@@ -38,5 +38,9 @@ public class LocationDAO {
         sqlSession.update("locationDAO.updateAssetLocation", vo);
     }
 
+    public void deleteAssetLocation(LocationVO vo) throws Exception{
+        sqlSession.update("locationDAO.deleteAssetLocation", vo);
+    }
+
 
 }

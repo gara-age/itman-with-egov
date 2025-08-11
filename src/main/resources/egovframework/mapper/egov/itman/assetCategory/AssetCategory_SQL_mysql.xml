@@ -4,6 +4,57 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="assetCategoryDAO">
+    <sql id="assetCategoryCondition">
+        <where>
+            DEL_YN = 'N'
+            AND GRO_IDX = #{searching.groIdx}
+            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+                <choose>
+                    <when test="searching.searchCondition == 'assCatCode'">
+                        AND ASS_CAT_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    </when>
+                    <when test="searching.searchCondition == 'assCatName'">
+                        AND ASS_CAT_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                    </when>
+                    <otherwise>
+                        AND (
+                        ASS_CAT_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                        OR ASS_CAT_NAME LIKE CONCAT('%', #{searching.searchKeyword}, '%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </sql>
+    <select id="selectAssetCategoryList" parameterType="pagination" resultType="assetCategoryVO">
+        SELECT
+            ASS_CAT_IDX AS assCatIdx,
+            ASS_CAT_CODE AS assCatCode,
+            ASS_CAT_NAME AS assCatName
+        FROM ITM_ASSET_CATEGORY
+        <include refid="assetCategoryCondition" />
+        LIMIT #{startList} , #{listSize}
+    </select>
+
+    <select id="selectAssetCategoryListCnt" parameterType="pagination" resultType="int">
+    SELECT
+        COUNT(*)
+    FROM
+        ITM_ASSET_CATEGORY
+    <include refid="assetCategoryCondition" />
+    </select>
+
+    <select id="selectAssetCategory" parameterType="assetCategoryVO" resultType="assetCategoryVO">
+        SELECT
+            ASS_CAT_IDX AS assCatIdx,
+            ASS_CAT_NAME AS assCatName,
+            ASS_CAT_CODE AS assCatCode,
+            SL_NOTE AS slNote
+        FROM ITM_ASSET_CATEGORY
+        WHERE DEL_YN = 'N'
+        AND ASS_CAT_IDX = #{assCatIdx}
+    </select>
+
     <select id="selectAssetCategoriesByGroup" parameterType="string" resultType="assetCategoryVO">
         SELECT ASS_CAT_IDX AS assCatIdx,
                ASS_CAT_NAME AS assCatName,
@@ -37,4 +88,45 @@
 
 
     </insert>
+
+    <update id="updateAssetCategory" parameterType="assetCategoryVO">
+        UPDATE
+        ITM_ASSET_CATEGORY
+        SET
+        <trim suffixOverrides=",">
+            ASS_CAT_NAME = #{assCatName},
+            ASS_CAT_CODE = #{assCatCode},
+            MOD_DATE = NOW(),
+            MOD_IDX = 77,
+            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+        </trim>
+        WHERE
+            ASS_CAT_IDX = #{assCatIdx}
+    </update>
+
+    <update id="deleteAssetCategory" parameterType="assetCategoryVO">
+        UPDATE
+        ITM_ASSET_CATEGORY
+        SET
+        <trim suffixOverrides=",">
+            DEL_YN = 'Y',
+            DEL_DATE = NOW(),
+            DEL_IDX = 77,
+            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+        </trim>
+        WHERE
+        ASS_CAT_IDX = #{assCatIdx}
+    </update>
+
+    <select id="findAll" parameterType="string" resultType="assetCategoryVO">
+        SELECT
+            ASS_CAT_CODE AS assCatCode,
+            ASS_CAT_NAME AS assCatName,
+            SL_NOTE AS slNote
+        FROM
+            ITM_ASSET_CATEGORY
+        WHERE
+            DEL_YN = 'N'
+        AND GRO_IDX = #{groIdx}
+    </select>
 </mapper>
