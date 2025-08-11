@@ -72,7 +72,6 @@
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
 	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
-	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />
  </head>
 <body>
 
@@ -86,12 +85,13 @@
 
 		<div class="viewTop">
 			<div class="img">
-				<span><img id="img" src="" onerror="this.src='${pageContext.request.contextPath}/images/_img/noimg.png'"/></span>
+				<span><img id="img" src="${pageContext.request.contextPath}/upload/assImg/${asset.image}" onerror="this.src='${pageContext.request.contextPath}/images/_img/noimg.png'"/></span>
 				<!-- 이미지없을때 <span><img src="_img/noimg.png" style="width:50px" alt="이미지없음"/></span> -->
 				<p class="filebox">
 				  <label for="filename">파일찾기</label> 
-				  <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
-					<input type="file" id="filename" class="upload-hidden" style="display:none">
+				  <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="/itman/asset/updateAssetPictureInfo.do">
+				<input type="hidden" name="assIdx" value="${asset.assIdx}">
+				<input type="file" id="filename" name="assImgFile" class="upload-hidden" style="display:none">
 				  </form>
 				</p>
 			</div>
@@ -269,35 +269,21 @@
 	</div>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
 	<script>
-		$("#filename").change(function(e){
-			var form = $('#FILE_FORM')[0];
-			var formData = new FormData(form);
-			formData.append("fileObj", $("#filename")[0].files[0]);
-			formData.append("ass_idx", "<?=$_GET['ASS_IDX']?>");
-			$.ajax({
-				url: './ig_process/assetChangeImage_proc.php',
-				enctype		: 'multipart/form-data',
-				processData	: false,
-				contentType	: false,
-				data: formData,
-				type: 'POST',
-				success: function(result){
-					if(result === '-1'){
-						alert("jpg, jpeg, gif, png 확장자만 가능합니다.");
-					}else if(result === '0'){
-						alert("사진 변경중 에러가 발생 하였습니다.");
-					}else{
-						console.log(result);
-						alert("사진 변경에 성공하였습니다.");
-						
-						$imgSrc = "../upload/assetImg/"+result;
-						var regex = / /gi;
-						$imgSrc = $imgSrc.replace(regex, "");
-						$("#img").attr("src", $imgSrc );
-					}
-				}
-				});
-		})
+		document.getElementById("filename").addEventListener("change", function() {
+			const fileInput = this;
+			const filePath = fileInput.value; // 선택된 파일 경로
+			const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+
+			if (!allowedExtensions.exec(filePath)) {
+				alert("JPG, JPEG, PNG 파일만 업로드 가능합니다.");
+				fileInput.value = ""; // 선택 초기화
+				return false;
+			}
+
+			// 확장자 통과 → 폼 제출
+			document.getElementById("FILE_FORM").submit();
+			alert("사진 변경에 성공하였습니다.");
+		});
 	</script>
 </body>
 </html>

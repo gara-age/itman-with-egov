@@ -66,16 +66,28 @@ public class AssetServiceImpl implements AssetService {
         assetDAO.updateAssetLocationInfo(vo);
     }
 
+    @Override
     public void updateAssetEmployeeInfo(AssetVO vo) throws Exception {
         assetDAO.updateAssetEmployeeInfo(vo);
     }
+
+    @Override
     public void updateAssetSupplyInfo(AssetVO vo) throws Exception {
         assetDAO.updateAssetSupplyInfo(vo);
     }
+
+    @Override
     public void updateAssetBuyDateInfo(AssetVO vo) throws Exception {
         assetDAO.updateAssetBuyDateInfo(vo);
     }
+
+    @Override
     public void updateAssetPriceInfo(AssetVO vo) throws Exception {
         assetDAO.updateAssetPriceInfo(vo);
+    }
+
+    @Override
+    public void updateAssetPictureInfo(AssetVO vo) throws Exception{
+        assetDAO.updateAssetPictureInfo(vo);
     }
 }

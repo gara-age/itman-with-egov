@@ -37,6 +37,7 @@
         A.GRO_IDX AS groIdx,
         A.ASS_ULID AS assUlid,
         A.ASS_NAME AS assName,
+        A.IMAGE AS image,
         C.ASS_CAT_NAME AS assCatName,
         S.STA_NAME AS assStaName,
         E.EMP_NAME AS assEmpName,
@@ -78,6 +79,7 @@
             A.ASS_IDX AS assIdx,
             A.ASS_ULID AS assUlid,
             A.ASS_NAME AS assName,
+            A.IMAGE AS image,
             A.ASS_CAT_IDX AS assCatIdx,
             C.ASS_CAT_NAME AS assCatName,
             A.REG_DATE AS regDate,
@@ -114,8 +116,8 @@
         <if test="buyDate != null and buyDate.trim.length() > 0">BUY_DATE,</if>
         <if test="price != null and price.trim.length() > 0">PRICE,</if>
         REG_DATE,
-        <!--REG_IDX, 회원가입 구현전으로 주석처리-->
-        <if test="image != null and image.trim.length() > 0">IAMGE,</if>
+        REG_IDX,
+        <if test="image != null and image.trim.length() > 0">IMAGE,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -130,6 +132,7 @@
         <if test="buyDate != null and buyDate.trim.length() > 0">#{buyDate},</if>
         <if test="price != null and price.trim.length() > 0">#{price},</if>
             NOW(),
+            77,
         <if test="image != null and image.trim.length() > 0">#{image},</if>
         </trim>
 
@@ -208,6 +211,16 @@
             ITM_ASSET
         SET
             PRICE = #{price},
+            MOD_DATE = NOW()
+        WHERE
+            ASS_IDX = #{assIdx}
+    </update>
+
+    <update id="updateAssetPictureInfo" parameterType="assetVO">
+        UPDATE
+            ITM_ASSET
+        SET
+            IMAGE = #{image},
             MOD_DATE = NOW()
         WHERE
             ASS_IDX = #{assIdx}

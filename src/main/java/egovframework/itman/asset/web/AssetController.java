@@ -23,10 +23,13 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.stream.Location;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +138,30 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/assetInsert.do")
-    public String insertAsset(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String insertAsset(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
+                              @RequestParam(value = "assImgFile", required = false) MultipartFile file,
+                              HttpServletRequest request,
+                              Model model, RedirectAttributes redirectAttributes) throws Exception {
+       if(!file.isEmpty()){
+           String uploadDir = "/upload/assImg/";
+           String realDir = request.getServletContext().getRealPath(uploadDir);
+           File dir = new File(realDir);
+           if(!dir.exists()){
+               dir.mkdirs();
+           }
+
+           String originalFileName = file.getOriginalFilename();
+           String ext = (originalFileName != null && originalFileName.lastIndexOf('.') != -1) ? originalFileName.substring(originalFileName.lastIndexOf('.')) : "";
+           String prefix = "assImg";
+           String datePart = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+           String randomPart = java.util.UUID.randomUUID().toString().replace("-", "").substring(0,8).toUpperCase();
+           String savedName = prefix + "_" + datePart + "_" + randomPart + ext;
+
+           File img = new File(dir, savedName);
+           file.transferTo(img);
+           vo.setImage(savedName);
+       }
+
         assetService.insertAsset(vo);
         setInsertAssLog(assLogVO, vo);
         assLogService.insertAssLog(assLogVO);
@@ -434,6 +460,44 @@ public class AssetController {
         assLogService.insertAssLog(assLogVO);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
+    }
+
+//    @RequestMapping("/itman/asset/assetNameInfoEdit.do")
+//    public String assetPictureInfoEdit(AssetVO vo, Model model) throws Exception {
+//        AssetVO assetVO = assetService.selectAssetView(vo);
+//        model.addAttribute("asset", assetVO);
+//
+//        return "itman/public/html/popup/asset/assetNameInfoEdit";
+//    }
+
+    @PostMapping("/itman/asset/updateAssetPictureInfo.do")
+    public String updateAssetPictureInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
+                                         @RequestParam(value = "assImgFile", required = false) MultipartFile file,
+                                         HttpServletRequest request,
+                                         Model model, RedirectAttributes redirectAttributes) throws Exception {
+        System.err.println("updateAssetPictureInfo");
+        if(!file.isEmpty()){
+            String uploadDir = "/upload/assImg/";
+            String realDir = request.getServletContext().getRealPath(uploadDir);
+            File dir = new File(realDir);
+            if(!dir.exists()){
+                dir.mkdirs();
+            }
+
+            String originalFileName = file.getOriginalFilename();
+            String ext = (originalFileName != null && originalFileName.lastIndexOf('.') != -1) ? originalFileName.substring(originalFileName.lastIndexOf('.')) : "";
+            String prefix = "assImg";
+            String datePart = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+            String randomPart = java.util.UUID.randomUUID().toString().replace("-", "").substring(0,8).toUpperCase();
+            String savedName = prefix + "_" + datePart + "_" + randomPart + ext;
+
+            File img = new File(dir, savedName);
+            file.transferTo(img);
+            vo.setImage(savedName);
+        }
+        assetService.updateAssetPictureInfo(vo);
+
+        return "redirect:/itman/assetsView.do?assIdx=" + vo.getAssIdx() ;
     }
 
     //-------------------------------삭제------------------------------------------

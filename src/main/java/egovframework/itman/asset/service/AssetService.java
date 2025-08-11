@@ -21,7 +21,7 @@ public interface AssetService {
     void updateAssetSupplyInfo(AssetVO vo) throws Exception;
     void updateAssetBuyDateInfo(AssetVO vo) throws Exception;
     void updateAssetPriceInfo(AssetVO vo) throws Exception;
-
+    void updateAssetPictureInfo(AssetVO vo) throws Exception;
     void deleteAsset(AssetVO vo) throws Exception;
 
 }

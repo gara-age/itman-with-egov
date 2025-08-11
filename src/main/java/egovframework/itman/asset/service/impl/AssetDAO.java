@@ -60,5 +60,8 @@ public class AssetDAO {
     public void updateAssetPriceInfo(AssetVO vo) throws Exception {
         sqlSession.update("assetDAO.updateAssetPriceInfo", vo);
     }
+    public void updateAssetPictureInfo(AssetVO vo) throws Exception{
+        sqlSession.update("assetDAO.updateAssetPictureInfo", vo);
+    }
 
 }

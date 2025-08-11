@@ -87,7 +87,7 @@
 				<c:forEach var="asset" items="${resultList}">
 					<li onclick="location.href='assetsView.do?assIdx=${asset.assIdx}'">
 					<p class="num">${asset.rowNum}</p>
-					<p class="img"><span><img src="" onerror = "this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
+					<p class="img"><span><img src="${pageContext.request.contextPath}/upload/assImg/${asset.image}" onerror = "this.src='${pageContext.request.contextPath}/images/_img/noimg.png'" alt="자산이미지 썸네일"/></span></p>
 					<p class="num">${asset.assUlid}</p>
 					<p class="tit">${asset.assName}</p>
 					<p class="cate">${asset.assCatName}</p>

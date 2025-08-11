@@ -27,7 +27,7 @@
 				<p class="tit">자산이미지</p>
 				<div class="cont filebox">
 					<label for="ex_filename">파일찾기</label> 
-					<input type="file" name="file" id="ex_filename" class="upload-hidden">
+					<input type="file" name="assImgFile" id="ex_filename" class="upload-hidden">
 					<input class="upload-name" id="show-ex-filename"  value="파일선택" disabled="disabled">
 					<input type="hidden" name="file_name" id="file_name" />
 				</div>
