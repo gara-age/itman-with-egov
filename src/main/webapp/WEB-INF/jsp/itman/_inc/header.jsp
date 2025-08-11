@@ -84,31 +84,31 @@
 					<a href="dashboard.jsp" class="${pageNumDepth01 == 0 ? 'on' : ''}">대시보드</a>
 				</li>
 				<li>
-					<a href="assetsList.do" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>3<%--${timAssetCount}--%></span></a>
+					<a href="assetsList.do" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>${headerData.groAssetCnt}</span></a>
 				</li>
 				<li>
-					<a href="employeeList.do" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>2<%--${itmEmployeeCount}--%></span></a>
+					<a href="employeeList.do" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>${headerData.groEmployeeCnt}</span></a>
 				</li>
 				<li>
-					<a href="departList.do" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>4<%--${itmDivisionCount}--%></span></a>
+					<a href="departList.do" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>${headerData.groDivisionCnt}</span></a>
 				</li>
 				<li>
-					<a href="spotList.do" class="${pageNumDepth01 == 4 ? 'on' : ''}">직위 관리<span>5<%--${itmPositionCount}--%></span></a>
+					<a href="spotList.do" class="${pageNumDepth01 == 4 ? 'on' : ''}">직위 관리<span>${headerData.groPositionCnt}</span></a>
 				</li>
 				<li>
-					<a href="supplierList.do" class="${pageNumDepth01 == 5 ? 'on' : ''}">구매처 관리<span>3<%--${itmSupplierCount}--%></span></a>
+					<a href="supplierList.do" class="${pageNumDepth01 == 5 ? 'on' : ''}">구매처 관리<span>${headerData.groSupplierCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetLocationList.do" class="${pageNumDepth01 == 6 ? 'on' : ''}">위치 관리<span>5<%--${itmLocationCount}--%></span></a>
+					<a href="assetLocationList.do" class="${pageNumDepth01 == 6 ? 'on' : ''}">위치 관리<span>${headerData.groLocationCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetCategory.do" class="${pageNumDepth01 == 11 ? 'on' : ''}">자산 분류 관리<span>4<%--${itmAssetCategoryCount}--%></span></a>
+					<a href="assetCategory.do" class="${pageNumDepth01 == 11 ? 'on' : ''}">자산 분류 관리<span>${headerData.groAssetCategoryCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetStateList.do" class="${pageNumDepth01 == 7 ? 'on' : ''}">자산 상태 관리<span>7<%--${itmStateCount}--%></span></a>
+					<a href="assetStateList.do" class="${pageNumDepth01 == 7 ? 'on' : ''}">자산 상태 관리<span>${headerData.groAssetStateCnt}</span></a>
 				</li>
 				<li>
-					<a href="employeeStateList.do" class="${pageNumDepth01 == 8 ? 'on' : ''}">직원 상태 관리<span>3<%--${itmEmpStateCount}--%></span></a>
+					<a href="employeeStateList.do" class="${pageNumDepth01 == 8 ? 'on' : ''}">직원 상태 관리<span>${headerData.groEmployeeStateCnt}</span></a>
 				</li>
 				<li>
 					<a href="ahistory.jsp" class="${pageNumDepth01 == 9 ? 'on' : ''}">자산 히스토리</a>

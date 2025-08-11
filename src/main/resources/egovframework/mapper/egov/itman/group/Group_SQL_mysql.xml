@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="groupDAO">
+<select id="getHeaderData" parameterType="groupVO" resultType="groupVO">
+    SELECT
+        (SELECT COUNT(a.ASS_IDX) FROM ITM_ASSET a WHERE a.GRO_IDX = #{groIdx} AND a.DEL_YN = 'N') AS groAssetCnt,
+        (SELECT COUNT(e.EMP_IDX) FROM ITM_EMPLOYE e WHERE e.GRO_IDX = #{groIdx} AND e.DEL_YN = 'N') AS groEmployeeCnt,
+        (SELECT COUNT(p.POS_IDX) FROM ITM_POSITION p WHERE p.GRO_IDX = #{groIdx} AND p.DEL_YN = 'N') AS groPositionCnt,
+        (SELECT COUNT(d.DIV_IDX) FROM ITM_DIVISION d WHERE d.GRO_IDX = #{groIdx} AND d.DEL_YN = 'N') AS groDivisionCnt,
+        (SELECT COUNT(s.SUP_IDX) FROM ITM_SUPPLIER s WHERE s.GRO_IDX = #{groIdx} AND s.DEL_YN = 'N') AS groSupplierCnt,
+        (SELECT COUNT(l.LOC_IDX) FROM ITM_LOCATION l WHERE l.GRO_IDX = #{groIdx} AND l.DEL_YN = 'N') AS groLocationCnt,
+        (SELECT COUNT(ac.ASS_CAT_IDX) FROM ITM_ASSET_CATEGORY ac WHERE ac.GRO_IDX = #{groIdx} AND ac.DEL_YN = 'N') AS groAssetCategoryCnt,
+        (SELECT COUNT(asta.STA_IDX) FROM ITM_STATE asta WHERE asta.GRO_IDX = #{groIdx} AND asta.DEL_YN = 'N') AS groAssetStateCnt,
+        (SELECT COUNT(esta.EMP_ST_IDX) FROM ITM_EMP_STATE esta WHERE esta.GRO_IDX = #{groIdx} AND esta.DEL_YN = 'N') AS groEmployeeStateCnt
+    ;
+</select>
+</mapper>

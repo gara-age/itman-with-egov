@@ -29,6 +29,7 @@
 		<typeAlias alias="softwareVO" 		type="egovframework.itman.software.service.SoftwareVO" />
 		<typeAlias alias="hardwareVO" 		type="egovframework.itman.hardware.service.HardwareVO" />
 		<typeAlias alias="assLogVO" 		type="egovframework.itman.assLog.service.AssLogVO" />
+		<typeAlias alias="groupVO" 			type="egovframework.itman.group.service.GroupVO" />
 	</typeAliases>
     
 </configuration>
