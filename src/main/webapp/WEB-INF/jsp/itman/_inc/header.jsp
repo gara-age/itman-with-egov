@@ -130,24 +130,24 @@
 <!-- 사이드메뉴 -->
 <div class="smn">
 	<ul class="smn_list">
-		<c:forEach var="row" items="${smnResult}">
+		<c:forEach var="group" items="${allGroupList}">
 			<li>
-				<p><a href="#">${row.GRO_NAME}</a></p>
+				<p><a href="#">${group.groName}</a></p>
 				<ul>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=0">대시보드</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=1">자산 관리</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=2">직원 관리</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=3">부서 관리</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=4">직위 관리</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=5">구매처 관리</a></li>
-					<li><a href="group_proc.jsp?group=${row.GRO_IDX}&amp;id=6">위치 관리</a></li>
+					<li><a href="dashboard.do?groIdx=${group.groIdx}&amp;id=0">대시보드</a></li>
+					<li><a href="assetsList.do?groIdx=${group.groIdx}&amp;id=1">자산 관리</a></li>
+					<li><a href="employeeList.do?groIdx=${group.groIdx}&amp;id=2">직원 관리</a></li>
+					<li><a href="departList.do?groIdx=${group.groIdx}&amp;id=3">부서 관리</a></li>
+					<li><a href="spotList.do?groIdx=${group.groIdx}&amp;id=4">직위 관리</a></li>
+					<li><a href="supplierList.do?groIdx=${group.groIdx}&amp;id=5">구매처 관리</a></li>
+					<li><a href="assetLocationList.do?groIdx=${group.groIdx}&amp;id=6">위치 관리</a></li>
 				</ul>
 			</li>
 		</c:forEach>
 	</ul>
 	<p class="go_itman">
-		<a href="${pageContext.request.contextPath}/html/index.jsp">
-			<span><img src="${pageContext.request.contextPath}/html/_img/_favicon/apple-icon-180x180.png" alt="아이티맨"/></span>
+		<a href="${pageContext.request.contextPath}/itman/index.do">
+			<span><img src="${pageContext.request.contextPath}/images/_img/_favicon/apple-icon-180x180.png" alt="아이티맨"/></span>
 			아이티맨 메인으로가기
 		</a>
 	</p>
@@ -159,7 +159,7 @@
 	<div class="pop-layer">
 		<div class="pop_tit">
 			<p class="title">비고</p>
-			<p class="close"><a class="cbtn" href="#none"><img src="${pageContext.request.contextPath}/html/_img/close.png" alt="닫기"/></a></p>
+			<p class="close"><a class="cbtn" href="#none"><img src="${pageContext.request.contextPath}/images/_img/close.png" alt="닫기"/></a></p>
 		</div>
 		<div class="pop_cont">
 			<!-- 팝업 내용 -->

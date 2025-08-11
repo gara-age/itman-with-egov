@@ -16,4 +16,82 @@
         (SELECT COUNT(esta.EMP_ST_IDX) FROM ITM_EMP_STATE esta WHERE esta.GRO_IDX = #{groIdx} AND esta.DEL_YN = 'N') AS groEmployeeStateCnt
     ;
 </select>
+
+    <select id="selectGroupList" parameterType="string" resultType="groupVO">
+        SELECT
+            GRO_IDX AS groIdx,
+            GRO_NAME AS groName,
+           (SELECT COUNT(a.ASS_IDX) FROM ITM_ASSET a WHERE a.GRO_IDX = g.GRO_IDX AND a.DEL_YN = 'N') AS groAssetCnt,
+            (SELECT COUNT(e.EMP_IDX) FROM ITM_EMPLOYE e WHERE e.GRO_IDX = g.GRO_IDX AND e.DEL_YN = 'N') AS groEmployeeCnt
+        FROM
+            ITM_GROUP g LEFT JOIN ITM_MEMBER m ON m.MEM_IDX = g.REG_IDX
+        WHERE g.DEL_YN = 'N'
+          AND m.DEL_YN = 'N'
+            AND m.MEM_IDX = #{memIdx}
+        ORDER BY g.GRO_IDX
+    </select>
+    <select id="getAllGroupData" parameterType="string" resultType="groupVO">
+        SELECT
+            GRO_IDX AS groIdx,
+            GRO_NAME AS groName
+        FROM
+            ITM_GROUP g LEFT JOIN ITM_MEMBER m ON m.MEM_IDX = g.REG_IDX
+        WHERE g.DEL_YN = 'N'
+          AND m.DEL_YN = 'N'
+          AND m.MEM_IDX = #{memIdx}
+        ORDER BY g.GRO_IDX
+    </select>
+    <insert id="insertGroup" parameterType="groupVO">
+        INSERT INTO
+        ITM_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRO_NAME,
+            GRO_IMG,
+            GRO_OWNER_IDX,
+            REG_DATE,
+            REG_IDX,
+            REG_IP
+        </trim>
+            VALUES
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    #{groName},
+                'img.jpg',
+<!--                <choose>-->
+<!--                    <when test="groImg != null and groImg.trim().length() > 0 ">-->
+<!--                        #{groImg},-->
+<!--                    </when>-->
+<!--                    <otherwise>-->
+<!--                        "",-->
+<!--                    </otherwise>-->
+<!--                </choose>-->
+                1, <!-- #{groOwnerIdx} -->
+                NOW(),
+                1 , <!-- #{regIdx} -->
+                '1.1.1.1' <!-- #{regIp} -->
+                </trim>
+    </insert>
+    <update id="updateGroup" parameterType="groupVO">
+        UPDATE
+        ITM_GROUP
+        SET
+            GRO_NAME = #{groName},
+            GRO_IMG = #{groImg},
+            GRO_NOTE = #{groNote},
+            MOD_DATE = NOW(),
+            MOD_IDX = 77, <!-- #{modIdx} -->
+            MOD_IP = '1.1.1.1' <!-- #{modIp} -->
+        WHERE
+            GRO_IDX = #{groIdx}
+    </update>
+    <update id="deleteGroup" parameterType="groupVO">
+        UPDATE
+            ITM_GROUP
+        SET
+            DEL_YN = 'Y',
+            DEL_DATE = NOW(),
+            DEL_IDX = 77, <!-- ${delIdx} -->
+            DEL_IP = '1.1.1.1' <!-- #{delIp} -->
+        WHERE
+            GRO_IDX = #{groIdx}
+    </update>
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @ControllerAdvice
 public class GroupCommonDataController {
@@ -19,4 +20,15 @@ public class GroupCommonDataController {
         return  groupService.getHeaderData(vo);
 
     }
+
+    @ModelAttribute("allGroupList")
+    public List<GroupVO> getAllGroupData(String memIdx) throws Exception {
+        memIdx = memIdx != null ? memIdx : "1";
+        return  groupService.getAllGroupData(memIdx);
+
+    }
+
+
+
+
 }
