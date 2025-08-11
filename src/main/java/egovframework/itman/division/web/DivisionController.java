@@ -40,29 +40,9 @@ public class DivisionController {
         return "itman/public/html/ingroup/departList";
     }
 
-    @RequestMapping("/itman/departView.do")
-    public String selectDivisionView(DivisionVO vo, Model model){
-        DivisionVO resultVO = divisionService.selectDivisionView(vo);
-        model.addAttribute("division", resultVO);
-        return "itman/public/html/ingroup/departView";
-    }
-
-    @RequestMapping("/itman/departEdit.do")
-    public String divisionForm(DivisionVO vo, Model model){
-        String groIdx;
-        if(vo.getDivIdx() != null){
-            DivisionVO resultVO = divisionService.selectDivisionView(vo);
-            model.addAttribute("division", resultVO);
-            groIdx = resultVO.getGroIdx();
-        } else {
-            groIdx = "1";
-        }
-
-        return "itman/public/html/ingroup/departWrite";
-    }
-
     @RequestMapping("/itman/divisionWrite.do")
     public String writeEmployeeDivision(DivisionVO vo, Model model) throws Exception {
+
         if(vo.getDivIdx() != null){
             DivisionVO resultVO = divisionService.selectDivisionView(vo);
             model.addAttribute("division", resultVO);

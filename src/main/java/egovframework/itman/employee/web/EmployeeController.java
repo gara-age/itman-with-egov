@@ -38,7 +38,6 @@ public class EmployeeController {
     @Resource(name = "assetService")
     private AssetServiceImpl assetService;
 
-
     private void addCommonLists(String groIdx, Model model) {
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
         model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
