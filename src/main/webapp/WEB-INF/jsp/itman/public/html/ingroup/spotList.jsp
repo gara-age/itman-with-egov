@@ -7,12 +7,12 @@
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
-	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/_css/default.css" />
- </head>
+     </head>
 <body>
 
 	<div id="contents">
 		<div class="tit_search">
+		<h2>직위 관리</h2>
 			<form  id="searchForm" name="searchForm" method="get" action="${pageContext.request.contextPath}/itman/spotList.do" onsubmit="this.page.value=1; this.range.value=1;">
 			<input type="hidden" id="page"      name="page"      value="${pagination.page}" />
 			<input type="hidden" id="range"     name="range"     value="${pagination.range}" />
@@ -34,21 +34,28 @@
 		<div class="num_list">
 			<p class="total">총 <span>${pagination.listCnt}</span>건의 결과가 있습니다.</p>
 		</div>
-		<!-- 글쓰기 버튼--> 
-		<p class="addContent"><a onclick="" class="edit">><span></span><span></span><span></span></a></p>
+		<!-- 글쓰기 버튼-->
+		<p class="addContent">
+		    <a href="#" onclick="window.open('/itman/positionWrite.do')" class="edit">><span></span><span></span><span></span></a></p>
+
 		<div class="Basic">
 			<ul class="adminList">
 				<li class="tit">
 					<p class="num">No</p>
 					<p class="cod">코드번호</p>
 					<p class="tit">직위명</p>
+					<p class="editDel">관리</p>
 				</li>
 				<c:if test="${!empty resultList}">
-					<c:forEach var="row" items="${resultList}">
-                    <li onClick="location.href='${pageContext.request.contextPath}/itman/positionView.do?posIdx=${row.posIdx}'">
-						<p class="num">${row.rowNum}</p>
-                        <p class="cod">${row.posCode}</p>
-                        <p class="tit">${row.posName}</p>
+					<c:forEach var="position" items="${resultList}">
+                    <li>
+						<p class="num">${position.rowNum}</p>
+                        <p class="cod">${position.posCode}</p>
+                        <p class="tit">${position.posName}</p>
+                        <p class="editDel" style="padding:0;">
+                            <a href="#" onclick="window.open('/itman/positionEdit.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+                            <a href="#" onclick="window.open('/itman/confirmPositionDel.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+                        </p>
                     </li>
 					</c:forEach>
 				</c:if>

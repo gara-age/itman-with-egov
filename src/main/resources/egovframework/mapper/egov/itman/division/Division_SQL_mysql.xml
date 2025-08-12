@@ -118,10 +118,5 @@
         WHERE
             DIV_IDX = #{divIdx}
     </update>
-
-
-
-
-
 </mapper>
 

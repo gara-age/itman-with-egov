@@ -42,7 +42,6 @@ public class DivisionController {
 
     @RequestMapping("/itman/divisionWrite.do")
     public String writeEmployeeDivision(DivisionVO vo, Model model) throws Exception {
-
         if(vo.getDivIdx() != null){
             DivisionVO resultVO = divisionService.selectDivisionView(vo);
             model.addAttribute("division", resultVO);

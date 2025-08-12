@@ -1,18 +1,18 @@
 package egovframework.itman.position.service;
 
 public class PositionVO {
-    private String posIdx;
-    private String groIdx;
-    private String posCode;
-    private String posName;
-    private String regDate;
-    private String regIdx;
-    private String modDate;
-    private String modIdx;
-    private String delYn;
-    private String delIdx;
-    private String delDate;
-    private String slNote;
+    private String posIdx; // 직위IDX
+    private String groIdx; // 소속그룹IDX
+    private String posCode; // 직위코드번호
+    private String posName; // 직위이름
+    private String regDate; // 생성일시
+    private String regIdx; // 생성자IDX
+    private String modDate; // 수정일시
+    private String modIdx; // 수정자IDX
+    private String delYn; // 삭제여부
+    private String delIdx; //삭제자IDX
+    private String delDate; // 삭제일시
+    private String slNote; // 비고
     private String rowNum;
 
     public String getRowNum() {
