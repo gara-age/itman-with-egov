@@ -1,57 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--
-<? $page_num_depth_01 = 5; ?>
-
-<?php
-    include("../_inc/dbconn.php");
-	session_start();
-    $group = $_SESSION['group'];
-	$search = $_GET['search'];
-
-	/** 페이지네이션  */
-	$page_per_result = 10;
-	$page = 1;
-	if($_GET['page'] !== null){
-		$page = $_GET['page'];
-	}
-
-	/** 검색 */
-	$sql = "SELECT * FROM ITM_SUPPLIER WHERE GRO_IDX = $group AND DEL_YN = 'N'";
-
-	if (empty($search)) {
-		$sql .= " ORDER BY SUP_IDX DESC";
-	}
-	else if ($search == 'all') {
-		$sql .= " AND (SUP_NAME LIKE '%$_GET[like]%' OR SUP_BNUM LIKE '%$_GET[like]%' OR SUP_MAIL LIKE '%$_GET[like]%' OR SUP_TEL LIKE '%$_GET[like]%') ORDER BY SUP_IDX DESC";
-	}
-	else if ($search == 'name') {
-		$sql .= " AND SUP_NAME LIKE '%$_GET[like]%' ORDER BY SUP_IDX DESC";
-	}
-	else if ($search == 'bnum') {
-		$sql .= " AND SUP_BNUM LIKE '%$_GET[like]%' ORDER BY SUP_IDX DESC";
-	}
-	else if ($search == 'mail') {
-		$sql .= " AND SUP_MAIL LIKE '%$_GET[like]%' ORDER BY SUP_IDX DESC";
-	}
-	else if ($search == 'tel') {
-		$sql .= " AND SUP_TEL LIKE '%$_GET[like]%' ORDER BY SUP_IDX DESC";
-	}
-	$count = queryCount($sql);
-	
-	$total_page = ceil($count/$page_per_result);
-
-	if($total_page == 0){
-		$total_page = 1;
-	}
-	
-    $page_start= ($page-1)*$page_per_result;
-
-	$sql .= " LIMIT $page_start, $page_per_result ";
-	$query = mysqli_query($dbconn, $sql);
-	
- 
- ?>
---%>
 
 <!doctype html>
 <html lang="ko">
