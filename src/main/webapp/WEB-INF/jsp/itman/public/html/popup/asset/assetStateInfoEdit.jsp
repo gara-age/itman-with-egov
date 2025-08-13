@@ -1,26 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-<%--include "../../_inc/dbconn.php";--%>
 
-<%--/**--%>
-<%-- * 세션 체크--%>
-<%-- */--%>
-<%--include "../../_inc/loginTest.php";--%>
-<%--login_check();--%>
-
-<%--$GROUP = $_SESSION['group'];--%>
-<%--$ASS_IDX = $_GET['ass_idx'];--%>
-<%--$STA_IDX = $_GET['sta_idx'];--%>
-
-
-<%--$sql = "SELECT * FROM ITM_STATE WHERE GRO_IDX = $GROUP";--%>
-<%--$query = mysqli_query($dbconn, $sql);--%>
-
-<%--$compare_sql = "SELECT * FROM ITM_ASSET WHERE ASS_IDX = $ASS_IDX ";--%>
-<%--$compare_query = mysqli_query($dbconn, $compare_sql);--%>
-<%--$compare_result = mysqli_fetch_array($compare_query);--%>
-<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>
@@ -60,23 +40,20 @@
 	</div>
 	<script>
 		function formSubmit(){
-			// $("#form").submit();
-			document.forms['form'].submit();
+			$state_empty = $("#state").val().trim();
 
-			setTimeout(() => {
-				window.opener.location.reload();
-				window.close();
-			}, 300);
+			if(!$state_empty){
+				alert("자산 상태를 선택해주세요");
+			} else {
+				document.forms['form'].submit();
+
+				setTimeout(() => {
+					window.opener.location.reload();
+					window.close();
+				}, 300);
+			}
+
 		}
-	<%--function updateAsset() {--%>
-	<%--	const assIdx = "${asset.assIdx}";--%>
-	<%--	const state = encodeURIComponent(document.getElementById("state").value);--%>
-
-	<%--	const url = "/itman/asset/updateAssetStateInfo.do?assIdx=" + assIdx + "&staIdx=" + state;--%>
-
-	<%--	window.opener.location.href = url;--%>
-	<%--	window.close();--%>
-	<%--}--%>
 </script>
 </body>
 </html>

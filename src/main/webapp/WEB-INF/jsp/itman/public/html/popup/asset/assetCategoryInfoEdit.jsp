@@ -1,22 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-<%--	include "../../_inc/dbconn.php";--%>
-
-<%--	/**--%>
-<%--	 * 세션 체크--%>
-<%--	 */--%>
-<%--	include "../../_inc/loginTest.php";--%>
-<%--	login_check();--%>
-
-<%--	$GROUP = $_SESSION['group'];--%>
-<%--	$ASS_IDX = $_GET['ass_idx'];--%>
-<%--	$ASS_CAT_IDX = $_GET['ass_cat_idx'];--%>
-
-<%--	$sql = "SELECT * FROM ITM_ASSET_CATEGORY WHERE GRO_IDX = $GROUP";--%>
-<%--	$query = mysqli_query($dbconn, $sql);--%>
-
-<%--?>--%>
 
 <!doctype html>
 <html lang="ko">
@@ -38,11 +21,10 @@
 				<li>
 				<p class="tit">자산 분류</p><!-- 분류, 상태, 위치, 구매처 등 셀렉 폼-->
 					<p class="cont">
-						<select id="ass_cat" name = "assCatIdx">
+						<select id="ass_cat_idx" name = "assCatIdx">
 							<option value="">분류선택</option>
 							<c:forEach var="c" items="${categories}">
 								<option value="${c.assCatIdx}" name="assCatIdx" ${asset.assCatIdx== c.assCatIdx ? 'selected' : ''} data-code="${c.assCatCode}">${c.assCatName}</option>
-								<%--							<input type="hidden" id="assCatCode" value="${c.assCatCode}"/>--%>
 							</c:forEach>
 						</select>
 					</p>
@@ -59,13 +41,17 @@
 	</div>
 	<script>
 		function formSubmit(){
-			// $("#form").submit();
-			document.forms['form'].submit();
+			$ass_cat_idx_empty = $("#ass_cat_idx").val().trim();
+			if(!$ass_cat_idx_empty){
+				alert("자산 분류를 선택해주세요.")
+			} else {
+				document.forms['form'].submit();
 
-			setTimeout(() => {
-				window.opener.location.reload();
-				window.close();
-			}, 300);
+				setTimeout(() => {
+					window.opener.location.reload();
+					window.close();
+				}, 300);
+			}
 		}
 	<%--function updateAsset() {--%>
 	<%--	const assIdx = "${asset.assIdx}";--%>
