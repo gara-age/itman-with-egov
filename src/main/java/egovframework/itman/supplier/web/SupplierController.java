@@ -86,6 +86,9 @@ public class SupplierController {
         vo.setGroIdx(groIdx);
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
+        System.err.println("vo.groIdx: " + vo.getGroIdx());
+        System.err.println("vo.delIdx: " + vo.getDelIdx());
+        System.err.println("vo.supIdx: " + vo.getSupIdx());
         supplierService.deleteSupply(vo);
         return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매처가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
