@@ -30,7 +30,8 @@
         SELECT
             ASS_CAT_IDX AS assCatIdx,
             ASS_CAT_CODE AS assCatCode,
-            ASS_CAT_NAME AS assCatName
+            ASS_CAT_NAME AS assCatName,
+            SL_NOTE AS slNote
         FROM ITM_ASSET_CATEGORY
         <include refid="assetCategoryCondition" />
         LIMIT #{startList} , #{listSize}

@@ -40,11 +40,11 @@
 			<p class="title">삭제하시겠습니까?</p>
 		</div>
 		<div class="pop_cont">
-			<form method="POST" id="form" action="/itman/deletePosition.do">
-		<input name="supIdx" type="hidden" value="${supply.supIdx}"/>
+			<form method="POST" id="form" action="${actionUrl}">
 				<input name="locIdx" type="hidden" value="${location.locIdx}"/>
 				<input name="assCatIdx" type="hidden" value="${assetCategory.assCatIdx}" />
 				<input name="posIdx" type="hidden" value="${position.posIdx}" />
+				<input name="supIdx" type="hidden" value="${supply.supIdx}" />
 			<ul class="contEdit">
 				<li>
 					<p class="tit">비고</p>

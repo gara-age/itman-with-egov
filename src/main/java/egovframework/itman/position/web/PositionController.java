@@ -55,7 +55,11 @@ public class PositionController {
     }
 
     @PostMapping("/itman/insertPosition.do")
-    public String insertPosition(PositionVO vo, Model model) {
+    public String insertPosition(PositionVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         positionService.insertPosition(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

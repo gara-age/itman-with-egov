@@ -81,7 +81,7 @@
 				<p class="tit">구매처 </p>
 				<p class="cont">
 				<input type="hidden" id = "sup_idx" name="sup_idx" value="" />
-				<a onclick="window.open('/popup/insertAssetSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
+				<a onclick="window.open('/popup/selectAssetSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none" class="popbtn">구매처 선택</a><span class="name" id="sup_name" value=""></span></p>
 			
 				<p class="edit"><a onclick="window.open('/itman/asset/contWriteSupplier.do', '구매처팝업', 'width=500, height=335')" href="#none">구매처 추가</a></p>
 			</li>

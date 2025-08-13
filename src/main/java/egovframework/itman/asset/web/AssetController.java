@@ -175,6 +175,7 @@ public class AssetController {
         vo.setGroIdx(groIdx);
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
+        assLogVO.setRegIdx(regIdx);
         assetService.insertAsset(vo);
         setInsertAssLog(assLogVO, vo);
         assLogService.insertAssLog(assLogVO);

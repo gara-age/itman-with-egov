@@ -35,7 +35,7 @@ public class SupplierController {
         return "itman/public/html/ingroup/buyList";
     }
 
-    @RequestMapping("/itman/asset/insertAssetSupplier.do")
+    @RequestMapping("/popup/selectAssetSupplier.do")
     public String supplierPop(SupplierVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "1") int range
@@ -84,6 +84,9 @@ public class SupplierController {
         vo.setGroIdx(groIdx);
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
+        System.err.println("vo.groIdx: " + vo.getGroIdx());
+        System.err.println("vo.delIdx: " + vo.getDelIdx());
+        System.err.println("vo.supIdx: " + vo.getSupIdx());
         supplierService.deleteSupply(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

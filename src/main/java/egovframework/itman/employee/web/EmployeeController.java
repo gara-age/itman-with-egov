@@ -163,7 +163,8 @@ public class EmployeeController {
         vo.setModIdx(modIdx);
         employeeService.updateEmploTelInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploDivisionInfoEdit.do")
@@ -183,7 +184,8 @@ public class EmployeeController {
         vo.setModIdx(modIdx);
         employeeService.updateEmploDivisionInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploPosInfoEdit.do")
@@ -205,7 +207,8 @@ public class EmployeeController {
         vo.setModIdx(modIdx);
         employeeService.updateEmploPosInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploMailInfoEdit.do")
@@ -225,7 +228,8 @@ public class EmployeeController {
 
         employeeService.updateEmploMailInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploNameInfoEdit.do")
@@ -240,7 +244,8 @@ public class EmployeeController {
     public String updateEmploNameInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
         employeeService.updateEmploNameInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploStateInfoEdit.do")
@@ -262,7 +267,8 @@ public class EmployeeController {
         vo.setModIdx(modIdx);
         employeeService.updateEmploStateInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/emploNumInfoEdit.do")
@@ -281,7 +287,8 @@ public class EmployeeController {
         vo.setModIdx(modIdx);
         employeeService.updateEmploNumInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/insert.do")
@@ -310,7 +317,8 @@ public class EmployeeController {
         vo.setDelIdx(delIdx);
         employeeService.deleteEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");
-        return "redirect:/itman/employeeList.do";
+        model.addAttribute("script", "<script>window.opener.location.href='/itman/employeeList.do'; window.close();</script>");
+        return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/popup/searchPop.do")

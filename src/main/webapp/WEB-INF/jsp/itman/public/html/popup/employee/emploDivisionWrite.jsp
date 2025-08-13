@@ -1,18 +1,4 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-
-<%--	include "../../_inc/dbconn.php";--%>
-<%--		--%>
-<%--	/**--%>
-<%--	 * 세션 체크--%>
-<%--	 */--%>
-<%--	include "../../_inc/loginTest.php";--%>
-<%--	login_check();--%>
-<%--	--%>
-<%--	$group = $_SESSION['group'];--%>
-<%--	$which = $_GET['which'];--%>
-<%--	--%>
-<%--?>--%>
 
 <!doctype html>
 <html lang="ko">
@@ -27,14 +13,14 @@
 		</div>
 		<div class="pop_cont">
 			<ul class="contEdit">
-				<form id="frm" name="form" method="post" action="${pageContext.request.contextPath}/itman/insertEmploDivision.do" >
+				<form id="form" name="form" method="post" action="${pageContext.request.contextPath}/itman/insertEmploDivision.do" >
 				<li>
 					<p class="tit">부서명 <span>*</span></p>
 					<p class="cont"><input id="div_name" name="divName" type="text" placeholder="추가할 부서명을 입력해 주세요."></p>
 				</li>
 				<li>
 					<p class="tit">코드번호 <span>*</span></p>
-					<p class="cont"><input name="div_code" type="text" placeholder="추가할 부서 코드번호를 입력해 주세요."></p>
+					<p class="cont"><input id="div_code" name="divCode" type="text" placeholder="추가할 부서 코드번호를 입력해 주세요."></p>
 				</li>
 				<li>
 					<p class="tit">사용유무</p>
