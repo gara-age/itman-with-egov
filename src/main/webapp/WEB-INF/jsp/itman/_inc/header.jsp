@@ -11,7 +11,8 @@
 		<p class="ham"><a href="#none"><span></span><span></span><span></span></a></p>
 		<h1>
 			<a href="${pageContext.request.contextPath}/itman/dashboard.do">
-				<img src="/images/_img/groupImage/no_img.png" />
+				<img src="${pageContext.request.contextPath}/upload/groImg/${sessionScope.group.groImg}" onerror = "this.src='${pageContext.request.contextPath}/images/_img/groupImage/no_img.png'" />
+
 			</a>
 		</h1>
 		<div class="tmn">

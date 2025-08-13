@@ -9,4 +9,5 @@ public interface GroupService {
     void insertGroup(GroupVO vo) throws Exception;
     void updateGroup(GroupVO vo) throws Exception;
     void deleteGroup(GroupVO vo) throws Exception;
+    GroupVO selectGroup(String groIdx);
 }

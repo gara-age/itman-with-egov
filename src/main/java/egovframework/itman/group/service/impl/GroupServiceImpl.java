@@ -42,4 +42,9 @@ public class GroupServiceImpl implements GroupService {
             public void deleteGroup(GroupVO vo) throws Exception{
                 groupDAO.deleteGroup(vo);
             }
+
+            @Override
+            public GroupVO selectGroup(String groIdx){
+                return groupDAO.selectGroup(groIdx);
+            }
 }

@@ -34,4 +34,7 @@ public class GroupDAO {
     public void deleteGroup(GroupVO vo) throws Exception{
         sqlSession.update("groupDAO.deleteGroup", vo);
     }
+    public GroupVO selectGroup(String groIdx){
+        return sqlSession.selectOne("groupDAO.selectGroup", groIdx);
+    }
 }

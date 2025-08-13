@@ -33,6 +33,7 @@ public class GroupController {
     @RequestMapping("/itman/group.do")
     public String selectGroupList(HttpSession session, Model model) throws Exception {
         session.removeAttribute("groIdx");
+        session.removeAttribute("group");
         String memIdx = ((MemberVO) session.getAttribute("loginUser")).getMemIdx();
        List<GroupVO> list = groupService.selectGroupList(memIdx);
 
@@ -77,8 +78,8 @@ public class GroupController {
     @ResponseBody
     public ResponseEntity<String> setSessionValue(@RequestParam("groIdx") String groIdx, HttpSession session) {
         session.setAttribute("groIdx", groIdx);
-        System.err.println("------------------------------------------------------------");
-        System.err.println("groIdx = " + groIdx);
+        GroupVO vo = groupService.selectGroup(groIdx);
+        session.setAttribute("group", vo);
         return ResponseEntity.ok("success");
     }
 
