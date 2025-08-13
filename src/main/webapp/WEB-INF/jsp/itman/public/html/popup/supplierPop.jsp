@@ -104,7 +104,7 @@ function changePage(page, range, rangeSize) {
 }
 //처음 버튼 이벤트
 function fn_maxPrev() {
-	var url = "${pageContext.request.contextPath}/popup/insertAssetSupplier.do";
+	var url = "${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do";
 	url = url + "?page=" + 1;
 	url = url + "&range=" + 1;
 	location.href = url;	}
@@ -112,13 +112,13 @@ function fn_maxPrev() {
 function fn_prev(page, range, rangeSize) {
 	var page = (((range - 2) * rangeSize) + 1) <= 1 ? 1 : ((range - 2) * rangeSize) + 1 ;
 	var range = (range - 1) <= 1 ? 1 : range - 1;
-	var url = "${pageContext.request.contextPath}/popup/insertAssetSupplier.do";
+	var url = "${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
 	location.href = url;	}
 //페이지 번호 클릭
 function fn_pagination(page, range, rangeSize, searchType, keyword) {
-	var url = "${pageContext.request.contextPath}/popup/insertAssetSupplier.do";
+	var url = "${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
 	location.href = url;		}
@@ -126,7 +126,7 @@ function fn_pagination(page, range, rangeSize, searchType, keyword) {
 function fn_next(pageCnt, page, range, rangeSize) {
 	var page = (parseInt((range * rangeSize)) + 1) >= pageCnt ? pageCnt / rangeSize * 10 : parseInt((range * rangeSize)) + 1 ;
 	var range = (parseInt(range) + 1) >= parseInt(pageCnt / rangeSize + 1) ? parseInt(pageCnt / rangeSize + 1) : (parseInt(range) + 1) ;
-	var url = "${pageContext.request.contextPath}/popup/insertAssetSupplier.do";
+	var url = "${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
 	location.href = url;	}
@@ -134,7 +134,7 @@ function fn_next(pageCnt, page, range, rangeSize) {
 function fn_maxNext(pageCnt, range, rangeSize) {
 	var page =  pageCnt / rangeSize * 10;
 	var range =    parseInt(pageCnt / rangeSize + 1);
-	var url = "${pageContext.request.contextPath}/popup/insertAssetSupplier.do";
+	var url = "${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
 	location.href = url;

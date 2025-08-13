@@ -35,7 +35,7 @@ public class SupplierController {
         return "itman/public/html/ingroup/buyList";
     }
 
-    @RequestMapping("/popup/insertAssetSupplier.do")
+    @RequestMapping("/itman/asset/insertAssetSupplier")
     public String supplierPop(SupplierVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "1") int range
