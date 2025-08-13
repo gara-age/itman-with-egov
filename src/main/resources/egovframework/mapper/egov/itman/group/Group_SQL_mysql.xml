@@ -109,4 +109,15 @@
         WHERE
             GRO_IDX = #{groIdx}
     </update>
+
+    <select id="selectGroup" parameterType="string" resultType="groupVO">
+        SELECT
+            GRO_IDX AS groIdx,
+            GRO_NAME AS groName,
+            GRO_IMG AS groImg
+        FROM
+            ITM_GROUP
+        WHERE
+            GRO_IDx = #{groIdx}
+    </select>
 </mapper>
