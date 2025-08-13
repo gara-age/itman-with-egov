@@ -24,7 +24,7 @@
 			<p class="title">구매처 추가 팝업</p>
 		</div>
 		<div class="pop_cont">
-			<form method="post" id="form" action="${pageContext.request.contextPath}/itman/asset/insertAssetSupplier.do">
+			<form method="post" id="form" action="${pageContext.request.contextPath}/itman/asset/insertSupplier.do">
 			<ul class="contEdit">
 				<li>
 					<p class="tit">구매처 명<span>*</span></p>
