@@ -68,7 +68,6 @@
         FROM ITM_EMP_STATE
         WHERE GRO_IDX = #{groIdx}
           AND DEL_YN = 'N'
-       <!--   AND EMP_ST_YN IN ('사', 'Y') --> <!--EMP_ST_YN은 직원의 상태와 무관하게 장비 사용여부이므로 여기서는 조건 불필요 -->
         ORDER BY EMP_ST_NAME
     </select>
 
@@ -86,12 +85,12 @@
         </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            1 , <!-- #{groIdx} 임시IDX -->
+            #{groIdx} ,
             #{empStCode},
             #{empStName},
             'Y',
             NOW(),
-            77, <!-- #{regIdx} 임시 IDX-->
+            #{regIdx},
             <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
         </trim>
     </insert>
@@ -103,7 +102,7 @@
             EMP_ST_NAME = #{empStName},
             EMP_ST_CODE = #{empStCode},
             MOD_DATE = NOW(),
-            MOD_IDX = 77
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_ST_IDX = #{empStIdx}
     </update>
@@ -114,7 +113,7 @@
             DEL_YN = 'Y',
             EMP_ST_YN = 'N',
             DEL_DATE = NOW(),
-            DEL_IDX = 77,
+            DEL_IDX = #{delIdx},
             SL_NOTE = #{slNote}
         WHERE
             EMP_ST_IDX = #{empStIdx}

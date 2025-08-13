@@ -95,10 +95,11 @@
             POS_IDX,
             EMP_ST_IDX,
             REG_DATE,
+            REG_IDx
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            1, <!--테스트를 위한 임의의 groIdx-->
+            #{groIdx},
             #{empNum},
             #{empName},
             <if test="empMail  != null and empMail.trim().length() > 0">#{empMail},</if>
@@ -107,7 +108,7 @@
             #{posIdx},
             #{empStIdx},
             NOW(),
-
+            #{regIdx},
         </trim>
     </insert>
 
@@ -116,7 +117,8 @@
             ITM_EMPLOYE
         SET
             EMP_TEL = #{empTel},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -126,7 +128,8 @@
             ITM_EMPLOYE
         SET
             EMP_NUM = #{empNum},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -135,7 +138,8 @@
             ITM_EMPLOYE
         SET
             DIV_IDX = #{divIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -144,7 +148,8 @@
             ITM_EMPLOYE
         SET
             POS_IDX = #{posIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -153,8 +158,8 @@
             ITM_EMPLOYE
         SET
             EMP_MAIL = #{empMail},
-
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -163,7 +168,8 @@
             ITM_EMPLOYE
         SET
             EMP_NAME = #{empName},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -172,7 +178,8 @@
             ITM_EMPLOYE
         SET
             EMP_ST_IDX = #{empStIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>
@@ -182,7 +189,8 @@
             ITM_EMPLOYE
         SET
             DEL_YN = 'Y' ,
-            DEL_DATE = NOW()
+            DEL_DATE = NOW(),
+            DEL_IDX = #{modIdx}
         WHERE
             EMP_IDX = #{empIdx}
     </update>

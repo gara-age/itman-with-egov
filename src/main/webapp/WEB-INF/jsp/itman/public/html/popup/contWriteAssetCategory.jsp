@@ -1,15 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--    --%>
-<%--    // group 불러오기--%>
-<%--    include "../_inc/loginTest.php";--%>
-<%--    login_check();--%>
-<%--    $group = $_SESSION['group'];--%>
-
-
-<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>
@@ -38,7 +28,7 @@
 					<p class="cont"><input name="slNote" type="text" /></p>
 				</li>
 			</ul>
-			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="javascript:formSubmit();" class="comp">작성</a></p>
+			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="formSubmit();" class="comp">작성</a></p>
 		</form>
 		</div>
 	</div>

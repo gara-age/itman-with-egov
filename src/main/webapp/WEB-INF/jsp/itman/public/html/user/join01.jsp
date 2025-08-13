@@ -6,13 +6,12 @@
 <html lang="ko">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-	 <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 
  </head>
 <body>
 	<div id="contents">
 		<div class="user_box join">
-			<p class="tit"><a href="../index.php"><img src="../../../../../../images/_img/itman_logo.png" alt="아이티맨" /></a></p>
+			<p class="tit"><a href="${pageContext.request.contextPath}/itman/index.do"><img src="../../../../../../images/_img/itman_logo.png" alt="아이티맨" /></a></p>
 			<ul class="step">
 				<li class="on"><span>1</span>서비스 이용약관</li>
 				<li><span>2</span></li>
@@ -218,46 +217,43 @@
 				</li>
 			</ul>
 			<p class="all_check"><input type="checkbox" name="selectall" id="ag_all" onclick='selectAll(this)'/><label for="ag_all">모두 동의합니다</label></p>
-			<p class="user_btn" style="background-color: #2e2fbf"><a href="javascript:fn_submit();">다음</a></p>
+			<p class="user_btn" style="background-color: #2e2fbf"><a href="#" onclick="fn_submit();">다음</a></p>
 		</div>
 	</div>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
+	<script>
+		function checkSelectAll(checkbox) {
+			const selectall = document.querySelector('input[name="selectall"]');
+
+			// 하나라도 해제되면 전체선택 해제
+			if (!checkbox.checked) {
+				selectall.checked = false;
+				return;
+			}
+
+			// 모든 개별 체크박스가 체크됐는지 확인
+			const checkboxes = document.querySelectorAll('input[name="ag01"], input[name="ag02"]');
+			selectall.checked = Array.from(checkboxes).every(cb => cb.checked);
+		}
+
+		function selectAll(selectAll) {
+			const checkboxes = document.querySelectorAll('input[name="ag01"], input[name="ag02"]');
+			checkboxes.forEach(cb => cb.checked = selectAll.checked);
+		}
+
+		function fn_submit(){
+			if($('input[name="ag01"]:checkbox:checked').length < 1){
+				alert("개인정보 수집 및 이용 동의가 필요합니다.");
+				return false;
+			}
+			if($('input[name="ag02"]:checkbox:checked').length < 1){
+				alert("금지 행위 및 이용 규칙에 대한 동의가 필요합니다.");
+				return false;
+			}
+
+			location.href='/itman/user/writeUserInfo.do';
+		}
+	</script>
 </body>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 
-function checkSelectAll(checkbox)  {
-  const selectall 
-    = document.querySelector('input[name="selectall"]');
-  
-  if(checkbox.checked === false)  {
-    selectall.checked = false;
-  }
-}
-
-function selectAll(selectAll)  {
-  const checkboxes1
-       = document.getElementsByName('ag01');
-  checkboxes1.forEach((checkbox) => {
-    checkbox.checked = selectAll.checked;
-  })
-  const checkboxes2
-       = document.getElementsByName('ag02');
-  checkboxes2.forEach((checkbox) => {
-    checkbox.checked = selectAll.checked;
-  })
-}
-
-function fn_submit(){
-    if($('input[name="ag01"]:checkbox:checked').length < 1){
-		alert("개인정보 수집 및 이용 동의가 필요합니다.");
-		return false;
-	}
-	if($('input[name="ag02"]:checkbox:checked').length < 1){
-		alert("금지 행위 및 이용 규칙에 대한 동의가 필요합니다.");
-		return false;
-	}
-	
-	location.href='join02.jsp';
-}
-</script>
 </html>

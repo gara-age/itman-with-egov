@@ -85,13 +85,13 @@
             </trim>
             VALUES
             <trim prefix="(" suffix=")" suffixOverrides=",">
-            1,
+            #{groIdx},
             #{divCode},
             #{divName},
             <if test="divLoc != null and divLoc.trim().length > 0">#{divLoc},</if>
             <if test="divTel != null and divTel.trim().length > 0">#{divTel},</if>
             NOW(),
-            77,
+            #{regIdx},
             #{divYn},
             </trim>
     </insert>
@@ -105,7 +105,8 @@
             DIV_LOC = #{divLoc},
             DIV_TEL = #{divTel},
             DIV_YN = #{divYn},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE DIV_IDX = #{divIdx}
     </update>
 
@@ -114,7 +115,8 @@
             ITM_DIVISION
         SET
             DEL_YN = 'Y',
-            DEL_DATE = NOW()
+            DEL_DATE = NOW(),
+            DEL_IDX = #{delIdx}
         WHERE
             DIV_IDX = #{divIdx}
     </update>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -49,8 +50,10 @@ public class EmployeeController {
     public String selectEmployeeList(EmployeeVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "1") int range
+                                     , HttpSession session
     ) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+        String groIdx = (String) session.getAttribute("groIdx");
+
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
         int listCnt = employeeService.selectEmployeeListCnt(pagination);
@@ -68,8 +71,8 @@ public class EmployeeController {
 
 
     @RequestMapping("/itman/employeeView.do")
-    public String selectEmployeeView(EmployeeVO vo, Model model, Pagination pagination) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String selectEmployeeView(EmployeeVO vo, Model model, Pagination pagination, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
@@ -82,15 +85,9 @@ public class EmployeeController {
     // ---------------------생성--------------------------
 
     @RequestMapping("/itman/employeeWrite.do")
-    public String employeeForm(EmployeeVO vo, Model model) {
-        String groIdx = vo.getGroIdx();
-        if (vo.getEmpIdx() != null) {
-            EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
-            model.addAttribute("employee", resultVO);
-            groIdx = resultVO.getGroIdx();
-        } else {
-            groIdx = "1";
-        }
+    public String employeeForm(EmployeeVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+
         addCommonLists(groIdx, model);
 
 
@@ -104,7 +101,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/itman/insertEmploDivision.do")
-    public String insertEmployeeDivision(DivisionVO vo, Model model) {
+    public String insertEmployeeDivision(DivisionVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         divisionService.insertDivision(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -117,7 +118,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/itman/insertEmploPosition.do")
-    public String insertEmployeePosition(PositionVO vo, Model model) {
+    public String insertEmployeePosition(PositionVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         positionService.insertPosition(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -130,7 +135,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/itman/insertEmploState.do")
-    public String insertEmployeeState(EmpStateVO vo, Model model) {
+    public String insertEmployeeState(EmpStateVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         empStateService.insertEmployeeState(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -147,7 +156,11 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploTelInfo.do")
-    public String updateEmploTelInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploTelInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         employeeService.updateEmploTelInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -155,17 +168,19 @@ public class EmployeeController {
 
     @RequestMapping("/itman/emploDivisionInfoEdit.do")
     public String employeeDivisionEdit(EmployeeVO vo, Model model) {
-        String groIdx;
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
             model.addAttribute("employee", resultVO);
-            groIdx = resultVO.getGroIdx();
+            String groIdx = resultVO.getGroIdx();
         model.addAttribute("divisionList", divisionService.selectDivisionsByGroup(groIdx));
-
 
         return "itman/public/html/popup/employee/emploDivisionInfoEdit";
     }
     @RequestMapping("/itman/updateEmploDivisionInfo.do")
-    public String updateEmploDivisionInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploDivisionInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         employeeService.updateEmploDivisionInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -173,10 +188,9 @@ public class EmployeeController {
 
     @RequestMapping("/itman/emploPosInfoEdit.do")
     public String employeePosEdit(EmployeeVO vo, Model model) {
-        String groIdx;
         EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
         model.addAttribute("employee", resultVO);
-        groIdx = resultVO.getGroIdx();
+        String groIdx = resultVO.getGroIdx();
 
         model.addAttribute("positionList", positionService.selectPositionsByGroup(groIdx));
 
@@ -184,7 +198,11 @@ public class EmployeeController {
         return "itman/public/html/popup/employee/emploPosInfoEdit";
     }
     @RequestMapping("/itman/updateEmploPosInfo.do")
-    public String updateEmploPosInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploPosInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         employeeService.updateEmploPosInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -199,7 +217,12 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploMailInfo.do")
-    public String updateEmploMailInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploMailInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
+
         employeeService.updateEmploMailInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -222,10 +245,9 @@ public class EmployeeController {
 
     @RequestMapping("/itman/emploStateInfoEdit.do")
     public String employeeStateEdit(EmployeeVO vo, Model model) {
-        String groIdx;
             EmployeeVO resultVO = employeeService.selectEmployeeView(vo);
             model.addAttribute("employee", resultVO);
-            groIdx = resultVO.getGroIdx();
+            String groIdx = resultVO.getGroIdx();
 
         model.addAttribute("empStateList", empStateService.selectEmpStatesByGroup(groIdx));
 
@@ -233,7 +255,11 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploStateInfo.do")
-    public String updateEmploStateInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploStateInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         employeeService.updateEmploStateInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
@@ -248,14 +274,22 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploNumInfo.do")
-    public String updateEmploNumInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploNumInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         employeeService.updateEmploNumInfo(vo);
         redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
         return "redirect:/itman/employeeView.do?empIdx=" + vo.getEmpIdx();
     }
 
     @RequestMapping("/itman/insert.do")
-    public String insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         employeeService.insertEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
         return "redirect:/itman/employeeList.do";
@@ -269,7 +303,11 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/emploDel.do")
-    public String deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setDelIdx(delIdx);
         employeeService.deleteEmployee(vo);
         redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");
         return "redirect:/itman/employeeList.do";
@@ -278,8 +316,9 @@ public class EmployeeController {
     @RequestMapping("/itman/popup/searchPop.do")
     public String searchPop(EmployeeVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+            , @RequestParam(defaultValue = "1") int range
+            , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -24,9 +25,11 @@ public class DivisionController {
     @RequestMapping("/itman/departList.do")
     public String selectDivisionList(DivisionVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range) throws Exception {
+            , @RequestParam(defaultValue = "1") int range
+            , HttpSession session) throws Exception {
 
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+        String groIdx = (String) session.getAttribute("groIdx");
+
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -50,14 +53,22 @@ public class DivisionController {
     }
 
     @PostMapping("/itman/insertDepart.do")
-    public String insertDivision(DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String insertDivision(DivisionVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         divisionService.insertDivision(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
 
     @PostMapping("/itman/updateDepart.do")
-    public String updateDivision(@ModelAttribute DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String updateDivision(@ModelAttribute DivisionVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         divisionService.updateDivision(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -70,7 +81,11 @@ public class DivisionController {
     }
 
     @PostMapping("/itman/deleteDepart.do")
-    public String deleteDivision(DivisionVO vo, Model model) {
+    public String deleteDivision(DivisionVO vo, Model model, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setDelIdx(delIdx);
         divisionService.deleteDivision(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

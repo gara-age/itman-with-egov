@@ -40,19 +40,10 @@
  </head>
 <body id="group">
 	<div id="contents">
-
 <div class="groupBox">
 	<div class="groupItem">
 		<a onclick="window.open('${pageContext.request.contextPath}/itman/addGroup.do', '그룹생성팝업', 'width=500, height=400')" href="#" class="addBox">그룹 생성하기</a>
 	</div>
-<%--    <?php while($row = (mysqli_fetch_array($result))) { --%>
-<%--        $ASSET = "SELECT * FROM ITM_ASSET WHERE GRO_IDX={$row['GRO_IDX']} AND DEL_YN = 'N'";--%>
-<%--        $ASSET_result = mysqli_query($dbconn, $ASSET);--%>
-<%--        $acount = mysqli_num_rows($ASSET_result);    --%>
-<%--        $EMPLO = "SELECT * FROM ITM_EMPLOYE WHERE GRO_IDX={$row['GRO_IDX']} AND DEL_YN = 'N'";--%>
-<%--        $EMPLO_result = mysqli_query($dbconn, $EMPLO);--%>
-<%--        $ecount = mysqli_num_rows($EMPLO_result);    --%>
-<%--    ?>--%>
 
     <c:if test="${!empty groupList}">
         <c:set var="colors" value="${fn:split('c01,c02,c03', ',')}" />
@@ -61,13 +52,13 @@
             <div class="groupItem">
                 <div class="Box ${color}">
                     <p class="name">
-                        <a href="/itman/dashboard.do?groIdx=${group.groIdx}">${group.groName}</a>
+                        <a href="#" onclick="goWithSession(${group.groIdx}, '/itman/dashboard.do')">${group.groName}</a>
                     </p>
                     <p class="going">
-                        <a href="/itman/assetsList.do?groIdx=${group.groIdx}">
+                        <a href="#" onclick="goWithSession(${group.groIdx}, '/itman/assetsList.do')">
                             자산<span>${group.groAssetCnt}</span>
                         </a>
-                        <a href="/itman/employeeList.do?groIdx=${group.groIdx}">
+                        <a href="#" onclick="goWithSession(${group.groIdx}, '/itman/employeeList.do')">
                             직원<span>${group.groEmployeeCnt}</span>
                         </a>
                     </p>
@@ -86,6 +77,23 @@
 
 	</div>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />
-
+<script>
+    function goWithSession(groIdx, targetUrl){
+        fetch("${pageContext.request.contextPath}/itman/setGroIdx.do", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"},
+            body: new URLSearchParams({groIdx: groIdx}),
+            credentials: "same-origin"
+        }).then(res => {
+                if (res.ok) {
+                    location.href = targetUrl + "?groIdx=" + groIdx;
+                } else {
+                    alert("세션 저장 실패");
+                }
+        });
+        }
+</script>
+</body>
 </html>
 

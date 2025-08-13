@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,9 @@ public class LocationController {
     @RequestMapping("/itman/popup/locationPop.do")
     public String locationPop(LocationVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+            , @RequestParam(defaultValue = "1") int range
+            , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -38,8 +40,9 @@ public class LocationController {
     @RequestMapping("/itman/assetLocationList.do")
     public String locationList(LocationVO vo, Pagination pagination , Model model
     , @RequestParam(defaultValue = "1") int page
-    , @RequestParam(defaultValue = "1") int range) throws Exception {
-    String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    , @RequestParam(defaultValue = "1") int range
+    , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
     pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -62,7 +65,11 @@ public class LocationController {
     }
 
     @PostMapping("/itman/updateLocation.do")
-    public String updateLocation(LocationVO vo, Model model) throws Exception {
+    public String updateLocation(LocationVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         locationService.updateAssetLocation(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -76,7 +83,11 @@ public class LocationController {
 
 
     @PostMapping("/itman/deleteLocation.do")
-    public String deleteLocation(LocationVO vo, Model model) throws Exception {
+    public String deleteLocation(LocationVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setDelIdx(delIdx);
         locationService.deleteAssetLocation(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

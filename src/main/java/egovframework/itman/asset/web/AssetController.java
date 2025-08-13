@@ -10,6 +10,7 @@ import egovframework.itman.assetCategory.service.impl.AssetCategoryServiceImpl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.employee.service.EmployeeVO;
 import egovframework.itman.employee.service.impl.EmployeeServiceImpl;
+import egovframework.itman.group.service.GroupVO;
 import egovframework.itman.hardware.service.impl.HardwareServiceImpl;
 import egovframework.itman.location.service.LocationVO;
 import egovframework.itman.location.service.impl.LocationServiceImpl;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.stream.Location;
 import java.io.File;
 import java.util.HashMap;
@@ -54,6 +56,7 @@ public class AssetController {
     SoftwareServiceImpl softwareService;
     @Resource(name= "assLogService")
     AssLogServiceImpl assLogService;
+
 
     private void selectByGroup(String groIdx, Model model) throws Exception {
         model.addAttribute("categories", assetCategoryService.selectAssetCategoriesByGroup(groIdx));
@@ -88,8 +91,14 @@ public class AssetController {
     @RequestMapping("/itman/assetsList.do")
     public String selectAssetsList(AssetVO vo, Pagination pagination , Model model
     , @RequestParam(defaultValue = "1") int page
-    , @RequestParam(defaultValue = "1") int range) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    , @RequestParam(defaultValue = "1") int range
+    , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+//        if(session.getAttribute("groIdx") != null) {
+//            System.err.println("groidx is not null");
+//        } else {
+//            System.err.println("groidx is null");
+//        }
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -116,9 +125,9 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/dashboard.do")
-    public String selectAssetDashboard(StateVO stateVO , Model model) throws Exception {
-    String groIdx = stateVO.getGroIdx() != null ? stateVO.getGroIdx() : "1";
-    List<AssLogVO> historyList = assLogService.selectDashBoardAssLogList(groIdx);
+    public String selectAssetDashboard(StateVO stateVO , Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        List<AssLogVO> historyList = assLogService.selectDashBoardAssLogList(groIdx);
     List<StateVO> stateList = stateService.selectDashBoardAssetStateList(groIdx);
     model.addAttribute("historyList", historyList);
     model.addAttribute("stateList", stateList);
@@ -128,8 +137,8 @@ public class AssetController {
     //-------------------------------------생성-----------------------------------------
 
     @RequestMapping("/itman/assetsWrite.do")
-    public String assetForm(AssetVO vo, Pagination pagination ,Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetForm(AssetVO vo, Pagination pagination ,Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         int inGroupCnt = assetService.selectInGroupAssetListCnt(pagination);
         selectByGroup(groIdx, model);
@@ -141,7 +150,8 @@ public class AssetController {
     public String insertAsset(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
                               @RequestParam(value = "assImgFile", required = false) MultipartFile file,
                               HttpServletRequest request,
-                              Model model, RedirectAttributes redirectAttributes) throws Exception {
+                              Model model, RedirectAttributes redirectAttributes,
+                              HttpSession session) throws Exception {
        if(!file.isEmpty()){
            String uploadDir = "/upload/assImg/";
            String realDir = request.getServletContext().getRealPath(uploadDir);
@@ -161,7 +171,10 @@ public class AssetController {
            file.transferTo(img);
            vo.setImage(savedName);
        }
-
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         assetService.insertAsset(vo);
         setInsertAssLog(assLogVO, vo);
         assLogService.insertAssLog(assLogVO);
@@ -170,52 +183,65 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/contWriteAssetCategory.do")
-    public String writeAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
-        model.addAttribute("vo", vo);
+    public String writeAssetCategory() throws Exception {
         return "itman/public/html/popup/contWriteAssetCategory";
     }
 
     @PostMapping("/itman/asset/insertAssetCategory.do")
-    public String insetAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
+    public String insetAssetCategory(AssetCategoryVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
+        System.err.println("vo.assCatName" + vo.getAssCatName());
         assetCategoryService.insertAssetCategory(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/asset/contWriteAssetState.do")
-    public String writeAssetState(StateVO vo, Model model) throws Exception {
-        model.addAttribute("vo", vo);
+    public String writeAssetState() throws Exception {
         return "itman/public/html/popup/contWriteItmState";
     }
 
     @PostMapping("/itman/asset/insertAssetState.do")
-    public String insetAssetState(StateVO vo, Model model) throws Exception {
+    public String insetAssetState(StateVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         stateService.insertAssetState(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/asset/contWriteAssetLocation.do")
-    public String writeAssetLocation(LocationVO vo, Model model) throws Exception {
-        model.addAttribute("vo", vo);
+    public String writeAssetLocation() throws Exception {
         return "itman/public/html/popup/contWriteItmLocation";
     }
 
     @PostMapping("/itman/asset/insertAssetLocation.do")
-    public String insetAssetLocation(LocationVO vo, Model model) throws Exception {
+    public String insetAssetLocation(LocationVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         locationService.insertAssetLocation(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
     }
 
     @RequestMapping("/itman/asset/contWriteSupplier.do")
-    public String writeAssetSupplier(SupplierVO vo, Model model) throws Exception {
-        model.addAttribute("vo", vo);
+    public String writeAssetSupplier() throws Exception {
         return "itman/public/html/popup/contWriteItmSupplier";
     }
 
     @PostMapping("/itman/asset/insertSupplier.do")
-    public String insetAssetSupplier(SupplierVO  vo, Model model) throws Exception {
+    public String insetAssetSupplier(SupplierVO  vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String regIdx = (String) session.getAttribute("userIdx");
+        vo.setRegIdx(regIdx);
         supplierService.insertAssetSupplier(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -232,7 +258,11 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetNameInfo.do")
-    public String updateAssetNameInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetNameInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldName = assetVO.getAssName();
         String newName = vo.getAssName();
@@ -249,8 +279,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetCategoryInfoEdit.do")
-    public String assetCategoryInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetCategoryInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -259,7 +289,11 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetCategoryInfo.do")
-    public String updateAssetCategoryInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetCategoryInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldCatName = assetVO.getAssCatName();
         assetService.updateAssetCategoryInfo(vo);
@@ -275,8 +309,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetStateInfoEdit.do")
-    public String assetStateInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetStateInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -287,7 +321,11 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetStateInfo.do")
-    public String updateAssetStateInfo(@ModelAttribute AssLogVO assLogVO  ,AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetStateInfo(@ModelAttribute AssLogVO assLogVO  ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldStaName = assetVO.getAssStaName();
         assetService.updateAssetStateInfo(vo);
@@ -303,8 +341,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetLocationInfoEdit.do")
-    public String assetLocationInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetLocationInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -315,7 +353,11 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetLocationInfo.do")
-    public String updateAssetLocationInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetLocationInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldLocName = assetVO.getAssLocName();
         assetService.updateAssetLocationInfo(vo);
@@ -333,8 +375,9 @@ public class AssetController {
     @RequestMapping("/itman/asset/assetEmployeeInfoEdit.do")
     public String assetEmployeeInfoEdit(EmployeeVO vo, AssetVO assetVO ,Model model, Pagination pagination
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range ) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+            , @RequestParam(defaultValue = "1") int range
+    , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         AssetVO targetVO = assetService.selectAssetView(assetVO);
@@ -354,7 +397,11 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetEmployeeInfo.do")
-    public String updateAssetEmployeeInfo(@ModelAttribute AssLogVO assLogVO , AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetEmployeeInfo(@ModelAttribute AssLogVO assLogVO , AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldEmpName = assetVO.getAssEmpName();
         assetService.updateAssetEmployeeInfo(vo);
@@ -370,8 +417,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetSupplyInfoEdit.do")
-    public String assetSupplyInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetSupplyInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -382,7 +429,12 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetSupplyInfo.do")
-    public String updateAssetSupplyInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetSupplyInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
+
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldSupName = assetVO.getAssSupName();
         if(oldSupName == null || oldSupName.equals("")) {
@@ -401,8 +453,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetBuyDateInfoEdit.do")
-    public String assetBuyDateInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetBuyDateInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -413,7 +465,12 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetBuyDateInfo.do")
-    public String updateAssetBuyDateInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetBuyDateInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
+
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldBuyDate = assetVO.getBuyDate();
         if (oldBuyDate == null || oldBuyDate.equals("")) {
@@ -432,8 +489,8 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/asset/assetPriceInfoEdit.do")
-    public String assetPriceInfoEdit(AssetVO vo, Model model) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+    public String assetPriceInfoEdit(AssetVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
@@ -444,7 +501,12 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetPriceInfo.do")
-    public String updateAssetPriceInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String updateAssetPriceInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
+
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldPrice = assetVO.getPrice();
         if (oldPrice == null || oldPrice.equals("")) {
@@ -462,20 +524,11 @@ public class AssetController {
         return "itman/common/scriptResponse";
     }
 
-//    @RequestMapping("/itman/asset/assetNameInfoEdit.do")
-//    public String assetPictureInfoEdit(AssetVO vo, Model model) throws Exception {
-//        AssetVO assetVO = assetService.selectAssetView(vo);
-//        model.addAttribute("asset", assetVO);
-//
-//        return "itman/public/html/popup/asset/assetNameInfoEdit";
-//    }
-
     @PostMapping("/itman/asset/updateAssetPictureInfo.do")
     public String updateAssetPictureInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
                                          @RequestParam(value = "assImgFile", required = false) MultipartFile file,
                                          HttpServletRequest request,
-                                         Model model, RedirectAttributes redirectAttributes) throws Exception {
-        System.err.println("updateAssetPictureInfo");
+                                         Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
         if(!file.isEmpty()){
             String uploadDir = "/upload/assImg/";
             String realDir = request.getServletContext().getRealPath(uploadDir);
@@ -495,6 +548,8 @@ public class AssetController {
             file.transferTo(img);
             vo.setImage(savedName);
         }
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         assetService.updateAssetPictureInfo(vo);
 
         return "redirect:/itman/assetsView.do?assIdx=" + vo.getAssIdx() ;
@@ -508,7 +563,12 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/deleteAsset.do")
-    public String deleteAsset(@ModelAttribute AssLogVO assLogVO ,AssetVO  vo, Model model) throws Exception {
+    public String deleteAsset(@ModelAttribute AssLogVO assLogVO ,AssetVO  vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(delIdx);
+
         AssetVO assetVO = assetService.selectAssetView(vo);
         assetService.deleteAsset(vo);
         assLogVO.setAssIdx(vo.getAssIdx());

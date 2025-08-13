@@ -56,7 +56,7 @@
             <if test="alCont != null and alCont.trim().length() > 0">#{alCont}, </if>
             <if test="alNote != null and alNote.trim().length() > 0">#{alNote}, </if>
             NOW(),
-             77,  <!-- #{regIdx} 임시값으로 77세팅-->
+            #{regIdx},
             '127.0.0.1' <!--임시 IP세팅 -->
         </trim>
     </insert>

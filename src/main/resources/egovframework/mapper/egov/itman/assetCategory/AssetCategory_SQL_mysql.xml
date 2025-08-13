@@ -78,11 +78,11 @@
             </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            1, <!-- #{groIdx}, 임시 groIdx-->
+            #{groIdx},
             #{assCatCode},
             #{assCatName},
             NOW(),
-            77, <!-- #{regIdx}, 임시 regIdx-->
+            #{regIdx},
             <if test="slNote != null and slNote.trim().length() > 0">#{slNote}</if>
         </trim>
 
@@ -97,7 +97,7 @@
             ASS_CAT_NAME = #{assCatName},
             ASS_CAT_CODE = #{assCatCode},
             MOD_DATE = NOW(),
-            MOD_IDX = 77,
+            MOD_IDX = #{modIdx},
             <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
         </trim>
         WHERE
@@ -111,7 +111,7 @@
         <trim suffixOverrides=",">
             DEL_YN = 'Y',
             DEL_DATE = NOW(),
-            DEL_IDX = 77,
+            DEL_IDX = #{delIdx},
             <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
         </trim>
         WHERE

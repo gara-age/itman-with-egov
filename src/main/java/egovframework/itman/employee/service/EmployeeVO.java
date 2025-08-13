@@ -14,7 +14,7 @@ public class EmployeeVO extends Searching {
     private String posIdx; // 직위IDX
     private String empStIdx; // 직원상태IDX
     private String regDate; // 생성일시
-    private String redIdx; // 생성자IDX
+    private String regIdx; // 생성자IDX
     private String modDate; // 수정일시
     private String modIdx; // 수정자IDX
     private String delYn; // 삭제여부
@@ -132,12 +132,12 @@ public class EmployeeVO extends Searching {
         this.regDate = regDate;
     }
 
-    public String getRedIdx() {
-        return redIdx;
+    public String getRegIdx() {
+        return regIdx;
     }
 
-    public void setRedIdx(String redIdx) {
-        this.redIdx = redIdx;
+    public void setRegIdx(String regIdx) {
+        this.regIdx = regIdx;
     }
 
     public String getModDate() {

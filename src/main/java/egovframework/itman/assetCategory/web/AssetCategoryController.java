@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,9 @@ public class AssetCategoryController {
     @RequestMapping("/itman/assetCategory.do")
     public String selectAssetCategoryList(AssetCategoryVO vo, Pagination pagination, Model model,
                                           @RequestParam(defaultValue = "1") int page,
-                                          @RequestParam(defaultValue = "1") int range) throws Exception {
-       String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+                                          @RequestParam(defaultValue = "1") int range
+    , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
        pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -46,7 +48,11 @@ public class AssetCategoryController {
     }
 
     @PostMapping("/itman/updateAssetCategory.do")
-    public String updateAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
+    public String updateAssetCategory(AssetCategoryVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         assetCategoryService.updateAssetCategory(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -59,7 +65,11 @@ public class AssetCategoryController {
     }
 
     @PostMapping("/itman/deleteAssetCategory.do")
-    public String deleteAssetCategory(AssetCategoryVO vo, Model model) throws Exception {
+    public String deleteAssetCategory(AssetCategoryVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setDelIdx(delIdx);
         assetCategoryService.deleteAssetCategory(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

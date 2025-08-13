@@ -36,7 +36,6 @@
         FROM
             ITM_POSITION
         <include refid="positionCondition"/>
-
         ORDER BY rowNum DESC
         LIMIT #{startList}, #{listSize}
     </select>
@@ -82,11 +81,11 @@
         </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-        1 ,<!-- #{groIdx} 임시IDX -->
+        #{groIdx} ,
         #{posCode},
         #{posName},
         NOW(),
-        77, <!-- #{regIdx} 임시IDX -->
+        #{regIdx},
         <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
         </trim>
     </insert>

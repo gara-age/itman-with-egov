@@ -83,11 +83,11 @@
         </trim>
             VALUES
                 <trim prefix="(" suffix=")" suffixOverrides=",">
-                    1, <!-- #{groIdx} 임시 IDX-->
+                    #{groIdx},
                 #{locCode},
                 #{locName},
                 NOW(),
-                77, <!--#{regIdx} 임시 IDX-->
+                #{regIdx},
         <if test="slNote != null and slNote.trim().length() > 0 ">#{slNote},</if>
                 </trim>
     </insert>
@@ -100,7 +100,7 @@
     LOC_NAME = #{locName},
     LOC_CODE = #{locCode},
     MOD_DATE = NOW(),
-    MOD_IDX = 77,
+    MOD_IDX = #{modIdx},
     <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
 </trim>
         WHERE
@@ -115,7 +115,7 @@
             <trim suffixOverrides=",">
                 DEL_YN = 'Y',
                 DEL_DATE = NOW(),
-                DEL_IDX = 77,
+                DEL_IDX = #{delIdx},
                 <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
             </trim>
         WHERE

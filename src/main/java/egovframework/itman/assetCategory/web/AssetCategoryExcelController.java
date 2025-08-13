@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,9 +19,9 @@ public class AssetCategoryExcelController {
     private AssetCategoryServiceImpl assetCategoryService;
 
     @GetMapping("/itman/downloadAssetCategoryData.do")
-    public void downloadAssetCategoryData(HttpServletResponse response, String groIdx) throws Exception {
+    public void downloadAssetCategoryData(HttpServletResponse response, String groIdx, HttpSession session) throws Exception {
         //xls 버전
-        groIdx = "1";
+        groIdx = (String) session.getAttribute("groIdx");
 
         Workbook workbook = new HSSFWorkbook(); //엑셀파일 생성
         Sheet sheet = workbook.createSheet("Asset_Category_Data"); //하나의 sheet 생성

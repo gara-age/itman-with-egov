@@ -105,13 +105,13 @@
         </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                1, <!-- #{groIdx} 임시 groIdx-->
+                #{groIdx},
                 #{staCode},
                 #{staName},
                 'Y',
             <if test="staNote != null and staNote.trim().length() > 0">#{staNote},</if>
-            NOW(),
-                77 <!-- #{regIdx} 임시 IDX -->
+                NOW(),
+                #{regIdx},
             </trim>
     </insert>
 
@@ -123,7 +123,7 @@
             STA_CODE = #{staCode},
             STA_NOTE = #{staNote},
             MOD_DATE = NOW(),
-            MOD_IDX = 77
+            MOD_IDX = #{modIdx}
         WHERE
             STA_IDX = #{staIdx}
     </update>
@@ -135,7 +135,7 @@
             DEL_YN = 'Y',
             STA_YN = 'N',
             DEL_DATE = NOW(),
-            DEL_IDX = 77
+            DEL_IDX = #{delIdx}
         WHERE
             STA_IDX = #{staIdx}
     </update>

@@ -14,8 +14,8 @@ public class GroupServiceImpl implements GroupService {
     GroupDAO groupDAO;
 
             @Override
-            public GroupVO getHeaderData(GroupVO vo) throws Exception{
-               return groupDAO.getHeaderData(vo);
+            public GroupVO getHeaderData(String groIdx) throws Exception{
+               return groupDAO.getHeaderData(groIdx);
             }
 
             @Override

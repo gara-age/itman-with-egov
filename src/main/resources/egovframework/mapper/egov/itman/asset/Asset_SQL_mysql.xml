@@ -154,7 +154,7 @@
         <if test="buyDate != null and buyDate.trim.length() > 0">#{buyDate},</if>
         <if test="price != null and price.trim.length() > 0">#{price},</if>
             NOW(),
-            77,
+            #{regIdx},
         <if test="image != null and image.trim.length() > 0">#{image},</if>
         </trim>
 
@@ -165,7 +165,8 @@
             ITM_ASSET
         SET
             ASS_NAME = #{assName},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -175,7 +176,8 @@
             ITM_ASSET
         SET
             ASS_CAT_IDX = #{assCatIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -185,7 +187,8 @@
             ITM_ASSET
         SET
             STA_IDX = #{staIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -204,7 +207,8 @@
             ITM_ASSET
         SET
             EMP_IDX = #{empIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -214,7 +218,8 @@
             ITM_ASSET
         SET
             SUP_IDX = #{supIdx},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -224,7 +229,8 @@
             ITM_ASSET
         SET
             BUY_DATE = #{buyDate},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -233,7 +239,8 @@
             ITM_ASSET
         SET
             PRICE = #{price},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -243,7 +250,8 @@
             ITM_ASSET
         SET
             IMAGE = #{image},
-            MOD_DATE = NOW()
+            MOD_DATE = NOW(),
+            MOD_IDX = #{modIdx}
         WHERE
             ASS_IDX = #{assIdx}
     </update>
@@ -254,6 +262,7 @@
         SET
             <trim suffixOverrides=",">
             DEL_YN = 'Y',
+            MOD_IDX = #{modIdx}
             </trim>
         WHERE
             ASS_IDX = #{assIdx}

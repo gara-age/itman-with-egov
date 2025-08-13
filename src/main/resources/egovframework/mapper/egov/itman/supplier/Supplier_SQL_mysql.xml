@@ -97,12 +97,12 @@
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            1, <!--  #{groIdx} 임시 groIdx-->
+            #{groIdx},
             #{supCode},
             #{supName},
             #{supBnum},
             NOW(),
-            77, <!-- #{regIdx} 임시 rgIdx-->
+            #{regIdx},
             <if test="supTel != null and supTel.trim().length() > 0">#{supTel},</if>
             <if test="supMemo != null and supMemo.trim().length() > 0">#{supMemo},</if>
             <if test="supMail != null and supMail.trim().length() > 0">#{supMail},</if>
@@ -118,7 +118,7 @@
             SUP_MAIL = #{supMail},
             SUP_TEL = #{supTel},
             MOD_DATE = NOW(),
-            MOD_IDX = 77 <!--임시 IDX-->
+            MOD_IDX = #{modIdx}
         WHERE
             SUP_IDX = #{supIdx}
     </update>
@@ -129,7 +129,7 @@
         SET
             DEL_YN = 'Y',
             DEL_DATE = NOW(),
-            DEL_IDX = 77 <!-- 임시IDX -->
+            DEL_IDX = #{delIdx}
         WHERE
             SUP_IDX = #{supIdx}
     </update>

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="groupDAO">
-<select id="getHeaderData" parameterType="groupVO" resultType="groupVO">
+<select id="getHeaderData" parameterType="string" resultType="groupVO">
     SELECT
         (SELECT COUNT(a.ASS_IDX) FROM ITM_ASSET a WHERE a.GRO_IDX = #{groIdx} AND a.DEL_YN = 'N') AS groAssetCnt,
         (SELECT COUNT(e.EMP_IDX) FROM ITM_EMPLOYE e WHERE e.GRO_IDX = #{groIdx} AND e.DEL_YN = 'N') AS groEmployeeCnt,
@@ -30,6 +30,7 @@
             AND m.MEM_IDX = #{memIdx}
         ORDER BY g.GRO_IDX
     </select>
+
     <select id="getAllGroupData" parameterType="string" resultType="groupVO">
         SELECT
             GRO_IDX AS groIdx,
@@ -63,9 +64,9 @@
                         "",
                     </otherwise>
                 </choose>
-                1, <!-- #{groOwnerIdx} -->
+                    #{groOwnerIdx},
                 NOW(),
-                1 , <!-- #{regIdx} -->
+                #{regIdx},
                 '1.1.1.1' <!-- #{regIp} -->
                 </trim>
     </insert>
@@ -77,7 +78,7 @@
             GRO_IMG = #{groImg},
             GRO_NOTE = #{groNote},
             MOD_DATE = NOW(),
-            MOD_IDX = 77, <!-- #{modIdx} -->
+            MOD_IDX = #{modIdx},
             MOD_IP = '1.1.1.1' <!-- #{modIp} -->
         WHERE
             GRO_IDX = #{groIdx}
@@ -88,7 +89,7 @@
         SET
             DEL_YN = 'Y',
             DEL_DATE = NOW(),
-            DEL_IDX = 77, <!-- ${delIdx} -->
+            DEL_IDX = #{delIdx},
             DEL_IP = '1.1.1.1' <!-- #{delIp} -->
         WHERE
             GRO_IDX = #{groIdx}

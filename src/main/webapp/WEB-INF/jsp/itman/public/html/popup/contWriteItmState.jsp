@@ -1,17 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--    // group 불러오기--%>
-<%--    include "../_inc/loginTest.php";--%>
-<%--    login_check();--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--	$REG_IDX = $_SESSION['userIDX'];--%>
-
-<%--	$group_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = $REG_IDX";--%>
-<%--	$group_query = mysqli_query($dbconn, $group_sql);--%>
-
-<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>

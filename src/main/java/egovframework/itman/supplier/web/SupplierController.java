@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,10 +19,12 @@ public class SupplierController {
     SupplierServiceImpl supplierService;
 
     @RequestMapping("/itman/supplierList.do")
-    public String selectSupplierList(SupplierVO vo, Pagination pagination ,Model model
+    public String selectSupplierList(SupplierVO vo, Pagination pagination , Model model
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+            , @RequestParam(defaultValue = "1") int range
+            , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         int listCnt = supplierService.selectSupplierListCnt(pagination);
         pagination.pageInfo(page, range, listCnt);
@@ -35,8 +38,9 @@ public class SupplierController {
     @RequestMapping("/popup/supplierPop.do")
     public String supplierPop(SupplierVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "1") int range) throws Exception {
-        String groIdx = vo.getGroIdx() != null ? vo.getGroIdx() : "1";
+            , @RequestParam(defaultValue = "1") int range
+            , HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
         int listCnt = supplierService.selectSupplierListCnt(pagination);
@@ -58,7 +62,11 @@ public class SupplierController {
     }
 
     @PostMapping("/itman/updateSupplier.do")
-    public String updateSupply(SupplierVO vo, Model model) throws Exception {
+    public String updateSupply(SupplierVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String modIdx = (String) session.getAttribute("userIdx");
+        vo.setModIdx(modIdx);
         supplierService.updateSupply(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -71,7 +79,11 @@ public class SupplierController {
     }
 
     @PostMapping("/itman/deleteSupplier.do")
-    public String deleteSupply(SupplierVO vo, Model model) throws Exception {
+    public String deleteSupply(SupplierVO vo, Model model, HttpSession session) throws Exception {
+        String groIdx = (String) session.getAttribute("groIdx");
+        vo.setGroIdx(groIdx);
+        String delIdx = (String) session.getAttribute("userIdx");
+        vo.setDelIdx(delIdx);
         supplierService.deleteSupply(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";

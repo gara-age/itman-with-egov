@@ -54,7 +54,7 @@ header .h_right .hr_box span		{font:400 15px/16px "Open Sans", "Noto Sans KR", s
 header .h_right .hr_box a			{display:inline-block; vertical-align:middle; margin:0 0 0 2px; width:35px; height:35px; border-radius:3px; font-size:0px; transition:0.3s;}
 header .h_right .hr_box a.mypage	{background:#e9f2f2 url('../../images/_img/mypage.png')no-repeat center center / 14px;}
 header .h_right .hr_box a.logout	{background:#e9f2f2 url('../../images/_img/logout.png')no-repeat center center / 16px;}
-header .h_right .hr_box a.group		{background:#e9f2f2 url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat center center / 15px;}
+header .h_right .hr_box a.group		{background:#e9f2f2 url('../../images/_img/group.png')no-repeat center center / 15px;}
 
 header .h_right .hr_box a.mypage:hover	{background:#4344ff url('../../images/_img/mypage_w.png')no-repeat center center / 14px;}
 header .h_right .hr_box a.logout:hover	{background:#4344ff url('../../images/_img/logout_w.png')no-repeat center center / 16px;}
@@ -79,7 +79,7 @@ header .h_right .hr_box a.group:hover	{background:#4344ff url('../../images/_img
 
 #mypage header .h_right .hr_box a.mypage		{background:#fff url('../../images/_img/mypage.png')no-repeat center center / 14px;}
 #mypage header .h_right .hr_box a.logout		{background:#fff url('../../images/_img/logout.png')no-repeat center center / 16px;}
-#mypage header .h_right .hr_box a.group		{background:#fff url('../../WEB-INF/jsp/itman/public/html/_img/group.png')no-repeat center center / 15px;}
+#mypage header .h_right .hr_box a.group		{background:#fff url('../../images/_img/group.png')no-repeat center center / 15px;}
 
 #mypage header .h_right .hr_box a.mypage:hover	{background:#4344ff url('../../images/_img/mypage_w.png')no-repeat center center / 14px;}
 #mypage header .h_right .hr_box a.logout:hover	{background:#4344ff url('../../images/_img/logout_w.png')no-repeat center center / 16px;}

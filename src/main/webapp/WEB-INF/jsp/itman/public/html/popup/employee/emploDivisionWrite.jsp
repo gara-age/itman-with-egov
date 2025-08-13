@@ -27,10 +27,10 @@
 		</div>
 		<div class="pop_cont">
 			<ul class="contEdit">
-				<form id="frm" method="post" action="pp_process/emploDivisionWrite_proc.jsp?" >
+				<form id="frm" name="form" method="post" action="${pageContext.request.contextPath}/itman/insertEmploDivision.do" >
 				<li>
 					<p class="tit">부서명 <span>*</span></p>
-					<p class="cont"><input name="div_name" type="text" placeholder="추가할 부서명을 입력해 주세요."></p>
+					<p class="cont"><input id="div_name" name="divName" type="text" placeholder="추가할 부서명을 입력해 주세요."></p>
 				</li>
 				<li>
 					<p class="tit">코드번호 <span>*</span></p>
@@ -38,7 +38,7 @@
 				</li>
 				<li>
 					<p class="tit">사용유무</p>
-					<p class="cont"><input type="radio" id="yes" name="gener" value="Y"><label for="yes">사용</label> <input type="radio" id="no" name="gener" value="N"><label for="no">사용안함</label></p>
+					<p class="cont"><input type="radio" id="yes" name="divYn" value="Y"><label for="yes">사용</label> <input type="radio" id="no" name="divYn" value="N"><label for="no">사용안함</label></p>
 				</li>
 				<!-- 비고란 -->
 				</form>

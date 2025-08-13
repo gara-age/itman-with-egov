@@ -2,14 +2,18 @@ package egovframework.itman.group.web;
 
 import egovframework.itman.group.service.GroupVO;
 import egovframework.itman.group.service.impl.GroupServiceImpl;
+import egovframework.itman.member.service.MemberVO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
 
@@ -25,10 +29,13 @@ public class GroupController {
     public String index(Model model) {
         return "itman/public/html/index";
     }
+
     @RequestMapping("/itman/group.do")
-    public String selectGroupList(Model model) throws Exception {
-        String memIdx = "1";
+    public String selectGroupList(HttpSession session, Model model) throws Exception {
+        session.removeAttribute("groIdx");
+        String memIdx = ((MemberVO) session.getAttribute("loginUser")).getMemIdx();
        List<GroupVO> list = groupService.selectGroupList(memIdx);
+
        model.addAttribute("groupList", list);
         return "itman/public/html/group";
     }
@@ -64,6 +71,15 @@ public class GroupController {
         groupService.insertGroup(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
+    }
+
+    @PostMapping("/itman/setGroIdx.do")
+    @ResponseBody
+    public ResponseEntity<String> setSessionValue(@RequestParam("groIdx") String groIdx, HttpSession session) {
+        session.setAttribute("groIdx", groIdx);
+        System.err.println("------------------------------------------------------------");
+        System.err.println("groIdx = " + groIdx);
+        return ResponseEntity.ok("success");
     }
 
 }

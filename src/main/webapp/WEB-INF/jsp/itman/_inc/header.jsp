@@ -5,67 +5,6 @@
 <jsp:include page="dbconn.jsp" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;700&display=swap" />
 
-
-<%--<jsp:include page="loginTest.jsp" />--%>
-
-<%--<?php--%>
-<%--    include("dbconn.php");--%>
-<%--	include "/home/itman/public_html/html/_inc/loginTest.php";--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--    // $smn_sql = "SELECT * FROM ITM_GROUP WHERE GRO_OWNER_IDX = '".$_SESSION['userIDX']."'";--%>
-<%--	$smn_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = '{$_SESSION['userIDX']}' AND DEL_YN = 'N'";--%>
-<%--    $smn_result = mysqli_query($dbconn, $smn_sql);--%>
-<%--	// $_SESSION['group'] = $_GET['group'];--%>
-
-<%--	$GROUP_IMG_SQL = "SELECT GRO_IMG FROM ITM_GROUP WHERE GRO_IDX={$_SESSION['group']}";--%>
-<%--	$GROUP_IMG_QUERY = mysqli_query($dbconn, $GROUP_IMG_SQL);--%>
-<%--	$GROUP_IMG_RESULT = mysqli_fetch_array($GROUP_IMG_QUERY);--%>
-
-
-<%--	$GROUP_IMG = $GROUP_IMG_RESULT['GRO_IMG'];--%>
-
-<%--	if($GROUP_IMG == ""){--%>
-<%--		$GROUP_IMG = "no_img.png";--%>
-<%--	}--%>
-
-<%--	$ITM_ASSET = "SELECT * FROM ITM_ASSET WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_ASSET_result = mysqli_query($dbconn, $ITM_ASSET);--%>
-<%--	$ITM_ASSET_COUNT = mysqli_num_rows($ITM_ASSET_result);--%>
-
-<%--    $ITM_EMPLOYEE = "SELECT * FROM ITM_EMPLOYE WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_EMPLOYEE_result = mysqli_query($dbconn, $ITM_EMPLOYEE);--%>
-<%--	$ITM_EMPLOYEE_COUNT = mysqli_num_rows($ITM_EMPLOYEE_result);--%>
-
-<%--    $ITM_DIVISION = "SELECT * FROM ITM_DIVISION WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_DIVISION_result = mysqli_query($dbconn, $ITM_DIVISION);--%>
-<%--	$ITM_DIVISION_COUNT = mysqli_num_rows($ITM_DIVISION_result);--%>
-
-<%--    $ITM_POSITION = "SELECT * FROM ITM_POSITION WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_POSITION_result = mysqli_query($dbconn, $ITM_POSITION);--%>
-<%--	$ITM_POSITION_COUNT = mysqli_num_rows($ITM_POSITION_result);--%>
-
-<%--    $ITM_SUPPLIER = "SELECT * FROM ITM_SUPPLIER WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_SUPPLIER_result = mysqli_query($dbconn, $ITM_SUPPLIER);--%>
-<%--	$ITM_SUPPLIER_COUNT = mysqli_num_rows($ITM_SUPPLIER_result);--%>
-
-<%--    $ITM_LOCATION = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_LOCATION_result = mysqli_query($dbconn, $ITM_LOCATION);--%>
-<%--	$ITM_LOCATION_COUNT = mysqli_num_rows($ITM_LOCATION_result);--%>
-
-<%--    $ITM_STATE = "SELECT * FROM ITM_STATE WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_STATE_result = mysqli_query($dbconn, $ITM_STATE);--%>
-<%--	$ITM_STATE_COUNT = mysqli_num_rows($ITM_STATE_result);--%>
-
-<%--    $ITM_EMP_STATE = "SELECT * FROM ITM_EMP_STATE WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_EMP_STATE_result = mysqli_query($dbconn, $ITM_EMP_STATE);--%>
-<%--	$ITM_EMP_STATE_COUNT = mysqli_num_rows($ITM_EMP_STATE_result);--%>
-
-<%--    $ITM_ASSET_CATEGORY = "SELECT * FROM ITM_ASSET_CATEGORY WHERE GRO_IDX={$_SESSION['group']} AND DEL_YN='N'";--%>
-<%--    $ITM_ASSET_CATEGORY_result = mysqli_query($dbconn, $ITM_ASSET_CATEGORY);--%>
-<%--	$ITM_ASSET_CATEGORY_COUNT = mysqli_num_rows($ITM_ASSET_CATEGORY_result);--%>
-
-<%--?>--%>
-
 <!-- 헤더 -->
 <header>
 	<div class="h_left">
@@ -119,7 +58,7 @@
 	<div class="h_right">
 		<a href="#" class="hr_btn"><span></span><span></span><span></span></a>
 		<p class="hr_box">
-			<span>${sessionScope.username}님</span>
+			<span>${userName}님</span>
 			<a href="${pageContext.request.contextPath}/html/user/mypage.jsp" class="mypage">마이페이지</a>
 			<a href="${pageContext.request.contextPath}/html/user/logout_proc.jsp" class="logout">로그아웃</a>
 			<a href="${pageContext.request.contextPath}/html/group.jsp" class="group">전체그룹메인</a>

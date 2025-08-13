@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberDAO">
+<select id="countByEmail" parameterType="string" resultType="int">
+    SELECT
+        COUNT(*)
+    FROM
+        ITM_MEMBER
+    WHERE
+        DEL_YN = 'N'
+    AND MEM_MAIL = #{email}
+</select>
+
+    <select id="selectMemberByEmail" parameterType="string" resultType="memberVO">
+        SELECT
+            MEM_IDX AS memIdx,
+            MEM_NAME AS memName,
+            MEM_MAIL AS memMail,
+            MEM_PW AS memPw
+        FROM
+            ITM_MEMBER
+        WHERE
+            DEL_YN = 'N'
+          AND MEM_MAIL = #{inputMail}
+    </select>
+
+    <insert id="insertMember" parameterType="memberVO">
+        INSERT INTO
+        ITM_MEMBER(
+                   MEM_NAME,
+                   MEM_MAIL,
+                   MEM_PW,
+                   MEM_TEL,
+                   REG_DATE
+        )
+        VALUES(
+               #{memName},
+               #{memMail},
+               #{memPw},
+               #{memTel},
+               NOW()
+              )
+    </insert>
+</mapper>

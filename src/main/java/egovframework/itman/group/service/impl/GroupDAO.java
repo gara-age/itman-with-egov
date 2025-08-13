@@ -12,8 +12,8 @@ public class GroupDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public GroupVO getHeaderData(GroupVO vo) throws Exception{
-      return sqlSession.selectOne("groupDAO.getHeaderData", vo);
+    public GroupVO getHeaderData(String groIdx) throws Exception{
+      return sqlSession.selectOne("groupDAO.getHeaderData", groIdx);
     }
 
     public List<GroupVO> selectGroupList(String memIdx) throws Exception{

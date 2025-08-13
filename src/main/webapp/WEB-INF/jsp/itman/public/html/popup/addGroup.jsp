@@ -14,6 +14,8 @@
 		</div>
 		<div class="pop_cont">
         <form action="${pageContext.request.contextPath}/itman/insertGroup.do" name="form" id="form" method="post" enctype= "multipart/form-data">
+			<input type="hidden" name="groOwnerIdx" value="${userIdx}" />
+			<input type="hidden" name="regIdx" value="${userIdx}" />
 			<ul class="contEdit">
 				<li>
 					<p class="tit">그룹 이름 <span>*</span></p>

@@ -58,4 +58,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+    <import resource="classpath:/egovframework/spring/com/context-email.xml"/>
+
 </beans>
