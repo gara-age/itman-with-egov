@@ -32,7 +32,14 @@
 				</li>
 				<!-- 비고란 -->
 			</ul>
-			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="#" onclick="formSubmit()" class="comp">수정</a></p>
+			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="#" onclick="formSubmit()" class="comp">
+				<c:if test="${!empty empState.empStIdx}">
+					수정
+				</c:if>
+				<c:if test="${empty empState.empStIdx}">
+					추가
+				</c:if>
+			</a></p>
 			</form>
 		</div>
 	</div>

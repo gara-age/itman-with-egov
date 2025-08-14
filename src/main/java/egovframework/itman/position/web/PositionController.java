@@ -25,7 +25,9 @@ public class PositionController {
     public String selectPositionList(PositionVO vo, Model model, Pagination pagination
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
+    ,@RequestParam(value = "id",defaultValue = "4")int id
     , HttpSession session) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);

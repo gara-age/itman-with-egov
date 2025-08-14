@@ -36,7 +36,7 @@
 		</div>
 		<!-- 글쓰기 버튼-->
 		<p class="addContent">
-		    <a href="#" onclick="window.open('/itman/positionWrite.do')" class="edit">><span></span><span></span><span></span></a></p>
+		    <a href="#" onclick="window.open('/itman/positionWrite.do' ,'직위 추가 팝업' ,'width=500, height=350, status=no,toolbar=no,scrollbars=no' )" class="edit">><span></span><span></span><span></span></a></p>
 
 		<div class="Basic">
 			<ul class="adminList">
@@ -53,8 +53,8 @@
                         <p class="cod">${position.posCode}</p>
                         <p class="tit">${position.posName}</p>
                         <p class="editDel" style="padding:0;">
-                            <a href="#" onclick="window.open('/itman/positionEdit.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
-                            <a href="#" onclick="window.open('/itman/confirmPositionDel.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+                            <a href="#" onclick="window.open('/itman/positionEdit.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+                            <a href="#" onclick="window.open('/itman/confirmPositionDel.do?posIdx=${position.posIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
                         </p>
                     </li>
 					</c:forEach>

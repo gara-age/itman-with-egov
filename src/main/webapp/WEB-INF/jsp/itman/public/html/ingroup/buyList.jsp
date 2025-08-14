@@ -57,7 +57,7 @@
 							<p class="tel">${!empty supply.supTel ? supply.supTel : '-'}</p>
 							<p class="editDel" style="padding: 0">
 								<a onclick="window.open('/itman/supplierEdit.do?supIdx=${supply.supIdx}', '수정 팝업', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
-								<a onclick="window.open('/itman/confirmSupplierDel.do?supIdx=${supply.supIdx}', '삭제 팝업', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+								<a onclick="window.open('/itman/confirmSupplierDel.do?supIdx=${supply.supIdx}', '삭제 팝업', 'width=500, height=300, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
 							</p>
 						</li>
 					</c:forEach>

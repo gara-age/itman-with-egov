@@ -2,49 +2,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 <? $page_num_depth_01 = 6; ?>
 
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--	session_start();--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--	$search = $_GET['search'];--%>
-
-<%--	/** 페이지네이션  */--%>
-<%--	 $page_per_result = 10;--%>
-<%--	 $page = 1;--%>
-<%--	 if($_GET['page'] !== null){--%>
-<%--		 $page = $_GET['page'];--%>
-<%--	 }--%>
-<%-- --%>
-<%--	 /** 검색 */--%>
-<%--	 $sql = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $group AND DEL_YN = 'N'";--%>
-<%-- --%>
-<%--	 if (empty($search)) {--%>
-<%--		 $sql .= " ORDER BY LOC_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'all') {--%>
-<%--		 $sql .= " AND (LOC_NAME LIKE '%$_GET[like]%' OR LOC_CODE LIKE '%$_GET[like]%') ORDER BY LOC_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'name') {--%>
-<%--		 $sql .= " AND LOC_NAME LIKE '%$_GET[like]%' ORDER BY LOC_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'code') {--%>
-<%--		 $sql .= " AND LOC_CODE LIKE '%$_GET[like]%' ORDER BY LOC_IDX DESC";--%>
-<%--	 }--%>
-<%--	 $count = queryCount($sql);--%>
-<%--	 --%>
-<%--	 $total_page = ceil($count/$page_per_result);--%>
-
-<%--	 if($total_page == 0){--%>
-<%--		$total_page = 1;--%>
-<%--	}--%>
-
-<%--	 $page_start= ($page-1)*$page_per_result;--%>
-<%-- --%>
-<%--	 $sql .= " LIMIT $page_start, $page_per_result ";--%>
-<%--	 $query = mysqli_query($dbconn, $sql);--%>
-<%-- --%>
-<%--?>--%>
-
 <!doctype html>
 <html lang="ko">
  <head>
@@ -87,13 +44,12 @@
 				</li>
 				<c:if test="${!empty resultList}">
 					<c:forEach var="location" items="${resultList}">
-<%--						<input type="hidden" name="locIdx" value="${location.locIdx}"/>--%>
 						<li>
 							<p class="num">${location.locCode}</p>
 							<p class="tit">${location.locName}</p>
 							<p class="editDel" style="padding: 0">
 								<a onclick="window.open('/itman/editLocation.do?locIdx=${location.locIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" href="#" class="edit">수정</a>
-								<a onclick="window.open('/itman/confirmLocationDel.do?locIdx=${location.locIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" href="#" class="del">삭제</a>
+								<a onclick="window.open('/itman/confirmLocationDel.do?locIdx=${location.locIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" href="#" class="del">삭제</a>
 							</p>
 						</li>
 					</c:forEach>

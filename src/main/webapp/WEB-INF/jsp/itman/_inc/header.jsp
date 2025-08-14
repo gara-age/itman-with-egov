@@ -21,37 +21,37 @@
 
 				<span>${itmAssetCount}</span>
 				<li class="dash">
-					<a href="dashboard.do" class="${pageNumDepth01 == 0 ? 'on' : ''}">대시보드</a>
+					<a href="dashboard.do?id=0" class="${pageNumDepth01 == 0 ? 'on' : ''}">대시보드</a>
 				</li>
 				<li>
-					<a href="assetsList.do" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>${headerData.groAssetCnt}</span></a>
+					<a href="assetsList.do?id=1" class="${pageNumDepth01 == 1 ? 'on' : ''}">자산 관리<span>${headerData.groAssetCnt}</span></a>
 				</li>
 				<li>
-					<a href="employeeList.do" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>${headerData.groEmployeeCnt}</span></a>
+					<a href="employeeList.do?id=2" class="${pageNumDepth01 == 2 ? 'on' : ''}">직원 관리<span>${headerData.groEmployeeCnt}</span></a>
 				</li>
 				<li>
-					<a href="departList.do" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>${headerData.groDivisionCnt}</span></a>
+					<a href="departList.do?id=3" class="${pageNumDepth01 == 3 ? 'on' : ''}">부서 관리<span>${headerData.groDivisionCnt}</span></a>
 				</li>
 				<li>
-					<a href="spotList.do" class="${pageNumDepth01 == 4 ? 'on' : ''}">직위 관리<span>${headerData.groPositionCnt}</span></a>
+					<a href="spotList.do?id=4" class="${pageNumDepth01 == 4 ? 'on' : ''}">직위 관리<span>${headerData.groPositionCnt}</span></a>
 				</li>
 				<li>
-					<a href="supplierList.do" class="${pageNumDepth01 == 5 ? 'on' : ''}">구매처 관리<span>${headerData.groSupplierCnt}</span></a>
+					<a href="supplierList.do?id=5" class="${pageNumDepth01 == 5 ? 'on' : ''}">구매처 관리<span>${headerData.groSupplierCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetLocationList.do" class="${pageNumDepth01 == 6 ? 'on' : ''}">위치 관리<span>${headerData.groLocationCnt}</span></a>
+					<a href="assetLocationList.do?id=6" class="${pageNumDepth01 == 6 ? 'on' : ''}">위치 관리<span>${headerData.groLocationCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetCategory.do" class="${pageNumDepth01 == 11 ? 'on' : ''}">자산 분류 관리<span>${headerData.groAssetCategoryCnt}</span></a>
+					<a href="assetCategory.do?id=11" class="${pageNumDepth01 == 11 ? 'on' : ''}">자산 분류 관리<span>${headerData.groAssetCategoryCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetStateList.do" class="${pageNumDepth01 == 7 ? 'on' : ''}">자산 상태 관리<span>${headerData.groAssetStateCnt}</span></a>
+					<a href="assetStateList.do?id=7" class="${pageNumDepth01 == 7 ? 'on' : ''}">자산 상태 관리<span>${headerData.groAssetStateCnt}</span></a>
 				</li>
 				<li>
-					<a href="employeeStateList.do" class="${pageNumDepth01 == 8 ? 'on' : ''}">직원 상태 관리<span>${headerData.groEmployeeStateCnt}</span></a>
+					<a href="employeeStateList.do?id=8" class="${pageNumDepth01 == 8 ? 'on' : ''}">직원 상태 관리<span>${headerData.groEmployeeStateCnt}</span></a>
 				</li>
 				<li>
-					<a href="assetHistory.do" class="${pageNumDepth01 == 9 ? 'on' : ''}">자산 히스토리</a>
+					<a href="assetHistory.do?id=9" class="${pageNumDepth01 == 9 ? 'on' : ''}">자산 히스토리</a>
 				</li>
 			</ul>
 		</div>

@@ -1,50 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<? $page_num_depth_01 = 11; ?>--%>
-
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--	session_start();--%>
-
-<%--    $group = $_SESSION['group'];--%>
-<%--	$search = $_GET['search'];--%>
-
-<%--	/** 페이지네이션  */--%>
-<%--	 $page_per_result = 10;--%>
-<%--	 $page = 1;--%>
-<%--	 if($_GET['page'] !== null){--%>
-<%--		 $page = $_GET['page'];--%>
-<%--	 }--%>
-<%-- --%>
-<%--	 /** 검색 */--%>
-<%--	 $sql = "SELECT * FROM ITM_ASSET_CATEGORY WHERE GRO_IDX = $group AND DEL_YN = 'N'";--%>
-<%-- --%>
-<%--	 if (empty($search)) {--%>
-<%--		 $sql .= " ORDER BY ASS_CAT_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'all') {--%>
-<%--		 $sql .= " AND (ASS_CAT_NAME LIKE '%$_GET[like]%' OR ASS_CAT_CODE LIKE '%$_GET[like]%') ORDER BY ASS_CAT_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'name') {--%>
-<%--		 $sql .= " AND ASS_CAT_NAME LIKE '%$_GET[like]%' ORDER BY ASS_CAT_IDX DESC";--%>
-<%--	 }--%>
-<%--	 else if ($search == 'code') {--%>
-<%--		 $sql .= " AND ASS_CAT_CODE LIKE '%$_GET[like]%' ORDER BY ASS_CAT_IDX DESC";--%>
-<%--	 }--%>
-<%--	 $count = queryCount($sql);--%>
-<%--	 --%>
-<%--	 $total_page = ceil($count/$page_per_result);--%>
-
-<%--	 if($total_page == 0){--%>
-<%--		$total_page = 1;--%>
-<%--	}--%>
-
-<%--	 $page_start= ($page-1)*$page_per_result;--%>
-<%-- --%>
-<%--	 $sql .= " LIMIT $page_start, $page_per_result ";--%>
-<%--	 $query = mysqli_query($dbconn, $sql);--%>
-<%-- --%>
-<%--?>--%>
 
 <!doctype html>
 <html lang="ko">
@@ -98,8 +53,8 @@
 							<p class="tit">${assCat.assCatName}</p>
 							<p class="tit">${assCat.slNote}</p>
 							<p class="editDel" style="padding: 0">
-								<a href="#" onclick="window.open('/itman/editAssetCategory.do?assCatIdx=${assCat.assCatIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
-								<a href="#" onclick="window.open('/itman/confirmAssetCategoryDel.do?assCatIdx=${assCat.assCatIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+								<a href="#" onclick="window.open('/itman/editAssetCategory.do?assCatIdx=${assCat.assCatIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+								<a href="#" onclick="window.open('/itman/confirmAssetCategoryDel.do?assCatIdx=${assCat.assCatIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
 							</p>
 						</li>
 					</c:forEach>

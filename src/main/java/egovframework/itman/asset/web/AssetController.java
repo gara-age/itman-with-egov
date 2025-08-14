@@ -92,7 +92,9 @@ public class AssetController {
     public String selectAssetsList(AssetVO vo, Pagination pagination , Model model
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
-    , HttpSession session) throws Exception {
+    , HttpSession session
+    , @RequestParam(value = "id", defaultValue = "1")int id) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
 
@@ -119,7 +121,9 @@ public class AssetController {
     }
 
     @RequestMapping("/itman/dashboard.do")
-    public String selectAssetDashboard(StateVO stateVO , Model model, HttpSession session) throws Exception {
+    public String selectAssetDashboard(StateVO stateVO , Model model, HttpSession session,
+                                       @RequestParam(value = "id", defaultValue = "0") int id) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
         List<AssLogVO> historyList = assLogService.selectDashBoardAssLogList(groIdx);
     List<StateVO> stateList = stateService.selectDashBoardAssetStateList(groIdx);

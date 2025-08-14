@@ -1,62 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<? $page_num_depth_01 = 7; ?>--%>
-
-<%--<?php--%>
-<%--	include "../_inc/dbconn.php";--%>
-
-<%--	/** group 불러오기 */--%>
-<%--	session_start();--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--	$search = $_GET['search'];--%>
-<%--	$state_count_sql = ""; --%>
-
-<%--	/** 페이지네이션  */--%>
-<%--	$page_per_result = 10;--%>
-<%--	$page = 1;--%>
-<%--	if($_GET['page'] !== null){--%>
-<%--		$page = $_GET['page'];--%>
-<%--	}--%>
-
-<%--	/** 검색 */--%>
-<%--	$sql = "SELECT *,(SELECT COUNT(*) FROM ITM_ASSET WHERE GRO_IDX = $group and STA_IDX = ITS.STA_IDX and DEL_YN = 'N') as STA_CNT FROM ITM_STATE ITS WHERE GRO_IDX = $group AND DEL_YN = 'N'";--%>
-<%--	--%>
-<%--	if (empty($search)) {--%>
-<%--		$sql .= " ORDER BY STA_IDX DESC";--%>
-<%--	}--%>
-<%--	else if ($search == 'all') {--%>
-<%--		$sql .= " AND (STA_NAME LIKE '%$_GET[like]%' OR STA_CODE LIKE '%$_GET[like]%' OR STA_NOTE LIKE '%$_GET[like]%') ORDER BY STA_IDX DESC";--%>
-<%--	}--%>
-<%--	else if ($search == 'name') {--%>
-<%--		$sql .= " AND STA_NAME LIKE '%$_GET[like]%' ORDER BY STA_IDX DESC";--%>
-<%--	}--%>
-<%--	else if ($search == 'code') {--%>
-<%--		$sql .= " AND STA_CODE LIKE '%$_GET[like]%' ORDER BY STA_IDX DESC";--%>
-<%--	}--%>
-<%--	else if ($search == 'note') {--%>
-<%--		$sql .= " AND STA_NOTE LIKE '%$_GET[like]%' ORDER BY STA_IDX DESC";--%>
-<%--	}--%>
-<%--	$count = queryCount($sql);--%>
-<%--	--%>
-<%--	$total_page = ceil($count/$page_per_result);--%>
-
-<%--	if($total_page == 0){--%>
-<%--		$total_page = 1;--%>
-<%--	}--%>
-
-<%--	$page_start= ($page-1)*$page_per_result;--%>
-
-<%--	$sql .= " LIMIT $page_start, $page_per_result ";--%>
-<%--	$query = mysqli_query($dbconn, $sql);--%>
-
-<%--	function staToAssetCount($sta_idx){--%>
-<%--		$state_count_sql = "SELECT count(*) FROM ITM_ASSET WHERE GRO_IDX = '{$group}' AND STA_IDX = '{$sta_idx}' AND DEL_YN = 'N' ";--%>
-<%--		$state_count_query = mysqli_query($dbconn, $state_count_sql);--%>
-<%--		$result = mysqli_fetch_array($state_count_query);--%>
-<%--		return $result[0];--%>
-<%--	}--%>
-
-<%--?>--%>
 
 <!doctype html>
 <html lang="ko">
@@ -93,7 +36,7 @@
 		</div>
 		
 		<!-- 글쓰기 버튼-->
-		<p class="addContent"><a href="#" onclick="window.open('/itman/asset/contWriteAssetState.do', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">><span></span><span></span><span></span></a></p>
+		<p class="addContent"><a href="#" onclick="window.open('/itman/asset/contWriteAssetState.do', 'EditPopUp', 'width=500, height=400, status=no,toolbar=no,scrollbars=no')" class="edit">><span></span><span></span><span></span></a></p>
 		
 		<div class="Basic">
 			<ul class="adminList">
@@ -112,8 +55,8 @@
 							<p class="num">${state.staCnt}</p>
 							<p class="tit">${state.staNote}</p>
 							<p class="editDel" style="padding: 0">
-								<a href="#" onclick="window.open('/itman/editAssetState.do?staIdx=${state.staIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
-								<a href="#" onclick="window.open('/itman/confirmAssetStateDel.do?staIdx=${state.staIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+								<a href="#" onclick="window.open('/itman/editAssetState.do?staIdx=${state.staIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+								<a href="#" onclick="window.open('/itman/confirmAssetStateDel.do?staIdx=${state.staIdx}', 'EditPopUp', 'width=500, height=350, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
 							</p>
 						</li>
 					</c:forEach>

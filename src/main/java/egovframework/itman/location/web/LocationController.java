@@ -41,7 +41,9 @@ public class LocationController {
     public String locationList(LocationVO vo, Pagination pagination , Model model
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
+    , @RequestParam(value = "id", defaultValue = "6")int id
     , HttpSession session) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
     pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);

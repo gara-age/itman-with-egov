@@ -20,8 +20,10 @@ public class AssLogController {
     @RequestMapping("/itman/assetHistory.do")
     public String selectAssetHistoryList(AssLogVO vo, Pagination pagination, Model model
     , @RequestParam(defaultValue = "1") int page
-    , @RequestParam(defaultValue = "1") int range,
+    , @RequestParam(defaultValue = "1") int range
+    , @RequestParam(value = "id", defaultValue = "9")int id ,
                                          HttpSession session) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(),groIdx);

@@ -51,7 +51,9 @@ public class EmployeeController {
             , @RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "1") int range
                                      , HttpSession session
+                                     ,@RequestParam(value = "id", defaultValue = "2")int id
     ) throws Exception {
+        model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);

@@ -10,7 +10,7 @@
 <body id="mypage">
 	<div id="contents">
 		<div class="mypage_box">
-			<h2><a href="mypage.jsp">그룹관리</a></h2>
+			<h2><a href="/itman/myPage.do">그룹관리</a></h2>
 			<ul class="groupEdit">
 				<li><a onclick="window.open('/itman/addGroup.do', '그룹생성팝업', 'width=500, height=345')" href="#none" class="addBox">그룹생성하기</a></li>
 				<c:if test="${!empty resultList}">

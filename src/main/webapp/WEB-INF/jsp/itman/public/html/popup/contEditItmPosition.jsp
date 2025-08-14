@@ -1,25 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<!-- <?php
-    include("../_inc/dbconn.php");
-    // group 불러오기
-    include "../_inc/loginTest.php";
-    login_check();
-    $group = $_SESSION['group'];
-	$REG_IDX = $_SESSION['userIDX'];
-
-	$group_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = $REG_IDX";
-	$group_query = mysqli_query($dbconn, $group_sql);
-
-	// 기존 값 불러오기
-    $idx = $_GET['idx'];
-	$sql = "SELECT * FROM ITM_POSITION WHERE POS_IDX = $idx";
-	$query = mysqli_query($dbconn, $sql);
-	$valueRow = (mysqli_fetch_array($query));
-?> -->
-
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
  <style>
     @layer default, comn;
