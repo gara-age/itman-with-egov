@@ -1,61 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<?php--%>
-<%--	include "../../_inc/dbconn.php";--%>
-
-<%--	/**--%>
-<%--	 * 세션 체크--%>
-<%--	 */--%>
-<%--	include "../../_inc/loginTest.php";--%>
-<%--	login_check();--%>
-
-<%--	$GROUP = $_SESSION['group'];--%>
-<%--	$ASS_IDX = $_GET['ass_idx'];--%>
-
-<%--	$schWord = "";--%>
-
-<%--	if($_POST['sch_word']){--%>
-<%--		$schWord = $_POST['sch_word'];--%>
-<%--	}--%>
-<%--	//echo($schWord);--%>
-
-<%--	/**--%>
-<%--     * pagination--%>
-<%--     * 한페이지당 10개씩 출력--%>
-<%--     */--%>
-<%--    $page_per_result = 5;--%>
-<%--    $page = 1;--%>
-
-<%--    if($_POST['page']){--%>
-<%--        $page = $_POST['page'];--%>
-<%--    }--%>
-
-<%--	$sql = "SELECT * FROM ITM_EMPLOYE ie--%>
-<%--			LEFT JOIN ITM_DIVISION id ON ie.DIV_IDX = id.DIV_IDX--%>
-<%--			LEFT JOIN ITM_POSITION ip ON ie.POS_IDX = ip.POS_IDX--%>
-<%--			WHERE ie.GRO_IDX = $GROUP AND ie.DEL_YN = 'N'";--%>
-<%--	--%>
-<%--	if($schWord != ""){--%>
-<%--			$sql .= "AND (ie.EMP_NAME LIKE '%{$schWord}%' OR ie.EMP_NUM LIKE '%{$schWord}%' OR id.DIV_NAME LIKE '%{$schWord}%') ";--%>
-<%--	}--%>
-
-<%--	$query_count = mysqli_query($dbconn, $sql);--%>
-<%--	$count = mysqli_num_rows($query_count);--%>
-<%--	$total_page = ceil($count/$page_per_result);--%>
-<%--	if($total_page == 0){--%>
-<%--		$total_page = 1;--%>
-<%--	}--%>
-
-<%--    $page_start= ($page-1)*$page_per_result;--%>
-
-<%--    $sql .= " ORDER BY ie.GRO_IDX DESC LIMIT $page_start, $page_per_result";--%>
-<%--    $query = mysqli_query($dbconn, $sql);--%>
-
-<%--?>--%>
 
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
 <head>
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 </head>

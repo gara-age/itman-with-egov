@@ -34,7 +34,7 @@
 .index .index_st	{margin-top:90px; font:500 21px/24px "GmarketSans", sans-serif; color:#000}
 
 .index .index_btn					{width:100%; max-width:500px; margin:20px auto 0 auto; text-align:left;}
-.index .index_btn a					{display:block; position:relative; overflow:hidden; width:100%; border-radius:5px; background:#1178ff url('../../images/_img/index_dot.png')no-repeat center right 40px / 22px; padding:30px 40px; font:400 20px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.2s}
+.index .index_btn a					{display:block; position:relative; overflow:hidden; z-index: 1; width:100%; border-radius:5px; background:#1178ff url('../_img/index_dot.png')no-repeat center right 40px / 22px; padding:30px 40px; font:400 20px/20px "Open Sans", "Noto Sans KR", sans-serif; color:#fff; transition:0.2s}
 .index .index_btn a:before			{content:""; position:absolute; top:0; left:0px; z-index:-2; display:block; width:calc(100% + 400px); height:100px; background:linear-gradient(90deg, #1178ff, #8400ff); transition:0.5s}
 
 .index .index_btn a + a				{margin-top:10px; background-color:#8400ff}

@@ -1,18 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<%--<?php--%>
-<%--	include "../_inc/dbconn.php";--%>
-
-<%--	 /**--%>
-<%--	  * 세션 체크--%>
-<%--	  */--%>
-<%--	  include "../_inc/loginTest.php";--%>
-<%--	  login_check();--%>
-<%--	  $group = $_SESSION['group'];--%>
-<%-- --%>
-<%--    $method = $_GET['id'];--%>
-<%--    $target = $_GET['target'];--%>
-<%--?>--%>
 <!doctype html>
 <html lang="ko">
  <head>

@@ -1,27 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<?php--%>
-<%--include "../../_inc/dbconn.php";--%>
 
-<%--/**--%>
-<%-- * 세션 체크--%>
-<%-- */--%>
-<%--include "../../_inc/loginTest.php";--%>
-<%--login_check();--%>
-
-<%--$GROUP = $_SESSION['group'];--%>
-<%--$ASS_IDX = $_GET['ass_idx'];--%>
-<%--$LOC_IDX = $_GET['loc_idx'];--%>
-
-<%--$sql = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $GROUP";--%>
-<%--$query = mysqli_query($dbconn, $sql);--%>
-
-<%--?>--%>
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-<%--	 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_css/default.css" />--%>
  </head>
 <body>
 

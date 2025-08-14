@@ -2,20 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--    // group 불러오기--%>
-<%--    include "../_inc/loginTest.php";--%>
-<%--    login_check();--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--	$REG_IDX = $_SESSION['userIDX'];--%>
-
-<%--	$group_sql = "SELECT * FROM ITM_GROUP WHERE REG_IDX = $REG_IDX";--%>
-<%--	$group_query = mysqli_query($dbconn, $group_sql);--%>
-
-<%--?>--%>
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>

@@ -2,63 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%--<?php--%>
-<%--	include "../_inc/dbconn.php";--%>
-
-<%--    /**--%>
-<%--     * 세션 체크--%>
-<%--     */--%>
-<%--    include "../_inc/loginTest.php";--%>
-<%--    login_check();--%>
-<%--    $group = $_SESSION['group'];--%>
-
-<%--	$like = $_POST['like'];--%>
-<%--	$page = $_GET['page'];--%>
-
-<%--	$sql = ""; $sql_count = "";--%>
-
-<%--	$first_limit = 0;--%>
-<%--	$count_limit = 5;--%>
-
-<%--	if(empty($page)){--%>
-<%--		$first_limit = 0;--%>
-<%--	}else{--%>
-<%--		$first_limit = ($page-1) * $count_limit;--%>
-<%--	}--%>
-
-
-<%--	if(empty($like)){--%>
-<%--		$sql = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $group AND DEL_YN = 'N' LIMIT $first_limit, $count_limit";--%>
-<%--		$sql_count = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $group AND DEL_YN = 'N'";--%>
-<%--	}else{--%>
-<%--		$sql = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $group AND LOC_NAME LIKE '%{$like}%' AND DEL_YN = 'N' LIMIT $first_limit, $count_limit";--%>
-<%--		$sql_count = "SELECT * FROM ITM_LOCATION WHERE GRO_IDX = $group AND LOC_NAME LIKE '%{$like}%' AND DEL_YN = 'N'";--%>
-<%--	}--%>
-<%--	--%>
-<%--	$result = mysqli_query($dbconn, $sql);--%>
-<%--	$result_count = mysqli_query($dbconn, $sql_count);--%>
-<%--	$count = mysqli_num_rows($result_count);--%>
-<%--	--%>
-
-<%--	$total_page = ceil($count / $count_limit);--%>
-
-<%--    function find_div_name($dbconn, $div_idx){--%>
-<%--        $div_sql = "SELECT DIV_NAME FROM ITM_DIVISION WHERE DIV_IDX = {$div_idx} ";--%>
-<%--        $div_query = mysqli_query($dbconn, $div_sql);--%>
-<%--        $div_result = mysqli_fetch_array($div_query);--%>
-<%--        return $div_result["DIV_NAME"];--%>
-<%--    }--%>
-
-<%--	function find_pos_name($dbconn, $pos_idx){--%>
-<%--        $pos_sql = "SELECT POS_NAME FROM ITM_POSITION WHERE POS_IDX = $pos_idx";--%>
-<%--        $pos_query = mysqli_query($dbconn, $pos_sql);--%>
-<%--        $pos_result = mysqli_fetch_array($pos_query);--%>
-<%--        return $pos_result["POS_NAME"];--%>
-<%--    }--%>
-
-<%--?>--%>
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>

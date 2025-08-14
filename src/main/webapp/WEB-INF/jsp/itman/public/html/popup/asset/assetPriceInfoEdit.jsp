@@ -1,23 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-<%--    include "../../_inc/dbconn.php";--%>
 
-<%--    /**--%>
-<%--     * 세션 체크--%>
-<%--     */--%>
-<%--    include "../../_inc/loginTest.php";--%>
-<%--    login_check();--%>
-
-<%--    $ASS_IDX= $_GET['ass_idx'];--%>
-<%--    $change_price_sql="SELECT * FROM ITM_ASSET WHERE ASS_IDX=$ASS_IDX";--%>
-<%--    --%>
-<%--    $change_price_query = mysqli_query($dbconn, $change_price_sql);--%>
-<%--    $change_price_result = mysqli_fetch_array($change_price_query);--%>
-<%--   --%>
-<%--    --%>
-<%--?>--%>
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>

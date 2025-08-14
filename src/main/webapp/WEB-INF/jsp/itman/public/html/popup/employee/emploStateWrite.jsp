@@ -1,22 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-
-<%--	include "../../_inc/dbconn.php";--%>
-<%--		--%>
-<%--	/**--%>
-<%--	 * 세션 체크--%>
-<%--	 */--%>
-<%--	include "../../_inc/loginTest.php";--%>
-<%--	login_check();--%>
-<%--	--%>
-<%--	$group = $_SESSION['group'];--%>
-<%--	$which = $_GET['which'];--%>
-<%--	--%>
-<%--?>--%>
 
 <!doctype html>
-<html lang="ko">
+<html lang="ko" style="background-color: #f0f5f5">
  <head>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
  </head>
