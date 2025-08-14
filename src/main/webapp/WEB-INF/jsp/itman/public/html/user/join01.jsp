@@ -217,7 +217,7 @@
 				</li>
 			</ul>
 			<p class="all_check"><input type="checkbox" name="selectall" id="ag_all" onclick='selectAll(this)'/><label for="ag_all">모두 동의합니다</label></p>
-			<p class="user_btn" style="background-color: #2e2fbf"><a href="#" onclick="fn_submit();">다음</a></p>
+			<p class="user_btn" ><a href="#" onclick="fn_submit();">다음</a></p>
 		</div>
 	</div>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />

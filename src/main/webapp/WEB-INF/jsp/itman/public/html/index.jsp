@@ -34,9 +34,9 @@
                 <a href="#" class="hr_btn"><span></span><span></span><span></span></a>
                 <p class="hr_box">
                     <span>${username}님</span>
-                    <a href="user/mypage.jsp" class="btn mypage">마이페이지</a>
-                    <a href="user/logout_proc.jsp" class="btn logout">로그아웃</a>
-                    <a href="group.jsp" class="btn group">전체그룹메인</a>
+                    <a href="/itman/myPage.do" class="btn mypage">마이페이지</a>
+                    <a href="/itman/logout.do" class="btn logout">로그아웃</a>
+                    <a href="/itman/group.do" class="btn group">전체그룹메인</a>
                 </p>
             </div>
         </c:otherwise>
@@ -61,7 +61,7 @@
     <p class="index_btn">
         <c:choose>
             <c:when test="${empty useremail || empty username}">
-                <a href="group.jsp">그룹 생성하기</a>
+                <a href="#" onclick="checkLogin();">그룹 생성하기</a>
             </c:when>
             <c:otherwise>
                 <a onclick="window.open('/itman/addGroup.do','그룹생성팝업','width=500,height=350')" href="#" class="addBox">그룹 생성하기</a>
@@ -74,6 +74,12 @@
 <jsp:include page="../../../itman/_inc/footer.jsp" />
 
 <script>
+    function checkLogin(){
+            alert("로그인을 해주세요.");
+            location.href='/itman/user/login.do';
+
+    }
+
     function unready(){
         alert("아직 준비중입니다.");
     }

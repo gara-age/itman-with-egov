@@ -6,29 +6,6 @@
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 
-<%-- <?php--%>
-<%--$username 	= $_POST["username"];--%>
-<%--$useremail 	= $_POST["useremail"];--%>
-<%--$userpw 	= $_POST["userpw"];--%>
-<%--$userphone 	= $_POST["userphone"];--%>
-<%--$rand_num = $_POST["rand_num"];--%>
-<%--$mode = $_POST["mode"];--%>
-
-<%--if($mode == "회원가입"){--%>
-<%--    $nextPage = "join_proc.php";--%>
-<%--}elseif($mode == "비밀번호찾기"){--%>
-<%--    $nextPage = "compPass.php";--%>
-<%--}--%>
-
-<%--include("../_inc/dbconn.php");--%>
-
-<%--$sql = "SELECT * FROM ITM_EMAIL_CODE WHERE EMAIL = '".$useremail."' AND MEM_NAME = '".$username."'--%>
-<%--ORDER BY REG_DATE DESC--%>
-<%--LIMIT 1";--%>
-
-<%--$result = mysqli_query($dbconn,$sql);--%>
-<%--$row = (mysqli_fetch_array($result));--%>
-<%--?>--%>
 <body>
 	<div id="contents">
 		<div class="user_box join">
@@ -46,7 +23,7 @@
 			</ul>
 			<input type="hidden" id="authCode" name="authCode" value="${authCode}">
 
-			<p class="user_btn" style="background-color: #2e2fbf"><a href="#" onclick="fn_submit();">다음</a></p>
+			<p class="user_btn" ><a href="#" onclick="fn_submit();">다음</a></p>
             </form>
 		</div>
 	</div>

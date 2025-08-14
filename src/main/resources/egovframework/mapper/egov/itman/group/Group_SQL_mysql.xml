@@ -42,12 +42,24 @@
           AND m.MEM_IDX = #{memIdx}
         ORDER BY g.GRO_IDX
     </select>
+    <select id="selectGroup" parameterType="string" resultType="groupVO">
+        SELECT
+            GRO_IDX AS groIdx,
+            GRO_NAME AS groName,
+            GRO_IMG AS groImg,
+            GRO_NOTE AS groNote
+        FROM
+            ITM_GROUP
+        WHERE
+            GRO_IDX = #{groIdx}
+    </select>
     <insert id="insertGroup" parameterType="groupVO">
         INSERT INTO
         ITM_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             GRO_NAME,
             GRO_IMG,
+            GRO_NOTE,
             GRO_OWNER_IDX,
             REG_DATE,
             REG_IDX,
@@ -64,6 +76,7 @@
                         "",
                     </otherwise>
                 </choose>
+                #{groNote},
                     #{groOwnerIdx},
                 NOW(),
                 #{regIdx},
@@ -75,7 +88,9 @@
         ITM_GROUP
         SET
             GRO_NAME = #{groName},
-            GRO_IMG = #{groImg},
+
+              GRO_IMG = #{groImg},
+
             GRO_NOTE = #{groNote},
             MOD_DATE = NOW(),
             MOD_IDX = #{modIdx},
@@ -94,15 +109,4 @@
         WHERE
             GRO_IDX = #{groIdx}
     </update>
-
-    <select id="selectGroup" parameterType="string" resultType="groupVO">
-        SELECT
-            GRO_IDX AS groIdx,
-            GRO_NAME AS groName,
-            GRO_IMG AS groImg
-        FROM
-            ITM_GROUP
-        WHERE
-            GRO_IDx = #{groIdx}
-    </select>
 </mapper>

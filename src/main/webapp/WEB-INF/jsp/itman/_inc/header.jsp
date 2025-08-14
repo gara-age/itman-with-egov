@@ -60,9 +60,9 @@
 		<a href="#" class="hr_btn"><span></span><span></span><span></span></a>
 		<p class="hr_box">
 			<span>${userName}님</span>
-			<a href="${pageContext.request.contextPath}/html/user/mypage.jsp" class="mypage">마이페이지</a>
-			<a href="${pageContext.request.contextPath}/html/user/logout_proc.jsp" class="logout">로그아웃</a>
-			<a href="${pageContext.request.contextPath}/html/group.jsp" class="group">전체그룹메인</a>
+			<a href="${pageContext.request.contextPath}/itman/myPage.do" class="mypage">마이페이지</a>
+			<a href="${pageContext.request.contextPath}/itman/logout.do" class="logout">로그아웃</a>
+			<a href="${pageContext.request.contextPath}/itman/group.do" class="group">전체그룹메인</a>
 		</p>
 	</div>
 </header>

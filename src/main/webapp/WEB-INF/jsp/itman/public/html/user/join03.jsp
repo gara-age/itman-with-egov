@@ -17,7 +17,7 @@
 			<div class="comp_page">
 				<span>${member.memName}</span>님 가입되었습니다!
 			</div>
-			<p class="user_btn" style="background-color: #2e2fbf"><a href="/itman/user/login.do">로그인하기</a></p>
+			<p class="user_btn" ><a href="/itman/user/login.do">로그인하기</a></p>
 		</div>
 	</div>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp" />

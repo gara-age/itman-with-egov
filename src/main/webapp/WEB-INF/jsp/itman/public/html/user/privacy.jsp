@@ -3,14 +3,13 @@
 <!doctype html>
 <html lang="ko">
  <head>
-  <? include "../_inc/title.php"; ?>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp"/>
  </head>
 <body id="mypage">
-	<? include "../_inc/header.php"; ?>
 	<div id="contents">
-<!-- 		<div class="mypage_box"> -->
 		<div class="">
-			<h2><a href="mypage.php">서비스 이용약관</a></h2>
+			<h2><a href="/itman/myPage.do">서비스 이용약관</a></h2>
 
 			<h3>개인정보 수집 및 이용 동의</h3>
 			<div class="userPriv">
@@ -199,6 +198,6 @@
 			</div>
 		</div>
 	</div>
-	<? include "../_inc/footer.php"; ?>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp"/>
 </body>
 </html>

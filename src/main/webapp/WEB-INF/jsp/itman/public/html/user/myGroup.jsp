@@ -1,37 +1,29 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
 <!doctype html>
 <html lang="ko">
  <head>
-  <? 
-  include "../_inc/title.php"; 
-  session_start();
-
-  $group = $_SESSION['group'];
-  ?>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp"/>
  </head>
 <body id="mypage">
-	<? 
-    include "../_inc/header.php"; 
-    include "../_inc/dbconn.php";
-    $sql = "SELECT * FROM ITM_GROUP WHERE GRO_OWNER_IDX = {$_SESSION['userIDX']} AND DEL_YN = 'N'";
-    $result = mysqli_query($dbconn, $sql);
-    ?>
 	<div id="contents">
 		<div class="mypage_box">
 			<h2><a href="mypage.jsp">그룹관리</a></h2>
 			<ul class="groupEdit">
-				<li><a onclick="window.open('../popup/addGroup.php', '그룹생성팝업', 'width=500, height=345')" href="#none" class="addBox">그룹생성하기</a></li>
-
-            <?php while($row = (mysqli_fetch_array($result))){?>
-				<li>
-					<p class="name"><? echo $row['GRO_NAME'];?></p>
-					<p class="btn">
-                        <a onclick="window.open('../user/groupWrite.php?idx=<?= $row['GRO_IDX']; ?>', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
-                        <a onclick="window.open('../user/groupDel.php?id=gro_del&target=<?= $row['GRO_IDX'] ?>', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
-                    </p>
-				</li>
-            <?php }?>
+				<li><a onclick="window.open('/itman/addGroup.do', '그룹생성팝업', 'width=500, height=345')" href="#none" class="addBox">그룹생성하기</a></li>
+				<c:if test="${!empty resultList}">
+					<c:forEach var="group" items="${resultList}">
+						<li>
+							<p class="name">${group.groName}</p>
+							<p class="btn">
+								<a onclick="window.open('/itman/editGroup.do?groIdx=${group.groIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="edit">수정</a>
+								<a onclick="window.open('/itman/confirmGroupDel.do?groIdx=${group.groIdx}', 'EditPopUp', 'width=500, height=500, status=no,toolbar=no,scrollbars=no')" class="del">삭제</a>
+							</p>
+						</li>
+					</c:forEach>
+				</c:if>
 			</ul>
 		</div>
 	</div>

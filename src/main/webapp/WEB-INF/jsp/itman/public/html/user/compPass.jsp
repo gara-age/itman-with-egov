@@ -3,45 +3,41 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<? include "../_inc/title.php"; ?>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
 </head>
 
 <body>
 	<div id="contents">
 		<div class="user_box join">
-			<p class="tit"><a href="../index.php"><img src="../../../../../../images/_img/itman_logo.png" alt="아이티맨" /></a></p>
+			<p class="tit"><a href="/itman/index.do"><img src="../../../../../../images/_img/itman_logo.png" alt="아이티맨" /></a></p>
 			<p class="find_tit">
 				재설정할<br/>
 				비밀번호를<br/>
 				입력해주세요.
 			</p>
-			<form action="changePass_proc.php" name="frm" id="frm" method="post">
+			<form action="/itman/changePass_proc.do" name="form" id="form" method="post">
 			<ul class="mem">
 				<li>
 					<p>비밀번호</p>
-					<div><input type="password" id="userpw" name="userpw"></div>
+					<div><input type="password" id="userpw" name="newPw"></div>
 				</li>
 				<li>
 					<p>비밀번호 확인</p>
 					<div>
-						<input type="password" id="userpw_ch" name="userpw_ch">
+						<input type="password" id="userpw_ch" name="memPwCh">
 					</div>
 				</li>
 			</ul>
 
-            <input type="hidden" name="username" value=<?=$_POST["username"];?>>
-            <input type="hidden" name="useremail" value=<?=$_POST["useremail"];?>>
-            <input type="hidden" name="userphone" value=<?=$_POST["userphone"];?>>
-
-			<p class="user_btn"><a href="javascript:fn_submit();">비밀번호 변경</a></p>
+			<p class="user_btn"><a href="#" onclick="formSubmit();">비밀번호 변경</a></p>
 			</form>
 		</div>
 	</div>
-	<? include "../_inc/footer.php"; ?>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/footer.jsp"/>
 </body>
 <script language="javascript">
 
-function fn_submit(){
+function formSubmit(){
 	// userpw값이 비어있으면 실행.
 	if($("#userpw").val().trim() == ""){
 	alert("비밀번호를 입력해주세요.");
@@ -66,7 +62,7 @@ function fn_submit(){
         $("#userpw").focus();
         return false;
     }
-    frm.submit();
+    form.submit();
 }
 </script>
 </html>

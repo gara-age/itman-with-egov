@@ -18,6 +18,7 @@
             MEM_IDX AS memIdx,
             MEM_NAME AS memName,
             MEM_MAIL AS memMail,
+            MEM_TEL AS memTel,
             MEM_PW AS memPw
         FROM
             ITM_MEMBER
@@ -43,4 +44,54 @@
                NOW()
               )
     </insert>
+
+    <update id="updateMemTel" parameterType="memberVO">
+        UPDATE
+        ITM_MEMBER
+        SET
+            MEM_TEL = #{memTel},
+            MOD_DATE = NOW()
+        WHERE
+            MEM_IDX = #{memIdx}
+    </update>
+    <update id="updateMemPw" parameterType="memberVO">
+        UPDATE
+        ITM_MEMBER
+        SET
+            MEM_PW = #{memPw},
+            MOD_DATE = NOW()
+        WHERE
+            MEM_IDX = #{memIdx}
+    </update>
+    <update id="deleteMember" parameterType="memberVO">
+        UPDATE
+            ITM_MEMBER
+        SET
+            DEL_YN = 'Y',
+            DEL_DATE = NOW()
+        WHERE
+            MEM_IDX = #{memIdx}
+    </update>
+
+    <select id="findMail" parameterType="memberVO" resultType="memberVO">
+        SELECT
+            MEM_MAIL
+        FROM
+            ITM_MEMBER
+        WHERE
+            DEL_YN = 'N'
+        AND MEM_NAME = #{memName}
+        AND MEM_TEL = #{memTel}
+    </select>
+    <select id="findPass" parameterType="memberVO" resultType="memberVO">
+        SELECT
+            MEM_MAIL
+        FROM
+            ITM_MEMBER
+        WHERE
+            DEL_YN = 'N'
+          AND MEM_NAME = #{memName}
+          AND MEM_TEL = #{memTel}
+          AND MEM_MAIL = #{memMail}
+    </select>
 </mapper>

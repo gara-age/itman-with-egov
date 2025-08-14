@@ -22,9 +22,9 @@
 					<div><input type="password" id="userpw" name="inputPw"></div>
 				</li>
 			</ul>
-			<p class="user_btn" style="background-color: #2e2fbf"><a href="#" onclick="formSubmit();">로그인</a></p>
+			<p class="user_btn" ><a href="#" onclick="formSubmit();">로그인</a></p>
 </form>
-			<p class="mam_btn"><a href="/itman/user/join.do">회원가입</a><a href="findEmail.php">이메일 찾기</a><a href="findPass.php">비밀번호 찾기</a></p>
+			<p class="mam_btn"><a href="/itman/user/join.do">회원가입</a><a href="/itman/user/findEmail.do">이메일 찾기</a><a href="/itman/user/findPass.do">비밀번호 찾기</a></p>
 		</div>
 	</div>
 	<c:if test="${!empty msg}">

@@ -82,5 +82,62 @@ public class GroupController {
         session.setAttribute("group", vo);
         return ResponseEntity.ok("success");
     }
+    @RequestMapping("/itman/myGroup.do")
+    public String myGroup(HttpSession session, Model model) throws Exception {
+        MemberVO member = (MemberVO) session.getAttribute("member");
+        List<GroupVO> list = groupService.getAllGroupData(member.getMemIdx());
+        model.addAttribute("resultList", list);
+        return "itman/public/html/user/myGroup";
+    }
+
+    @RequestMapping("/itman/editGroup.do")
+    public String editGroup(GroupVO vo, HttpSession session, Model model) {
+        GroupVO group = groupService.selectGroup(vo.getGroIdx());
+        model.addAttribute("group", group);
+        return "itman/public/html/user/groupWrite";
+    }
+    @PostMapping("/itman/updateGroup.do")
+    public String updateGroup(GroupVO vo, HttpSession session, Model model,
+                              @RequestParam(value = "groImgFile" , required = false) MultipartFile file,
+                              HttpServletRequest request) throws Exception {
+        vo.setGroImg(groupService.selectGroup(vo.getGroIdx()).getGroImg());
+        if(!file.isEmpty()){
+            System.err.println("!file.isEmpty");
+            System.err.println(file.getOriginalFilename());
+            String uploadDir = "/upload/groImg/";
+            String realDir = request.getServletContext().getRealPath(uploadDir);
+            File dir = new File(realDir);
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            String originalFileName = file.getOriginalFilename();
+            String ext = (originalFileName != null && originalFileName.lastIndexOf('.') != -1) ? originalFileName.substring(originalFileName.lastIndexOf('.')) : "";
+            String prefix = "groupImg";
+            String datePart = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+            String randomPart = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 6).toUpperCase();
+            String savedName = prefix + "_" + datePart + "_" + randomPart + ext;
+            File img = new File(dir, savedName);
+            file.transferTo(img);
+            vo.setGroImg(savedName);
+        }
+        groupService.updateGroup(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
+
+    @RequestMapping("/itman/confirmGroupDel.do")
+    public String confirmGroupDel(GroupVO vo, HttpSession session, Model model) throws Exception {
+        GroupVO selectedVO = groupService.selectGroup(vo.getGroIdx());
+        model.addAttribute("group", selectedVO);
+        return "itman/public/html/user/groupDel";
+    }
+
+    @PostMapping("/itman/deleteGroup.do")
+    public String deleteGroup(GroupVO vo, Model model) throws Exception {
+        groupService.deleteGroup(vo);
+        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
+        return "itman/common/scriptResponse";
+    }
 
 }
