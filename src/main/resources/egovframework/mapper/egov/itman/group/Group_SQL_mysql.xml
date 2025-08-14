@@ -80,7 +80,7 @@
                     #{groOwnerIdx},
                 NOW(),
                 #{regIdx},
-                '1.1.1.1' <!-- #{regIp} -->
+                #{regIp}
                 </trim>
     </insert>
     <update id="updateGroup" parameterType="groupVO">
@@ -94,7 +94,7 @@
             GRO_NOTE = #{groNote},
             MOD_DATE = NOW(),
             MOD_IDX = #{modIdx},
-            MOD_IP = '1.1.1.1' <!-- #{modIp} -->
+            MOD_IP = #{modIp}
         WHERE
             GRO_IDX = #{groIdx}
     </update>
@@ -105,7 +105,7 @@
             DEL_YN = 'Y',
             DEL_DATE = NOW(),
             DEL_IDX = #{delIdx},
-            DEL_IP = '1.1.1.1' <!-- #{delIp} -->
+            DEL_IP = #{delIp}
         WHERE
             GRO_IDX = #{groIdx}
     </update>

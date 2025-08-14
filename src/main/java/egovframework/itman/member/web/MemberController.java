@@ -6,9 +6,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.net.UnknownHostException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
 
 @Controller
 public class MemberController {
@@ -89,12 +92,16 @@ public class MemberController {
     public String authUser(@ModelAttribute MemberVO vo, HttpSession session,
     @RequestParam("inputMail") String inputMail,
     @RequestParam("inputPw") String inputPw ,
+                           HttpServletRequest request,
                            Model model) {
         MemberVO member = memberService.selectMemberByEmail(inputMail);
         if(member == null || !passwordEncoder.matches(inputPw, member.getMemPw())) {
             model.addAttribute("msg", "존재하지않는 회원이거나 아이디 또는 비밀번호가 일치하지않습니다.");
             return "itman/public/html/user/login";
         }
+        String ip = getClientIPv4(request);
+        session.setAttribute("userIp", ip);
+        System.err.println("Client IP: " + ip);
         session.setAttribute("loginUser", member);
         session.setAttribute("userIdx", member.getMemIdx());
         return "redirect:/itman/index.do";
@@ -237,11 +244,6 @@ public class MemberController {
     public String changePassProc(@RequestParam("newPw") String newPw, HttpSession session) {
         MemberVO vo = (MemberVO) session.getAttribute("foundedUser");
         MemberVO user = memberService.selectMemberByEmail(vo.getMemMail());
-        System.err.println(newPw);
-        System.err.println("vo.memIdx = " + user.getMemIdx());
-        System.err.println("vo.memTel = " + user.getMemTel());
-        System.err.println("vo.memMail = " + user.getMemMail());
-        System.err.println("vo.memName = " + user.getMemName());
         String encodedPassword = passwordEncoder.encode(newPw);
         user.setMemPw(encodedPassword);
         session.removeAttribute("member");
@@ -249,5 +251,36 @@ public class MemberController {
         return "redirect:/itman/user/login.do";
     }
 
+    public String getClientIPv4(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
 
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+
+        if ("0:0:0:0:0:0:0:1".equals(ip) || "::1".equals(ip)) {
+            ip = "127.0.0.1";  // IPv6 loopback을 IPv4로 변환
+        }
+
+
+        // X-Forwarded-For에는 복수 IP가 있을 수 있음
+        if (ip != null && ip.contains(",")) {
+            ip = ip.split(",")[0].trim();
+        }
+
+        // IPv6 주소를 IPv4로 변환 시도
+        try {
+            InetAddress inet = InetAddress.getByName(ip);
+            ip = inet.getHostAddress();
+
+            // IPv6 to IPv4 변환 (예: 0:0:0:0:0:ffff:192.168.0.1 → 192.168.0.1)
+            if (ip != null && ip.contains(":") && ip.contains(".")) {
+                ip = ip.substring(ip.lastIndexOf(":") + 1);
+            }
+        } catch (UnknownHostException e) {
+            ip = "0.0.0.0"; // fallback
+        }
+
+        return ip;
+    }
 }

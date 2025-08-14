@@ -49,7 +49,8 @@ public class GroupController {
     @PostMapping("/itman/insertGroup.do")
     public String insertGroup(GroupVO vo,
                               @RequestParam(value = "groImgFile" , required = false) MultipartFile file,
-                              HttpServletRequest request
+                              HttpServletRequest request,
+                              HttpSession session
             , Model model) throws Exception {
         if(!file.isEmpty()){
             String uploadDir = "/upload/groImg/";
@@ -69,6 +70,8 @@ public class GroupController {
             file.transferTo(img);
             vo.setGroImg(savedName);
         }
+        String ip = session.getAttribute("userIp").toString();
+        vo.setRegIp(ip);
         groupService.insertGroup(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -121,6 +124,8 @@ public class GroupController {
             file.transferTo(img);
             vo.setGroImg(savedName);
         }
+        String ip = session.getAttribute("userIp").toString();
+        vo.setModIp(ip);
         groupService.updateGroup(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
@@ -134,7 +139,9 @@ public class GroupController {
     }
 
     @PostMapping("/itman/deleteGroup.do")
-    public String deleteGroup(GroupVO vo, Model model) throws Exception {
+    public String deleteGroup(GroupVO vo, Model model, HttpSession session) throws Exception {
+        String ip = session.getAttribute("userIp").toString();
+        vo.setDelIp(ip);
         groupService.deleteGroup(vo);
         model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
         return "itman/common/scriptResponse";
