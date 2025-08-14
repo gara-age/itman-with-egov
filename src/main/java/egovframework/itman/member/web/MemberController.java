@@ -60,7 +60,7 @@ public class MemberController {
         String savedCode = (String) session.getAttribute("authCode");
         model.addAttribute("authCode", savedCode);
         if(savedCode != null && savedCode.equals(inputCode)) {
-            if(session.getAttribute("state") == null || session.getAttribute("state").equals("findPass")){
+            if(session.getAttribute("state") != null || session.getAttribute("state").equals("findPass")){
                 session.removeAttribute("authCode");
                 session.removeAttribute("state");
                 return "itman/public/html/user/compPass";

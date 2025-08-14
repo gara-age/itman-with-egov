@@ -1,35 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<?php--%>
-<%--    include "../_inc/dbconn.php";--%>
-
-<%--    /**--%>
-<%--     * 세션 체크--%>
-<%--     */--%>
-<%--	session_start();--%>
-
-
-<%--	/**--%>
-<%--	 * 전역 변수--%>
-<%--	 */--%>
-<%--	$group = $_SESSION['group'];--%>
-<%--	$page_num_depth_01 = 2; --%>
-<%--	$emp_idx = $_GET['idx'];--%>
-<%--	--%>
-<%--	$sql = "SELECT * FROM ITM_EMPLOYE ie--%>
-<%--	LEFT JOIN ITM_DIVISION id ON ie.DIV_IDX = id.DIV_IDX--%>
-<%--	LEFT JOIN ITM_POSITION ip ON ie.POS_IDX  = ip.POS_IDX--%>
-<%--	LEFT JOIN ITM_EMP_STATE ies ON ies.EMP_ST_IDX = ie.EMP_ST_IDX --%>
-<%--	WHERE ie.EMP_IDX = '{$emp_idx}' AND ie.DEL_YN = 'n'";--%>
-
-<%--	$query= mysqli_query($dbconn, $sql);--%>
-
-<%--	$asset_sql = "SELECT *,(SELECT ASS_CAT_NAME FROM ITM_ASSET_CATEGORY WHERE ASS_CAT_IDX = IA.ASS_CAT_IDX) ASS_CAT_NAME FROM ITM_ASSET IA--%>
-<%--				  WHERE EMP_IDX = $emp_idx";--%>
-<%--	$asset_query = mysqli_query($dbconn, $asset_sql);--%>
-<%--	$asset_num =mysqli_num_rows($asset_query);--%>
-<%--?>--%>
 
 <!doctype html>
 <html lang="ko">

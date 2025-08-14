@@ -1,74 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
-<%--<?php--%>
-<%--    include("../_inc/dbconn.php");--%>
-<%--    --%>
-<%--	session_start();--%>
-<%--    $group = $_SESSION['group'];--%>
-
-<%--	$src = "";--%>
-<%--    $sql = "SELECT * FROM ITM_ASSET WHERE ASS_IDX={$_GET['ASS_IDX']}";--%>
-<%--    $result = mysqli_query($dbconn, $sql);--%>
-<%--    $row = mysqli_fetch_array($result);--%>
-
-<%--    $ITM_ASSET_CATEGORY = "SELECT * FROM ITM_ASSET_CATEGORY WHERE ASS_CAT_IDX={$row['ASS_CAT_IDX']}";--%>
-<%--    $ITM_ASSET_CATEGORY_result = mysqli_query($dbconn, $ITM_ASSET_CATEGORY);--%>
-<%--    $ITM_ASSET_CATEGORY_row = mysqli_fetch_array($ITM_ASSET_CATEGORY_result);--%>
-
-<%--    $STA_IDX = "SELECT * FROM ITM_STATE WHERE STA_IDX={$row['STA_IDX']}";--%>
-<%--    $STA_IDX_result = mysqli_query($dbconn, $STA_IDX);--%>
-<%--    $STA_IDX_row = mysqli_fetch_array($STA_IDX_result);--%>
-
-<%--    $ITM_EMPLOYEE = "SELECT * FROM ITM_EMPLOYE WHERE EMP_IDX={$row['EMP_IDX']}";--%>
-<%--    $ITM_EMPLOYEE_result = mysqli_query($dbconn, $ITM_EMPLOYEE);--%>
-<%--    $ITM_EMPLOYEE_row = mysqli_fetch_array($ITM_EMPLOYEE_result);--%>
-
-<%--    $LOC_IDX = "SELECT * FROM ITM_LOCATION WHERE LOC_IDX={$row['LOC_IDX']}";--%>
-<%--    $LOC_IDX_result = mysqli_query($dbconn, $LOC_IDX);--%>
-<%--    $LOC_IDX_row = mysqli_fetch_array($LOC_IDX_result);--%>
-
-<%--    $SUP_IDX = "SELECT * FROM ITM_SUPPLIER WHERE SUP_IDX={$row['SUP_IDX']}";--%>
-<%--    $SUP_IDX_result = mysqli_query($dbconn, $SUP_IDX);--%>
-<%--    $SUP_IDX_row = mysqli_fetch_array($SUP_IDX_result);--%>
-
-<%--    $ITM_ASS_LOG = "SELECT *, --%>
-<%--					(--%>
-<%--						SELECT MEM_NAME FROM ITM_MEMBER im --%>
-<%--						WHERE il.REG_IDX = im.MEM_IDX --%>
-<%--					) AS MEM_NAME --%>
-<%--	 				FROM ITM_ASS_LOG il--%>
-<%--					WHERE il.ASS_IDX= '{$_GET['ASS_IDX']}' --%>
-<%--					ORDER BY il.AL_IDX DESC";--%>
-<%--    $ITM_ASS_LOG_result = mysqli_query($dbconn, $ITM_ASS_LOG);--%>
-
-<%--	$ITM_HARDWARE = "SELECT * FROM ITM_HARDWARE WHERE ASS_IDX = {$_GET['ASS_IDX']}";--%>
-<%--	$ITM_HARDWARE_RESULT = mysqli_query($dbconn, $ITM_HARDWARE);--%>
-<%--	$ITM_HARDWARE_ROW = mysqli_fetch_array($ITM_HARDWARE_RESULT);--%>
-
-<%--	$ITM_HARDWARE_OS_ARR = explode('', $ITM_HARDWARE_ROW['OS']);--%>
-
-<%--	$ITM_HARDWARE_CPU_ARR = explode('', $ITM_HARDWARE_ROW['CPU']);--%>
-
-
-<%--	$ITM_HARDWARE_MEMORY_ARR = explode('', $ITM_HARDWARE_ROW['MEMORY']);--%>
-<%--	$ITM_HARDWARE_MEMORY = "";--%>
-
-
-<%--	$ITM_SOFTWARE = "SELECT * FROM ITM_SOFTWARE WHERE ASS_IDX = {$_GET['ASS_IDX']}";--%>
-<%--	$ITM_SOFTWARE_RESULT = mysqli_query($dbconn, $ITM_SOFTWARE);--%>
-
-<%--	if ($row['IMAGE'] == "") {--%>
-<%--		$src = 'src="../_img/noimg.png" style="width:50px"';--%>
-<%--	}else{--%>
-<%--		$src = 'src="../upload/assetImg/'.$row['IMAGE'].' "alt="자산사진"';--%>
-<%--	}--%>
-<%--?>--%>
-
-<%--<? $page_num_depth_01 = 1; ?>--%>
 
 <!doctype html>
 <html lang="ko">
  <head>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/checkSession.jsp"/>
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
 	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />

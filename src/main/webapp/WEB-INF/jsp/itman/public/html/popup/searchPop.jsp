@@ -5,8 +5,8 @@
 <!doctype html>
 <html lang="ko" style="background-color: #f0f5f5">
 <head>
+    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/checkSession.jsp"/>
     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
-
 </head>
 <body>
 

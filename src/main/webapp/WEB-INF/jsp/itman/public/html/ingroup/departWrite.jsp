@@ -5,6 +5,7 @@
 <!doctype html>
 <html lang="ko">
  <head>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/checkSession.jsp"/>
 	 <jsp:include page="/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="/WEB-INF/jsp/itman/_inc/header.jsp" />
 	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />

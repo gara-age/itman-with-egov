@@ -2,17 +2,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
-<%--<?php--%>
-<%--    include("_inc/dbconn.php");--%>
-<%--    session_start();--%>
-<%--    $group = $_SESSION['group'];--%>
-<%--    $sql = "SELECT * FROM ITM_GROUP WHERE GRO_OWNER_IDX = '".$_SESSION['userIDX']."' AND DEL_YN = 'N'";--%>
-<%--    $result = mysqli_query($dbconn, $sql);--%>
-<%--?>--%>
-
 <!doctype html>
 <html lang="ko">
  <head>
+     <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/checkSession.jsp"/>
      <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
      <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/header.jsp" />
      <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
