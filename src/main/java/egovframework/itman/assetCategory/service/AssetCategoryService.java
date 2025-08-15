@@ -12,7 +12,7 @@ public interface AssetCategoryService {
     void updateAssetCategory(AssetCategoryVO vo) throws Exception;
     void deleteAssetCategory(AssetCategoryVO vo) throws Exception;
     int selectAssetCategoryListCnt(Pagination pagination) throws Exception;
-
+    AssetCategoryVO checkDuplicate(AssetCategoryVO vo);
     List<AssetCategoryVO> findAll(String groIdx) throws Exception;
 
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
 <!doctype html>
@@ -7,7 +8,7 @@
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp"/>
  </head>
 <body>
-
+<c:url value="/itman/checkDuplicateAssCat.do" var="checkDuplicateUrl"/>
 	<div id="popup">
 		<div class="pop_tit">
 			<p class="title">정보를 입력해주세요</p>
@@ -35,20 +36,46 @@
 	</div>
 
 	<script>
-		function formSubmit(){
-			$div_name_empty = $("#div_name").val().trim();
-			$div_code_empty = $("#div_code").val().trim();
+		async function checkDuplicate(){
+			$div_name = $("#div_name").val().trim();
+			$div_code = $("#div_code").val().trim();
 
-			if(!$div_name_empty || !$div_code_empty){
+			if(!$div_name || !$div_code){
 				alert("필수 값을 입력해주세요!");
 			}else{
-				document.forms['form'].submit();
+					try {
+						const resp = await fetch("${checkDuplicateUrl}", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/x-www-form-urlencoded"
+							},
+							body: new URLSearchParams({
+								divCode: document.querySelector("input[name='divCode']").value.trim()
 
-				setTimeout(() => {
-					window.opener.location.reload();
-					window.close();
-				}, 300);
+							}),
+						});
 
+						const text = await resp.text();
+						const code = parseInt(text.trim(), 10);
+
+						if (code === 0) {
+							alert("이미 존재하는 부서 코드입니다.");
+							$("#div_code").focus();
+							return;
+						}
+
+						if (code === 1) {
+							document.forms['form'].submit();
+
+							setTimeout(() => {
+								window.opener.location.reload();
+								window.close();
+							} ,300)
+						}
+					} catch (e) {
+						alert("오류가 발생했습니다.");
+						console.error(e);
+					}
 			}
 		}
 		</script>

@@ -45,4 +45,9 @@ public class DivisionServiceImpl implements DivisionService {
     public void deleteDivision(DivisionVO divisionVO) {
         divisionDAO.deleteDivision(divisionVO);
     }
+
+    @Override
+    public DivisionVO checkDuplicate(DivisionVO vo){
+        return divisionDAO.checkDuplicate(vo);
+    }
 }

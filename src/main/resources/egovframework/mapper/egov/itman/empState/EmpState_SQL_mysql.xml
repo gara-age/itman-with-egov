@@ -118,4 +118,14 @@
         WHERE
             EMP_ST_IDX = #{empStIdx}
     </update>
+    <select id="checkDuplicate" parameterType="empStateVO" resultType="empStateVO">
+        SELECT
+            EMP_ST_IDX
+        FROM
+            ITM_EMP_STATE
+        WHERE
+            DEL_YN = 'N'
+        AND GRO_IDX = #{groIdx}
+        AND EMP_ST_CODE = #{empStCode}
+    </select>
 </mapper>

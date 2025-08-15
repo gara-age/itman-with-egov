@@ -130,4 +130,15 @@
             DEL_YN = 'N'
         AND GRO_IDX = #{groIdx}
     </select>
+
+    <select id="checkDuplicate" parameterType="assetCategoryVO" resultType="assetCategoryVO">
+        SELECT
+            ASS_CAT_IDX
+        FROM
+            ITM_ASSET_CATEGORY
+        WHERE
+            DEL_YN = 'N'
+        AND GRO_IDX = #{groIdx}
+        AND ASS_CAT_CODE = ${assCatCode}
+    </select>
 </mapper>

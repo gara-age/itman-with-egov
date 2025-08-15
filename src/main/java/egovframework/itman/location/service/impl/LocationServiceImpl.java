@@ -49,4 +49,9 @@ public class LocationServiceImpl implements LocationService {
         locationDAO.deleteAssetLocation(vo);
     }
 
+    @Override
+    public LocationVO checkDuplicate(LocationVO vo){
+        return locationDAO.checkDuplicate(vo);
+    }
+
 }

@@ -35,4 +35,7 @@ public class PositionDAO {
     public int selectPositionListCnt(Pagination pagination) {
         return sqlSession.selectOne("positionDAO.selectPositionListCnt", pagination);
     }
+    public PositionVO checkDuplicate(PositionVO vo){
+        return sqlSession.selectOne("positionDAO.checkDuplicate", vo);
+    }
 }

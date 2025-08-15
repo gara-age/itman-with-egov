@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -117,6 +118,19 @@ public class EmployeeController {
         return "itman/public/html/popup/employee/emploPositionWrite";
     }
 
+    @PostMapping(value = "/itman/checkDuplicateEmpPos.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicateEmpPos(@RequestParam("posCode") String posCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        PositionVO vo = new PositionVO();
+        vo.setPosCode(posCode);
+        vo.setGroIdx(groIdx);
+        PositionVO resultVO = positionService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
+    }
     @PostMapping("/itman/insertEmploPosition.do")
     public String insertEmployeePosition(PositionVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
@@ -133,6 +147,19 @@ public class EmployeeController {
         return "itman/public/html/popup/employee/emploStateWrite";
     }
 
+    @PostMapping(value = "/itman/checkDuplicateEmpSta.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicateEmpSta(@RequestParam("empStCode") String empStCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        EmpStateVO vo = new EmpStateVO();
+        vo.setEmpStCode(empStCode);
+        vo.setGroIdx(groIdx);
+        EmpStateVO resultVO = empStateService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
+    }
     @PostMapping("/itman/insertEmploState.do")
     public String insertEmployeeState(EmpStateVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");

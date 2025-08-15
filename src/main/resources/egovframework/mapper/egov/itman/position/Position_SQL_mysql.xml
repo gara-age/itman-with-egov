@@ -109,7 +109,16 @@
             DEL_DATE = NOW()
         WHERE
             POS_IDX = #{posIdx}
-
     </update>
+    <select id="checkDuplicate" parameterType="positionVO" resultType="positionVO">
+        SELECT
+            POS_IDX
+        FROM
+            ITM_POSITION
+        WHERE
+            DEL_YN = 'N'
+        AND GRO_IDX = #{groIdx}
+        AND POS_CODE = #{posCode}
+    </select>
 </mapper>
 

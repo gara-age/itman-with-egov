@@ -48,4 +48,9 @@ public class PositionServiceImpl implements PositionService {
     public int selectPositionListCnt(Pagination pagination) {
         return positionDAO.selectPositionListCnt(pagination);
     }
+
+    @Override
+    public PositionVO checkDuplicate(PositionVO vo){
+        return positionDAO.checkDuplicate(vo);
+    }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
 <!doctype html>
@@ -7,7 +8,7 @@
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 <body>
-
+<c:url value="/itman/checkDuplicateAssCat.do" var="checkDuplicateUrl"/>
 	<div id="popup">
 		<div class="pop_tit">
 			<p class="title">자산 분류 추가 팝업</p>
@@ -29,25 +30,53 @@
 					<p class="cont"><input name="slNote" type="text" /></p>
 				</li>
 			</ul>
-			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="formSubmit();" class="comp">작성</a></p>
+			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="checkDuplicate();" class="comp">추가</a></p>
 		</form>
 		</div>
 	</div>
 <script>
 
-    function formSubmit(){
-			$ass_cat_name_empty = $("#ass_cat_name").val().trim();
+	async function checkDuplicate(){
+		$ass_cat_name_empty = $("#ass_cat_name").val().trim();
 			$ass_cat_code_empty = $("#ass_cat_code").val().trim();
 
 			if(!$ass_cat_name_empty || !$ass_cat_code_empty){
 				alert("필수 값을 입력해주세요!");
 			}else{
-				document.forms['form'].submit();
+				try {
+					const resp = await fetch("${checkDuplicateUrl}", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						body: new URLSearchParams({
+							assCatCode: document.querySelector("input[name='assCatCode']").value.trim()
 
-				setTimeout(() => {
-					window.opener.location.reload();
-					window.close();
-				} ,300)
+						}),
+					});
+
+					const text = await resp.text();
+					const code = parseInt(text.trim(), 10);
+
+					if (code === 0) {
+						alert("이미 존재하는 분류 코드입니다.");
+						$("#ass_cat_code").focus();
+						return;
+					}
+
+					if (code === 1) {
+						document.forms['form'].submit();
+
+						setTimeout(() => {
+							window.opener.location.reload();
+							window.close();
+						} ,300)
+					}
+				} catch (e) {
+					alert("오류가 발생했습니다.");
+					console.error(e);
+				}
+
 			}
 
 

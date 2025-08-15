@@ -43,4 +43,8 @@ public class AssetCategoryDAO {
     public List<AssetCategoryVO> findAll(String groIdx) throws Exception{
       return sqlSession.selectList("assetCategoryDAO.findAll", groIdx);
     }
+
+    public AssetCategoryVO checkDuplicate(AssetCategoryVO vo){
+        return sqlSession.selectOne("assetCategoryDAO.checkDuplicate", vo);
+    }
 }

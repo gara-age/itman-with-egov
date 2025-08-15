@@ -44,4 +44,9 @@ public class EmpStateServiceImpl implements EmpStateService {
     public void deleteEmployeeState(EmpStateVO vo) {
         empStateDAO.deleteEmployeeState(vo);
     }
+
+    @Override
+    public EmpStateVO checkDuplicate(EmpStateVO vo){
+        return empStateDAO.checkDuplicate(vo);
+    }
 }

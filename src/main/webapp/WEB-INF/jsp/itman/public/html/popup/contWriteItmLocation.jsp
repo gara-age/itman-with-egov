@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" language="java" %>
 
 <!doctype html>
@@ -7,7 +8,7 @@
 	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
  </head>
 <body>
-
+<c:url value="/itman/checkDuplicateAssLoc.do" var="checkDuplicateUrl"/>
 	<div id="popup">
 		<div class="pop_tit">
 			<p class="title">자산 위치 작성 팝업</p>
@@ -30,25 +31,52 @@
 					<p class="cont"><input type="text" name="slNote"/></p>
 				</li>
 			</ul>
-			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="formSubmit();" class="comp">작성</a></p>
+			</form>
+			<p class="pop_btn"><a href="javascript:window.close();" class="del">취소</a><a href="#" onclick="checkDuplicate();" class="comp">추가</a></p>
 		</div>
 	</div>
 <script>
     
-    function formSubmit(){
+  async function checkDuplicate(){
 			$loc_name_empty = $("#loc_name").val().trim();
 			$loc_code_empty = $("#loc_code").val().trim();
 
 			if(!$loc_name_empty || !$loc_code_empty){
 				alert("필수 값을 입력해주세요!");
 			}else{
-				$("#itmLocationForm").submit();
-				document.forms['form'].submit();
+				try {
+					const resp = await fetch("${checkDuplicateUrl}", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						body: new URLSearchParams({
+							locCode: document.querySelector("input[name='locCode']").value.trim()
 
-				setTimeout(() => {
-					window.opener.location.reload();
-					window.close();
-				} , 300);
+						}),
+					});
+
+					const text = await resp.text();
+					const code = parseInt(text.trim(), 10);
+
+					if (code === 0) {
+						alert("이미 존재하는 위치 코드입니다.");
+						$("#loc_code").focus();
+						return;
+					}
+
+					if (code === 1) {
+						document.forms['form'].submit();
+
+						setTimeout(() => {
+							window.opener.location.reload();
+							window.close();
+						} ,300)
+					}
+				} catch (e) {
+					alert("오류가 발생했습니다.");
+					console.error(e);
+				}
 			}
 		}
 

@@ -14,6 +14,8 @@
 <c:if test="${empty empState.empStIdx}">
 	<c:set var="actionUrl" value="${pageContext.request.contextPath}/itman/insertEmploState.do"/>
 </c:if>
+<c:url value="/itman/checkDuplicateEmpSta.do" var="checkDuplicateUrl"/>
+
 
 	<div id="popup">
 		<div class="pop_tit">
@@ -25,15 +27,15 @@
 			<ul class="contEdit">
 				<li>
 					<p class="tit">상태이름 <span>*</span></p>
-					<p class="cont"><input name="empStName" type="text" value="${empState.empStName}" placeholder="직원 상태명을 입력해 주세요."></p>
+					<p class="cont"><input id="empStName" name="empStName" type="text" value="${empState.empStName}" placeholder="직원 상태명을 입력해 주세요."></p>
 				</li>
 				<li>
 					<p class="tit">코드번호 <span>*</span></p>
-					<p class="cont"><input name="empStCode" type="text" value="${empState.empStCode}" placeholder="직원상태 코드번호를 입력해 주세요."></p>
+					<p class="cont"><input id="empStCode" name="empStCode" type="text" value="${empState.empStCode}" placeholder="직원상태 코드번호를 입력해 주세요."></p>
 				</li>
 				<!-- 비고란 -->
 			</ul>
-			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="#" onclick="formSubmit()" class="comp">
+			<p class="pop_btn"><a href="javascript:;window.close();" class="del">취소</a><a href="#" onclick="checkDuplicate()" class="comp">
 				<c:if test="${!empty empState.empStIdx}">
 					수정
 				</c:if>
@@ -46,13 +48,55 @@
 	</div>
 
 	<script>
-		function formSubmit(){
-			document.forms['form'].submit();
+		async function checkDuplicate(){
+			const empStName = document.getElementById("empStName").value.trim();
+			const empStCode = document.getElementById("empStCode").value.trim();
 
-			setTimeout(() => {
-				window.opener.location.reload();
-				window.close();
-			}, 300);
+			if(empStName === ""){
+				alert("직원 상태명을 입력해주세요.");
+				$("#empStName").focus();
+				return false;
+			}
+			if(empStCode === ""){
+				alert("직원 상태명을 입력해주세요.");
+				$("#empStCode").focus();
+				return false;
+			}
+			try {
+				const resp = await fetch("${checkDuplicateUrl}", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					body: new URLSearchParams({
+						empStCode: document.querySelector("input[name='empStCode']").value.trim()
+
+					}),
+				});
+
+				const text = await resp.text();
+				const code = parseInt(text.trim(), 10);
+
+				if (code === 0) {
+					alert("이미 존재하는 직원 상태 코드입니다.");
+					$("#div_code").focus();
+					return;
+				}
+
+				if (code === 1) {
+					document.forms['form'].submit();
+
+					setTimeout(() => {
+						window.opener.location.reload();
+						window.close();
+					} ,300)
+				}
+			} catch (e) {
+				alert("오류가 발생했습니다.");
+				console.error(e);
+			}
+
+
 		}
 		</script>
 </body>

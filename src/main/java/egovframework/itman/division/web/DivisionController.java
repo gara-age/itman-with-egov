@@ -1,17 +1,16 @@
 package egovframework.itman.division.web;
 
 import egovframework.itman.common.Pagination;
+import egovframework.itman.division.service.DivisionService;
 import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
+import egovframework.itman.location.service.LocationVO;
 import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -52,6 +51,19 @@ public class DivisionController {
             model.addAttribute("division", resultVO);
         }
         return "itman/public/html/popup/contWriteItmDivision";
+    }
+    @PostMapping(value = "/itman/checkDuplicateEmpDiv.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicateEmpDiv(@RequestParam("divCode") String divCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        DivisionVO vo = new DivisionVO();
+        vo.setDivCode(divCode);
+        vo.setGroIdx(groIdx);
+        DivisionVO resultVO = divisionService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
     }
 
     @PostMapping("/itman/insertDepart.do")

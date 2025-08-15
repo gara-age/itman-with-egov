@@ -120,5 +120,15 @@
         WHERE
             DIV_IDX = #{divIdx}
     </update>
+    <select id="checkDuplicate" parameterType="divisionVO" resultType="divisionVO">
+        SELECT
+            DIV_IDX
+        FROM
+            ITM_DIVISION
+        WHERE
+            DEL_YN ='N'
+        AND GRO_IDX = #{groIdx}
+        AND DIV_CODE = #{divCode}
+    </select>
 </mapper>
 

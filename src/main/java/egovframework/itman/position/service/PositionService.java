@@ -12,5 +12,6 @@ public interface PositionService {
     void updatePosition(PositionVO positionVO);
     void deletePosition(PositionVO positionVO);
     int selectPositionListCnt(Pagination pagination);
+    PositionVO checkDuplicate(PositionVO vo);
 
 }

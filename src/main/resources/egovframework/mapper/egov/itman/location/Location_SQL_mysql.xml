@@ -122,4 +122,15 @@
             LOC_IDX = #{locIdx}
     </update>
 
+    <select id="checkDuplicate" parameterType="locationVO" resultType="locationVO">
+        SELECT
+            LOC_IDX
+        FROM
+            ITM_LOCATION
+        WHERE
+            DEL_YN = 'N'
+          AND GRO_IDX = #{groIdx}
+          AND LOC_CODE = #{locCode}
+    </select>
+
 </mapper>

@@ -42,5 +42,9 @@ public class LocationDAO {
         sqlSession.update("locationDAO.deleteAssetLocation", vo);
     }
 
+    public LocationVO checkDuplicate(LocationVO vo){
+        return sqlSession.selectOne("locationDAO.checkDuplicate", vo);
+    }
+
 
 }

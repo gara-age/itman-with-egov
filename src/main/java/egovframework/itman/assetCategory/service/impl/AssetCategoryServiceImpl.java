@@ -52,4 +52,8 @@ public class AssetCategoryServiceImpl implements AssetCategoryService {
     public List<AssetCategoryVO> findAll(String groIdx) throws Exception{
         return assetCategoryDAO.findAll(groIdx);
     }
+    @Override
+    public AssetCategoryVO checkDuplicate(AssetCategoryVO vo){
+        return assetCategoryDAO.checkDuplicate(vo);
+    }
 }

@@ -6,6 +6,7 @@ import egovframework.itman.assLog.service.impl.AssLogServiceImpl;
 import egovframework.itman.asset.service.AssetVO;
 import egovframework.itman.asset.service.impl.AssetServiceImpl;
 import egovframework.itman.assetCategory.service.AssetCategoryVO;
+import egovframework.itman.assetCategory.service.impl.AssetCategoryDAO;
 import egovframework.itman.assetCategory.service.impl.AssetCategoryServiceImpl;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.employee.service.EmployeeVO;
@@ -183,13 +184,26 @@ public class AssetController {
         return "itman/public/html/popup/contWriteAssetCategory";
     }
 
+    @PostMapping(value = "/itman/checkDuplicateAssCat.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicatedAssCat(@RequestParam("assCatCode") String assCatCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        AssetCategoryVO vo = new AssetCategoryVO();
+        vo.setAssCatCode(assCatCode);
+        vo.setGroIdx(groIdx);
+        AssetCategoryVO resultVO = assetCategoryService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
+    }
+
     @PostMapping("/itman/asset/insertAssetCategory.do")
     public String insetAssetCategory(AssetCategoryVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
-        System.err.println("vo.assCatName" + vo.getAssCatName());
         assetCategoryService.insertAssetCategory(vo);
         return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 분류가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
@@ -197,6 +211,20 @@ public class AssetController {
     @RequestMapping("/itman/asset/contWriteAssetState.do")
     public String writeAssetState() throws Exception {
         return "itman/public/html/popup/contWriteItmState";
+    }
+
+    @PostMapping(value = "/itman/checkDuplicateAssSta.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicatedAssSta(@RequestParam("staCode") String staCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        StateVO vo = new StateVO();
+        vo.setStaCode(staCode);
+        vo.setGroIdx(groIdx);
+        StateVO resultVO = stateService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
     }
 
     @PostMapping("/itman/asset/insertAssetState.do")
@@ -212,6 +240,19 @@ public class AssetController {
     @RequestMapping("/itman/asset/contWriteAssetLocation.do")
     public String writeAssetLocation() throws Exception {
         return "itman/public/html/popup/contWriteItmLocation";
+    }
+    @PostMapping(value = "/itman/checkDuplicateAssLoc.do" ,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkDuplicateAssLoc(@RequestParam("locCode") String locCode, HttpSession session) {
+        String groIdx = (String) session.getAttribute("groIdx");
+        LocationVO vo = new LocationVO();
+        vo.setLocCode(locCode);
+        vo.setGroIdx(groIdx);
+        LocationVO resultVO = locationService.checkDuplicate(vo);
+        if (resultVO != null){
+            return "0";
+        }
+        return "1";
     }
 
     @PostMapping("/itman/asset/insertAssetLocation.do")

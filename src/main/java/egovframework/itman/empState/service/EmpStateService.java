@@ -12,4 +12,5 @@ public interface EmpStateService {
     void insertEmployeeState(EmpStateVO vo);
     void updateEmployeeState(EmpStateVO vo);
     void deleteEmployeeState(EmpStateVO vo);
+    EmpStateVO checkDuplicate(EmpStateVO vo);
 }

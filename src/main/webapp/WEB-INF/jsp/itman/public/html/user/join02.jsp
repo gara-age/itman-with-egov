@@ -3,9 +3,6 @@
 
 <!doctype html>
 <html lang="ko">
-<!-- 회원가입 프로세스
-    join01 - join02 - send_email_proc - certPass - join_proc - join03 
--->
 <head>
   <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/title.jsp" />
 </head>

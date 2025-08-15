@@ -29,7 +29,7 @@ public class EmpStateDAO {
     }
 
 
-        public void insertEmployeeState(EmpStateVO vo) {
+    public void insertEmployeeState(EmpStateVO vo) {
         sqlSession.insert("empStateDAO.insertEmployeeState", vo);
     }
     public void updateEmployeeState(EmpStateVO vo) {
@@ -37,5 +37,8 @@ public class EmpStateDAO {
     }
     public void deleteEmployeeState(EmpStateVO vo) {
         sqlSession.update("empStateDAO.deleteEmployeeState", vo);
+    }
+    public EmpStateVO checkDuplicate(EmpStateVO vo){
+        return sqlSession.selectOne("empStateDAO.checkDuplicate", vo);
     }
 }
