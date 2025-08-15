@@ -8,7 +8,7 @@
         <where>
             s.DEL_YN = 'N'
             AND s.GRO_IDX = #{searching.groIdx}
-            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
                 <choose>
                     <when test="searching.searchCondition == 'staCode'">
                         AND s.STA_CODE LIKE CONCAT('%', #{searching.searchKeyword}, '%')
@@ -99,7 +99,7 @@
             STA_CODE,
             STA_NAME,
             STA_YN,
-            <if test="staNote != null and staNote.trim().length() > 0">STA_NOTE,</if>
+            <if test="staNote != null and staNote != ''">STA_NOTE,</if>
             REG_DATE,
             REG_IDX,
         </trim>
@@ -109,7 +109,7 @@
                 #{staCode},
                 #{staName},
                 'Y',
-            <if test="staNote != null and staNote.trim().length() > 0">#{staNote},</if>
+            <if test="staNote != null and staNote != ''">#{staNote},</if>
                 NOW(),
                 #{regIdx},
             </trim>

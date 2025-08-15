@@ -77,7 +77,7 @@
             POS_NAME,
             REG_DATE,
             REG_IDX,
-            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE,</if>
+            <if test="slNote != null and slNote != ''">SL_NOTE,</if>
         </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -86,7 +86,7 @@
         #{posName},
         NOW(),
         #{regIdx},
-        <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
+        <if test="slNote != null and slNote != ''">#{slNote},</if>
         </trim>
     </insert>
     <update id="updatePosition" parameterType="positionVO">

@@ -3,6 +3,7 @@ package egovframework.itman.supplier.web;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.supplier.service.SupplierVO;
 import egovframework.itman.supplier.service.impl.SupplierServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,12 +71,11 @@ public class SupplierController {
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         supplierService.updateSupply(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매처가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmSupplierDel.do")
-    public String confirmSupplierDel(SupplierVO vo, Model model) throws Exception {
+    public String confirmSupplierDel(SupplierVO vo, Model model) {
         model.addAttribute("supply", vo);
         return "itman/public/html/popup/listDelete";
     }
@@ -86,11 +86,7 @@ public class SupplierController {
         vo.setGroIdx(groIdx);
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
-        System.err.println("vo.groIdx: " + vo.getGroIdx());
-        System.err.println("vo.delIdx: " + vo.getDelIdx());
-        System.err.println("vo.supIdx: " + vo.getSupIdx());
         supplierService.deleteSupply(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매처가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 }

@@ -3,6 +3,7 @@ package egovframework.itman.state.web;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.state.service.StateVO;
 import egovframework.itman.state.service.impl.StateServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,12 +55,11 @@ public class StateController {
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         stateService.updateAssetState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close()</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 상태가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmAssetStateDel.do")
-    public String confirmAssetStateDel(StateVO vo, Model model) throws Exception {
+    public String confirmAssetStateDel(StateVO vo, Model model) {
         model.addAttribute("state", vo);
         return "itman/public/html/popup/contDel";
     }
@@ -71,6 +71,6 @@ public class StateController {
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         stateService.deleteAssetState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close()</script>");
-        return "itman/common/scriptResponse";    }
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 상태가 삭제되었습니다", "<script>window.opener.location.reload(); window.close();</script>");
+    }
 }

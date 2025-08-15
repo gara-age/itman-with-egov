@@ -89,8 +89,8 @@
             GRO_IDX,
             EMP_NUM,
             EMP_NAME,
-            <if test="empMail  != null and empMail.trim().length() > 0">EMP_MAIL,</if>
-            <if test="empTel   != null and empTel.trim().length() > 0">EMP_TEL,</if>
+            <if test="empMail  != null and empMail != ''">EMP_MAIL,</if>
+            <if test="empTel   != null and empTel != ''">EMP_TEL,</if>
             DIV_IDX,
             POS_IDX,
             EMP_ST_IDX,
@@ -102,8 +102,8 @@
             #{groIdx},
             #{empNum},
             #{empName},
-            <if test="empMail  != null and empMail.trim().length() > 0">#{empMail},</if>
-            <if test="empTel   != null and empTel.trim().length() > 0">#{empTel},</if>
+            <if test="empMail  != null and empMail != ''">#{empMail},</if>
+            <if test="empTel   != null and empTel != ''">#{empTel},</if>
             #{divIdx},
             #{posIdx},
             #{empStIdx},

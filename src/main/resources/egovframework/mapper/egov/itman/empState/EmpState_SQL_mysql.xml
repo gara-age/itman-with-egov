@@ -8,7 +8,7 @@
         <where>
             DEL_YN = 'N'
             AND GRO_IDX = #{searching.groIdx}
-            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
                 <choose>
                     <when test="searching.searchCondition == 'empStName'">
                         AND EMP_ST_NAME LIKE CONCAT('%', #{searching.searchKeyword} ,'%')
@@ -81,7 +81,7 @@
             EMP_ST_YN,
             REG_DATE,
             REG_IDX,
-            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE,</if>
+            <if test="slNote != null and slNote != ''">SL_NOTE,</if>
         </trim>
             VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -91,7 +91,7 @@
             'Y',
             NOW(),
             #{regIdx},
-            <if test="slNote != null and slNote.trim().length() > 0">#{slNote},</if>
+            <if test="slNote != null and slNote != ''">#{slNote},</if>
         </trim>
     </insert>
 

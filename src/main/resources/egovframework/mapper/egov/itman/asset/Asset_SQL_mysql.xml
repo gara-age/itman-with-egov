@@ -32,7 +32,7 @@
     </sql>
     <select id="selectAssetList" parameterType="pagination" resultType="assetVO">
     SELECT
-        ROW_NUMBER() OVER(ORDER BY A.ASS_IDX ASC) AS rowNum,
+        ROW_NUMBER() OVER(ORDER BY A.ASS_IDX ) AS rowNum,
         A.ASS_IDX AS assIdx,
         A.GRO_IDX AS groIdx,
         A.ASS_ULID AS assUlid,
@@ -52,6 +52,7 @@
         LEFT JOIN ITM_LOCATION L ON L.LOC_IDX = A.LOC_IDX
         LEFT JOIN ITM_SUPPLIER SP ON SP.SUP_IDX = A.SUP_IDX
         <include refid="assetCondition"/>
+        ORDER BY rowNum DESC
             LIMIT #{startList} , #{listSize}
     </select>
 
@@ -133,13 +134,13 @@
         ASS_CAT_IDX,
         STA_IDX,
         LOC_IDX,
-        <if test="empIdx != null and empIdx.trim().length() > 0">EMP_IDX,</if>
-        <if test="supIdx != null and supIdx.trim().length() > 0">SUP_IDX,</if>
-        <if test="buyDate != null and buyDate.trim.length() > 0">BUY_DATE,</if>
-        <if test="price != null and price.trim.length() > 0">PRICE,</if>
+        <if test="empIdx != null and empIdx != ''">EMP_IDX,</if>
+        <if test="supIdx != null and supIdx != ''">SUP_IDX,</if>
+        <if test="buyDate != null and buyDate != ''">BUY_DATE,</if>
+        <if test="price != null and price != ''">PRICE,</if>
         REG_DATE,
         REG_IDX,
-        <if test="image != null and image.trim.length() > 0">IMAGE,</if>
+        <if test="image != null and image != ''">IMAGE,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -149,13 +150,13 @@
             #{assCatIdx},
             #{staIdx},
             #{locIdx},
-        <if test="empIdx != null and empIdx.trim().length() > 0">#{empIdx},</if>
-        <if test="supIdx != null and supIdx.trim().length() > 0">#{supIdx},</if>
-        <if test="buyDate != null and buyDate.trim.length() > 0">#{buyDate},</if>
-        <if test="price != null and price.trim.length() > 0">#{price},</if>
+        <if test="empIdx != null and empIdx != ''">#{empIdx},</if>
+        <if test="supIdx != null and supIdx != ''">#{supIdx},</if>
+        <if test="buyDate != null and buyDate != ''">#{buyDate},</if>
+        <if test="price != null and price != ''">#{price},</if>
             NOW(),
             #{regIdx},
-        <if test="image != null and image.trim.length() > 0">#{image},</if>
+        <if test="image != null and image != ''">#{image},</if>
         </trim>
 
     </insert>

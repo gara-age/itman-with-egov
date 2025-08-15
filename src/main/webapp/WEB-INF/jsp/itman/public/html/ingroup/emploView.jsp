@@ -5,7 +5,7 @@
 <!doctype html>
 <html lang="ko">
  <head>
-<%--  <? include "../_inc/title.php"; ?>--%>
+	 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/itman/_inc/checkSession.jsp"/>
 	 <jsp:include page="/WEB-INF/jsp/itman/_inc/title.jsp" />
 	 <jsp:include page="/WEB-INF/jsp/itman/_inc/header.jsp" />
 	 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
@@ -123,11 +123,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/jsp/itman/_inc/footer.jsp" />
-	<c:if test="${not empty msg}">
-		<script>
-			alert("${msg}");
-		</script>
-	</c:if>
 </body>
  <script type="text/javascript">
 	 function confirmDelete(empIdx) {

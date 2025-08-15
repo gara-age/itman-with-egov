@@ -2,6 +2,7 @@ package egovframework.itman.member.web;
 
 import egovframework.itman.member.service.MemberVO;
 import egovframework.itman.member.service.impl.MemberServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +61,8 @@ public class MemberController {
         String savedCode = (String) session.getAttribute("authCode");
         model.addAttribute("authCode", savedCode);
         if(savedCode != null && savedCode.equals(inputCode)) {
-            if(session.getAttribute("state") != null || session.getAttribute("state").equals("findPass")){
+            if(session.getAttribute("state") != null && session.getAttribute("state").equals("findPass")){
+
                 session.removeAttribute("authCode");
                 session.removeAttribute("state");
                 return "itman/public/html/user/compPass";
@@ -101,7 +103,6 @@ public class MemberController {
         }
         String ip = getClientIPv4(request);
         session.setAttribute("userIp", ip);
-        System.err.println("Client IP: " + ip);
         session.setAttribute("loginUser", member);
         session.setAttribute("userIdx", member.getMemIdx());
         return "redirect:/itman/index.do";
@@ -130,8 +131,7 @@ public class MemberController {
         vo.setMemTel(memTel);
         memberService.updateMemTel(vo);
         session.setAttribute("member", vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "회원 연락처가 변경되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @PostMapping(value = "/itman/authPassword.do", produces = "application/json;charset=UTF-8" )
@@ -152,14 +152,13 @@ public class MemberController {
     }
 
     @PostMapping("/itman/updatePass.do")
-    public String updatePass(@RequestParam("newPw") String newPw, HttpSession session) {
+    public String updatePass(@RequestParam("newPw") String newPw, HttpSession session, Model model) {
         MemberVO vo = (MemberVO) session.getAttribute("member");
         String encodedPassword = passwordEncoder.encode(newPw);
         vo.setMemPw(encodedPassword);
         session.removeAttribute("member");
         memberService.updateMemPw(vo);
-        session.setAttribute("member", vo);
-        return "redirect:/itman/myPage.do";
+        return EgovframeworkCommonUtil.alertMove(model, "비밀번호가 변경되었습니다", "/itman/myPage.do");
     }
 
     @RequestMapping("/itman/privacy.do")
@@ -174,17 +173,18 @@ public class MemberController {
     }
 
     @PostMapping("/itman/accDel_proc.do")
-    public String accDelProc(HttpSession session) {
+    public String accDelProc(HttpSession session, Model model) {
         MemberVO vo = (MemberVO) session.getAttribute("member");
         memberService.deleteMember(vo);
         session.invalidate();
-        return "redirect:/itman/index.do";
+        return EgovframeworkCommonUtil.alertMove(model, "탈퇴가 완료되었습니다", "/itman/index.do");
+
     }
 
     @GetMapping("/itman/logout.do")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, Model model) {
         session.invalidate(); // 세션 비우기
-        return "redirect:/itman/index.do";
+        return EgovframeworkCommonUtil.alertMove(model, "로그아웃 되었습니다", "/itman/index.do");
     }
 
     @RequestMapping("/itman/user/findEmail.do")
@@ -216,7 +216,7 @@ public class MemberController {
     }
 
     @RequestMapping("/itman/user/findPass.do")
-    public String findPass(HttpSession session, Model model) {
+    public String findPass() {
         return "itman/public/html/user/findPass";
     }
 

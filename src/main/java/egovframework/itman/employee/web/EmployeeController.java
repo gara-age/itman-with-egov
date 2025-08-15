@@ -14,6 +14,7 @@ import egovframework.itman.position.service.impl.PositionServiceImpl;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
 import egovframework.itman.state.service.StateVO;
 import egovframework.itman.state.service.impl.StateServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,8 +92,6 @@ public class EmployeeController {
         String groIdx = (String) session.getAttribute("groIdx");
 
         addCommonLists(groIdx, model);
-
-
         return "itman/public/html/ingroup/emploWrite";
     }
 
@@ -109,8 +108,7 @@ public class EmployeeController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         divisionService.insertDivision(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "부서가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploPositionWrite.do")
@@ -126,8 +124,7 @@ public class EmployeeController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         positionService.insertPosition(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직위가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploStateWrite.do")
@@ -143,8 +140,7 @@ public class EmployeeController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         empStateService.insertEmployeeState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 상태가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     // --------------------수정----------------------------
@@ -158,15 +154,13 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploTelInfo.do")
-    public String updateEmploTelInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploTelInfo(EmployeeVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         employeeService.updateEmploTelInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 연락처가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploDivisionInfoEdit.do")
@@ -179,15 +173,13 @@ public class EmployeeController {
         return "itman/public/html/popup/employee/emploDivisionInfoEdit";
     }
     @RequestMapping("/itman/updateEmploDivisionInfo.do")
-    public String updateEmploDivisionInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploDivisionInfo(EmployeeVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         employeeService.updateEmploDivisionInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 부서가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploPosInfoEdit.do")
@@ -202,15 +194,13 @@ public class EmployeeController {
         return "itman/public/html/popup/employee/emploPosInfoEdit";
     }
     @RequestMapping("/itman/updateEmploPosInfo.do")
-    public String updateEmploPosInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploPosInfo(EmployeeVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         employeeService.updateEmploPosInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 직위가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploMailInfoEdit.do")
@@ -222,16 +212,14 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploMailInfo.do")
-    public String updateEmploMailInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploMailInfo(EmployeeVO vo, Model model , HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
 
         employeeService.updateEmploMailInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 메일이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploNameInfoEdit.do")
@@ -243,11 +231,9 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploNameInfo.do")
-    public String updateEmploNameInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes) {
+    public String updateEmploNameInfo(EmployeeVO vo, Model model ) {
         employeeService.updateEmploNameInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원명이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploStateInfoEdit.do")
@@ -262,15 +248,13 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploStateInfo.do")
-    public String updateEmploStateInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploStateInfo(EmployeeVO vo, Model model , HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         employeeService.updateEmploStateInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 상태가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/emploNumInfoEdit.do")
@@ -282,26 +266,23 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/updateEmploNumInfo.do")
-    public String updateEmploNumInfo(EmployeeVO vo, Model model ,RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateEmploNumInfo(EmployeeVO vo, Model model , HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         employeeService.updateEmploNumInfo(vo);
-        redirectAttributes.addFlashAttribute("msg", "수정되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 사번이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/insert.do")
-    public String insertEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String insertEmployee(EmployeeVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         employeeService.insertEmployee(vo);
-        redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
-        return "redirect:/itman/employeeList.do";
+        return EgovframeworkCommonUtil.alertMove(model, "직원이 추가되었습니다", "/itman/employeeList.do");
     }
 
     @RequestMapping("/itman/emploDelConfirm.do")
@@ -312,15 +293,13 @@ public class EmployeeController {
     }
 
     @RequestMapping("/itman/emploDel.do")
-    public String deleteEmployee(EmployeeVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String deleteEmployee(EmployeeVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         employeeService.deleteEmployee(vo);
-        redirectAttributes.addFlashAttribute("msg", "삭제되었습니다.");
-        model.addAttribute("script", "<script>window.opener.location.href='/itman/employeeList.do'; window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원이 삭제되었습니다","<script>window.opener.location='/itman/employeeList.do'; window.close();</script>");
     }
 
     @RequestMapping("/itman/popup/searchPop.do")

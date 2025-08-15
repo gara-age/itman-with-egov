@@ -3,6 +3,7 @@ package egovframework.itman.empState.web;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.empState.service.EmpStateVO;
 import egovframework.itman.empState.service.impl.EmpStateServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,29 +48,27 @@ public class EmpStateController {
         return "itman/public/html/popup/employee/emploStateWrite";
     }
     @PostMapping("/itman/updateEmploState.do")
-    public String updateEmployeeState(EmpStateVO vo, Model model, HttpSession session) throws Exception {
+    public String updateEmployeeState(EmpStateVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         empStateService.updateEmployeeState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close()</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 상태가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmEmploStateDel.do")
-    public String confirmEmployeeStateDel(EmpStateVO vo, Model model) throws Exception {
+    public String confirmEmployeeStateDel(EmpStateVO vo, Model model) {
         model.addAttribute("empState", vo);
         return "itman/public/html/popup/contEmpDel";
     }
     @PostMapping("/itman/deleteEmploState.do")
-    public String deleteEmployeeState(EmpStateVO vo, Model model, HttpSession session) throws Exception {
+    public String deleteEmployeeState(EmpStateVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         empStateService.deleteEmployeeState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close()</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직원 상태가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 }

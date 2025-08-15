@@ -7,7 +7,7 @@
     <sql id="assLogCondition">
         <where>
             a.GRO_IDX = ${searching.groIdx}
-            <if test="searching.searchKeyword != null and searching.searchKeyword.trim().length() > 0">
+            <if test="searching.searchKeyword != null and searching.searchKeyword != ''">
                 <choose>
                     <when test="searching.searchCondition == 'assUlid'">
                         AND a.ASS_ULID LIKE CONCAT('%', #{searching.searchKeyword}, '%')
@@ -49,15 +49,15 @@
     VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
 
-        <if test="assNameLog != null and assNameLog.trim().length() > 0">#{assNameLog}, </if>
+        <if test="assNameLog != null and assNameLog != ''">#{assNameLog}, </if>
             #{assIdx},
             #{alType},
-            <if test="alCat != null and alCat.trim().length() > 0">#{alCat}, </if>
-            <if test="alCont != null and alCont.trim().length() > 0">#{alCont}, </if>
-            <if test="alNote != null and alNote.trim().length() > 0">#{alNote}, </if>
+            <if test="alCat != null and alCat != ''">#{alCat}, </if>
+            <if test="alCont != null and alCont != ''">#{alCont}, </if>
+            <if test="alNote != null and alNote != ''">#{alNote}, </if>
             NOW(),
             #{regIdx},
-            '127.0.0.1' <!--임시 IP세팅 -->
+            #{regIp}
         </trim>
     </insert>
 

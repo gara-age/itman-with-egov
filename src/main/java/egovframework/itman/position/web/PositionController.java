@@ -3,6 +3,7 @@ package egovframework.itman.position.web;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.position.service.PositionVO;
 import egovframework.itman.position.service.impl.PositionServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +27,8 @@ public class PositionController {
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
     ,@RequestParam(value = "id",defaultValue = "4")int id
-    , HttpSession session) throws Exception {
+    , HttpSession session) {
+
         model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
@@ -41,7 +43,7 @@ public class PositionController {
 
     }
     @RequestMapping("/itman/positionWrite.do")
-    public String writePosition(PositionVO vo, Model model) throws Exception{
+    public String writePosition(PositionVO vo, Model model) {
         if(vo.getPosIdx() !=null){
             PositionVO resultVO = positionService.selectPositionView(vo);
             model.addAttribute("position",resultVO);
@@ -50,7 +52,7 @@ public class PositionController {
     }
 
     @RequestMapping("/itman/positionEdit.do")
-    public String editPosition(PositionVO vo, Model model) throws Exception{
+    public String editPosition(PositionVO vo, Model model){
             PositionVO resultVO = positionService.selectPositionView(vo);
             model.addAttribute("position",resultVO);
         return "itman/public/html/popup/contEditItmPosition";
@@ -63,15 +65,13 @@ public class PositionController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         positionService.insertPosition(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직위가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @PostMapping("/itman/updatePosition.do")
     public String updatePosition(PositionVO vo, Model model){
         positionService.updatePosition(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직위가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
 
     }
 
@@ -85,8 +85,7 @@ public class PositionController {
     @PostMapping("/itman/deletePosition.do")
     public String deletePosition(PositionVO vo, Model model) {
         positionService.deletePosition(vo);
-        model.addAttribute("script","<script>window.opener.location.reload(); window.close();</script>");
-        return"itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "직위가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
 }

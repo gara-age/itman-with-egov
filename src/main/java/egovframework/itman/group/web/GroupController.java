@@ -3,6 +3,7 @@ package egovframework.itman.group.web;
 import egovframework.itman.group.service.GroupVO;
 import egovframework.itman.group.service.impl.GroupServiceImpl;
 import egovframework.itman.member.service.MemberVO;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,8 +74,7 @@ public class GroupController {
         String ip = session.getAttribute("userIp").toString();
         vo.setRegIp(ip);
         groupService.insertGroup(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "그룹이 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @PostMapping("/itman/setGroIdx.do")
@@ -94,7 +94,7 @@ public class GroupController {
     }
 
     @RequestMapping("/itman/editGroup.do")
-    public String editGroup(GroupVO vo, HttpSession session, Model model) {
+    public String editGroup(GroupVO vo, Model model) {
         GroupVO group = groupService.selectGroup(vo.getGroIdx());
         model.addAttribute("group", group);
         return "itman/public/html/user/groupWrite";
@@ -127,12 +127,11 @@ public class GroupController {
         String ip = session.getAttribute("userIp").toString();
         vo.setModIp(ip);
         groupService.updateGroup(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "그룹이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmGroupDel.do")
-    public String confirmGroupDel(GroupVO vo, HttpSession session, Model model) throws Exception {
+    public String confirmGroupDel(GroupVO vo, Model model) {
         GroupVO selectedVO = groupService.selectGroup(vo.getGroIdx());
         model.addAttribute("group", selectedVO);
         return "itman/public/html/user/groupDel";
@@ -143,8 +142,7 @@ public class GroupController {
         String ip = session.getAttribute("userIp").toString();
         vo.setDelIp(ip);
         groupService.deleteGroup(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "그룹이 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
 }

@@ -19,10 +19,12 @@ import egovframework.itman.state.service.StateVO;
 import egovframework.itman.state.service.impl.StateServiceImpl;
 import egovframework.itman.supplier.service.SupplierVO;
 import egovframework.itman.supplier.service.impl.SupplierServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -77,13 +79,6 @@ public class AssetController {
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(vo.getAssName());
         assLogVO.setAlType("생성");
-        assLogVO.setAlCat("자산");
-    }
-
-    private void setUpdateAssLog(AssLogVO assLogVO, AssetVO vo, String flag) {
-        assLogVO.setAssIdx(vo.getAssIdx());
-        assLogVO.setAssNameLog(vo.getAssName());
-        assLogVO.setAlType("수정");
         assLogVO.setAlCat("자산");
     }
 
@@ -148,7 +143,7 @@ public class AssetController {
     public String insertAsset(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
                               @RequestParam(value = "assImgFile", required = false) MultipartFile file,
                               HttpServletRequest request,
-                              Model model, RedirectAttributes redirectAttributes,
+                              Model model,
                               HttpSession session) throws Exception {
        if(!file.isEmpty()){
            String uploadDir = "/upload/assImg/";
@@ -174,12 +169,14 @@ public class AssetController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         assLogVO.setRegIdx(regIdx);
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assetService.insertAsset(vo);
         setInsertAssLog(assLogVO, vo);
         assLogService.insertAssLog(assLogVO);
-        redirectAttributes.addFlashAttribute("msg", "추가되었습니다.");
-        return "redirect:/itman/assetsList.do";
+        return EgovframeworkCommonUtil.alertMove(model, "자산이 추가되었습니다", "/itman/assetsList.do");
     }
+
 
     @RequestMapping("/itman/asset/contWriteAssetCategory.do")
     public String writeAssetCategory() throws Exception {
@@ -194,8 +191,7 @@ public class AssetController {
         vo.setRegIdx(regIdx);
         System.err.println("vo.assCatName" + vo.getAssCatName());
         assetCategoryService.insertAssetCategory(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 분류가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/contWriteAssetState.do")
@@ -210,8 +206,7 @@ public class AssetController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         stateService.insertAssetState(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 상태가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/contWriteAssetLocation.do")
@@ -226,8 +221,7 @@ public class AssetController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         locationService.insertAssetLocation(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 위치가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/contWriteSupplier.do")
@@ -242,8 +236,7 @@ public class AssetController {
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         supplierService.insertAssetSupplier(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매처가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     //-------------------------------------수정-----------------------------------------
@@ -257,7 +250,7 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetNameInfo.do")
-    public String updateAssetNameInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetNameInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -268,6 +261,8 @@ public class AssetController {
         String oldName = assetVO.getAssName();
         String newName = vo.getAssName();
         assetService.updateAssetNameInfo(vo);
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(newName);
         assLogVO.setAlType("수정");
@@ -275,8 +270,7 @@ public class AssetController {
         assLogVO.setAlCont(oldName + "->" + newName);
         System.err.println("assLogVO.getAlNote() = " + assLogVO.getAlNote());
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산명이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetCategoryInfoEdit.do")
@@ -290,13 +284,14 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetCategoryInfo.do")
-    public String updateAssetCategoryInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetCategoryInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model,HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         assLogVO.setRegIdx(modIdx);
-
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         AssetVO assetVO = assetService.selectAssetView(vo);
         String oldCatName = assetVO.getAssCatName();
         assetService.updateAssetCategoryInfo(vo);
@@ -307,8 +302,7 @@ public class AssetController {
         assLogVO.setAlCat("자산 분류");
         assLogVO.setAlCont(oldCatName + "->" + newCatName);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 분류가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetStateInfoEdit.do")
@@ -324,7 +318,7 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetStateInfo.do")
-    public String updateAssetStateInfo(@ModelAttribute AssLogVO assLogVO  ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetStateInfo(@ModelAttribute AssLogVO assLogVO  ,AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -341,8 +335,7 @@ public class AssetController {
         assLogVO.setAlCat("자산 상태");
         assLogVO.setAlCont(oldStaName + "->" + newStaName);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 상태가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetLocationInfoEdit.do")
@@ -353,12 +346,11 @@ public class AssetController {
         model.addAttribute("asset", assetVO);
         selectByGroup(groIdx, model);
 
-
         return "itman/public/html/popup/asset/assetLocationInfoEdit";
     }
 
     @PostMapping("/itman/asset/updateAssetLocationInfo.do")
-    public String updateAssetLocationInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetLocationInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -369,14 +361,15 @@ public class AssetController {
         String oldLocName = assetVO.getAssLocName();
         assetService.updateAssetLocationInfo(vo);
         String newLocName = assetService.selectAssetView(vo).getAssLocName();
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("수정");
         assLogVO.setAlCat("자산 위치");
         assLogVO.setAlCont(oldLocName + "->" + newLocName);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 위치가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetEmployeeInfoEdit.do")
@@ -404,7 +397,7 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetEmployeeInfo.do")
-    public String updateAssetEmployeeInfo(@ModelAttribute AssLogVO assLogVO , AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetEmployeeInfo(@ModelAttribute AssLogVO assLogVO , AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -415,14 +408,15 @@ public class AssetController {
         String oldEmpName = assetVO.getAssEmpName();
         assetService.updateAssetEmployeeInfo(vo);
         String newEmpName = assetService.selectAssetView(vo).getAssEmpName();
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("수정");
         assLogVO.setAlCat("사용직원");
         assLogVO.setAlCont(oldEmpName + "->" + newEmpName);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "사용 직원이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetSupplyInfoEdit.do")
@@ -438,7 +432,7 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetSupplyInfo.do")
-    public String updateAssetSupplyInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetSupplyInfo(@ModelAttribute AssLogVO assLogVO ,AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -452,14 +446,15 @@ public class AssetController {
         }
         assetService.updateAssetSupplyInfo(vo);
         String newSupName = assetService.selectAssetView(vo).getAssSupName();
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("수정");
         assLogVO.setAlCat("자산 구매처");
         assLogVO.setAlCont(oldSupName + "->" + newSupName);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매처가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetBuyDateInfoEdit.do")
@@ -469,7 +464,6 @@ public class AssetController {
         AssetVO assetVO = assetService.selectAssetView(vo);
         model.addAttribute("asset", assetVO);
         selectByGroup(groIdx, model);
-
 
         return "itman/public/html/popup/asset/assetBuyDateInfoEdit";
     }
@@ -489,14 +483,15 @@ public class AssetController {
         }
         assetService.updateAssetBuyDateInfo(vo);
         String newBuyDate = assetService.selectAssetView(vo).getBuyDate();
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("수정");
         assLogVO.setAlCat("최초 구매일");
         assLogVO.setAlCont(oldBuyDate + "->" + newBuyDate);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "최초 구매일이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/asset/assetPriceInfoEdit.do")
@@ -512,7 +507,7 @@ public class AssetController {
     }
 
     @PostMapping("/itman/asset/updateAssetPriceInfo.do")
-    public String updateAssetPriceInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String updateAssetPriceInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo, Model model, HttpSession session) throws Exception {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
@@ -526,21 +521,22 @@ public class AssetController {
         }
         assetService.updateAssetPriceInfo(vo);
         String newPrice = assetService.selectAssetView(vo).getPrice();
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("수정");
         assLogVO.setAlCat("구매 가격");
         assLogVO.setAlCont(oldPrice + "->" + newPrice);
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "구매가격이 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @PostMapping("/itman/asset/updateAssetPictureInfo.do")
     public String updateAssetPictureInfo(@ModelAttribute AssLogVO assLogVO, AssetVO vo,
                                          @RequestParam(value = "assImgFile", required = false) MultipartFile file,
                                          HttpServletRequest request,
-                                         Model model, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+                                         Model model, HttpSession session) throws Exception {
         if(!file.isEmpty()){
             String uploadDir = "/upload/assImg/";
             String realDir = request.getServletContext().getRealPath(uploadDir);
@@ -563,8 +559,7 @@ public class AssetController {
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         assetService.updateAssetPictureInfo(vo);
-
-        return "redirect:/itman/assetsView.do?assIdx=" + vo.getAssIdx() ;
+        return EgovframeworkCommonUtil.alertMove(model, "자산 사진이 변경되었습니다", "/itman/assetsView.do?assIdx=" + vo.getAssIdx());
     }
 
     //-------------------------------삭제------------------------------------------
@@ -584,12 +579,13 @@ public class AssetController {
 
         AssetVO assetVO = assetService.selectAssetView(vo);
         assetService.deleteAsset(vo);
+        String ip = session.getAttribute("userIp").toString();
+        assLogVO.setRegIp(ip);
         assLogVO.setAssIdx(vo.getAssIdx());
         assLogVO.setAssNameLog(assetVO.getAssName());
         assLogVO.setAlType("삭제");
         assLogVO.setAlCat("자산");
         assLogService.insertAssLog(assLogVO);
-        model.addAttribute("script", "<script>window.opener.location.href=\"/itman/assetsList.do\"; window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산이 삭제되었습니다","<script>window.opener.location='/itman/assetsList.do'; window.close();</script>");
     }
 }

@@ -3,6 +3,7 @@ package egovframework.itman.location.web;
 import egovframework.itman.common.Pagination;
 import egovframework.itman.location.service.LocationVO;
 import egovframework.itman.location.service.impl.LocationServiceImpl;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class LocationController {
     public String locationPop(LocationVO vo, Pagination pagination, Model model
             , @RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "1") int range
-            , HttpSession session) throws Exception {
+            , HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
 
         pagination.setSearchingGroIdx(pagination.getSearching(), groIdx);
@@ -42,7 +43,8 @@ public class LocationController {
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
     , @RequestParam(value = "id", defaultValue = "6")int id
-    , HttpSession session) throws Exception {
+    , HttpSession session) {
+
         model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 
@@ -73,12 +75,11 @@ public class LocationController {
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         locationService.updateAssetLocation(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 위치가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmLocationDel.do")
-    public String confirmLocationDel(LocationVO vo, Model model) throws Exception {
+    public String confirmLocationDel(LocationVO vo, Model model) {
         model.addAttribute("location", vo);
         return "itman/public/html/popup/listDelete";
     }
@@ -91,8 +92,7 @@ public class LocationController {
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         locationService.deleteAssetLocation(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 위치가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
 }

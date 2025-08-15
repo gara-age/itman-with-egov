@@ -218,7 +218,6 @@
 
 			// 확장자 통과 → 폼 제출
 			document.getElementById("FILE_FORM").submit();
-			alert("사진 변경에 성공하였습니다.");
 		});
 	</script>
 </body>

@@ -4,6 +4,7 @@ import egovframework.itman.common.Pagination;
 import egovframework.itman.division.service.DivisionVO;
 import egovframework.itman.division.service.impl.DivisionServiceImpl;
 import egovframework.itman.employee.service.EmployeeVO;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public class DivisionController {
     }
 
     @RequestMapping("/itman/divisionWrite.do")
-    public String writeEmployeeDivision(DivisionVO vo, Model model) throws Exception {
+    public String writeEmployeeDivision(DivisionVO vo, Model model) {
         if(vo.getDivIdx() != null){
             DivisionVO resultVO = divisionService.selectDivisionView(vo);
             model.addAttribute("division", resultVO);
@@ -54,29 +55,26 @@ public class DivisionController {
     }
 
     @PostMapping("/itman/insertDepart.do")
-    public String insertDivision(DivisionVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String insertDivision(DivisionVO vo, Model model, HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String regIdx = (String) session.getAttribute("userIdx");
         vo.setRegIdx(regIdx);
         divisionService.insertDivision(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "부서가 추가되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @PostMapping("/itman/updateDepart.do")
-    public String updateDivision(@ModelAttribute DivisionVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateDivision(@ModelAttribute DivisionVO vo, Model model,HttpSession session) {
         String groIdx = (String) session.getAttribute("groIdx");
         vo.setGroIdx(groIdx);
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         divisionService.updateDivision(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
-    }
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "부서가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");    }
 
     @RequestMapping("/itman/confirmDivisionDel.do")
-    public String confirmDivisionDel(DivisionVO vo, Model model, RedirectAttributes redirectAttributes) {
+    public String confirmDivisionDel(DivisionVO vo, Model model) {
         model.addAttribute("division", vo);
         return "itman/public/html/popup/contDivisionDel";
     }
@@ -88,9 +86,7 @@ public class DivisionController {
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         divisionService.deleteDivision(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
-    }
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "부서가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");    }
 
 
 

@@ -79,7 +79,7 @@
             LOC_NAME,
             REG_DATE,
             REG_IDX,
-            <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE,</if>
+            <if test="slNote != null and slNote != ''">SL_NOTE,</if>
         </trim>
             VALUES
                 <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,7 +88,7 @@
                 #{locName},
                 NOW(),
                 #{regIdx},
-        <if test="slNote != null and slNote.trim().length() > 0 ">#{slNote},</if>
+        <if test="slNote != null and slNote != ''">#{slNote},</if>
                 </trim>
     </insert>
 
@@ -101,7 +101,7 @@
     LOC_CODE = #{locCode},
     MOD_DATE = NOW(),
     MOD_IDX = #{modIdx},
-    <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+    <if test="slNote != null and slNote != ''">SL_NOTE = #{slNote}</if>
 </trim>
         WHERE
             LOC_IDX = #{locIdx}
@@ -116,7 +116,7 @@
                 DEL_YN = 'Y',
                 DEL_DATE = NOW(),
                 DEL_IDX = #{delIdx},
-                <if test="slNote != null and slNote.trim().length() > 0">SL_NOTE = #{slNote}</if>
+                <if test="slNote != null and slNote != ''">SL_NOTE = #{slNote}</if>
             </trim>
         WHERE
             LOC_IDX = #{locIdx}

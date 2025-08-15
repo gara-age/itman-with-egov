@@ -22,7 +22,7 @@ public class AssLogController {
     , @RequestParam(defaultValue = "1") int page
     , @RequestParam(defaultValue = "1") int range
     , @RequestParam(value = "id", defaultValue = "9")int id ,
-                                         HttpSession session) throws Exception {
+                                         HttpSession session) {
         model.addAttribute("pageNumDepth01", id);
         String groIdx = (String) session.getAttribute("groIdx");
 

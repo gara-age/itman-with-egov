@@ -90,9 +90,9 @@
             SUP_BNUM,
             REG_DATE,
             REG_IDX,
-            <if test="supTel != null and supTel.trim().length() > 0">SUP_TEL,</if>
-            <if test="supMemo != null and supMemo.trim().length() > 0">SUP_MEMO,</if>
-            <if test="supMail != null and supMail.trim().length() > 0">SUP_MAIL,</if>
+            <if test="supTel != null and supTel != ''">SUP_TEL,</if>
+            <if test="supMemo != null and supMemo != ''">SUP_MEMO,</if>
+            <if test="supMail != null and supMail != ''">SUP_MAIL,</if>
 
         </trim>
         VALUES
@@ -103,9 +103,9 @@
             #{supBnum},
             NOW(),
             #{regIdx},
-            <if test="supTel != null and supTel.trim().length() > 0">#{supTel},</if>
-            <if test="supMemo != null and supMemo.trim().length() > 0">#{supMemo},</if>
-            <if test="supMail != null and supMail.trim().length() > 0">#{supMail},</if>
+            <if test="supTel != null and supTel != ''">#{supTel},</if>
+            <if test="supMemo != null and supMemo != ''">#{supMemo},</if>
+            <if test="supMail != null and supMail != ''">#{supMail},</if>
         </trim>
     </insert>
 

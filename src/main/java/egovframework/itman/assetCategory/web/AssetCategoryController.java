@@ -3,6 +3,7 @@ package egovframework.itman.assetCategory.web;
 import egovframework.itman.assetCategory.service.AssetCategoryVO;
 import egovframework.itman.assetCategory.service.impl.AssetCategoryServiceImpl;
 import egovframework.itman.common.Pagination;
+import egovframework.usr.com.EgovframeworkCommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,12 +57,11 @@ public class AssetCategoryController {
         String modIdx = (String) session.getAttribute("userIdx");
         vo.setModIdx(modIdx);
         assetCategoryService.updateAssetCategory(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 분류가 수정되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
     @RequestMapping("/itman/confirmAssetCategoryDel.do")
-    public String confirmAssetCategoryDel(AssetCategoryVO vo, Model model) throws Exception {
+    public String confirmAssetCategoryDel(AssetCategoryVO vo, Model model) {
         model.addAttribute("assetCategory", vo);
         return "itman/public/html/popup/listDelete";
     }
@@ -73,8 +73,7 @@ public class AssetCategoryController {
         String delIdx = (String) session.getAttribute("userIdx");
         vo.setDelIdx(delIdx);
         assetCategoryService.deleteAssetCategory(vo);
-        model.addAttribute("script", "<script>window.opener.location.reload(); window.close();</script>");
-        return "itman/common/scriptResponse";
+        return EgovframeworkCommonUtil.alertMoveWithScript(model, "자산 분류가 삭제되었습니다","<script>window.opener.location.reload(); window.close();</script>");
     }
 
 }

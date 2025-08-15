@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import egovframework.com.cmm.service.EgovProperties;
@@ -519,10 +520,16 @@ public class EgovframeworkCommonUtil {
 		return "/kr/_inc/alertClose";
 	}
 
-	public static String alertMove(final ModelMap model, String msg, String moveUrl) {
+	public static String alertMove(final Model model, String msg, String moveUrl) {
 		model.addAttribute("message", msg);
 		model.addAttribute("returnUrl", moveUrl);
-		return "/kr/_inc/alertMove";
+		return "itman/common/scriptResponse";
+	}
+
+	public static String alertMoveWithScript(final Model model, String msg,String script) {
+		model.addAttribute("message", msg);
+		model.addAttribute("script", script);
+		return "itman/common/scriptResponse";
 	}
 
 	public static String alertMoveRedirect(final ModelMap model, String msg, String moveUrl) {

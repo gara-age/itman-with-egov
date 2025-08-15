@@ -69,7 +69,7 @@
                 <trim prefix="(" suffix=")" suffixOverrides=",">
                     #{groName},
                 <choose>
-                    <when test="groImg != null and groImg.trim().length() > 0 ">
+                    <when test="groImg != null and groImg != ''">
                         #{groImg},
                     </when>
                     <otherwise>
